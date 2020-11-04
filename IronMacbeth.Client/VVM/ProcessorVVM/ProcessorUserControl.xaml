@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="IronMacbeth.Client.VVM.ProcessorVVM.ProcessorUserControl"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IronMacbeth.Client.VVM.ProcessorVVM"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="700">
+
+    <DockPanel VerticalAlignment="Stretch">
+        <WrapPanel 
+            DockPanel.Dock="Bottom"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom">
+            <Button 
+                Visibility="{Binding DataContext.AdminToolsVisibility, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                Command="{Binding AddCommand}"
+                Width="90"
+                Margin="5,10,10,10"
+                Content="Add"/>
+            <Button 
+                Visibility="{Binding DataContext.AdminToolsVisibility, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                Command="{Binding EditCommand}"
+                Width="90"
+                Margin="5,10,10,10"
+                Content="Edit"/>
+            <Button 
+                Visibility="{Binding DataContext.AdminToolsVisibility, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                Command="{Binding DeleteCommand}"
+                Width="90"
+                Margin="0,10,10,10"
+                Content="Delete"
+                />
+        </WrapPanel>
+        <WrapPanel
+            Margin="5"
+            DockPanel.Dock="Top"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom">
+            <TextBlock
+                Text="Search: "/>
+            <TextBox
+                Width="130"
+                Text="{Binding Search,UpdateSourceTrigger=PropertyChanged}"/>
+        </WrapPanel>
+        <ListView
+            DockPanel.Dock="Top"
+            ScrollViewer.CanContentScroll="False"
+            ItemsSource="{Binding Items}"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}" 
+            SelectionMode="Single">
+            <ListView.Resources>
+                <Style TargetType="GridViewColumnHeader">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </Style>
+            </ListView.Resources>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <local:ProcessorItemUserControl/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+
+    </DockPanel>
+</UserControl>

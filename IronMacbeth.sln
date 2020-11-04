@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronMacbeth.BFF", "IronMacbeth.BFF\IronMacbeth.BFF.csproj", "{9006D147-1DF2-429F-B14B-F29814102AB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronMacbeth.Client", "IronMacbeth.Client\IronMacbeth.Client.csproj", "{87468F18-40B7-4C6A-95B6-E799C9BE0BD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronMacbeth.Model.ToBeRemoved", "IronMacbeth.Model.ToBeRemoved\IronMacbeth.Model.ToBeRemoved.csproj", "{92D2F9E6-942A-4533-9987-F5577CDD316C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{1555EB99-FD12-48D7-9EC1-4026174BF347}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "IronMacbeth.BFF.Database", "IronMacbeth.BFF.Database\IronMacbeth.BFF.Database.sqlproj", "{BE2B329D-C09B-4850-8CB9-E2CBBEE080A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9006D147-1DF2-429F-B14B-F29814102AB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9006D147-1DF2-429F-B14B-F29814102AB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9006D147-1DF2-429F-B14B-F29814102AB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9006D147-1DF2-429F-B14B-F29814102AB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87468F18-40B7-4C6A-95B6-E799C9BE0BD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87468F18-40B7-4C6A-95B6-E799C9BE0BD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87468F18-40B7-4C6A-95B6-E799C9BE0BD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87468F18-40B7-4C6A-95B6-E799C9BE0BD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92D2F9E6-942A-4533-9987-F5577CDD316C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92D2F9E6-942A-4533-9987-F5577CDD316C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92D2F9E6-942A-4533-9987-F5577CDD316C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92D2F9E6-942A-4533-9987-F5577CDD316C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE2B329D-C09B-4850-8CB9-E2CBBEE080A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE2B329D-C09B-4850-8CB9-E2CBBEE080A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE2B329D-C09B-4850-8CB9-E2CBBEE080A3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BE2B329D-C09B-4850-8CB9-E2CBBEE080A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE2B329D-C09B-4850-8CB9-E2CBBEE080A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE2B329D-C09B-4850-8CB9-E2CBBEE080A3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BE2B329D-C09B-4850-8CB9-E2CBBEE080A3} = {1555EB99-FD12-48D7-9EC1-4026174BF347}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BA80DFAF-D9E9-4026-9512-B932987D4F8F}
+	EndGlobalSection
+EndGlobal
