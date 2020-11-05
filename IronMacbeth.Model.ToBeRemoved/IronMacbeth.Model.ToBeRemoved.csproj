@@ -68,9 +68,13 @@
     <Compile Include="ServerAdapter.cs" />
     <Compile Include="Store.cs" />
     <Compile Include="RentBook.cs" />
+    <Compile Include="StoreArticles.cs" />
+    <Compile Include="StoreBooks.cs" />
     <Compile Include="StoreMemory.cs" />
     <Compile Include="StoreMotherboard.cs" />
+    <Compile Include="StorePeriodicals.cs" />
     <Compile Include="StoreProcessor.cs" />
+    <Compile Include="StoreThesis.cs" />
     <Compile Include="StoreVideocard.cs" />
     <Compile Include="Thesis.cs" />
     <Compile Include="User.cs" />
