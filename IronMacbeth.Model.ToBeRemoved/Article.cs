@@ -23,6 +23,10 @@ namespace IronMacbeth.Model.ToBeRemoved
 
         public string ElectronicVersion { get; set; }
 
+        public string Rating { get; set; }
+
+        public string Comments { get; set; }
+
         public string NameOfArticle => Name;
 
         public string SellableType => "Article";
