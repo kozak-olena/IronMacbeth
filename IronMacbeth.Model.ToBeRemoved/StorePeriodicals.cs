@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace IronMacbeth.Model.ToBeRemoved
 {
-    class RentBook : Base<RentBook>
+    class StorePeriodicals : Base<StorePeriodicals>
     {
         public int Id { get; set; }
 
-        public int RentId { get; set; }
+        public int StoreId { get; set; }
 
         public string Date { get; set; }
 
-        public int BookId { get; set; }
+        public int PeriodicalId { get; set; }
 
         public int UserId { get; set; }   //user, who rented book
 
@@ -31,6 +31,6 @@ namespace IronMacbeth.Model.ToBeRemoved
         public new bool Modified { get; set; }
 
         public override string DisplayString =>
-           $"RentBook: RentId: {RentId} BookId: {BookId}";   //TODO: id of order or rent
+           $"StorePeriodicals: StoreId: {StoreId} PeriodicalId: {PeriodicalId}";   //TODO: id of order or rent
     }
 }

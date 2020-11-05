@@ -3,39 +3,35 @@ using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Model.ToBeRemoved
 {
-    public class Book : Base<Book>, ISellable
+    class Article : Base<Article>, ISellable
     {
-
         public int Id { get; set; }
 
         public string Name { get; set; }
 
         public string Author { get; set; }
 
-        public string PublishingHouse { get; set; }
-
-        public string City { get; set; }
-
         public string Year { get; set; }
 
         public string Pages { get; set; }
-        public string Availiability { get; set; }   //electronic version???
 
-        public string Location { get; set; }
+        public string Availiability { get; set; }
+
+        public int MainDocumentId { get; set; }   //book, in which the article is published// foreighn key? //rent book, not article
 
         public string TypeOfDocument { get; set; }
+
         public string ElectronicVersion { get; set; }
 
         public string Rating { get; set; }
 
         public string Comments { get; set; }
 
-        public string NameOfBook => Name;
+        public string NameOfArticle => Name;
 
-        public string SellableType => "Book";
-
+        public string SellableType => "Article";
         public override string DisplayString =>
-            $"Book: Id: {Id}";   // public override string DisplayString => $"Book: Name: {Name}";
+                   $"Article: Id: {Id}";   // public override string DisplayString => $"Book: Name: {Name}";
 
         public string ImageName { get; set; }
         public BitmapImage BitmapImage
@@ -55,10 +51,5 @@ namespace IronMacbeth.Model.ToBeRemoved
         private string _description;
 
         public string DescriptionName { get; set; }
-
-        public int NumberOfOfferings   //the same as availability?
-        {
-            get { return 0; }
-        }
     }
 }

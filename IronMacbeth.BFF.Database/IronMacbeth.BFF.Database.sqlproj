@@ -71,5 +71,10 @@
     <Build Include="Tables\StoreMotherboard.sql" />
     <Build Include="Tables\Purchase.sql" />
     <Build Include="Tables\Book.sql" />
+    <Build Include="Tables\RentBook.sql" />
+    <Build Include="Tables\Article.sql" />
+    <Build Include="Tables\Periodical.sql" />
+    <Build Include="Tables\RentPeriodical.sql" />
+    <Build Include="Tables\Thesis.sql" />
   </ItemGroup>
 </Project>

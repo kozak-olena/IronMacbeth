@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace IronMacbeth.Model.ToBeRemoved
 {
-    class RentBook : Base<RentBook>
+    class StoreBooks : Base<StoreBooks>
     {
         public int Id { get; set; }
 
-        public int RentId { get; set; }
+        public int StoreId { get; set; }
 
         public string Date { get; set; }
 
@@ -31,6 +31,6 @@ namespace IronMacbeth.Model.ToBeRemoved
         public new bool Modified { get; set; }
 
         public override string DisplayString =>
-           $"RentBook: RentId: {RentId} BookId: {BookId}";   //TODO: id of order or rent
+           $"StoreBook: StoreId: {StoreId} BookId: {BookId}";   //TODO: id of order or rent
     }
 }

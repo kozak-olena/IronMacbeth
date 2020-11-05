@@ -1,9 +1,9 @@
-﻿CREATE TABLE [dbo].[Book]
+﻿CREATE TABLE [dbo].[Thesis]
 (
-    [BookId] INT NOT NULL PRIMARY KEY,
-    [BookName] VARCHAR (255) NOT NULL,
-    [BookAuthor] VARCHAR (255) NOT NULL,
-    [PublishingHouse] VARCHAR (255) NOT NULL,
+    [ThesisId] INT NOT NULL PRIMARY KEY,
+    [ThesisName] VARCHAR (255) NOT NULL,
+    [ThesisAuthor] VARCHAR (255) NOT NULL,
+    [Responsible] VARCHAR (255) NOT NULL,
     [City] VARCHAR (255) NOT NULL,
     [PublicationYear] VARCHAR (255) NOT NULL,
     [NumberOfPages] VARCHAR (255) NOT NULL,

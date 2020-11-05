@@ -1,18 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Model.ToBeRemoved
 {
-    public class Book : Base<Book>, ISellable
+    class Thesis : Base<Thesis>, ISellable    //(IRENTABLE)
     {
-
         public int Id { get; set; }
 
         public string Name { get; set; }
 
         public string Author { get; set; }
 
-        public string PublishingHouse { get; set; }
+        public string Responsible { get; set; } //Крицевий О. Т.; Чернівецький держ. ун-т// Євген Нахлік : НАНУ ; Ін-т літератури ім. Т.Г. Шевченка
 
         public string City { get; set; }
 
@@ -29,13 +32,12 @@ namespace IronMacbeth.Model.ToBeRemoved
         public string Rating { get; set; }
 
         public string Comments { get; set; }
-
         public string NameOfBook => Name;
 
-        public string SellableType => "Book";
+        public string SellableType => "Thesis";
 
         public override string DisplayString =>
-            $"Book: Id: {Id}";   // public override string DisplayString => $"Book: Name: {Name}";
+            $"Thesis: Id: {Id}";   // public override string DisplayString => $"Book: Name: {Name}";
 
         public string ImageName { get; set; }
         public BitmapImage BitmapImage
