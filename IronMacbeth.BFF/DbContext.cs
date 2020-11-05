@@ -37,6 +37,13 @@ namespace IronMacbeth.BFF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Book>()
+                .ToTable(nameof(Book))
+                .Ignore("_bitmapImage")
+                .Ignore(x => x.BitmapImage)
+                .Ignore("_description")
+                .Ignore(x => x.Description);
+
             modelBuilder.Entity<Memory>()
                 .ToTable(nameof(Memory))
                 .Ignore("_bitmapImage")
@@ -98,5 +105,6 @@ namespace IronMacbeth.BFF
                 .Ignore("_description")
                 .Ignore(x => x.Description);
         }
+
     }
 }
