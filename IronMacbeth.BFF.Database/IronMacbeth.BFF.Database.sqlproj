@@ -70,5 +70,6 @@
     <Build Include="Tables\StoreVideoCard.sql" />
     <Build Include="Tables\StoreMotherboard.sql" />
     <Build Include="Tables\Purchase.sql" />
+    <Build Include="Tables\Book.sql" />
   </ItemGroup>
 </Project>

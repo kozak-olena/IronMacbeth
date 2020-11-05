@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base.cs" />
+    <Compile Include="Book.cs" />
     <Compile Include="DatabaseAttribute.cs" />
     <Compile Include="IDescribable.cs" />
     <Compile Include="IDisplayable.cs" />
