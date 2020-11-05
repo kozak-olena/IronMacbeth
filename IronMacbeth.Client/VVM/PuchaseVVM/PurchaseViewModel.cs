@@ -41,7 +41,7 @@ namespace IronMacbeth.Client.VVM.PuchaseVVM
                 IsMarkedAsRead = false
             };
 
-            MainViewModel.ServerAdapter.Insert(purchase);
+            MainViewModel.ServerAdapter.CreatePurchase(purchase);
 
             Executed = true;
         }

@@ -42,15 +42,15 @@ namespace IronMacbeth.Model.ToBeRemoved
             public new bool Modified { get; set; }
 
 
-            public Store Store
-            {
-                get { return Store.Items.Find(item => item.Id == StoreId); }
-            }
+            //public Store Store
+            //{
+            //    get { return MainViewModel.ServerAdapter.GetAllStores().Find(item => item.Id == StoreId); }
+            //}
 
-            public Motherboard Motherboard
-            {
-                get { return Motherboard.Items.Find(item => item.Id == MotherboardId); }
-            }
+            //public Motherboard Motherboard
+            //{
+            //    get { return MainViewModel.ServerAdapter.GetAllMotherboards().Find(item => item.Id == MotherboardId); }
+            //}
 
             public override string DisplayString =>
                 $"StoreMotherboard: StoreId: {StoreId} VideocardId: {MotherboardId}";
@@ -64,7 +64,6 @@ namespace IronMacbeth.Model.ToBeRemoved
                 get { return MotherboardId; }
                 set { MotherboardId = value; }
             }
-            public ISellable Sellable => Motherboard;
 
             #endregion
     }

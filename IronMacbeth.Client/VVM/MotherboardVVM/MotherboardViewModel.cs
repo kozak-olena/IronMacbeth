@@ -27,7 +27,7 @@ namespace IronMacbeth.Client.VVM.MotherboardVVM
             private set { _items = value; }
         }
 
-        private string _search;
+        private string _search = "";
         public string Search
         {
             get { return _search; }
@@ -55,10 +55,6 @@ namespace IronMacbeth.Client.VVM.MotherboardVVM
 
         public MotherboardViewModel()
         {
-            Search = "";
-
-            UpdateCollection(false);
-
             AddCommand = new RelayCommand(AddMethod);
             EditCommand = new RelayCommand(EditMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
             DeleteCommand = new RelayCommand(DeleteMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
@@ -77,7 +73,7 @@ namespace IronMacbeth.Client.VVM.MotherboardVVM
 
         public void Update()
         {
-            MainViewModel.LoadSellable();
+
         }
 
         public void EditMethod(object parameter)
@@ -93,14 +89,17 @@ namespace IronMacbeth.Client.VVM.MotherboardVVM
 
         public void DeleteMethod(object parameter)
         {
-            MainViewModel.ServerAdapter.Delete(SelectedItem as Motherboard);
-            Update();
-            UpdateCollection(false);
+            if (SelectedItem is Motherboard motherboard)
+            {
+                MainViewModel.ServerAdapter.DeleteMotherboard(motherboard.Id);
+                Update();
+                UpdateCollection(false);
+            }
         }
 
         public void UpdateCollection(bool innerCall)
         {
-            _items = Motherboard.Items.
+            _items = MainViewModel.ServerAdapter.GetAllMotherboards().
                 OrderByDescending(item => item.NumberOfOfferings).
                 Where(item => item.Name.ToLower().Contains(Search.ToLower())).ToList();
 
@@ -112,7 +111,7 @@ namespace IronMacbeth.Client.VVM.MotherboardVVM
 
         public void UpdateCollectionNoFilter()
         {
-            _items = Motherboard.Items.
+            _items = MainViewModel.ServerAdapter.GetAllMotherboards().
                 OrderByDescending(item => item.NumberOfOfferings).ToList();
 
             OnPropertyChanged(nameof(Items));

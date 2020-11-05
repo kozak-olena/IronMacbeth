@@ -27,7 +27,7 @@ namespace IronMacbeth.Client.VVM.VideocardVVM
             private set { _items = value; }
         }
 
-        private string _search;
+        private string _search = "";
         public string Search
         {
             get { return _search; }
@@ -55,10 +55,6 @@ namespace IronMacbeth.Client.VVM.VideocardVVM
 
         public VideocardViewModel()
         {
-            Search = "";
-
-            UpdateCollection(false);
-
             AddCommand = new RelayCommand(AddMethod);
             EditCommand = new RelayCommand(EditMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
             DeleteCommand = new RelayCommand(DeleteMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
@@ -77,10 +73,7 @@ namespace IronMacbeth.Client.VVM.VideocardVVM
 
         public void Update()
         {
-            MainViewModel.LoadSellable();
-            //Store.Items = MainViewModel.ServerAdapter.GetAll<Store>();
-            //Processor.Items = MainViewModel.ServerAdapter.GetAll<Processor>();
-            //StoreProcessor.Items = MainViewModel.ServerAdapter.GetAll<StoreProcessor>();
+
         }
 
         public void EditMethod(object parameter)
@@ -96,14 +89,17 @@ namespace IronMacbeth.Client.VVM.VideocardVVM
 
         public void DeleteMethod(object parameter)
         {
-            MainViewModel.ServerAdapter.Delete(SelectedItem as Videocard);
-            Update();
-            UpdateCollection(false);
+            if (SelectedItem is Videocard videocard)
+            {
+                MainViewModel.ServerAdapter.DeleteVideoCard(videocard.Id);
+                Update();
+                UpdateCollection(false);
+            }
         }
 
         public void UpdateCollection(bool innerCall)
         {
-            _items = Videocard.Items.
+            _items = MainViewModel.ServerAdapter.GetAllVideoCards().
                 OrderByDescending(item => item.NumberOfOfferings).
                 Where(item => item.Name.ToLower().Contains(Search.ToLower())).ToList();
 
@@ -115,10 +111,7 @@ namespace IronMacbeth.Client.VVM.VideocardVVM
 
         public void UpdateCollectionNoFilter()
         {
-            //StoreProcessor.Items = MainViewModel.ServerAdapter.GetAll<StoreProcessor>();
-            //Processor.Items = MainViewModel.ServerAdapter.GetAll<Processor>();
-
-            _items = Videocard.Items.
+            _items = MainViewModel.ServerAdapter.GetAllVideoCards().
                 OrderByDescending(item => item.NumberOfOfferings).ToList();
 
             OnPropertyChanged(nameof(Items));

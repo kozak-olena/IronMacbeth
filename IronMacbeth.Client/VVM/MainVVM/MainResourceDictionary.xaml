@@ -42,7 +42,4 @@
     <DataTemplate DataType="{x:Type memorydinfo:MemoryInfoViewModel}">
         <memorydinfo:MemoryInfoUserControl/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type notification:NotificationViewModel}">
-        <notification:NotificationUserControl/>
-    </DataTemplate>
 </ResourceDictionary>

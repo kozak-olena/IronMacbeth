@@ -4,13 +4,14 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
+
 using IronMacbeth.Client.Annotations;
 using IronMacbeth.Client.ViewModel;
 using IronMacbeth.Model.ToBeRemoved;
 
 namespace IronMacbeth.Client.VVM
 {
-    class StorePurchaseViewModel:INotifyPropertyChanged
+    class StorePurchaseViewModel : INotifyPropertyChanged
     {
         public ICommand CloseCommand { get; }
         public ICommand DeleteCommand { get; }
@@ -26,35 +27,34 @@ namespace IronMacbeth.Client.VVM
             CloseCommand = new RelayCommand(CloseMethod);
             DeleteCommand = new RelayCommand(DeleteMethod);
 
-            MainViewModel.LoadSellable();
-                 
             UpdateCollection();
         }
 
         public void DeleteMethod(object parameter)
         {
-            MainViewModel.ServerAdapter.Delete(parameter as Purchase);
-            Purchase.Items.Remove(parameter as Purchase);
-            UpdateCollection();
+            if (parameter is Purchase purchase)
+            {
+                MainViewModel.ServerAdapter.DeletePurchase(purchase.Id);
+                UpdateCollection();
+            }
         }
 
         private void UpdateCollection()
         {
-            Purchase.Items = MainViewModel.ServerAdapter.GetAll<Purchase>();
             Items = new List<Purchase>();
             Items.AddRange(
-                Purchase.Items.
-                    Where(item => _user.Stores.Contains(item.Store)).
-                    OrderByDescending(item=>item.Date)
+                MainViewModel.ServerAdapter.GetAllPurchases().
+                    Where(item => MainViewModel.ServerAdapter.GetUserStores(_user).Select(x => x.Id).Contains(MainViewModel.ServerAdapter.GetStoreFromPurchase(item).Id)).
+                    OrderByDescending(item => item.Date)
             );
             OnPropertyChanged(nameof(Items));
         }
 
         public void CloseMethod(object parameter)
         {
-            foreach (var item in Items.Where(item=>item.Modified))
+            foreach (var item in Items.Where(item => item.Modified))
             {
-                MainViewModel.ServerAdapter.Update(item);
+                MainViewModel.ServerAdapter.UpdatePurchase(item);
             }
 
             (parameter as Window)?.Close();

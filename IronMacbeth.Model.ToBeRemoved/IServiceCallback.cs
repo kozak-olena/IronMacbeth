@@ -10,8 +10,5 @@ namespace IronMacbeth.Model.ToBeRemoved
 
         [OperationContract(IsOneWay = true)]
         void NotifyNewMessage(string message);
-
-        [OperationContract(IsOneWay = true)]
-        void NotifyNewPurchase(Notification notification);
     }
 }

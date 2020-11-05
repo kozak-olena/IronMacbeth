@@ -62,43 +62,6 @@ namespace IronMacbeth.Model.ToBeRemoved
 
         private DateTime _dateTime;
 
-        [NonSerialized]
-        private ISellableLink _sellableLink;
-
-        public Store Store => SellableLink.Store;
-
-        public ISellable Sellable => SellableLink.Sellable;
-
-        public ISellableLink SellableLink
-        {
-            get
-            {
-                if (_sellableLink == null)
-                {
-                    Assembly assembly = Assembly.GetAssembly(typeof(Purchase));
-                    Type linkType = assembly.GetType(LinkName);
-
-                    var linkList = linkType.BaseType.GetField("Items").GetValue(null);
-
-                    if (linkList is IEnumerable)
-                    {
-                        foreach (object link in linkList as IEnumerable)
-                        {
-                            int sellableLinkId = (int)linkType.GetProperty("Id").GetValue(link);
-
-                            if (LinkId == sellableLinkId)
-                            {
-                                _sellableLink = link as ISellableLink;
-                                return _sellableLink;
-                            }
-                        }
-                    }
-                    return null;
-                }
-                return _sellableLink;
-            }
-        }
-
         public override string DisplayString => "Purchase";
 
         public SolidColorBrush Background =>

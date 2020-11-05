@@ -19,47 +19,6 @@ namespace IronMacbeth.Model.ToBeRemoved
         public string OwnerId { get; set; }
         public override string DisplayString => $"Store: Id: {Id}";
 
-        public List<ISellable> Sellables
-        {
-            get
-            {
-                List<ISellable> sellables = new List<ISellable>();
-
-                sellables.AddRange(StoreProcessor.Items.
-                        Where(item => item.StoreId == Id).
-                        Select(item => item.Processor).ToList());
-
-                sellables.AddRange(StoreVideocard.Items.
-                        Where(item => item.StoreId == Id).
-                        Select(item => item.Videocard).ToList());
-
-                sellables.AddRange(StoreMotherboard.Items.
-                        Where(item => item.MotherboardId == Id).
-                        Select(item => item.Motherboard).ToList());
-
-                sellables.AddRange(StoreMemory.Items.
-                        Where(item => item.MemoryId == Id).
-                        Select(item => item.Memory).ToList());
-
-                return sellables;
-            }
-        } 
-
-        public List<ISellableLink> SellableLinks
-        {
-            get
-            {
-                List<ISellableLink> sellableLinks = new List<ISellableLink>();
-
-                sellableLinks.AddRange(StoreProcessor.Items.Where(item => item.StoreId == Id));
-                sellableLinks.AddRange(StoreVideocard.Items.Where(item => item.StoreId == Id));
-                sellableLinks.AddRange(StoreMotherboard.Items.Where(item => item.StoreId == Id));
-                sellableLinks.AddRange(StoreMemory.Items.Where(item => item.StoreId == Id));
-
-                return sellableLinks;
-            }
-        }
-
         #region IDisplayable
         [Database]
         public string ImageName { get; set; }

@@ -14,10 +14,10 @@ namespace IronMacbeth.Model.ToBeRemoved
         [Database]
         public int AccessLevel { get; set; }
 
-        public List<Store> Stores
-        {
-            get { return Store.Items.Where(item => item.OwnerId == Login).ToList(); }
-        }
+        //public List<Store> Stores
+        //{
+        //    get { return MainViewModel.ServerAdapter.GetAllStores().Where(item => item.OwnerId == Login).ToList(); }
+        //}
 
         public override string DisplayString => $"User: Login: {Login}";
     }

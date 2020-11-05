@@ -96,7 +96,7 @@ namespace IronMacbeth.Client.VVM.EditMotherboardVVM
                     Motherboard.DescriptionName = null;
                 }
 
-                MainViewModel.ServerAdapter.Update(Motherboard);
+                MainViewModel.ServerAdapter.UpdateMotherboard(Motherboard);
             }
             else
             {
@@ -114,7 +114,7 @@ namespace IronMacbeth.Client.VVM.EditMotherboardVVM
                     MPN = MPN,
                     Description = Description
                 };
-                MainViewModel.ServerAdapter.Insert(Motherboard);
+                MainViewModel.ServerAdapter.CreateMotherboard(Motherboard);
             }
 
             CollectionChanged = true;

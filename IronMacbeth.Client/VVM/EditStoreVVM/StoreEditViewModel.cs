@@ -91,8 +91,6 @@ namespace IronMacbeth.Client.VVM.EditStoreVVM
                 Delivery = Store.Delivery;
                 BitmapImage = Store.BitmapImage;
 
-                MainViewModel.LoadSellable();
-
                 SellableAdded = new List<ISellableLink>();
                 SellableToAdd = new List<ISellable>();
 
@@ -116,20 +114,28 @@ namespace IronMacbeth.Client.VVM.EditStoreVVM
 
             if (sellable != null)
             {
-
-                StoreSellable sellableLink = new StoreSellable
+                if (sellable is Memory)
                 {
-                    Sellable = sellable,
-                    SellableId = sellable.Id,
-                    StoreId = Store.Id
-                };
-
-                MainViewModel.ServerAdapter.InsertStoreSellable(sellableLink);
+                    MainViewModel.ServerAdapter.CreateStoreMemory(new StoreMemory { SellableId = sellable.Id, StoreId = Store.Id });
+                }
+                else if (sellable is Motherboard)
+                {
+                    MainViewModel.ServerAdapter.CreateStoreMotherboard(new StoreMotherboard { SellableId = sellable.Id, StoreId = Store.Id });
+                }
+                else if (sellable is Processor)
+                {
+                    MainViewModel.ServerAdapter.CreateStoreProcessor(new StoreProcessor { SellableId = sellable.Id, StoreId = Store.Id });
+                }
+                else if (sellable is Videocard)
+                {
+                    MainViewModel.ServerAdapter.CreateStoreVideocard(new StoreVideocard { SellableId = sellable.Id, StoreId = Store.Id });
+                }
+                else
+                {
+                    throw new NotSupportedException($"ISellable of type '{sellable.GetType().FullName}' is not supported.");
+                }
 
                 UpdateModifiedLinks();
-
-                MainViewModel.LoadSellableLinks();
-                //StoreProcessor.Items = MainViewModel.ServerAdapter.GetAll<StoreProcessor>();
 
                 UpdateCollectionToAddNoFilter();
                 UpdateCollectionAddedNoFilter();
@@ -142,10 +148,27 @@ namespace IronMacbeth.Client.VVM.EditStoreVVM
 
             if (sellableLink != null)
             {
-                MainViewModel.ServerAdapter.DeleteLink(sellableLink);
+                if (sellableLink is StoreMemory)
+                {
+                    MainViewModel.ServerAdapter.DeleteStoreMemory(sellableLink.Id);
+                }
+                else if (sellableLink is StoreMotherboard)
+                {
+                    MainViewModel.ServerAdapter.DeleteStoreMotherboard(sellableLink.Id);
+                }
+                else if (sellableLink is StoreProcessor)
+                {
+                    MainViewModel.ServerAdapter.DeleteStoreProcessor(sellableLink.Id);
+                }
+                else if( sellableLink is StoreVideocard)
+                {
+                    MainViewModel.ServerAdapter.DeleteStoreVideocard(sellableLink.Id);
+                }
+                else
+                {
+                    throw new NotSupportedException($"ISellableLink of type '{sellableLink.GetType().FullName}' is not supported.");
+                }
 
-                MainViewModel.LoadSellableLinks();
-                //StoreProcessor.Items = MainViewModel.ServerAdapter.GetAll<StoreProcessor>();
 
                 UpdateCollectionToAddNoFilter();
                 UpdateCollectionAddedNoFilter();
@@ -173,7 +196,7 @@ namespace IronMacbeth.Client.VVM.EditStoreVVM
                     Store.ImageName = null;
                 }
 
-                MainViewModel.ServerAdapter.Update(Store);
+                MainViewModel.ServerAdapter.UpdateStore(Store);
 
                 UpdateModifiedLinks();
             }
@@ -186,7 +209,7 @@ namespace IronMacbeth.Client.VVM.EditStoreVVM
                     BitmapImage = BitmapImage,
                     OwnerId = _user.Login
                 };
-                MainViewModel.ServerAdapter.Insert(Store);
+                MainViewModel.ServerAdapter.CreateStore(Store);
             }
 
             CollectionChanged = true;
@@ -224,28 +247,68 @@ namespace IronMacbeth.Client.VVM.EditStoreVVM
         {
             SellableAdded = new List<ISellableLink>();
 
-            SellableAdded.AddRange(Store.SellableLinks.Where(item => item.Sellable.Name.ToLower().Contains(ItemsAddedSearch.ToLower())));
+
+            SellableAdded.AddRange
+            (
+                MainViewModel.ServerAdapter
+                    .GetStoreSellableLinks(Store.Id)
+                    .Select
+                    (
+                        link =>
+                        {
+                            ISellable sellable;
+
+                            if (link is StoreMemory storeMemory)
+                            {
+                                sellable = MainViewModel.ServerAdapter.GetMemoryFromStoreMemory(storeMemory);
+                            }
+                            else if (link is StoreMotherboard storeMotherboard)
+                            {
+                                sellable = MainViewModel.ServerAdapter.GetMotherboardFromStoreMotherboard(storeMotherboard);
+                            }
+                            else if (link is StoreProcessor storeProcessor)
+                            {
+                                sellable = MainViewModel.ServerAdapter.GetProcessorFromStoreProcessor(storeProcessor);
+                            }
+                            else if (link is StoreVideocard storeVideocard)
+                            {
+                                sellable = MainViewModel.ServerAdapter.GetVideoCardFromStoreVideoCard(storeVideocard);
+                            }
+                            else
+                            {
+                                throw new NotSupportedException($"ISellableLink of type '{link.GetType().FullName}' is not supported.");
+                            }
+
+                            return new { SellableLink = link, Sellable = sellable };
+                        }
+                    )
+                    .Where(item => item.Sellable.Name.ToLower().Contains(ItemsAddedSearch.ToLower()))
+                    .Select(x => x.SellableLink)
+            );
 
             OnPropertyChanged(nameof(SellableAdded));
         }
 
         public void UpdateCollectionToAdd()
         {
+            var storeSellables = MainViewModel.ServerAdapter.GetStoreSellables(Store.Id);
+
             SellableToAdd = new List<ISellable>();
 
             SellableToAdd.AddRange(
-                Processor.Items.Where(item => !Store.Sellables.Contains(item)).
-                                Where(item => item.Name.ToLower().Contains(ItemsToAddSearch.ToLower())));
-            SellableToAdd.AddRange(
-                Videocard.Items.Where(item => !Store.Sellables.Contains(item)).
+                MainViewModel.ServerAdapter.GetAllProcessors().Where(item => !storeSellables.Contains(item)).
                                 Where(item => item.Name.ToLower().Contains(ItemsToAddSearch.ToLower())));
 
             SellableToAdd.AddRange(
-                Motherboard.Items.Where(item => !Store.Sellables.Contains(item)).
+                MainViewModel.ServerAdapter.GetAllVideoCards().Where(item => !storeSellables.Contains(item)).
                                 Where(item => item.Name.ToLower().Contains(ItemsToAddSearch.ToLower())));
-
+            
             SellableToAdd.AddRange(
-                Memory.Items.Where(item => !Store.Sellables.Contains(item)).
+                MainViewModel.ServerAdapter.GetAllMotherboards().Where(item => !storeSellables.Contains(item)).
+                                Where(item => item.Name.ToLower().Contains(ItemsToAddSearch.ToLower())));
+            
+            SellableToAdd.AddRange(
+                MainViewModel.ServerAdapter.GetAllMemories().Where(item => !storeSellables.Contains(item)).
                                 Where(item => item.Name.ToLower().Contains(ItemsToAddSearch.ToLower())));
 
 
@@ -257,26 +320,30 @@ namespace IronMacbeth.Client.VVM.EditStoreVVM
         {
             SellableAdded = new List<ISellableLink>();
 
-            SellableAdded.AddRange(Store.SellableLinks);
+            var storeSellableLinks = MainViewModel.ServerAdapter.GetStoreSellableLinks(Store.Id);
+
+            SellableAdded.AddRange(storeSellableLinks);
 
             OnPropertyChanged(nameof(SellableAdded));
         }
 
         public void UpdateCollectionToAddNoFilter()
         {
+            var storeSellables = MainViewModel.ServerAdapter.GetStoreSellables(Store.Id);
+
             SellableToAdd = new List<ISellable>();
 
             SellableToAdd.AddRange(
-                Processor.Items.Where(item => !Store.Sellables.Contains(item)));
-
+                MainViewModel.ServerAdapter.GetAllProcessors().Where(item => !storeSellables.Contains(item)));
+            
             SellableToAdd.AddRange(
-                Videocard.Items.Where(item => !Store.Sellables.Contains(item)));
-
+                MainViewModel.ServerAdapter.GetAllVideoCards().Where(item => !storeSellables.Contains(item)));
+            
             SellableToAdd.AddRange(
-                Motherboard.Items.Where(item => !Store.Sellables.Contains(item)));
-
+                MainViewModel.ServerAdapter.GetAllMotherboards().Where(item => !storeSellables.Contains(item)));
+            
             SellableToAdd.AddRange(
-                Memory.Items.Where(item => !Store.Sellables.Contains(item)));
+                MainViewModel.ServerAdapter.GetAllMemories().Where(item => !storeSellables.Contains(item)));
 
             OnPropertyChanged(nameof(SellableToAdd));
         }
@@ -290,12 +357,32 @@ namespace IronMacbeth.Client.VVM.EditStoreVVM
 
         private void UpdateModifiedLinks()
         {
-            foreach (var link in Store.SellableLinks)
+            foreach (var link in SellableAdded)
             {
                 if (link.Modified)
                 {
                     link.Modified = false;
-                    MainViewModel.ServerAdapter.Update(link);
+
+                    if (link is StoreMemory storeMemory)
+                    {
+                        MainViewModel.ServerAdapter.UpdateStoreMemory(storeMemory);
+                    }
+                    else if (link is StoreMotherboard storeMotherboard)
+                    {
+                        MainViewModel.ServerAdapter.UpdateStoreMotherboard(storeMotherboard);
+                    }
+                    else if (link is StoreProcessor storeProcessor)
+                    {
+                        MainViewModel.ServerAdapter.UpdateStoreProcessor(storeProcessor);
+                    }
+                    else if (link is StoreVideocard storeVideocard)
+                    {
+                        MainViewModel.ServerAdapter.UpdateStoreVideocard(storeVideocard);
+                    }
+                    else
+                    {
+                        throw new NotSupportedException($"ISellableLink of type '{link.GetType().FullName}' is not supported.");
+                    }
                 }
             }
         }

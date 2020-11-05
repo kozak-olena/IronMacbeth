@@ -99,7 +99,7 @@ namespace IronMacbeth.Client.VVM.EditVideocardVVM
                     Videocard.DescriptionName = null;
                 }
 
-                MainViewModel.ServerAdapter.Update(Videocard);
+                MainViewModel.ServerAdapter.UpdateVideoCard(Videocard);
             }
             else
             {
@@ -118,7 +118,7 @@ namespace IronMacbeth.Client.VVM.EditVideocardVVM
                     MPN = MPN,
                     Description = Description
                 };
-                MainViewModel.ServerAdapter.Insert(Videocard);
+                MainViewModel.ServerAdapter.CreateVideoCard(Videocard);
             }
 
             CollectionChanged = true;

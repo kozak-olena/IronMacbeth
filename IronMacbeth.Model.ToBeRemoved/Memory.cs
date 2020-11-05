@@ -64,29 +64,29 @@ namespace IronMacbeth.Model.ToBeRemoved
         private string _description;
         #endregion
 
-        public List<Store> Stores
-        {
-            get { return StoreMemory.Items.Where(item => item.MemoryId == Id).Select(item => item.Store).ToList(); }
-        }
+        //public List<Store> Stores
+        //{
+        //    get { return MainViewModel.ServerAdapter.GetAllStoreMemories().Where(item => item.MemoryId == Id).Select(item => item.Store).ToList(); }
+        //}
 
-        public List<StoreMemory> Links
-        {
-            get { return StoreMemory.Items.Where(item => item.MemoryId == Id).ToList(); }
-        }
+        //public List<StoreMemory> Links
+        //{
+        //    get { return MainViewModel.ServerAdapter.GetAllStoreMemories().Where(item => item.MemoryId == Id).ToList(); }
+        //}
 
         public int AveragePrice
         {
             get
             {
-                var links = Links;
-                if (links.Count != 0)
-                {
-                    return links.Sum(link => link.ProductPrice) / links.Count;
-                }
-                else
-                {
+                //var links = Links;
+                //if (links.Count != 0)
+                //{
+                //    return links.Sum(link => link.ProductPrice) / links.Count;
+                //}
+                //else
+                //{
                     return 0;
-                }
+                //}
             }
         }
 
@@ -94,34 +94,35 @@ namespace IronMacbeth.Model.ToBeRemoved
         {
             get
             {
-                if (Links.Count != 0)
-                {
-                    return Links.Min(link => link.ProductPrice);
-                }
-                else
-                {
+                //if (Links.Count != 0)
+                //{
+                //    return Links.Min(link => link.ProductPrice);
+                //}
+                //else
+                //{
                     return 0;
-                }
+                //}
             }
         }
         public int MaxPrice
         {
             get
             {
-                if (Links.Count != 0)
-                {
-                    return Links.Max(link => link.ProductPrice);
-                }
-                else
-                {
+                //if (Links.Count != 0)
+                //{
+                //    return Links.Max(link => link.ProductPrice);
+                //}
+                //else
+                //{
                     return 0;
-                }
+                //}
             }
         }
 
         public int NumberOfOfferings
         {
-            get { return Links.Count; }
+            //get { return Links.Count; }
+            get { return 0; }
         }
     }
 }

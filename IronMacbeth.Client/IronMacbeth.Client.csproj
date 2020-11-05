@@ -112,10 +112,6 @@
       <DependentUpon>MotherboardUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="VVM\MotherboardVVM\MotherboardViewModel.cs" />
-    <Compile Include="VVM\NotificationVVM\NotificationUserControl.xaml.cs">
-      <DependentUpon>NotificationUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\NotificationVVM\NotificationViewModel.cs" />
     <Compile Include="VVM\StorePurchaseVVM\StorePurchaseUserControl.xaml.cs">
       <DependentUpon>StorePurchaseUserControl.xaml</DependentUpon>
     </Compile>
@@ -223,10 +219,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VVM\MotherboardVVM\MotherboardUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\NotificationVVM\NotificationUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

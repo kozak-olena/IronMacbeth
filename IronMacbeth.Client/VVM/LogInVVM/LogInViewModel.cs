@@ -56,7 +56,7 @@ namespace IronMacbeth.Client.VVM.LogInVVM
                     Password = Password
                 };
 
-                MainViewModel.ServerAdapter.Insert(user);
+                MainViewModel.ServerAdapter.Register(user);
 
                 _loginMode = true;
 

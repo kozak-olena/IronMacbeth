@@ -18,7 +18,6 @@ using IronMacbeth.Client.VVM.MemoryInfo;
 using IronMacbeth.Client.VVM.MemoryVVM;
 using IronMacbeth.Client.VVM.MotherboardInfo;
 using IronMacbeth.Client.VVM.MotherboardVVM;
-using IronMacbeth.Client.VVM.NotificationVVM;
 using IronMacbeth.Client.VVM.ProcessorInfo;
 using IronMacbeth.Client.VVM.ProcessorVVM;
 using IronMacbeth.Client.VVM.PuchaseVVM;
@@ -82,22 +81,6 @@ namespace IronMacbeth.Client.ViewModel
                 {
                     _currentPageViewModel = value;
                     OnPropertyChanged(nameof(CurrentPageViewModel));
-                }
-            }
-        }
-
-        private NotificationViewModel _notificationPageViewModel;
-        private readonly Queue<NotificationViewModel> _notificationViewModels; 
-
-        public NotificationViewModel NotificationPageViewModel
-        {
-            get { return _notificationPageViewModel; }
-            set
-            {
-                if (_notificationPageViewModel != value)
-                {
-                    _notificationPageViewModel = value;
-                    OnPropertyChanged(nameof(NotificationPageViewModel));
                 }
             }
         }
@@ -236,8 +219,6 @@ namespace IronMacbeth.Client.ViewModel
             ChangePageCommand = new RelayCommand(ChangePageMethod);
             ShowStoresCommand = new RelayCommand(ShowStoresMethod);
             ShowPurchasesCommand = new RelayCommand(ShowPurchasesMethod);
-            HideNotificationCommand = new RelayCommand(HideNotificationMethod);
-            ViewNotificationCommand = new RelayCommand(ViewNotificationMethod);
             AnimationCompletedCommand = new RelayCommand(OnAnimationCompleted);
 
             PageViewModels = new List<IPageViewModel>
@@ -251,7 +232,6 @@ namespace IronMacbeth.Client.ViewModel
 
             _previousPages = new Stack<IPageViewModel>();
             _nextPages = new Stack<IPageViewModel>();
-            _notificationViewModels = new Queue<NotificationViewModel>();
 
             CurrentPageViewModel = new HomeViewModel();
 
@@ -267,7 +247,6 @@ namespace IronMacbeth.Client.ViewModel
 
         private void LogOutMethod(object parameter)
         {
-            Proxy.LogOut(User);
             User = null;
         }
 
@@ -279,26 +258,6 @@ namespace IronMacbeth.Client.ViewModel
         public void ShowPurchasesMethod(object parameter)
         {
             new StorePurchaseWindow { DataContext = new StorePurchaseViewModel(User) }.ShowDialog();
-        }
-
-        public void HideNotificationMethod(object parameter)
-        {
-            if (_notificationViewModels.Count != 0)
-            {
-                NotificationPageViewModel = _notificationViewModels.Dequeue();
-            }
-            else
-            {
-                NotificationPageViewModel = null;
-            }
-        }
-
-        public void ViewNotificationMethod(object parameter)
-        {
-            NotificationPageViewModel = null;
-            _notificationViewModels.Clear();
-
-            ShowPurchasesMethod(parameter);
         }
 
         public void CloseMethod(object parameter)
@@ -380,23 +339,7 @@ namespace IronMacbeth.Client.ViewModel
             }
         }
 
-        public static void LoadSellable()
-        {
-            Store.Items = ServerAdapter.GetAll<Store>();
-            Memory.Items = ServerAdapter.GetAll<Memory>();
-            Processor.Items = ServerAdapter.GetAll<Processor>();
-            Videocard.Items = ServerAdapter.GetAll<Videocard>();
-            Motherboard.Items = ServerAdapter.GetAll<Motherboard>();
-            LoadSellableLinks();
-        }
 
-        public static void LoadSellableLinks()
-        {
-            StoreMemory.Items = ServerAdapter.GetAll<StoreMemory>();
-            StoreProcessor.Items = ServerAdapter.GetAll<StoreProcessor>();
-            StoreVideocard.Items = ServerAdapter.GetAll<StoreVideocard>();
-            StoreMotherboard.Items = ServerAdapter.GetAll<StoreMotherboard>();
-        }
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -415,19 +358,12 @@ namespace IronMacbeth.Client.ViewModel
 
         public void NotifyUserJoined(string userName)
         {
+            throw new NotImplementedException();
         }
 
         public void NotifyNewMessage(string message)
         {
-        }
-
-        public void NotifyNewPurchase(Notification notification)
-        {
-            _notificationViewModels.Enqueue(new NotificationViewModel(notification));
-            if (NotificationPageViewModel == null)
-            {
-                NotificationPageViewModel = _notificationViewModels.Dequeue();
-            }
+            throw new NotImplementedException();
         }
 
         private bool Connect()

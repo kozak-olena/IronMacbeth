@@ -1,132 +1,453 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.ServiceModel;
 using IronMacbeth.Model.ToBeRemoved;
 
 namespace IronMacbeth.BFF
 {
     public class Service : IService
     {
-        private static readonly DataAdapter DataAdapter;
-        private static readonly Dictionary<string,IServiceCallback> Callbacks;
+        #region Memory
 
-        static Service()
+        public void CreateMemory(Memory memory)
         {
-            //Represents a connection to a SQL Server database
-            var connection = new SqlConnection("Data Source=localhost;Initial Catalog=IronMacbeth.BFF.Database;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=False");
-          
-            DataAdapter = new DataAdapter(connection);
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(memory);
 
-            Callbacks = new Dictionary<string, IServiceCallback>();
+                dbContext.SaveChanges();
+            }
+        }
+
+        public List<Memory> GetAllMemories()
+        {
+            using (var dbContext = new DbContext())
+            {
+                return dbContext.Memories.ToList();
+            }
+        }
+
+        public void UpdateMemory(Memory memory)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Update(memory);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteMemory(int id)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Memories.Remove(new Memory { Id = id });
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        #endregion
+
+        #region Motherboard
+
+        public void CreateMotherboard(Motherboard motherboard)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(motherboard);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public List<Motherboard> GetAllMotherboards()
+        {
+            using (var dbContext = new DbContext())
+            {
+                return dbContext.Motherboards.ToList();
+            }
+        }
+
+        public void UpdateMotherboard(Motherboard motherboard)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Update(motherboard);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteMotherboard(int id)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Motherboards.Remove(new Motherboard { Id = id });
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        #endregion
+
+        #region Processor
+
+        public void CreateProcessor(Processor processor) 
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(processor);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public List<Processor> GetAllProcessors() 
+        {
+            using (var dbContext = new DbContext())
+            {
+                return dbContext.Processors.ToList();
+            }
+        }
+
+        public void UpdateProcessor(Processor processor)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Update(processor);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteProcessor(int id)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Processors.Remove(new Processor { Id = id });
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        #endregion
+
+        #region Purchase
+
+        public void CreatePurchase(Purchase purchase) 
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(purchase);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public List<Purchase> GetAllPurchases()
+        {
+            using (var dbContext = new DbContext())
+            {
+                return dbContext.Purchases.ToList();
+            }
+        }
+
+        public void UpdatePurchase(Purchase purchase)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Update(purchase);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeletePurchase(int id)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Purchases.Remove(new Purchase { Id = id });
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        #endregion
+
+        #region Store
+
+        public void CreateStore(Store store)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(store);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public List<Store> GetAllStores() 
+        {
+            using (var dbContext = new DbContext())
+            {
+                return dbContext.Stores.ToList();
+            }
+        }
+
+        public void UpdateStore(Store store)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Update(store);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteStore(int id)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Stores.Remove(new Store { Id = id });
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        #endregion
+
+        #region StoreMemory
+
+        public void CreateStoreMemory(StoreMemory storeMemory)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(storeMemory);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public List<StoreMemory> GetAllStoreMemories() 
+        {
+            using (var dbContext = new DbContext())
+            {
+                return dbContext.StoreMemories.ToList();
+            }
+        }
+
+        public void UpdateStoreMemory(StoreMemory storeMemory)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Update(storeMemory);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteStoreMemory(int id)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.StoreMemories.Remove(new StoreMemory { Id = id });
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        #endregion
+
+        #region StoreMotherboard
+
+        public void CreateStoreMotherboard(StoreMotherboard storeMotherboard)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(storeMotherboard);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public List<StoreMotherboard> GetAllStoreMotherboards()
+        {
+            using (var dbContext = new DbContext())
+            {
+                return dbContext.StoreMotherboards.ToList();
+            }
+        }
+
+        public void UpdateStoreMotherboard(StoreMotherboard storeMotherboard)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Update(storeMotherboard);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteStoreMotherboard(int id)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.StoreMotherboards.Remove(new StoreMotherboard { Id = id });
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        #endregion
+
+        #region StoreProcessor
+
+        public void CreateStoreProcessor(StoreProcessor storeProcessor)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(storeProcessor);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public List<StoreProcessor> GetAllStoreProcessors() 
+        {
+            using (var dbContext = new DbContext())
+            {
+                return dbContext.StoreProcessors.ToList();
+            }
+        }
+
+        public void UpdateStoreProcessor(StoreProcessor storeProcessor)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Update(storeProcessor);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteStoreProcessor(int id)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.StoreProcessors.Remove(new StoreProcessor { Id = id });
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        #endregion
+
+        #region StoreVideocard
+
+        public void CreateStoreVideocard(StoreVideocard storeVideocard)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(storeVideocard);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public List<StoreVideocard> GetAllStoreVideoCards() 
+        {
+            using (var dbContext = new DbContext())
+            {
+                return dbContext.StoreVideoCards.ToList();
+            }
+        }
+
+        public void UpdateStoreVideocard(StoreVideocard storeVideocard)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Update(storeVideocard);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteStoreVideocard(int id)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.StoreVideoCards.Remove(new StoreVideocard { Id = id });
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        #endregion
+
+        #region User
+
+        public void Register(User user)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(user);
+
+                dbContext.SaveChanges();
+            }
         }
 
         public User LogIn(string login, string password)
         {
-            var bytes = GetAll(typeof(User).AssemblyQualifiedName);
-            List<object> objects;
-
-            using (MemoryStream stream = new MemoryStream(bytes))
+            using (var dbContext = new DbContext())
             {
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-
-                objects = (List<object>)binaryFormatter.Deserialize(stream);
-            }
-
-            List<User> results = objects.Cast<User>().ToList();
-
-            foreach (User user in results)
-            {
-                if (user.Login == login && user.Password == password)
-                {
-                    IServiceCallback registeredUser = OperationContext.Current.GetCallbackChannel<IServiceCallback>();
-
-                    if (!Callbacks.Keys.Contains(login))
-                    {
-                        Callbacks.Add(login,registeredUser);
-                    }
-
-                    return user;
-                }
-            }
-
-            return null;
-        }
-
-        public void LogOut(User user)
-        {
-            if (Callbacks.ContainsKey(user.Login))
-            {
-                Callbacks.Remove(user.Login);
+                return dbContext.Users.SingleOrDefault(x => x.Login == login && x.Password == password);
             }
         }
 
-        public byte[] GetAll(string typeName)
+        #endregion
+
+        #region Videocard
+
+        public void CreateVideoCard(Videocard videocard)
         {
-            Type type = Type.GetType(typeName);
-
-            var bytes = DataAdapter.GetAll(type);
-            return bytes;
-        }
-
-        public void Insert(byte[] bytes, string typeName)
-        {
-            Type type = Type.GetType(typeName);
-
-            if (type == typeof(Purchase))
+            using (var dbContext = new DbContext())
             {
-                Purchase purchase = DataAdapter.Deserialize(bytes) as Purchase;
+                dbContext.Add(videocard);
 
-                string imageName;
-                string sellableName;
-                DataAdapter.GetImageNameFromPurchase(purchase, out imageName,out sellableName);
-
-                byte[] fileBytes = GetFile(imageName);
-
-                Notification notification = new Notification
-                {
-                    Name = $"{purchase.FirstName} {purchase.SecondName}",
-                    SellableName = sellableName,
-                    BitmapBytes = fileBytes
-                };
-
-                IServiceCallback registeredUser = OperationContext.Current.GetCallbackChannel<IServiceCallback>();
-
-                string login = DataAdapter.GetStoreOwnerName(purchase);
-
-                if (Callbacks.ContainsKey(login) && Callbacks[login]!=registeredUser)
-                {
-                    try
-                    {
-                        Callbacks[login].NotifyNewPurchase(notification);
-                    }
-                    catch
-                    {
-                        Callbacks.Remove(login);
-                    }
-                }
+                dbContext.SaveChanges();
             }
-
-            DataAdapter.Insert(bytes, type);
         }
 
-        public void Delete(byte[] item)
+        public List<Videocard> GetAllVideoCards() 
         {
-            DataAdapter.Delete(item);
+            using (var dbContext = new DbContext())
+            {
+                return dbContext.VideoCards.ToList();
+            }
         }
 
-        public void DeleteLink(byte[] item)
+        public void UpdateVideoCard(Videocard videocard)
         {
-            DataAdapter.DeleteLink(item);
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Update(videocard);
+
+                dbContext.SaveChanges();
+            }
         }
 
-        public void Update(byte[] item)
+        public void DeleteVideoCard(int id)
         {
-            DataAdapter.Update(item);
+            using (var dbContext = new DbContext())
+            {
+                dbContext.VideoCards.Remove(new Videocard { Id = id });
+
+                dbContext.SaveChanges();
+            }
         }
+
+        #endregion
 
         public void AddFile(byte[] file, out string fileName)
         {

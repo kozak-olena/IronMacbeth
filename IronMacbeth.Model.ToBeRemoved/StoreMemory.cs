@@ -42,15 +42,15 @@ namespace IronMacbeth.Model.ToBeRemoved
         public new bool Modified { get; set; }
 
 
-        public Store Store
-        {
-            get { return Store.Items.Find(item => item.Id == StoreId); }
-        }
+        //public Store Store
+        //{
+        //    get { return MainViewModel.ServerAdapter.GetAllStores().Find(item => item.Id == StoreId); }
+        //}
 
-        public Memory Memory
-        {
-            get { return Memory.Items.Find(item => item.Id == MemoryId); }
-        }
+        //public Memory Memory
+        //{
+        //    get { return MainViewModel.ServerAdapter.GetAllMemories().Find(item => item.Id == MemoryId); }
+        //}
 
         public override string DisplayString =>
             $"StoreMemory: StoreId: {StoreId} MemoryId: {MemoryId}";
@@ -64,7 +64,6 @@ namespace IronMacbeth.Model.ToBeRemoved
             get { return MemoryId; }
             set { MemoryId = value; }
         }
-        public ISellable Sellable => Memory;
 
         #endregion
     }

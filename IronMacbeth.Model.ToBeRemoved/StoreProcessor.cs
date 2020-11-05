@@ -40,16 +40,6 @@ namespace IronMacbeth.Model.ToBeRemoved
 
         public new bool Modified { get; set; }
 
-
-        public Store Store
-        {
-            get { return Store.Items.Find(item => item.Id == StoreId); }
-        }
-        public Processor Processor
-        {
-            get { return Processor.Items.Find(item => item.Id == ProcessorId); }
-        }
-
         public override string DisplayString =>
             $"StoreProcessor: StoreId: {StoreId} ProcessorId: {ProcessorId}";
 
@@ -62,7 +52,6 @@ namespace IronMacbeth.Model.ToBeRemoved
             get { return ProcessorId; }
             set { ProcessorId = value; }
         }
-        public ISellable Sellable => Processor;
 
         #endregion
     }

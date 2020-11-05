@@ -26,7 +26,7 @@ namespace IronMacbeth.Client.VVM.MemoryVVM
             private set { _items = value; }
         }
 
-        private string _search;
+        private string _search = "";
         public string Search
         {
             get { return _search; }
@@ -54,10 +54,6 @@ namespace IronMacbeth.Client.VVM.MemoryVVM
 
         public MemoryViewModel()
         {
-            Search = "";
-
-            UpdateCollection(false);
-
             AddCommand = new RelayCommand(AddMethod);
             EditCommand = new RelayCommand(EditMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
             DeleteCommand = new RelayCommand(DeleteMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
@@ -76,10 +72,7 @@ namespace IronMacbeth.Client.VVM.MemoryVVM
 
         public void Update()
         {
-            MainViewModel.LoadSellable();
-            //Store.Items = MainViewModel.ServerAdapter.GetAll<Store>();
-            //Processor.Items = MainViewModel.ServerAdapter.GetAll<Processor>();
-            //StoreProcessor.Items = MainViewModel.ServerAdapter.GetAll<StoreProcessor>();
+
         }
 
         public void EditMethod(object parameter)
@@ -95,16 +88,19 @@ namespace IronMacbeth.Client.VVM.MemoryVVM
 
         public void DeleteMethod(object parameter)
         {
-            MainViewModel.ServerAdapter.Delete(SelectedItem as Memory);
-            Update();
-            UpdateCollection(false);
+            if (SelectedItem is Memory memory)
+            {
+                MainViewModel.ServerAdapter.DeleteMemory(memory.Id);
+                Update();
+                UpdateCollection(false);
+            }
         }
 
         public void UpdateCollection(bool innerCall)
         {
-            _items = Memory.Items.
-                OrderByDescending(item => item.NumberOfOfferings).
-                Where(item => item.Name.ToLower().Contains(Search.ToLower())).ToList();
+            _items = MainViewModel.ServerAdapter.GetAllMemories()
+                .OrderByDescending(item => item.NumberOfOfferings)
+                .Where(item => item.Name.ToLower().Contains(Search.ToLower())).ToList();
 
             if (!innerCall)
             {
@@ -114,11 +110,8 @@ namespace IronMacbeth.Client.VVM.MemoryVVM
 
         public void UpdateCollectionNoFilter()
         {
-            //StoreProcessor.Items = MainViewModel.ServerAdapter.GetAll<StoreProcessor>();
-            //Processor.Items = MainViewModel.ServerAdapter.GetAll<Processor>();
-
-            _items = Memory.Items.
-                OrderByDescending(item => item.NumberOfOfferings).ToList();
+            _items = MainViewModel.ServerAdapter.GetAllMemories()
+                .OrderByDescending(item => item.NumberOfOfferings).ToList();
 
             OnPropertyChanged(nameof(Items));
         }
