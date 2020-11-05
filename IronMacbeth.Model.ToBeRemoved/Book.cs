@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Model.ToBeRemoved
@@ -25,10 +20,15 @@ namespace IronMacbeth.Model.ToBeRemoved
 
         public string Pages { get; set; }
         public string Availiability { get; set; }   //electronic version???
+
         public string Location { get; set; }
+
         public string TypeOfDocument { get; set; }
+
         public string NameOfBook => Name;
+
         public string SellableType => "Book";
+
         public string InfoContainerKey => "Book";
 
         public override string DisplayString =>
