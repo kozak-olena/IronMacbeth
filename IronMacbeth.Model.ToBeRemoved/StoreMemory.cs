@@ -5,17 +5,16 @@ namespace IronMacbeth.Model.ToBeRemoved
     [Serializable]
     public class StoreMemory : Base<StoreMemory>, IInformationContainer, ISellableLink
     {
-        [Database]
+         
         public int Id { get; set; }
-        [Database]
+         
         public int StoreId { get; set; }
-        [Database]
+       
         public int MemoryId { get; set; }
-
 
         private int _productPrice;
 
-        [Database]
+        
         public int ProductPrice
         {
             get { return _productPrice; }
@@ -28,7 +27,7 @@ namespace IronMacbeth.Model.ToBeRemoved
 
         private int _productWarranty;
 
-        [Database]
+        
         public int ProductWarranty
         {
             get { return _productWarranty; }

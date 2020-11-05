@@ -64,6 +64,7 @@
     <Compile Include="Purchase.cs" />
     <Compile Include="ServerAdapter.cs" />
     <Compile Include="Store.cs" />
+    <Compile Include="RentBook.cs" />
     <Compile Include="StoreMemory.cs" />
     <Compile Include="StoreMotherboard.cs" />
     <Compile Include="StoreProcessor.cs" />
