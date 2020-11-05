@@ -53,6 +53,23 @@ namespace IronMacbeth.Model.ToBeRemoved
         {
             Proxy.DeleteMemory(id);
         }
+       
+        public List<(Store Store, StoreMemory StoreMemory)> GetAllStoresSellingMemory(int id)
+        {
+            var result =
+                GetAllStoreMemories()
+                    .Where(x => x.MemoryId == id)
+                    .Join
+                    (
+                        GetAllStores(),
+                        storeMemory => storeMemory.StoreId,
+                        store => store.Id,
+                        (storeMemory, store) => (store, storeMemory)
+                    )
+                    .ToList();
+
+            return result;
+        }
 
         #endregion
 
@@ -92,6 +109,23 @@ namespace IronMacbeth.Model.ToBeRemoved
             Proxy.DeleteMotherboard(id);
         }
 
+        public List<(Store Store, StoreMotherboard StoreMotherboard)> GetAllStoresSellingMotherboard(int id)
+        {
+            var result =
+                GetAllStoreMotherboards()
+                    .Where(x => x.MotherboardId == id)
+                    .Join
+                    (
+                        GetAllStores(),
+                        storeMotherboard => storeMotherboard.StoreId,
+                        store => store.Id,
+                        (storeMotherboard, store) => (store, storeMotherboard)
+                    )
+                    .ToList();
+
+            return result;
+        }
+
         #endregion
 
         #region Processor
@@ -128,6 +162,23 @@ namespace IronMacbeth.Model.ToBeRemoved
         public void DeleteProcessor(int id)
         {
             Proxy.DeleteProcessor(id);
+        }
+
+        public List<(Store Store, StoreProcessor StoreProcessor)> GetAllStoresSellingProcessor(int id)
+        {
+            var result = 
+                GetAllStoreProcessors()
+                    .Where(x => x.ProcessorId == id)
+                    .Join
+                    (
+                        GetAllStores(),
+                        storeProcessor => storeProcessor.StoreId,
+                        store => store.Id,
+                        (storeProcessor, store) => (store, storeProcessor)
+                    )
+                    .ToList();
+
+            return result;
         }
 
         #endregion
@@ -437,6 +488,23 @@ namespace IronMacbeth.Model.ToBeRemoved
         public void DeleteVideoCard(int id)
         {
             Proxy.DeleteVideoCard(id);
+        }
+
+        public List<(Store Store, StoreVideocard StoreVideoCard)> GetAllStoresSellingVideoCard(int id)
+        {
+            var result =
+                GetAllStoreVideoCards()
+                    .Where(x => x.VideocardId == id)
+                    .Join
+                    (
+                        GetAllStores(),
+                        storeVideoCard => storeVideoCard.StoreId,
+                        store => store.Id,
+                        (storeVideoCard, store) => (store, storeVideoCard)
+                    )
+                    .ToList();
+
+            return result;
         }
 
         #endregion

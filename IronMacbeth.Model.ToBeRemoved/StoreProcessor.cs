@@ -3,7 +3,7 @@
 namespace IronMacbeth.Model.ToBeRemoved
 {
     [Serializable]
-    public class StoreProcessor : Base<StoreProcessor>,IInformationContainer,ISellableLink
+    public class StoreProcessor : Base<StoreProcessor>, ISellableLink
     {
         [Database]
         public int Id { get; set; }
@@ -16,7 +16,8 @@ namespace IronMacbeth.Model.ToBeRemoved
         private int _productPrice;
 
         [Database]
-        public int ProductPrice {
+        public int ProductPrice
+        {
             get { return _productPrice; }
             set
             {

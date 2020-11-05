@@ -19,19 +19,19 @@
         <Image
             Width="100"
             Grid.Column="0"
-            Source="{Binding Store.BitmapImage}" 
+            Source="{Binding BitmapImage}" 
             Margin="5"/>
         
         <WrapPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Margin="5" Text="{Binding Store.Name}"></TextBlock>
+            <TextBlock Margin="5" Text="{Binding Name}"></TextBlock>
         </WrapPanel>
         
         <WrapPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock Margin="5,5,0,5" Text="Warranty: "/>
             <TextBlock Margin="0,5,5,5" Text="{Binding ProductWarranty}"/>
         </WrapPanel>
-        
-        <TextBlock Margin="5" Grid.Column="3" Text="Kyiv" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <TextBlock Margin="5" Grid.Column="3" Text="{Binding Delivery}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
         <WrapPanel Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock Margin="5,5,0,5" Text="{Binding ProductPrice}"/>
@@ -45,7 +45,7 @@
             Content="More"
             Height="25"
             Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
-            CommandParameter="{Binding}"/>
+            CommandParameter="{Binding PurchaseVm}"/>
 
     </Grid>
 </UserControl>

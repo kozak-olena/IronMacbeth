@@ -6,7 +6,7 @@ using System.Windows.Input;
 using IronMacbeth.Client.Annotations;
 using IronMacbeth.Client.ViewModel;
 using IronMacbeth.Client.VVM.EditMotherboardVVM;
-using IronMacbeth.Client.VVM.EditVideocardVVM;
+using IronMacbeth.Client.VVM.MemoryVVM;
 using IronMacbeth.Model.ToBeRemoved;
 
 namespace IronMacbeth.Client.VVM.MotherboardVVM
@@ -15,9 +15,9 @@ namespace IronMacbeth.Client.VVM.MotherboardVVM
     {
         public string PageViewName => "Motherboards";
 
-        private List<Motherboard> _items;
+        private List<MotherboardItemViewModel> _items;
 
-        public List<Motherboard> Items
+        public List<MotherboardItemViewModel> Items
         {
             get
             {
@@ -99,9 +99,12 @@ namespace IronMacbeth.Client.VVM.MotherboardVVM
 
         public void UpdateCollection(bool innerCall)
         {
-            _items = MainViewModel.ServerAdapter.GetAllMotherboards().
-                OrderByDescending(item => item.NumberOfOfferings).
-                Where(item => item.Name.ToLower().Contains(Search.ToLower())).ToList();
+            _items = 
+                MainViewModel.ServerAdapter.GetAllMotherboards()
+                    .OrderByDescending(item => item.NumberOfOfferings)
+                    .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
+                    .Select(x => new MotherboardItemViewModel(x))
+                    .ToList();
 
             if (!innerCall)
             {
@@ -111,8 +114,11 @@ namespace IronMacbeth.Client.VVM.MotherboardVVM
 
         public void UpdateCollectionNoFilter()
         {
-            _items = MainViewModel.ServerAdapter.GetAllMotherboards().
-                OrderByDescending(item => item.NumberOfOfferings).ToList();
+            _items =
+                MainViewModel.ServerAdapter.GetAllMotherboards()
+                    .OrderByDescending(item => item.NumberOfOfferings)
+                    .Select(x => new MotherboardItemViewModel(x))
+                    .ToList();
 
             OnPropertyChanged(nameof(Items));
         }

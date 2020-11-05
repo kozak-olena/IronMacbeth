@@ -3,7 +3,7 @@
 namespace IronMacbeth.Model.ToBeRemoved
 {
     [Serializable]
-    public class StoreMotherboard : Base<StoreMotherboard>, IInformationContainer, ISellableLink
+    public class StoreMotherboard : Base<StoreMotherboard>, ISellableLink
     {
         public int Id { get; set; }
         public int StoreId { get; set; }
@@ -34,17 +34,6 @@ namespace IronMacbeth.Model.ToBeRemoved
         }
 
         public new bool Modified { get; set; }
-
-
-        //public Store Store
-        //{
-        //    get { return MainViewModel.ServerAdapter.GetAllStores().Find(item => item.Id == StoreId); }
-        //}
-
-        //public Motherboard Motherboard
-        //{
-        //    get { return MainViewModel.ServerAdapter.GetAllMotherboards().Find(item => item.Id == MotherboardId); }
-        //}
 
         public override string DisplayString =>
             $"StoreMotherboard: StoreId: {StoreId} VideocardId: {MotherboardId}";

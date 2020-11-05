@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Model.ToBeRemoved
 {
     [Serializable]
-    public class Processor:Base<Processor>,IInformationContainer,ISellable
+    public class Processor : Base<Processor>, ISellable
     {
         [Database]
         public int Id { get; set; }
@@ -38,9 +36,7 @@ namespace IronMacbeth.Model.ToBeRemoved
         public string Name => Model;
         public string SellableType => "Processor";
 
-        //public string InfoContainerKey => "Processor";
-
-        public override string DisplayString => 
+        public override string DisplayString =>
             $"Processor: Id: {Id}";
 
         #region IDisplayable
@@ -70,16 +66,6 @@ namespace IronMacbeth.Model.ToBeRemoved
         private string _description;
         #endregion
 
-        //public List<Store> Stores
-        //{
-        //    get { return MainViewModel.ServerAdapter.GetAllStoreProcessors().Where(item => item.ProcessorId == Id).Select(item => item.Store).ToList(); }
-        //}
-
-        //public List<StoreProcessor> Links
-        //{
-        //    get { return MainViewModel.ServerAdapter.GetAllStoreProcessors().Where(item => item.ProcessorId == Id).ToList(); }
-        //}
-
         public int AveragePrice
         {
             get
@@ -91,7 +77,7 @@ namespace IronMacbeth.Model.ToBeRemoved
                 //}
                 //else
                 //{
-                    return 0;
+                return 0;
                 //}
             }
         }
@@ -106,7 +92,7 @@ namespace IronMacbeth.Model.ToBeRemoved
                 //}
                 //else
                 //{
-                    return 0;
+                return 0;
                 //}
             }
         }
@@ -120,7 +106,7 @@ namespace IronMacbeth.Model.ToBeRemoved
                 //}
                 //else
                 //{
-                    return 0;
+                return 0;
                 //}
             }
         }
@@ -130,7 +116,5 @@ namespace IronMacbeth.Model.ToBeRemoved
             //get { return Links.Count; }
             get { return 0; }
         }
-
-        public string InfoContainerKey => "Processor";
     }
 }

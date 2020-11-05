@@ -5,8 +5,8 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using IronMacbeth.Client.Annotations;
 using IronMacbeth.Client.ViewModel;
-using IronMacbeth.Client.VVM.EditProcessorVVM;
 using IronMacbeth.Client.VVM.EditVideocardVVM;
+using IronMacbeth.Client.VVM.MemoryVVM;
 using IronMacbeth.Model.ToBeRemoved;
 
 namespace IronMacbeth.Client.VVM.VideocardVVM
@@ -15,9 +15,9 @@ namespace IronMacbeth.Client.VVM.VideocardVVM
     {
         public string PageViewName => "Videocards";
 
-        private List<Videocard> _items;
+        private List<VideoCardItemViewModel> _items;
 
-        public List<Videocard> Items
+        public List<VideoCardItemViewModel> Items
         {
             get
             {
@@ -99,9 +99,12 @@ namespace IronMacbeth.Client.VVM.VideocardVVM
 
         public void UpdateCollection(bool innerCall)
         {
-            _items = MainViewModel.ServerAdapter.GetAllVideoCards().
-                OrderByDescending(item => item.NumberOfOfferings).
-                Where(item => item.Name.ToLower().Contains(Search.ToLower())).ToList();
+            _items = 
+                MainViewModel.ServerAdapter.GetAllVideoCards()
+                    .OrderByDescending(item => item.NumberOfOfferings)
+                    .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
+                    .Select(x => new VideoCardItemViewModel(x))
+                    .ToList();
 
             if (!innerCall)
             {
@@ -111,8 +114,11 @@ namespace IronMacbeth.Client.VVM.VideocardVVM
 
         public void UpdateCollectionNoFilter()
         {
-            _items = MainViewModel.ServerAdapter.GetAllVideoCards().
-                OrderByDescending(item => item.NumberOfOfferings).ToList();
+            _items =
+                MainViewModel.ServerAdapter.GetAllVideoCards()
+                    .OrderByDescending(item => item.NumberOfOfferings)
+                    .Select(x => new VideoCardItemViewModel(x))
+                    .ToList();
 
             OnPropertyChanged(nameof(Items));
         }

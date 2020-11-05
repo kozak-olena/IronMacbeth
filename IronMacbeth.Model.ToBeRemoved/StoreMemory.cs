@@ -3,9 +3,8 @@
 namespace IronMacbeth.Model.ToBeRemoved
 {
     [Serializable]
-    public class StoreMemory : Base<StoreMemory>, IInformationContainer, ISellableLink
-    {
-         
+    public class StoreMemory : Base<StoreMemory>, ISellableLink
+    {    
         public int Id { get; set; }
          
         public int StoreId { get; set; }
@@ -39,17 +38,6 @@ namespace IronMacbeth.Model.ToBeRemoved
         }
 
         public new bool Modified { get; set; }
-
-
-        //public Store Store
-        //{
-        //    get { return MainViewModel.ServerAdapter.GetAllStores().Find(item => item.Id == StoreId); }
-        //}
-
-        //public Memory Memory
-        //{
-        //    get { return MainViewModel.ServerAdapter.GetAllMemories().Find(item => item.Id == MemoryId); }
-        //}
 
         public override string DisplayString =>
             $"StoreMemory: StoreId: {StoreId} MemoryId: {MemoryId}";

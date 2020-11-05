@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Model.ToBeRemoved
 {
     [Serializable]
-    public class Videocard : Base<Videocard>, IInformationContainer, ISellable
+    public class Videocard : Base<Videocard>, ISellable
     {
         [Database]
         public int Id { get; set; }
@@ -33,8 +31,6 @@ namespace IronMacbeth.Model.ToBeRemoved
         public string MPN { get; set; }
         public string Name => Model;
         public string SellableType => "Videocard";
-
-        public string InfoContainerKey => "Videocard";
 
         public override string DisplayString =>
             $"Videocard: Id: {Id}";
@@ -66,20 +62,11 @@ namespace IronMacbeth.Model.ToBeRemoved
         private string _description;
         #endregion
 
-        //public List<Store> Stores
-        //{
-        //    get { return MainViewModel.ServerAdapter.GetAllStoreVideocards().Where(item => item.VideocardId == Id).Select(item => item.Store).ToList(); }
-        //}
-
-        //public List<StoreVideocard> Links
-        //{
-        //    get { return MainViewModel.ServerAdapter.GetAllStoreVideocards().Where(item => item.VideocardId == Id).ToList(); }
-        //}
-
         public int AveragePrice
         {
             get
             {
+                //TODO: uncomment and fix
                 //var links = Links;
                 //if (links.Count != 0)
                 //{
@@ -96,13 +83,14 @@ namespace IronMacbeth.Model.ToBeRemoved
         {
             get
             {
+                //TODO: uncomment and fix
                 //if (Links.Count != 0)
                 //{
                 //    return Links.Min(link => link.ProductPrice);
                 //}
                 //else
                 //{
-                    return 0;
+                return 0;
                 //}
             }
         }
@@ -110,19 +98,21 @@ namespace IronMacbeth.Model.ToBeRemoved
         {
             get
             {
+                //TODO: uncomment and fix
                 //if (Links.Count != 0)
                 //{
                 //    return Links.Max(link => link.ProductPrice);
                 //}
                 //else
                 //{
-                    return 0;
+                return 0;
                 //}
             }
         }
 
         public int NumberOfOfferings
         {
+            //TODO: uncomment and fix
             //get { return Links.Count; }
             get { return 0; }
         }

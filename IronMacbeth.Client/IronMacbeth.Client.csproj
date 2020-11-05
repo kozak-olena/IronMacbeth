@@ -100,6 +100,7 @@
     <Compile Include="VVM\MemoryVVM\MemoryUserControl.xaml.cs">
       <DependentUpon>MemoryUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VVM\MemoryVVM\MemoryItemViewModel.cs" />
     <Compile Include="VVM\MemoryVVM\MemoryViewModel.cs" />
     <Compile Include="VVM\MotherboardInfo\MotherboardInfoUserControl.xaml.cs">
       <DependentUpon>MotherboardInfoUserControl.xaml</DependentUpon>
@@ -112,6 +113,8 @@
       <DependentUpon>MotherboardUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="VVM\MotherboardVVM\MotherboardViewModel.cs" />
+    <Compile Include="VVM\MotherboardVVM\MotherboardItemViewModel.cs" />
+    <Compile Include="VVM\ProcessorVVM\ProcessorItemViewModel.cs" />
     <Compile Include="VVM\StorePurchaseVVM\StorePurchaseUserControl.xaml.cs">
       <DependentUpon>StorePurchaseUserControl.xaml</DependentUpon>
     </Compile>
@@ -156,6 +159,7 @@
     <Compile Include="VVM\StoreVVM\StoreSellableItemUserControl.xaml.cs">
       <DependentUpon>StoreSellableItemUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VVM\StoreVVM\StoreSellableItemViewModel.cs" />
     <Compile Include="VVM\StoreVVM\UserStoresViewModel.cs" />
     <Compile Include="VVM\StoreVVM\UserStoresWindow.xaml.cs">
       <DependentUpon>UserStoresWindow.xaml</DependentUpon>
@@ -171,6 +175,7 @@
       <DependentUpon>VideocardInfoUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="VVM\VideocardInfo\VideocardInfoViewModel.cs" />
+    <Compile Include="VVM\VideocardVVM\VideoCardItemViewModel.cs" />
     <Compile Include="VVM\VideocardVVM\VideocardItemUserControl.xaml.cs">
       <DependentUpon>VideocardItemUserControl.xaml</DependentUpon>
     </Compile>

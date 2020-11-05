@@ -52,7 +52,6 @@
     <Compile Include="DatabaseAttribute.cs" />
     <Compile Include="IDescribable.cs" />
     <Compile Include="IDisplayable.cs" />
-    <Compile Include="IInformationContainer.cs" />
     <Compile Include="ISellable.cs" />
     <Compile Include="ISellableLink.cs" />
     <Compile Include="IService.cs" />

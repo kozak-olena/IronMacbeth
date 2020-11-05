@@ -108,7 +108,6 @@ namespace IronMacbeth.Client.ViewModel
 
         private readonly Stack<IPageViewModel> _previousPages;
         private readonly Stack<IPageViewModel> _nextPages;
-        private readonly Dictionary<string, Type> _infoViewModels;
 
         private bool _connected;
         public bool Connected
@@ -234,15 +233,6 @@ namespace IronMacbeth.Client.ViewModel
             _nextPages = new Stack<IPageViewModel>();
 
             CurrentPageViewModel = new HomeViewModel();
-
-            _infoViewModels = new Dictionary<string, Type>
-            {
-                {"Memory",typeof(MemoryInfoViewModel)},
-                {"Processor",typeof(ProcessorInfoViewModel)},
-                {"Videocard",typeof(VideocardInfoViewModel)},
-                {"Motherboard",typeof(MotherboardInfoViewModel)},
-                {"Purchase",typeof(PurchaseViewModel)}
-            };
         }
 
         private void LogOutMethod(object parameter)
@@ -291,14 +281,14 @@ namespace IronMacbeth.Client.ViewModel
 
         public void ChangePageMethod(object parameter)
         {
-            Type type = parameter.GetType();
-            if (type.GetInterfaces().Contains(typeof(IPageViewModel)))
+            if (parameter is IPageViewModel viewModel)
             {
-                var viewModel = parameter as IPageViewModel;
                 if (!PageViewModels.Contains(viewModel))
+                {
                     PageViewModels.Add(viewModel);
+                }
 
-                if (type != CurrentPageViewModel.GetType())
+                if (parameter.GetType() != CurrentPageViewModel.GetType())
                 {
                     _previousPages.Push(CurrentPageViewModel);
 
@@ -307,15 +297,9 @@ namespace IronMacbeth.Client.ViewModel
                     viewModel.Update();
                 }
             }
-            else if (type.GetInterfaces().Contains(typeof(IInformationContainer)))
+            else
             {
-                var infoContainer = parameter as IInformationContainer;
-                if (_infoViewModels.ContainsKey(infoContainer.InfoContainerKey))
-                {
-                    Type VMType = _infoViewModels[infoContainer.InfoContainerKey];
-                    IPageViewModel viewModel = Activator.CreateInstance(VMType, parameter) as IPageViewModel;
-                    ChangePageMethod(viewModel);
-                }
+                throw new NotSupportedException($"Changing the page with parameter of type '{parameter.GetType().FullName}' is not supported");
             }
         }
 
@@ -338,8 +322,6 @@ namespace IronMacbeth.Client.ViewModel
                 CurrentPageViewModel = _nextPages.Pop();
             }
         }
-
-
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

@@ -6,6 +6,7 @@ using System.Windows.Input;
 using IronMacbeth.Client.Annotations;
 using IronMacbeth.Client.ViewModel;
 using IronMacbeth.Client.VVM.EditProcessorVVM;
+using IronMacbeth.Client.VVM.MemoryVVM;
 using IronMacbeth.Model.ToBeRemoved;
 
 namespace IronMacbeth.Client.VVM.ProcessorVVM
@@ -14,9 +15,9 @@ namespace IronMacbeth.Client.VVM.ProcessorVVM
     {
         public string PageViewName => "Processors";
 
-        private List<Processor> _items;
+        private List<ProcessorItemViewModel> _items;
 
-        public List<Processor> Items
+        public List<ProcessorItemViewModel> Items
         {
             get
             {
@@ -98,9 +99,12 @@ namespace IronMacbeth.Client.VVM.ProcessorVVM
 
         public void UpdateCollection(bool innerCall)
         {
-            _items = MainViewModel.ServerAdapter.GetAllProcessors().
-                OrderByDescending(item=>item.NumberOfOfferings).
-                Where(item => item.Name.ToLower().Contains(Search.ToLower())).ToList();
+            _items = 
+                MainViewModel.ServerAdapter.GetAllProcessors()
+                    .OrderByDescending(item=>item.NumberOfOfferings)
+                    .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
+                    .Select(x => new ProcessorItemViewModel(x))
+                    .ToList();
 
             if (!innerCall)
             {
@@ -110,10 +114,13 @@ namespace IronMacbeth.Client.VVM.ProcessorVVM
 
         public void UpdateCollectionNoFilter()
         {
-            _items = MainViewModel.ServerAdapter.GetAllProcessors().
-                OrderByDescending(item => item.NumberOfOfferings).ToList();
+            _items =
+                MainViewModel.ServerAdapter.GetAllProcessors()
+                    .OrderByDescending(item => item.NumberOfOfferings)
+                    .Select(x => new ProcessorItemViewModel(x))
+                    .ToList();
 
-           OnPropertyChanged(nameof(Items));
+            OnPropertyChanged(nameof(Items));
         }
 
         public bool CanExecuteMaintenanceMethods(object parameter)

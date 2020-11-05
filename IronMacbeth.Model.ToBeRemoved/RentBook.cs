@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IronMacbeth.Model.ToBeRemoved
 {
-    class RentBook : Base<RentBook>, IInformationContainer
+    class RentBook : Base<RentBook>
     {
         public int Id { get; set; }
 
@@ -30,8 +30,5 @@ namespace IronMacbeth.Model.ToBeRemoved
 
         public override string DisplayString =>
            $"RentBook: RentId: {RentId} BookId: {BookId}";   //TODO: id of order or rent
-
-        public string InfoContainerKey => "Rent";
-
     }
 }

@@ -18,12 +18,12 @@
                 <StackPanel VerticalAlignment="Center">
                     <Image
                         Width="100"
-                        Source="{Binding SellableLink.Sellable.BitmapImage}" 
+                        Source="{Binding MerchandiseImage}" 
                         Margin="5,5,5,0"/>
                     <TextBlock 
                         HorizontalAlignment="Center"
                         Margin="5,0,5,5"
-                        Text="{Binding SellableLink.Sellable.Name}"
+                        Text="{Binding MerchandiseName}"
                         Foreground="CornflowerBlue" 
                         FontWeight="Bold" 
                         FontSize="13"/>
@@ -38,12 +38,12 @@
                 <StackPanel VerticalAlignment="Center">
                     <Image
                         Width="100"
-                        Source="{Binding SellableLink.Store.BitmapImage}" 
+                        Source="{Binding StoreImage}" 
                         Margin="5"/>
                     <TextBlock 
                         HorizontalAlignment="Center"
                         Margin="0,10,0,0"
-                        Text="{Binding SellableLink.Store.Name}"
+                        Text="{Binding StoreName}"
                         Foreground="CornflowerBlue" 
                         FontWeight="Bold" 
                         FontSize="13"/>

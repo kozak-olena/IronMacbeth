@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Model.ToBeRemoved
 {
     [Serializable]
-    public class Motherboard : Base<Motherboard>, IInformationContainer, ISellable
+    public class Motherboard : Base<Motherboard>, ISellable
     {
         [Database]
         public int Id { get; set; }
@@ -32,8 +30,6 @@ namespace IronMacbeth.Model.ToBeRemoved
         public string Name => Model;
 
         public string SellableType => "Motherboard";
-
-        public string InfoContainerKey => "Motherboard";
 
         public override string DisplayString =>
             $"Motherboard: Id: {Id}";
@@ -64,16 +60,6 @@ namespace IronMacbeth.Model.ToBeRemoved
         [NonSerialized]
         private string _description;
         #endregion
-
-        //public List<Store> Stores
-        //{
-        //    get { return MainViewModel.ServerAdapter.GetAllStores().Where(item => item.MotherboardId == Id).Select(item => item.Store).ToList(); }
-        //}
-
-        //public List<StoreMotherboard> Links
-        //{
-        //    get { return MainViewModel.ServerAdapter.GetAllStoreMotherboards().Where(item => item.MotherboardId == Id).ToList(); }
-        //}
 
         public int AveragePrice
         {

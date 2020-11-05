@@ -163,7 +163,7 @@
                         ScrollViewer.CanContentScroll="False"
                         HorizontalAlignment="Stretch" 
                         VerticalAlignment="Stretch" 
-                        ItemsSource="{Binding Memory.Links}"
+                        ItemsSource="{Binding Stores}"
                         SelectionMode="Single">
                         <ListView.Resources>
                             <Style TargetType="GridViewColumnHeader">

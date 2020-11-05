@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Model.ToBeRemoved
 {
-    public class Book : Base<Book>, IInformationContainer, ISellable
+    public class Book : Base<Book>, ISellable
     {
 
         public int Id { get; set; }
@@ -28,7 +28,6 @@ namespace IronMacbeth.Model.ToBeRemoved
         public string Location { get; set; }
         public string NameOfBook => Name;
         public string SellableType => "Book";
-        public string InfoContainerKey => "Book";
 
         public override string DisplayString =>
             $"Book: Id: {Id}";   // public override string DisplayString => $"Book: Name: {Name}";

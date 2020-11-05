@@ -1,4 +1,8 @@
-﻿using IronMacbeth.Model.ToBeRemoved;
+﻿using System.Collections.Generic;
+using System.Linq;
+using IronMacbeth.Client.ViewModel;
+using IronMacbeth.Client.VVM.StoreVVM;
+using IronMacbeth.Model.ToBeRemoved;
 
 namespace IronMacbeth.Client.VVM.ProcessorInfo
 {
@@ -9,9 +13,16 @@ namespace IronMacbeth.Client.VVM.ProcessorInfo
 
         public Processor Processor { get; }
 
+        public List<StoreSellableItemViewModel> Stores { get; }
+
         public ProcessorInfoViewModel(Processor processor)
         {
             Processor = processor;
+
+            Stores = 
+                MainViewModel.ServerAdapter.GetAllStoresSellingProcessor(processor.Id)
+                    .Select(x => new StoreSellableItemViewModel(x.Store, processor, x.StoreProcessor))
+                    .ToList();
         }
     }
 }

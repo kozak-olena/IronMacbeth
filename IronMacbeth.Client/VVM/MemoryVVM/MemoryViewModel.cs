@@ -14,9 +14,9 @@ namespace IronMacbeth.Client.VVM.MemoryVVM
     {
         public string PageViewName => "Memory";
 
-        private List<Memory> _items;
+        private List<MemoryItemViewModel> _items;
 
-        public List<Memory> Items
+        public List<MemoryItemViewModel> Items
         {
             get
             {
@@ -42,7 +42,6 @@ namespace IronMacbeth.Client.VVM.MemoryVVM
                 {
                     UpdateCollectionNoFilter();
                 }
-
             }
         }
 
@@ -98,9 +97,12 @@ namespace IronMacbeth.Client.VVM.MemoryVVM
 
         public void UpdateCollection(bool innerCall)
         {
-            _items = MainViewModel.ServerAdapter.GetAllMemories()
-                .OrderByDescending(item => item.NumberOfOfferings)
-                .Where(item => item.Name.ToLower().Contains(Search.ToLower())).ToList();
+            _items = 
+                MainViewModel.ServerAdapter.GetAllMemories()
+                    .OrderByDescending(item => item.NumberOfOfferings)
+                    .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
+                    .Select(x => new MemoryItemViewModel(x))
+                    .ToList();
 
             if (!innerCall)
             {
@@ -110,8 +112,12 @@ namespace IronMacbeth.Client.VVM.MemoryVVM
 
         public void UpdateCollectionNoFilter()
         {
-            _items = MainViewModel.ServerAdapter.GetAllMemories()
-                .OrderByDescending(item => item.NumberOfOfferings).ToList();
+            _items =
+                MainViewModel.ServerAdapter.GetAllMemories()
+                    .OrderByDescending(item => item.NumberOfOfferings)
+                    .Select(x => new MemoryItemViewModel(x))
+                    .ToList();
+
 
             OnPropertyChanged(nameof(Items));
         }

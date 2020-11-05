@@ -3,7 +3,7 @@
 namespace IronMacbeth.Model.ToBeRemoved
 {
     [Serializable]
-    public class StoreVideocard : Base<StoreVideocard>, IInformationContainer, ISellableLink
+    public class StoreVideocard : Base<StoreVideocard>, ISellableLink
     {
         [Database]
         public int Id { get; set; }
@@ -40,17 +40,6 @@ namespace IronMacbeth.Model.ToBeRemoved
         }
 
         public new bool Modified { get; set; }
-
-
-        //public Store Store
-        //{
-        //    get { return MainViewModel.ServerAdapter.GetAllStores().Find(item => item.Id == StoreId); }
-        //}
-
-        //public Videocard Videocard
-        //{
-        //    get { return MainViewModel.ServerAdapter.GetAllVideoCards.Find(item => item.Id == VideocardId); }
-        //}
 
         public override string DisplayString =>
             $"StoreVideocard: StoreId: {StoreId} VideocardId: {VideocardId}";
