@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using IronMacbeth.Model.ToBeRemoved;
+using Microsoft.EntityFrameworkCore;
 
 namespace IronMacbeth.BFF
 {
@@ -391,7 +392,8 @@ namespace IronMacbeth.BFF
         {
             using (var dbContext = new DbContext())
             {
-                dbContext.Add(user);
+                // EntityFramework doesn't support adding entities without primary key
+                dbContext.Database.ExecuteSqlRaw("INSERT [dbo].[User](Login, Password, AccessLevel) VALUES(@p0, @p1, 0)", user.Login, user.Password);                
 
                 dbContext.SaveChanges();
             }
