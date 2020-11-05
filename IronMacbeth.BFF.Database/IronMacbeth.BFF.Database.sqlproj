@@ -72,5 +72,6 @@
     <Build Include="Tables\Purchase.sql" />
     <Build Include="Tables\Book.sql" />
     <Build Include="Tables\RentBook.sql" />
+    <Build Include="Tables\Article.sql" />
   </ItemGroup>
 </Project>
