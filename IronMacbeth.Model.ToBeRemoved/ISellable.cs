@@ -1,6 +1,6 @@
 ﻿namespace IronMacbeth.Model.ToBeRemoved
 {
-    public interface ISellable:IDisplayable,IDescribable
+    public interface ISellable:IDisplayable,IDescribable   //IRentable
     {
         int Id { get; } 
 
