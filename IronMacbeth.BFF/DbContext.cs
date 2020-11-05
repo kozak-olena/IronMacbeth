@@ -9,6 +9,7 @@ namespace IronMacbeth.BFF
     public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     {
 
+        public DbSet<Book> Books { get; set; }
         public DbSet<Memory> Memories { get; set; }
 
         public DbSet<Motherboard> Motherboards { get; set; }
