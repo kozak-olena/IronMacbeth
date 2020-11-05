@@ -3,14 +3,13 @@ using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Model.ToBeRemoved
 {
-    public class Book : Base<Book>, IInformationContainer, ISellable
+    class Periodical : Base<Periodical>, IInformationContainer, ISellable
     {
-
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public string Author { get; set; }
+        public string ResponsibleAuthors { get; set; }  //Київ. нац. ун-т ім. Тараса Шевченка ; голов. ред. Л.І. Шевченко ; редкол.: Ф.С. Бацевич, А. Брацкі, П.Ю. Гриценко [та ін.]
 
         public string PublishingHouse { get; set; }
 
@@ -19,21 +18,24 @@ namespace IronMacbeth.Model.ToBeRemoved
         public string Year { get; set; }
 
         public string Pages { get; set; }
-        public string Availiability { get; set; }   //electronic version???
+        public string Availiability { get; set; }    
 
         public string Location { get; set; }
 
-        public string TypeOfDocument { get; set; }
+        public string IssueNumber { get; set; }
+
         public string ElectronicVersion { get; set; }
+
+        public string TypeOfDocument { get; set; }
 
         public string NameOfBook => Name;
 
-        public string SellableType => "Book";
+        public string SellableType => "Periodical";
 
-        public string InfoContainerKey => "Book";
+        public string InfoContainerKey => "Periodical";
 
         public override string DisplayString =>
-            $"Book: Id: {Id}";   // public override string DisplayString => $"Book: Name: {Name}";
+            $"Periodical: Id: {Id}";   // public override string DisplayString => $"Book: Name: {Name}";
 
         public string ImageName { get; set; }
         public BitmapImage BitmapImage
@@ -58,5 +60,7 @@ namespace IronMacbeth.Model.ToBeRemoved
         {
             get { return 0; }
         }
+
+
     }
 }

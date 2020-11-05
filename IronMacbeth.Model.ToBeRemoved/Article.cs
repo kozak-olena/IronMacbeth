@@ -17,16 +17,18 @@ namespace IronMacbeth.Model.ToBeRemoved
 
         public string Availiability { get; set; }
 
-        public string MainDocumentId { get; set; }   //book, in which the article is published// foreighn key? //rent book, not article
+        public int MainDocumentId { get; set; }   //book, in which the article is published// foreighn key? //rent book, not article
 
         public string TypeOfDocument { get; set; }
+
+        public string ElectronicVersion { get; set; }
 
         public string NameOfArticle => Name;
 
         public string SellableType => "Article";
         public string InfoContainerKey => "Article";
         public override string DisplayString =>
-                   $"Book: Id: {Id}";   // public override string DisplayString => $"Book: Name: {Name}";
+                   $"Article: Id: {Id}";   // public override string DisplayString => $"Book: Name: {Name}";
 
         public string ImageName { get; set; }
         public BitmapImage BitmapImage
