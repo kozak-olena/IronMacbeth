@@ -26,6 +26,7 @@ namespace IronMacbeth.Model.ToBeRemoved
         public string Pages { get; set; }
         public string Availiability { get; set; }   //electronic version???
         public string Location { get; set; }
+        public string TypeOfDocument { get; set; }
         public string NameOfBook => Name;
         public string SellableType => "Book";
         public string InfoContainerKey => "Book";
