@@ -12,8 +12,6 @@ namespace IronMacbeth.Model.ToBeRemoved
 
         public int StoreId { get; set; }
 
-        public string Date { get; set; }
-
         public int BookId { get; set; }
 
         public int UserId { get; set; }   //user, who rented book
