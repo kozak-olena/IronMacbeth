@@ -17,7 +17,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
 {
     class EditBookViewModel : IPageViewModel, INotifyPropertyChanged
     {
-        public string PageViewName => "Memory";
+        public string PageViewName => "Book";
         public Book Book { get; private set; }
 
         public bool CollectionChanged { get; private set; }
@@ -50,6 +50,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
         public ICommand CloseCommand { get; set; }
         public ICommand SelectImageCommand { get; set; }
+        public ICommand SelectPdfCommand { get; set; }
         public ICommand ApplyChangesCommand { get; set; }
 
         public EditBookViewModel(Book book = null)
@@ -76,10 +77,32 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
             CloseCommand = new RelayCommand(CloseMethod);
             SelectImageCommand = new RelayCommand(SelectImageMethod);
+            SelectPdfCommand = new RelayCommand(SelectPdfMethod);     //TODO: Select electronic version
             ApplyChangesCommand = new RelayCommand(ApplyChangesMethod)
             {
                 CanExecuteFunc = ApplyChangesCanExecute
             };
+        }
+
+        public void SelectPdfMethod(object parameter)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "pdf Files (.pdf)|*.pdf",
+                FilterIndex = 1,
+                Multiselect = false
+            };
+
+            bool? userClickedOk = openFileDialog.ShowDialog();
+
+            if (userClickedOk == true)
+            {
+                ImagePath = openFileDialog.FileName;
+                OnPropertyChanged(nameof(ImagePath));
+
+                BitmapImage = new BitmapImage(new Uri(ImagePath));
+                OnPropertyChanged(nameof(BitmapImage));
+            }
         }
 
         public void ApplyChangesMethod(object parameter)

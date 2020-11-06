@@ -87,7 +87,10 @@
       <DependentUpon>BookUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="VVM\BookVVM\BookViewModel.cs" />
-    <Compile Include="VVM\BookVVM\EditBookViewModel.cs" />
+    <Compile Include="VVM\EditBookVVM\EditBookViewModel.cs" />
+    <Compile Include="VVM\EditBookVVM\EditBookWindow.xaml.cs">
+      <DependentUpon>EditBookWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VVM\EditMemoryVVM\EditMemoryViewModel.cs" />
     <Compile Include="VVM\EditMemoryVVM\EditMemoryWindow.xaml.cs">
       <DependentUpon>EditMemoryWindow.xaml</DependentUpon>
@@ -206,6 +209,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VVM\BookVVM\BookUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VVM\EditBookVVM\EditBookWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
