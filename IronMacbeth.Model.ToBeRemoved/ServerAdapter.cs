@@ -18,6 +18,92 @@ namespace IronMacbeth.Model.ToBeRemoved
             Proxy = proxy;
         }
 
+        #region Book
+        public void CreateBook(Book book)
+        {
+            CreateIDisplayable(book);
+            CreateIDescribable(book);
+
+            Proxy.CreateBook(book);
+        }
+        public List<Book> GetAllBooks()
+        {
+            var books = Proxy.GetAllBooks();
+
+            foreach (var book in books)
+            {
+                book.BitmapImage = GetImage(book.ImageName);
+                book.Description = GetStringFileContent(book.DescriptionName);
+            }
+
+            return books;
+        }
+
+        public void UpdateBook(Book book)
+        {
+            UpdateIDisplayable(book);
+            UpdateIDescribable(book);
+
+            Proxy.UpdateBook(book);
+        }
+
+        public void DeleteBook(int id)
+        {
+            Proxy.DeleteBook(id);
+        }
+
+        public List<(Store Store, StoreBook StoreBook)> GetAllStoresSellingBook(int id)
+        {
+            var result =
+                GetAllStoreBooks()
+                    .Where(x => x.BookId == id)
+                    .Join
+                    (
+                        GetAllStores(),
+                        storeBook => storeBook.StoreId,
+                        store => store.Id,
+                        (storeBook, store) => (store, storeBook)
+                    )
+                    .ToList();
+
+            return result;
+        }
+
+        #endregion
+
+        #region StoreBook
+
+        public void CreateStoreBook(StoreBook storeBooks)
+        {
+            Proxy.CreateStoreBook(storeBooks);
+        }
+
+        public List<StoreBook> GetAllStoreBooks()
+        {
+            var result = Proxy.GetAllStoreBooks();
+
+            return result;
+        }
+
+        public void UpdateStoreBook(StoreBook storeBooks)
+        {
+            Proxy.UpdateStoreBooks(storeBooks);
+        }
+
+        public void DeleteStoreBook(int id)
+        {
+            Proxy.DeleteStoreBook(id);
+        }
+
+        public Book GetBookFromStoreBook(StoreBook storeBooks)
+        {
+            return GetAllBooks().Find(item => item.Id == storeBooks.BookId);
+        }
+
+        #endregion
+
+
+
         #region Memory
 
         public void CreateMemory(Memory memory)
@@ -53,7 +139,7 @@ namespace IronMacbeth.Model.ToBeRemoved
         {
             Proxy.DeleteMemory(id);
         }
-       
+
         public List<(Store Store, StoreMemory StoreMemory)> GetAllStoresSellingMemory(int id)
         {
             var result =
@@ -166,7 +252,7 @@ namespace IronMacbeth.Model.ToBeRemoved
 
         public List<(Store Store, StoreProcessor StoreProcessor)> GetAllStoresSellingProcessor(int id)
         {
-            var result = 
+            var result =
                 GetAllStoreProcessors()
                     .Where(x => x.ProcessorId == id)
                     .Join

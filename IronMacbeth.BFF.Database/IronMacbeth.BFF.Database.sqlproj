@@ -79,5 +79,6 @@
     <Build Include="Tables\StoreBook.sql" />
     <Build Include="Tables\StorePeriodicals.sql" />
     <Build Include="Tables\StoreArticle.sql" />
+    <Build Include="Tables\Newspaper.sql" />
   </ItemGroup>
 </Project>

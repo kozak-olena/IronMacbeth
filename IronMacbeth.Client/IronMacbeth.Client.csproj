@@ -78,6 +78,13 @@
     <Compile Include="GifImage.cs" />
     <Compile Include="GridLengthAnimation.cs" />
     <Compile Include="TestAnimation.cs" />
+    <Compile Include="VVM\BookVVM\BookInfoViewModel.cs" />
+    <Compile Include="VVM\BookVVM\BookItemViewModel.cs" />
+    <Compile Include="VVM\BookVVM\BookUserControl.xaml.cs">
+      <DependentUpon>BookUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VVM\BookVVM\BookViewModel.cs" />
+    <Compile Include="VVM\BookVVM\EditBookViewModel.cs" />
     <Compile Include="VVM\EditMemoryVVM\EditMemoryViewModel.cs" />
     <Compile Include="VVM\EditMemoryVVM\EditMemoryWindow.xaml.cs">
       <DependentUpon>EditMemoryWindow.xaml</DependentUpon>
@@ -190,6 +197,10 @@
     <Page Include="Themes\BureauBlue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VVM\BookVVM\BookUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VVM\EditMemoryVVM\EditMemoryWindow.xaml">
       <SubType>Designer</SubType>

@@ -64,10 +64,7 @@ namespace IronMacbeth.Client.VVM.EditMemoryVVM
 
             CloseCommand = new RelayCommand(CloseMethod);
             SelectImageCommand = new RelayCommand(SelectImageMethod);
-            ApplyChangesCommand = new RelayCommand(ApplyChangesMethod)
-            {
-                CanExecuteFunc = ApplyChangesCanExecute
-            };
+            ApplyChangesCommand = new RelayCommand(ApplyChangesMethod) { CanExecuteFunc = ApplyChangesCanExecute };
         }
 
         public void ApplyChangesMethod(object parameter)

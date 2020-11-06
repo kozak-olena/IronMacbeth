@@ -1,17 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:IronMacbeth.View"
                     xmlns:processorinfo="clr-namespace:IronMacbeth.Client.VVM.ProcessorInfo"
                     xmlns:videocardinfo="clr-namespace:IronMacbeth.Client.VVM.VideocardInfo"
                     xmlns:motherboardinfo="clr-namespace:IronMacbeth.Client.VVM.MotherboardInfo"
                     xmlns:memorydinfo="clr-namespace:IronMacbeth.Client.VVM.MemoryInfo"
                     xmlns:processor="clr-namespace:IronMacbeth.Client.VVM.ProcessorVVM"
                     xmlns:purchase="clr-namespace:IronMacbeth.Client.VVM.PuchaseVVM"
-                    xmlns:notification="clr-namespace:IronMacbeth.Client.VVM.NotificationVVM"
                     xmlns:motherboard="clr-namespace:IronMacbeth.Client.VVM.MotherboardVVM"
                     xmlns:home="clr-namespace:IronMacbeth.Client.VVM.Home"
                     xmlns:memory="clr-namespace:IronMacbeth.Client.VVM.MemoryVVM"
-                    xmlns:videocardVvm="clr-namespace:IronMacbeth.Client.VVM.VideocardVVM">
+                    xmlns:videocardVvm="clr-namespace:IronMacbeth.Client.VVM.VideocardVVM"
+                    xmlns:book ="clr-namespace:IronMacbeth.Client.VVM.BookVVM">
     <DataTemplate DataType="{x:Type home:HomeViewModel}">
         <home:HomeUserControl />
     </DataTemplate>
@@ -29,9 +28,12 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type videocardVvm:VideocardViewModel}">
         <videocardVvm:VideocardUserControl/>
-    </DataTemplate> 
+    </DataTemplate>
     <DataTemplate DataType="{x:Type motherboard:MotherboardViewModel}">
         <motherboard:MotherboardUserControl/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type book:BookViewModel}">
+        <book:BookUserControl/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type motherboardinfo:MotherboardInfoViewModel}">
         <motherboardinfo:MotherboardInfoUserControl/>

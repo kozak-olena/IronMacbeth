@@ -8,6 +8,89 @@ namespace IronMacbeth.BFF
 {
     public class Service : IService
     {
+
+        #region Book
+        public void CreateBook(Book book)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(book);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public List<Book> GetAllBooks()
+        {
+            using (var dbContext = new DbContext())
+            {
+                return dbContext.Books.ToList();
+            }
+        }
+
+        public void UpdateBook(Book book)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Update(book);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteBook(int id)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Books.Remove(new Book { Id = id });
+
+                dbContext.SaveChanges();
+            }
+        }
+        #endregion
+
+        #region StoreBook
+
+        public void CreateStoreBook(StoreBook storeBook)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(storeBook);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public List<StoreBook> GetAllStoreBooks()
+        {
+            using (var dbContext = new DbContext())
+            {
+                return dbContext.StoreBook.ToList();
+            }
+        }
+
+        public void UpdateStoreBooks(StoreBook storeBook)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Update(storeBook);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteStoreBook(int id)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.StoreBook.Remove(new StoreBook { Id = id });
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        #endregion
+
         #region Memory
 
         public void CreateMemory(Memory memory)
@@ -94,7 +177,7 @@ namespace IronMacbeth.BFF
 
         #region Processor
 
-        public void CreateProcessor(Processor processor) 
+        public void CreateProcessor(Processor processor)
         {
             using (var dbContext = new DbContext())
             {
@@ -104,7 +187,7 @@ namespace IronMacbeth.BFF
             }
         }
 
-        public List<Processor> GetAllProcessors() 
+        public List<Processor> GetAllProcessors()
         {
             using (var dbContext = new DbContext())
             {
@@ -136,7 +219,7 @@ namespace IronMacbeth.BFF
 
         #region Purchase
 
-        public void CreatePurchase(Purchase purchase) 
+        public void CreatePurchase(Purchase purchase)
         {
             using (var dbContext = new DbContext())
             {
@@ -188,7 +271,7 @@ namespace IronMacbeth.BFF
             }
         }
 
-        public List<Store> GetAllStores() 
+        public List<Store> GetAllStores()
         {
             using (var dbContext = new DbContext())
             {
@@ -230,7 +313,7 @@ namespace IronMacbeth.BFF
             }
         }
 
-        public List<StoreMemory> GetAllStoreMemories() 
+        public List<StoreMemory> GetAllStoreMemories()
         {
             using (var dbContext = new DbContext())
             {
@@ -314,7 +397,7 @@ namespace IronMacbeth.BFF
             }
         }
 
-        public List<StoreProcessor> GetAllStoreProcessors() 
+        public List<StoreProcessor> GetAllStoreProcessors()
         {
             using (var dbContext = new DbContext())
             {
@@ -356,7 +439,7 @@ namespace IronMacbeth.BFF
             }
         }
 
-        public List<StoreVideocard> GetAllStoreVideoCards() 
+        public List<StoreVideocard> GetAllStoreVideoCards()
         {
             using (var dbContext = new DbContext())
             {
@@ -393,7 +476,7 @@ namespace IronMacbeth.BFF
             using (var dbContext = new DbContext())
             {
                 // EntityFramework doesn't support adding entities without primary key
-                dbContext.Database.ExecuteSqlRaw("INSERT [dbo].[User](Login, Password, AccessLevel) VALUES(@p0, @p1, 0)", user.Login, user.Password);                
+                dbContext.Database.ExecuteSqlRaw("INSERT [dbo].[User](Login, Password, AccessLevel) VALUES(@p0, @p1, 0)", user.Login, user.Password);
 
                 dbContext.SaveChanges();
             }
@@ -421,7 +504,7 @@ namespace IronMacbeth.BFF
             }
         }
 
-        public List<Videocard> GetAllVideoCards() 
+        public List<Videocard> GetAllVideoCards()
         {
             using (var dbContext = new DbContext())
             {

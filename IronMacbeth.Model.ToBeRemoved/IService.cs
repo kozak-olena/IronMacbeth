@@ -11,6 +11,38 @@ namespace IronMacbeth.Model.ToBeRemoved
 
     public interface IService
     {
+        #region Book
+
+        [OperationContract]
+        void CreateBook(Book book);
+
+        [OperationContract]
+        List<Book> GetAllBooks();
+
+        [OperationContract]
+        void UpdateBook(Book book);
+
+        [OperationContract]
+        void DeleteBook(int id);
+
+        #endregion
+
+        #region StoreBook
+
+        [OperationContract]
+        void CreateStoreBook(StoreBook storeBooks);
+
+        [OperationContract]
+        List<StoreBook> GetAllStoreBooks();
+
+        [OperationContract]
+        void UpdateStoreBooks(StoreBook storeBooks);
+
+        [OperationContract]
+        void DeleteStoreBook(int id);
+
+#endregion
+
         #region Memory
 
         [OperationContract]

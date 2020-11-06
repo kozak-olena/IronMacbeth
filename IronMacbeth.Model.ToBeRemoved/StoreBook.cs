@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IronMacbeth.Model.ToBeRemoved
 {
-    class StoreBooks : Base<StoreBooks>
+    public class StoreBook : Base<StoreBook>
     {
         public int Id { get; set; }
 

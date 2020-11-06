@@ -28,6 +28,7 @@ using IronMacbeth.Client.VVM.VideocardInfo;
 using IronMacbeth.Client.VVM.VideocardVVM;
 using IronMacbeth.Model.ToBeRemoved;
 using Timer = System.Timers.Timer;
+using IronMacbeth.Client.VVM.BookVVM;
 
 namespace IronMacbeth.Client.ViewModel
 {
@@ -222,11 +223,13 @@ namespace IronMacbeth.Client.ViewModel
 
             PageViewModels = new List<IPageViewModel>
             {
+
                 new HomeViewModel(),
                 new MemoryViewModel(),
                 new ProcessorViewModel(),
                 new VideocardViewModel(),
-                new MotherboardViewModel()
+                new MotherboardViewModel(),
+                new BookViewModel()
             };
 
             _previousPages = new Stack<IPageViewModel>();
@@ -374,7 +377,7 @@ namespace IronMacbeth.Client.ViewModel
             Connected = await Task<bool>.Factory.StartNew(Connect);
         }
 
-        private async void ConnectionCheck(object sender,ElapsedEventArgs args)
+        private async void ConnectionCheck(object sender, ElapsedEventArgs args)
         {
             if (checkTask.Status != TaskStatus.Running && Connected)
             {
