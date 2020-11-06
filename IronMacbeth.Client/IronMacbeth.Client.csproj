@@ -78,7 +78,10 @@
     <Compile Include="GifImage.cs" />
     <Compile Include="GridLengthAnimation.cs" />
     <Compile Include="TestAnimation.cs" />
-    <Compile Include="VVM\BookVVM\BookInfoViewModel.cs" />
+    <Compile Include="VVM\BookInfoVVM\BookInfoUserControl.xaml.cs">
+      <DependentUpon>BookInfoUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VVM\BookInfoVVM\BookInfoViewModel.cs" />
     <Compile Include="VVM\BookVVM\BookItemViewModel.cs" />
     <Compile Include="VVM\BookVVM\BookUserControl.xaml.cs">
       <DependentUpon>BookUserControl.xaml</DependentUpon>
@@ -197,6 +200,10 @@
     <Page Include="Themes\BureauBlue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VVM\BookInfoVVM\BookInfoUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VVM\BookVVM\BookUserControl.xaml">
       <SubType>Designer</SubType>

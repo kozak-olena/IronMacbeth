@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="IronMacbeth.Client.VVM.BookInfoVVM.BookInfoUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IronMacbeth.Client.VVM.BookInfoVVM"
+             mc:Ignorable="d" 
+            d:DesignHeight="1000" d:DesignWidth="700">
+    <ScrollViewer>
+        <StackPanel Orientation="Vertical" Background="#FFB8DBF1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="320" Width="*"/>
+                    <ColumnDefinition Width="170"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Column="0"
+                    MinWidth="300"
+                    TextWrapping="Wrap" 
+                    Margin="10"
+                    VerticalAlignment="Stretch"
+                    Text="{Binding Book.Description}"/>
+                <Image
+                    Source="{Binding Book.BitmapImage}"
+                    Height="150" 
+                    Margin="10,10,10,10" 
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Right" 
+                    Width="150" Grid.Column="1"/>
+            </Grid>
+            <TabControl
+                MaxWidth="900"
+                MinWidth="400"
+                Margin="10,10,10,10" 
+                Height="405" 
+                VerticalAlignment="Top" BorderBrush="#FFFFFCFC">
+                <TabItem Header="Information" Height="25">
+                    <Grid Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock 
+                            Grid.Column="0"
+                            HorizontalAlignment="Left" 
+                            Margin="10,10,0,0" 
+                            Text="Name:                                                                            " 
+                            VerticalAlignment="Top"/>
+                        <TextBlock 
+                            Grid.Column="0"
+                            HorizontalAlignment="Left" 
+                            Margin="10,31,0,0" 
+                            Text="Autor:                                                                              " 
+                            VerticalAlignment="Top"/>
+                        <TextBlock 
+                            Grid.Column="0"
+                            HorizontalAlignment="Left" 
+                            Margin="10,52,0,0" 
+                            Text="PublishingHouse:                                                              " 
+                            VerticalAlignment="Top"/>
+                        <TextBlock 
+                            Grid.Column="0"
+                            HorizontalAlignment="Left" 
+                            Margin="10,178,0,0" 
+                            Text="TypeOfDocument:                                                            " 
+                            VerticalAlignment="Top"/>
+                        <TextBlock 
+                        	Grid.Column="0"
+                        	HorizontalAlignment="Left" 
+                        	Margin="10,73,0,0" 
+                        	Text="City:                                                                               " 
+                        	VerticalAlignment="Top"/>
+                        <TextBlock 
+                        	Grid.Column="0"
+                        	HorizontalAlignment="Left" 
+                        	Margin="10,94,0,0" 
+                        	Text="Year:                                                                                 " 
+                        	VerticalAlignment="Top"/>
+                        <TextBlock 
+                        	Grid.Column="0"
+                        	HorizontalAlignment="Left" 
+                        	Margin="10,115,0,0" 
+                        	Text="Availiability:                                                                     " 
+                        	VerticalAlignment="Top"/>
+                        <TextBlock 
+                        	Grid.Column="0"
+                        	HorizontalAlignment="Left" 
+                        	Margin="10,136,0,0" 
+                        	Text="Location:                                                                       " 
+                        	VerticalAlignment="Top"/>
+                        <TextBlock 
+                        	Grid.Column="0"
+                        	HorizontalAlignment="Left" 
+                        	Margin="10,157,0,0" 
+                        	Text="ElectronicVersion                                                            " 
+                        	VerticalAlignment="Top"/>
+                        <TextBlock 
+                        	Grid.Column="0"
+                        	HorizontalAlignment="Left" 
+                        	Margin="10,199,0,0" 
+                        	Text="Rating                                                            " 
+                        	VerticalAlignment="Top"/>
+                        <TextBlock 
+                        	Grid.Column="0"
+                        	HorizontalAlignment="Left" 
+                        	Margin="10,220,0,0" 
+                        	Text="Comments                                                            " 
+                        	VerticalAlignment="Top"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
