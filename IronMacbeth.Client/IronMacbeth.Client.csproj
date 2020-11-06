@@ -75,8 +75,39 @@
     <Compile Include="ConnectingAnimation.xaml.cs">
       <DependentUpon>ConnectingAnimation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Factory.cs" />
     <Compile Include="GifImage.cs" />
     <Compile Include="GridLengthAnimation.cs" />
+    <Compile Include="Model\Article.cs" />
+    <Compile Include="Model\Base.cs" />
+    <Compile Include="Model\Book.cs" />
+    <Compile Include="Model\IDescribable.cs" />
+    <Compile Include="Model\IDisplayable.cs" />
+    <Compile Include="Model\ISellable.cs" />
+    <Compile Include="Model\ISellableLink.cs" />
+    <Compile Include="Model\Memory.cs" />
+    <Compile Include="Model\Motherboard.cs" />
+    <Compile Include="Model\Newspaper.cs" />
+    <Compile Include="Model\Periodical.cs" />
+    <Compile Include="Model\Processor.cs" />
+    <Compile Include="Model\Purchase.cs" />
+    <Compile Include="Model\RentBook.cs" />
+    <Compile Include="Model\RentNewspaper.cs" />
+    <Compile Include="Model\RentPeriodical.cs" />
+    <Compile Include="ServerAdapter.cs" />
+    <Compile Include="Model\Store.cs" />
+    <Compile Include="Model\StoreArticles.cs" />
+    <Compile Include="Model\StoreBook.cs" />
+    <Compile Include="Model\StoreMemory.cs" />
+    <Compile Include="Model\StoreMotherboard.cs" />
+    <Compile Include="Model\StoreNewspaper.cs" />
+    <Compile Include="Model\StorePeriodicals.cs" />
+    <Compile Include="Model\StoreProcessor.cs" />
+    <Compile Include="Model\StoreThesis.cs" />
+    <Compile Include="Model\StoreVideocard.cs" />
+    <Compile Include="Model\Thesis.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\Videocard.cs" />
     <Compile Include="TestAnimation.cs" />
     <Compile Include="VVM\BookInfoVVM\BookInfoUserControl.xaml.cs">
       <DependentUpon>BookInfoUserControl.xaml</DependentUpon>
@@ -359,12 +390,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IronMacbeth.Model.ToBeRemoved\IronMacbeth.Model.ToBeRemoved.csproj">
-      <Project>{92d2f9e6-942a-4533-9987-f5577cdd316c}</Project>
-      <Name>IronMacbeth.Model.ToBeRemoved</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
@@ -397,6 +422,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\loadingSmall.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IronMacbeth.BFF.Contract\IronMacbeth.BFF.Contract.csproj">
+      <Project>{7147F8FD-500B-4BD9-97B2-3AD28C2496E2}</Project>
+      <Name>IronMacbeth.BFF.Contract</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,6 +1,5 @@
 ﻿using System.Windows.Media.Imaging;
 using IronMacbeth.Client.VVM.VideocardInfo;
-using IronMacbeth.Model.ToBeRemoved;
 
 namespace IronMacbeth.Client.VVM.MemoryVVM
 {

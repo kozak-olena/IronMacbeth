@@ -1,38 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.ServiceModel;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using IronMacbeth.Client.Annotations;
 using IronMacbeth.Client.VVM.Home;
 using IronMacbeth.Client.VVM.LogInVVM;
-using IronMacbeth.Client.VVM.MemoryInfo;
 using IronMacbeth.Client.VVM.MemoryVVM;
-using IronMacbeth.Client.VVM.MotherboardInfo;
 using IronMacbeth.Client.VVM.MotherboardVVM;
-using IronMacbeth.Client.VVM.ProcessorInfo;
 using IronMacbeth.Client.VVM.ProcessorVVM;
-using IronMacbeth.Client.VVM.PuchaseVVM;
 using IronMacbeth.Client.VVM.PurchaseVVM;
 using IronMacbeth.Client.VVM;
 using IronMacbeth.Client.VVM.StoreVVM;
-using IronMacbeth.Client.VVM.VideocardInfo;
 using IronMacbeth.Client.VVM.VideocardVVM;
-using IronMacbeth.Model.ToBeRemoved;
 using Timer = System.Timers.Timer;
 using IronMacbeth.Client.VVM.BookVVM;
+using IService = IronMacbeth.BFF.Contract.IService;
 
 namespace IronMacbeth.Client.ViewModel
 {
-    internal class MainViewModel : INotifyPropertyChanged, IServiceCallback
+    internal class MainViewModel : INotifyPropertyChanged
     {
         public User User
         {
@@ -49,8 +40,6 @@ namespace IronMacbeth.Client.ViewModel
         }
 
         public static ServerAdapter ServerAdapter { get; private set; }
-        public static IService Proxy { get; private set; }
-
 
         public ICommand BackCommand { get; }
         public ICommand CloseCommand { get; }
@@ -191,7 +180,7 @@ namespace IronMacbeth.Client.ViewModel
         {
             try
             {
-                return Proxy.Ping();
+                return ServerAdapter.Ping();
             }
             catch
             {
@@ -341,27 +330,17 @@ namespace IronMacbeth.Client.ViewModel
             return User.Login;
         }
 
-        public void NotifyUserJoined(string userName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void NotifyNewMessage(string message)
-        {
-            throw new NotImplementedException();
-        }
-
         private bool Connect()
         {
-            DuplexChannelFactory<IService> channelFactory = new DuplexChannelFactory<IService>(this, "WCFServiceEndPoint");
+            ChannelFactory<IService> channelFactory = new ChannelFactory<IService>("IronMacbeth.BFF.Endpoint");
 
-            Proxy = channelFactory.CreateChannel();
+            var proxy = channelFactory.CreateChannel();
 
-            ServerAdapter = new ServerAdapter(Proxy);
+            ServerAdapter = new ServerAdapter(proxy);
 
             try
             {
-                return Proxy.Ping();
+                return ServerAdapter.Ping();
             }
             catch
             {
@@ -385,7 +364,7 @@ namespace IronMacbeth.Client.ViewModel
                 {
                     try
                     {
-                        return Proxy.Ping();
+                        return ServerAdapter.Ping();
                     }
                     catch
                     {

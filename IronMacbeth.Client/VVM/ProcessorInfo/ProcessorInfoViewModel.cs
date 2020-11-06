@@ -2,7 +2,6 @@
 using System.Linq;
 using IronMacbeth.Client.ViewModel;
 using IronMacbeth.Client.VVM.StoreVVM;
-using IronMacbeth.Model.ToBeRemoved;
 
 namespace IronMacbeth.Client.VVM.ProcessorInfo
 {

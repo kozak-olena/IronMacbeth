@@ -6,7 +6,6 @@ using System.Windows.Input;
 using IronMacbeth.Client.Annotations;
 using IronMacbeth.Client.ViewModel;
 using IronMacbeth.Client.VVM.EditMemoryVVM;
-using IronMacbeth.Model.ToBeRemoved;
 
 namespace IronMacbeth.Client.VVM.MemoryVVM
 {
