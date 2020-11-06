@@ -1,11 +1,7 @@
 ﻿using IronMacbeth.Client.ViewModel;
 using IronMacbeth.Client.VVM.StoreVVM;
-using IronMacbeth.Model.ToBeRemoved;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IronMacbeth.Client.VVM.BookVVM
 {

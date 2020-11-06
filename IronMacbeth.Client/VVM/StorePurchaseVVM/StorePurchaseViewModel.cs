@@ -4,10 +4,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
-
 using IronMacbeth.Client.Annotations;
 using IronMacbeth.Client.ViewModel;
-using IronMacbeth.Model.ToBeRemoved;
 
 namespace IronMacbeth.Client.VVM
 {

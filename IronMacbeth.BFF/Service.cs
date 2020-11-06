@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using IronMacbeth.Model.ToBeRemoved;
+using IronMacbeth.BFF.Contract;
 using Microsoft.EntityFrameworkCore;
 
 namespace IronMacbeth.BFF
 {
     public class Service : IService
     {
-
         #region Book
         public void CreateBook(Book book)
         {

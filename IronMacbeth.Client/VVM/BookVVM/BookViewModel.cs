@@ -1,15 +1,10 @@
 ﻿using IronMacbeth.Client.Annotations;
 using IronMacbeth.Client.ViewModel;
 using IronMacbeth.Client.VVM.EditMemoryVVM;
-using IronMacbeth.Model.ToBeRemoved;
-using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace IronMacbeth.Client.VVM.BookVVM

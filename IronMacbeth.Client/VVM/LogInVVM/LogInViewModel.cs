@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using IronMacbeth.Client.ViewModel;
-using IronMacbeth.Model.ToBeRemoved;
 
 namespace IronMacbeth.Client.VVM.LogInVVM
 {
@@ -32,11 +31,11 @@ namespace IronMacbeth.Client.VVM.LogInVVM
             {
                 if (string.IsNullOrWhiteSpace(Password))
                 {
-                    User = MainViewModel.Proxy.LogIn(Login, "");
+                    User = MainViewModel.ServerAdapter.LogIn(Login, "");
                 }
                 else
                 {
-                    User = MainViewModel.Proxy.LogIn(Login, Password);
+                    User = MainViewModel.ServerAdapter.LogIn(Login, Password);
                 }
                 if (User != null)
                 {

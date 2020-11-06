@@ -7,7 +7,6 @@ using IronMacbeth.Client.Annotations;
 using IronMacbeth.Client.ViewModel;
 using IronMacbeth.Client.VVM.EditProcessorVVM;
 using IronMacbeth.Client.VVM.MemoryVVM;
-using IronMacbeth.Model.ToBeRemoved;
 
 namespace IronMacbeth.Client.VVM.ProcessorVVM
 {

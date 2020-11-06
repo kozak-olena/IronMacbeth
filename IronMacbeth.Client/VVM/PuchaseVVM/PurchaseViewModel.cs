@@ -2,7 +2,6 @@
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using IronMacbeth.Client.ViewModel;
-using IronMacbeth.Model.ToBeRemoved;
 
 namespace IronMacbeth.Client.VVM.PuchaseVVM
 {

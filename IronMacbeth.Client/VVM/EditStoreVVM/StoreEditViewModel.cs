@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -10,7 +9,6 @@ using System.Windows.Media.Imaging;
 using IronMacbeth.Client.Annotations;
 using IronMacbeth.Client.ViewModel;
 using Microsoft.Win32;
-using IronMacbeth.Model.ToBeRemoved;
 
 namespace IronMacbeth.Client.VVM.EditStoreVVM
 {

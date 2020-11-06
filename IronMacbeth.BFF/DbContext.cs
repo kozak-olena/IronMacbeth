@@ -1,7 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-using IronMacbeth.Model.ToBeRemoved;
-
+﻿using IronMacbeth.BFF.Contract;
 using Microsoft.EntityFrameworkCore;
 
 namespace IronMacbeth.BFF
@@ -39,73 +36,41 @@ namespace IronMacbeth.BFF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Book>()
-                .ToTable(nameof(Book))
-                .Ignore("_bitmapImage")
-                .Ignore(x => x.BitmapImage)
-                .Ignore("_description")
-                .Ignore(x => x.Description);
+                .ToTable(nameof(Book));
 
             modelBuilder.Entity<Memory>()
-                .ToTable(nameof(Memory))
-                .Ignore("_bitmapImage")
-                .Ignore(x => x.BitmapImage)
-                .Ignore("_description")
-                .Ignore(x => x.Description);
+                .ToTable(nameof(Memory));
 
             modelBuilder.Entity<Motherboard>()
-                .ToTable(nameof(Motherboard))
-                .Ignore("_bitmapImage")
-                .Ignore(x => x.BitmapImage)
-                .Ignore("_description")
-                .Ignore(x => x.Description);
+                .ToTable(nameof(Motherboard));
 
             modelBuilder.Entity<Processor>()
-                .ToTable(nameof(Processor))
-                .Ignore("_bitmapImage")
-                .Ignore(x => x.BitmapImage)
-                .Ignore("_description")
-                .Ignore(x => x.Description);
+                .ToTable(nameof(Processor));
 
             modelBuilder.Entity<Purchase>()
-                .ToTable(nameof(Purchase))
-                .Ignore(x => x.IsMarkedAsRead);
+                .ToTable(nameof(Purchase));
 
             modelBuilder.Entity<Store>()
-                .ToTable(nameof(Store))
-                .Ignore("_bitmapImage")
-                .Ignore(x => x.BitmapImage);
+                .ToTable(nameof(Store));
 
             modelBuilder.Entity<StoreMemory>()
-                .ToTable(nameof(StoreMemory))
-                .Ignore(x => x.Modified)
-                .Ignore(x => x.SellableId);
+                .ToTable(nameof(StoreMemory));
 
             modelBuilder.Entity<StoreMotherboard>()
-                .ToTable(nameof(StoreMotherboard))
-                .Ignore(x => x.Modified)
-                .Ignore(x => x.SellableId);
+                .ToTable(nameof(StoreMotherboard));
 
             modelBuilder.Entity<StoreProcessor>()
-                .ToTable(nameof(StoreProcessor))
-                .Ignore(x => x.Modified)
-                .Ignore(x => x.SellableId);
+                .ToTable(nameof(StoreProcessor));
 
             modelBuilder.Entity<StoreVideocard>()
-                .ToTable(nameof(StoreVideocard))
-                .Ignore(x => x.Modified)
-                .Ignore(x => x.SellableId);
+                .ToTable(nameof(StoreVideocard));
 
             modelBuilder.Entity<User>()
                 .ToTable(nameof(User))
                 .HasNoKey();
 
             modelBuilder.Entity<Videocard>()
-                .ToTable(nameof(Videocard))
-                .Ignore("_bitmapImage")
-                .Ignore(x => x.BitmapImage)
-                .Ignore("_description")
-                .Ignore(x => x.Description);
+                .ToTable(nameof(Videocard));
         }
-
     }
 }
