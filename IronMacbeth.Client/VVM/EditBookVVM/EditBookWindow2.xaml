@@ -1,0 +1,242 @@
+﻿<Window x:Class="IronMacbeth.Client.VVM.EditBookVVM.EditBookWindow2"
+         x:Name="Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IronMacbeth.Client.VVM.EditBookVVM"
+        mc:Ignorable="d"
+          Height="617" Width="446"
+        >
+    <Grid Background="#FFC7D3EE" HorizontalAlignment="Stretch" Margin="0,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="109*"/>
+            <ColumnDefinition Width="38*"/>
+        </Grid.ColumnDefinitions>
+        <Border 
+            Margin="10,10,0,0"
+            Height="136"
+            BorderBrush="#FF2C72AF"
+            BorderThickness="1" HorizontalAlignment="Left" Width="124" VerticalAlignment="Top">
+            <Image
+                Source="{Binding BitmapImage}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Height="100"
+                Width="100"/>
+        </Border>
+        <ScrollViewer HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,5,0" Grid.ColumnSpan="2">
+            <WrapPanel  
+                        Orientation="Vertical"
+            Margin="0,0,10,0"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Right" Height="497">
+
+                <WrapPanel Orientation="Horizontal" Margin="0,0">
+                    <TextBlock
+                    VerticalAlignment="Center" 
+                    TextWrapping="Wrap"
+                    Margin="67,0,0,0"
+                    Text="TypeOfDocument: "/>
+                    <ComboBox Name="TypeList" Height="24" Width="145" VerticalAlignment="Top" BorderBrush="White"
+                              ItemsSource="{Binding AvailibleItemTypes}"
+                              SelectedItem="{Binding SelectedItemType}"
+                              >
+
+                        <ComboBox.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </ComboBox.Background>
+                    </ComboBox>
+                </WrapPanel>
+
+                <WrapPanel
+                HorizontalAlignment="Right"
+                Orientation="Horizontal" 
+                Margin="0,5" >
+                    <TextBlock
+                    VerticalAlignment="Center" 
+                    TextWrapping="Wrap"
+                    Margin="9,0,0,0"
+                    Text="Image: "/>
+                    <TextBox 
+                    IsEnabled="False"
+                    Text="{Binding ImagePath,UpdateSourceTrigger=PropertyChanged}"
+                    Height="24" 
+                    Width="120"/>
+                    <Button 
+                    Width="20"
+                    Content="..."
+                    Margin="5,0,0,0"
+                    Command="{Binding SelectImageCommand}"/>
+                </WrapPanel>
+                <WrapPanel Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
+                    <TextBlock
+                    VerticalAlignment="Center" 
+                    TextWrapping="Wrap"
+                    Margin="8,0,0,0"
+                    Text="Name: "/>
+                    <TextBox
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                    Height="24" 
+                    Width="145"/>
+                </WrapPanel>
+                <WrapPanel Visibility="{Binding AuthorItemVisbility}" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
+                    <TextBlock
+                    VerticalAlignment="Center" 
+                    TextWrapping="Wrap"
+                    Margin="16,0,0,0"
+                    Text="Author: "/>
+                    <TextBox 
+                    Text="{Binding Author,UpdateSourceTrigger=PropertyChanged}"
+                    Height="24" 
+                    Width="145"/>
+                </WrapPanel>
+                <WrapPanel Visibility="{Binding  PublishingHouseVisibility}" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
+                    <TextBlock
+                    VerticalAlignment="Center" 
+                    TextWrapping="Wrap"
+                    Margin="17,0,0,0"
+                    Text="PublishingHouse: "/>
+                    <TextBox 
+                    Text="{Binding PublishingHouse,UpdateSourceTrigger=PropertyChanged}"
+                    Height="24" 
+                    Width="145"/>
+                </WrapPanel>
+                <WrapPanel Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
+                    <TextBlock
+                    VerticalAlignment="Center" 
+                    TextWrapping="Wrap"
+                    Margin="17,0,0,0"
+                    Text="City: "/>
+                    <TextBox 
+                    Text="{Binding City,UpdateSourceTrigger=PropertyChanged}"
+                    Height="24" 
+                    Width="145"/>
+                </WrapPanel>
+                <WrapPanel Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
+                    <TextBlock
+                    VerticalAlignment="Center" 
+                    TextWrapping="Wrap"
+                    Margin="17,0,0,0"
+                    Text="Year: "/>
+                    <TextBox 
+                    Text="{Binding Year,UpdateSourceTrigger=PropertyChanged}"
+                    Height="24" 
+                    Width="145"/>
+                </WrapPanel>
+                <WrapPanel Visibility="{Binding  PagesVisibility}" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
+                    <TextBlock
+                    VerticalAlignment="Center" 
+                    TextWrapping="Wrap"
+                    Margin="17,0,0,0"
+                    Text="Pages: "/>
+                    <TextBox 
+                    Text="{Binding Pages,UpdateSourceTrigger=PropertyChanged}"
+                    Height="24" 
+                    Width="145"/>
+                </WrapPanel>
+                <WrapPanel Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
+                    <TextBlock
+                    VerticalAlignment="Center" 
+                    TextWrapping="Wrap"
+                    Margin="17,0,0,0"
+                    Text="Availiability: "/>
+                    <TextBox 
+                    Text="{Binding Availiability,UpdateSourceTrigger=PropertyChanged}"
+                    Height="24" 
+                    Width="145"/>
+                </WrapPanel>
+                <WrapPanel Visibility="{Binding  LocationVisibility}" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
+                    <TextBlock
+                    VerticalAlignment="Center" 
+                    TextWrapping="Wrap"
+                    Margin="17,0,0,0"
+                    Text="Location: "/>
+                    <TextBox 
+                    Text="{Binding Location,UpdateSourceTrigger=PropertyChanged}"
+                    Height="24" 
+                    Width="145"/>
+                </WrapPanel>
+                <WrapPanel Visibility="{Binding  MainDocumentVisibility}" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
+                    <TextBlock
+                    VerticalAlignment="Center" 
+                    TextWrapping="Wrap"
+                    Margin="17,0,0,0"
+                    Text="MainDocumentId: "/>
+                    <TextBox 
+                    Text="{Binding MainDocumentId,UpdateSourceTrigger=PropertyChanged}"
+                    Height="24" 
+                    Width="145"/>
+                </WrapPanel>
+
+                <WrapPanel
+                HorizontalAlignment="Right"
+                Orientation="Horizontal" 
+                Margin="0,5"
+                >
+                    <TextBlock
+                    VerticalAlignment="Center" 
+                    TextWrapping="Wrap"
+                    Margin="9,0,0,0"
+                    Text="Electronic version: "/>
+                    <TextBox 
+                    IsEnabled="False"
+                    Text="{Binding PdfPath,UpdateSourceTrigger=PropertyChanged}"
+                    Height="24" 
+                    Width="120"/>
+                    <Button 
+                    Width="20"
+                    Content="..."
+                    Margin="5,0,0,0"
+                    Command="{Binding SelectPdfCommand}"/>
+                </WrapPanel>
+                <WrapPanel Visibility="{Binding ResponsibleVisibility}"
+                           Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
+                    <TextBlock
+                    VerticalAlignment="Center" 
+                    TextWrapping="Wrap"
+                    Margin="17,0,0,0"
+                    Text="ResponsibleAuthors: "/>
+                    <TextBox 
+                    Text="{Binding ResponsibleAuthors,UpdateSourceTrigger=PropertyChanged}"
+                    Height="24" 
+                    Width="145"/>
+                </WrapPanel>
+                <WrapPanel 
+                    Visibility="{Binding IssueNumberVisibility}" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
+                    <TextBlock
+                    VerticalAlignment="Center" 
+                    TextWrapping="Wrap"
+                    Margin="17,0,0,0"
+                    Text="IssueNumber: "/>
+                    <TextBox 
+                    Text="{Binding IssueNumber,UpdateSourceTrigger=PropertyChanged}"
+                    Height="24" 
+                    Width="145"/>
+                </WrapPanel>
+
+            </WrapPanel>
+        </ScrollViewer>
+        <WrapPanel 
+                HorizontalAlignment="Right"
+                 VerticalAlignment="Bottom"
+                Orientation="Horizontal" 
+                Margin="0,0,10,10" Height="28" Grid.ColumnSpan="2">
+            <Button 
+                    Command="{Binding ApplyChangesCommand}"
+                    CommandParameter="{Binding ElementName=Window}"
+                    Margin="5,0"
+                    Content="Done" 
+                    Width="75"/>
+            <Button 
+                    Command="{Binding CloseCommand}"
+                    CommandParameter="{Binding ElementName=Window}"
+                    Margin="5,0"
+                    Content="Cancel" 
+                    Width="75"/>
+        </WrapPanel>
+    </Grid>
+</Window>

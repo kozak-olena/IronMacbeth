@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace IronMacbeth.Client.VVM.EditBookVVM
+namespace IronMacbeth.Client.VVM.BookVVM
 {
     /// <summary>
-    /// Interaction logic for EditBookWindow.xaml
+    /// Interaction logic for BookItemUserControl.xaml
     /// </summary>
-    public partial class EditBookWindow : Window
+    public partial class BookItemUserControl : UserControl
     {
-        public EditBookWindow()
+        public BookItemUserControl()
         {
             InitializeComponent();
         }

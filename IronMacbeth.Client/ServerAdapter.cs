@@ -28,6 +28,9 @@ namespace IronMacbeth.Client
         {
             CreateIDisplayable(book);
             CreateIDescribable(book);
+            string fileName;  
+            AddFile(book.ElectronicVersion, out fileName);
+            book.ElectronicVersionFileName = fileName;
 
             var contractBook = MapInternalToContractBook(book);
 
@@ -42,8 +45,10 @@ namespace IronMacbeth.Client
 
             foreach (var book in internalBooks)
             {
-                book.BitmapImage = GetImage(book.ImageName);
-                book.Description = GetStringFileContent(book.DescriptionName);
+                if (book.ImageName != null) { book.BitmapImage = GetImage(book.ImageName); }
+                if (book.DescriptionName != null)
+                { book.Description = GetStringFileContent(book.DescriptionName); }
+
             }
 
             return internalBooks;
@@ -74,11 +79,11 @@ namespace IronMacbeth.Client
                 PublishingHouse = book.PublishingHouse,
                 City = book.City,
                 Year = book.Year,
-                Pages = book.Pages,
+                Pages = book.Pages,                               //TODO:add more attributes
                 Availiability = book.Availiability,
                 Location = book.Location,
                 TypeOfDocument = book.TypeOfDocument,
-                ElectronicVersion = book.ElectronicVersion,
+                ElectronicVersionFileName = book.ElectronicVersionFileName,
                 Rating = book.Rating,
                 Comments = book.Comments,
                 ImageName = book.ImageName,
@@ -93,14 +98,14 @@ namespace IronMacbeth.Client
                 Id = book.Id,
                 Name = book.Name,
                 Author = book.Author,
-                PublishingHouse = book.PublishingHouse,
+                PublishingHouse = book.PublishingHouse,              //TODO: add more attributes
                 City = book.City,
                 Year = book.Year,
                 Pages = book.Pages,
                 Availiability = book.Availiability,
                 Location = book.Location,
                 TypeOfDocument = book.TypeOfDocument,
-                ElectronicVersion = book.ElectronicVersion,
+                ElectronicVersionFileName = book.ElectronicVersionFileName,
                 Rating = book.Rating,
                 Comments = book.Comments,
                 ImageName = book.ImageName,
@@ -996,9 +1001,9 @@ namespace IronMacbeth.Client
             Proxy.AddFile(bytes, out fileName);
         }
 
-        public void AddImageFile(byte[] image, out string fileName)
+        public void AddFile(byte[] file, out string fileName)
         {
-            Proxy.AddFile(image, out fileName);
+            Proxy.AddFile(file, out fileName);
         }
 
         private void CreateIDisplayable(IDisplayable displayable)
@@ -1011,7 +1016,7 @@ namespace IronMacbeth.Client
 
                 byte[] image = Serialize(bitmap);
 
-                AddImageFile(image, out fileName);
+                AddFile(image, out fileName);
 
                 displayable.ImageName = fileName;
             }
@@ -1037,7 +1042,7 @@ namespace IronMacbeth.Client
 
                 byte[] image = Serialize(bitmap);
 
-                AddImageFile(image, out var fileName);
+                AddFile(image, out var fileName);
 
                 displayable.ImageName = fileName;
             }

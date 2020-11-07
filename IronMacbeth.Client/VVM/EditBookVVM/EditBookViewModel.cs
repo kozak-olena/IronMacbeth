@@ -3,6 +3,7 @@ using IronMacbeth.Client.ViewModel;
 using Microsoft.Win32;
 using System;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
@@ -18,11 +19,15 @@ namespace IronMacbeth.Client.VVM.BookVVM
         public bool CollectionChanged { get; private set; }
 
         public string ImagePath { get; set; }
+
+        public string PdfPath { get; set; }
+
         public BitmapImage BitmapImage { get; set; }
 
         public string Name { get; set; }
 
         public string Author { get; set; }
+
         public string PublishingHouse { get; set; }
 
         public string City { get; set; }
@@ -30,23 +35,114 @@ namespace IronMacbeth.Client.VVM.BookVVM
         public string Year { get; set; }
 
         public string Pages { get; set; }
+
         public string Availiability { get; set; }   //electronic version???
 
         public string Location { get; set; }
+        public string IssueNumber { get; set; }
+        public string RentPrice { get; set; }
 
         public string TypeOfDocument { get; set; }
-        public string ElectronicVersion { get; set; }
+
+        public byte[] ElectronicVersion { get; set; }
 
         public string Rating { get; set; }
 
         public string Comments { get; set; }
 
+        private string _selecteItemType;
+        public string SelectedItemType
+        {
+            get { return _selecteItemType; }
+            set
+            {
+                OnSelectedItemTypeChanged(value);
+                _selecteItemType = value;
+            }
+        }
 
+        public bool IsBookSelected = false;
+        public bool IsArticleSelected = false;
+        public bool IsPeriodicalSelected = false;
+        public bool IsThesisSelected = false;
+        public bool IsNewspaperSelected = false;
+
+        #region Visivility
+        public Visibility AuthorItemVisbility => IsBookSelected || IsArticleSelected || IsThesisSelected ? Visibility.Visible : Visibility.Collapsed;
+
+        public Visibility PublishingHouseVisibility => IsBookSelected || IsPeriodicalSelected || IsThesisSelected ? Visibility.Visible : Visibility.Collapsed;
+
+        public Visibility LocationVisibility => IsBookSelected || IsPeriodicalSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
+
+        public Visibility RentPriceVisibility => IsBookSelected || IsPeriodicalSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
+
+        public Visibility MainDocumentVisibility => IsArticleSelected ? Visibility.Visible : Visibility.Collapsed;
+
+        public Visibility IssueNumberVisibility => IsPeriodicalSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
+
+        public Visibility ResponsibleVisibility => IsPeriodicalSelected || IsThesisSelected ? Visibility.Visible : Visibility.Collapsed;
+
+        public Visibility PagesVisibility => IsPeriodicalSelected || IsBookSelected || IsThesisSelected || IsArticleSelected ? Visibility.Visible : Visibility.Collapsed;
+
+        #endregion
+        private void OnSelectedItemTypeChanged(string value)
+        {
+            if (value == "Book")
+            {
+                IsBookSelected = true;
+                OnPropertyChanged(nameof(AuthorItemVisbility));
+                OnPropertyChanged(nameof(PublishingHouseVisibility));
+                OnPropertyChanged(nameof(LocationVisibility));
+                OnPropertyChanged(nameof(RentPriceVisibility));
+                OnPropertyChanged(nameof(PagesVisibility));
+            }
+            else if (value == "Article")
+            {
+                IsArticleSelected = true;
+                OnPropertyChanged(nameof(AuthorItemVisbility));
+                OnPropertyChanged(nameof(MainDocumentVisibility));
+                OnPropertyChanged(nameof(PagesVisibility));
+
+            }
+            else if (value == "Periodical")
+            {
+                IsPeriodicalSelected = true;
+                OnPropertyChanged(nameof(PublishingHouseVisibility));
+                OnPropertyChanged(nameof(LocationVisibility));
+                OnPropertyChanged(nameof(RentPriceVisibility));
+                OnPropertyChanged(nameof(IssueNumberVisibility));
+                OnPropertyChanged(nameof(ResponsibleVisibility));
+                OnPropertyChanged(nameof(PagesVisibility));
+            }
+            else if (value == "Thesis")
+            {
+                IsThesisSelected = true;
+                OnPropertyChanged(nameof(PublishingHouseVisibility));
+                OnPropertyChanged(nameof(AuthorItemVisbility));
+                OnPropertyChanged(nameof(ResponsibleVisibility));
+                OnPropertyChanged(nameof(PagesVisibility));
+            }
+            else if (value == "Newspaper")
+            {
+                IsNewspaperSelected = true;
+                OnPropertyChanged(nameof(LocationVisibility));
+                OnPropertyChanged(nameof(RentPriceVisibility));
+                OnPropertyChanged(nameof(IssueNumberVisibility));
+            }
+            else
+            {
+                throw new NotImplementedException("Selected item is not supported");
+            }
+        }
+
+        public string[] AvailibleItemTypes => new[] { "Book", "Article", "Periodical", "Thesis", "Newspaper" };
 
         public ICommand CloseCommand { get; set; }
         public ICommand SelectImageCommand { get; set; }
         public ICommand SelectPdfCommand { get; set; }
         public ICommand ApplyChangesCommand { get; set; }
+
+
 
         public EditBookViewModel(Book book = null)
         {
@@ -55,6 +151,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
             if (Book != null)
             {
                 ImagePath = "<image>";
+                PdfPath = "<pdf>";
                 BitmapImage = Book.BitmapImage;
 
                 Author = Book.Author;
@@ -64,6 +161,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
                 City = Book.City;
                 Year = Book.Year;
                 Location = Book.Location;
+                
                 Availiability = Book.Availiability;
                 ElectronicVersion = Book.ElectronicVersion;
                 Rating = Book.Rating;
@@ -92,11 +190,9 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
             if (userClickedOk == true)
             {
-                ImagePath = openFileDialog.FileName;
-                OnPropertyChanged(nameof(ImagePath));
-
-                BitmapImage = new BitmapImage(new Uri(ImagePath));
-                OnPropertyChanged(nameof(BitmapImage));
+                PdfPath = openFileDialog.FileName;
+                OnPropertyChanged(nameof(PdfPath));
+                ElectronicVersion = File.ReadAllBytes(PdfPath);
             }
         }
 
@@ -129,7 +225,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
                     Book.DescriptionName = null;
                 }
 
-                MainViewModel.ServerAdapter.UpdateBook(Book);
+                MainViewModel.ServerAdapter.UpdateBook(Book);   //if article update article
             }
             else
             {
@@ -185,7 +281,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
         public bool ApplyChangesCanExecute(object parameter)
         {
-            int n;
+
             return !string.IsNullOrWhiteSpace(Name) &&
                    !string.IsNullOrWhiteSpace(Author) &&
                    !string.IsNullOrWhiteSpace(PublishingHouse) &&
@@ -194,9 +290,6 @@ namespace IronMacbeth.Client.VVM.BookVVM
                    !string.IsNullOrWhiteSpace(Pages) &&
                    !string.IsNullOrWhiteSpace(Availiability) &&
                    !string.IsNullOrWhiteSpace(Location) &&
-                   !string.IsNullOrWhiteSpace(TypeOfDocument) &&
-                   !string.IsNullOrWhiteSpace(Rating) &&
-                   !string.IsNullOrWhiteSpace(Comments) &&
                    !string.IsNullOrWhiteSpace(ImagePath);
         }
 

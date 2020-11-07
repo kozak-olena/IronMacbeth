@@ -59,7 +59,7 @@
             </ListView.Resources>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <bookVvm:BookUserControl/>
+                    <bookVvm:BookItemUserControl/>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.ItemContainerStyle>
