@@ -115,50 +115,56 @@
                         <TextBlock 
                             Grid.Column="1"
                             HorizontalAlignment="Left" 
-                            Margin="10,31,0,0" 
-                            Text="Videocard"
-                            VerticalAlignment="Top"/>
-                        <TextBlock 
-                            Grid.Column="1"
-                            HorizontalAlignment="Left" 
                             Margin="10,52,0,0" 
-                            Text="{Binding Memory.Size}"
+                            Text="{Binding Book.PublishingHouse}"
                             VerticalAlignment="Top"/>
                         <TextBlock 
                             Grid.Column="1"
                             HorizontalAlignment="Left" 
                             Margin="10,73,0,0" 
-                            Text="{Binding Memory.Standart}"
+                            Text="{Binding Book.City}"
                             VerticalAlignment="Top"/>
                         <TextBlock 
                             Grid.Column="1"
                             HorizontalAlignment="Left" 
                             Margin="10,94,0,0" 
-                            Text="{Binding Memory.Frequency}"
+                            Text="{Binding Book.Year}"
                             VerticalAlignment="Top"/>
                         <TextBlock 
                             Grid.Column="1"
                             HorizontalAlignment="Left" 
                             Margin="10,115,0,0" 
-                            Text="{Binding Memory.Timings}"
+                            Text="{Binding Book.Availiability}"
                             VerticalAlignment="Top"/>
                         <TextBlock 
                             Grid.Column="1"
                             HorizontalAlignment="Left" 
                             Margin="10,136,0,0" 
-                            Text="{Binding Memory.Voltage}"
+                            Text="{Binding Book.Location}"
                             VerticalAlignment="Top"/>
                         <TextBlock 
                             Grid.Column="1"
                             HorizontalAlignment="Left" 
                             Margin="10,157,0,0" 
-                            Text="{Binding Memory.FormFactor}"
+                            Text="{Binding Book.ElectronicVersion}"
                             VerticalAlignment="Top"/>
                         <TextBlock 
                             Grid.Column="1"
                             HorizontalAlignment="Left" 
                             Margin="10,178,0,0" 
-                            Text="{Binding Memory.Type}"
+                            Text="{Binding Book.TypeOfDocument}"
+                            VerticalAlignment="Top"/>
+                        <TextBlock 
+                            Grid.Column="1"
+                            HorizontalAlignment="Left" 
+                            Margin="10,199,0,0" 
+                            Text="{Binding Book.Rating}"
+                            VerticalAlignment="Top"/>
+                        <TextBlock 
+                            Grid.Column="1"
+                            HorizontalAlignment="Left" 
+                            Margin="10,220,0,0" 
+                            Text="{Binding Book.Comments}"
                             VerticalAlignment="Top"/>
                     </Grid>
                 </TabItem>

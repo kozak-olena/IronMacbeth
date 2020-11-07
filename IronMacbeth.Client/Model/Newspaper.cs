@@ -19,9 +19,14 @@ namespace IronMacbeth.Client
         public string Availiability { get; set; }   //electronic version???
 
         public string Location { get; set; }
-
+        public string IssueNumber { get; set; }
         public string TypeOfDocument { get; set; }
-        public string ElectronicVersion { get; set; }
+        public byte[] ElectronicVersion { get; set; }
+
+        public string ElectronicVersionFileName { get; set; }
+        public int RentPrice { get; set; }
+
+        public int ElectronicVersionPrice { get; set; }
 
         public string Rating { get; set; }
 

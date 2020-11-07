@@ -10,7 +10,9 @@
                     xmlns:home="clr-namespace:IronMacbeth.Client.VVM.Home"
                     xmlns:memory="clr-namespace:IronMacbeth.Client.VVM.MemoryVVM"
                     xmlns:videocardVvm="clr-namespace:IronMacbeth.Client.VVM.VideocardVVM"
-                    xmlns:book ="clr-namespace:IronMacbeth.Client.VVM.BookVVM">
+                    xmlns:book ="clr-namespace:IronMacbeth.Client.VVM.BookVVM"
+                    xmlns:bookInfo ="clr-namespace:IronMacbeth.Client.VVM.BookInfoVVM">
+    
     <DataTemplate DataType="{x:Type home:HomeViewModel}">
         <home:HomeUserControl />
     </DataTemplate>
@@ -34,6 +36,9 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type book:BookViewModel}">
         <book:BookUserControl/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type book:BookInfoViewModel}">
+        <bookInfo:BookInfoUserControl/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type motherboardinfo:MotherboardInfoViewModel}">
         <motherboardinfo:MotherboardInfoUserControl/>

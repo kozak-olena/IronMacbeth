@@ -1,5 +1,6 @@
 ﻿using IronMacbeth.Client.Annotations;
 using IronMacbeth.Client.ViewModel;
+using IronMacbeth.Client.VVM.EditBookVVM;
 using IronMacbeth.Client.VVM.EditMemoryVVM;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -59,9 +60,9 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
         public void AddMethod(object parameter)
         {
-            var editMemoryViewModel = new EditMemoryViewModel();
-            new EditMemoryWindow { DataContext = editMemoryViewModel }.ShowDialog();
-            if (editMemoryViewModel.CollectionChanged)
+            var editBookViewModel = new EditBookViewModel();
+            new EditBookWindow2 { DataContext = editBookViewModel }.ShowDialog();
+            if (editBookViewModel.CollectionChanged)
             {
                 Update();
                 UpdateCollection(false);
@@ -76,7 +77,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
         public void EditMethod(object parameter)
         {
             var editBookViewModel = new EditBookViewModel(SelectedItem as Book);   //TODO: CREATE EditBookViewModel
-            new EditMemoryWindow { DataContext = editBookViewModel }.ShowDialog();
+            new EditBookWindow2 { DataContext = editBookViewModel }.ShowDialog();
             if (editBookViewModel.CollectionChanged)
             {
                 Update();

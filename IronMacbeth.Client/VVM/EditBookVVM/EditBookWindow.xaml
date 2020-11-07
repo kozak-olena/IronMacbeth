@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="IronMacbeth.Client.VVM.EditBookVVM.EditBookWindow"
+﻿<Window x:Class="IronMacbeth.Client.VVM.EditBookVVM.EditBookWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:IronMacbeth.Client.VVM.EditBookVVM"
              mc:Ignorable="d" 
-              Height="468" Width="388"
+              Height="468" Width="384"
         MaxHeight="468" MaxWidth="344"
         MinHeight="468" MinWidth="344">
     <Grid Background="#FFC7D3EE" Margin="0,0,-44,0">
@@ -47,7 +47,9 @@
                     Margin="5,0,0,0"
                     Command="{Binding SelectImageCommand}"/>
             </WrapPanel>
-            <WrapPanel Orientation="Horizontal" Margin="0,5">
+            <WrapPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Right"
+                        Margin="0,5">
                 <TextBlock
                     VerticalAlignment="Center" 
                     TextWrapping="Wrap"
@@ -58,7 +60,7 @@
                     Height="24" 
                     Width="145"/>
             </WrapPanel>
-            <WrapPanel Orientation="Horizontal" Margin="0,5">
+            <WrapPanel Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
                 <TextBlock
                     VerticalAlignment="Center" 
                     TextWrapping="Wrap"
@@ -191,4 +193,4 @@
 
 
     </Grid>
-</UserControl>
+</Window>

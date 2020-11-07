@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace IronMacbeth.Client.VVM.EditBookVVM
 {
     /// <summary>
-    /// Interaction logic for EditBookWindow.xaml
+    /// Interaction logic for EditBookWindow2.xaml
     /// </summary>
-    public partial class EditBookWindow : Window
+    public partial class EditBookWindow2 : Window
     {
-        public EditBookWindow()
+        public EditBookWindow2()
         {
             InitializeComponent();
         }

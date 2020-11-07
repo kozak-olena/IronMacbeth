@@ -28,7 +28,9 @@ namespace IronMacbeth.BFF.Contract
 
         public string TypeOfDocument { get; set; }
 
-        public string ElectronicVersion { get; set; }
+        public string ElectronicVersionFileName { get; set; }
+
+        public int ElectronicVersionPrice { get; set; }
 
         public string Rating { get; set; }
 
