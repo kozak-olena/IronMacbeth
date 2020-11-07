@@ -864,7 +864,12 @@ namespace IronMacbeth.Client
         {
             var result = Proxy.LogIn(login, password);
 
-            return MapContractToInternalUser(result);
+            if (result != null)
+            {
+                return MapContractToInternalUser(result);
+            }
+
+            return null;
         }
 
         public List<Internal.Store> GetUserStores(Internal.User user)

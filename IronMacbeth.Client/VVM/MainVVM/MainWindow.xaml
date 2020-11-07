@@ -207,22 +207,5 @@
                 Content="Retry"
                 Command="{Binding ReconnectCommand}"/>
         </Border>
-        <!--<contract:GifImage 
-                x:Name="gifImage" 
-                Stretch="None" 
-                GifSource="../../Images/ConnectionAnimation.gif" 
-                AutoStart="True"/>-->
-        <!--<StackPanel
-            Background="White"
-            Orientation="Horizontal">
-            <Image
-                Height="40"
-                gif:ImageBehavior.AnimatedSource="../../Images/loading-2.gif"/>
-            <Image
-                Height="40"
-                gif:ImageBehavior.AnimatedSource="../../Images/loadingSmall.gif"/>
-
-        </StackPanel>-->
-        <!--<contract:ConnectingAnimation Width="400" Height="400"></contract:ConnectingAnimation>-->
     </Grid>
 </Window>
