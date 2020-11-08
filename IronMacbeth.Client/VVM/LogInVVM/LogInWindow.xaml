@@ -21,14 +21,18 @@
             Width="120" 
             Margin="10,10,0,0"
             Text="{Binding Login,UpdateSourceTrigger=PropertyChanged}"/>
-        
+
         <PasswordBox 
             Margin="10,0,0,10" 
             Height="23" 
             VerticalAlignment="Bottom"  
             PasswordChanged="PasswordBox_OnPasswordChanged" 
             HorizontalAlignment="Left" 
-            Width="120"/>
+            Width="120">
+            <PasswordBox.InputBindings>
+                <KeyBinding Command="{Binding LogInCommand}" CommandParameter="{Binding ElementName=Window}" Key="Enter"/>
+            </PasswordBox.InputBindings>
+        </PasswordBox>
 
         <Button 
             Content="{Binding ButtonContent}" 
