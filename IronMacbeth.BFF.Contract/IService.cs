@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.ServiceModel;
 
 namespace IronMacbeth.BFF.Contract
@@ -223,10 +224,10 @@ namespace IronMacbeth.BFF.Contract
         #endregion
 
         [OperationContract]
-        void AddFile(byte[] file, out string fileName);
+        string AddFile(Stream fileStream);
 
         [OperationContract]
-        byte[] GetFile(string fileName);
+        Stream GetFile(string fileName);
 
         [OperationContract]
         bool Ping();

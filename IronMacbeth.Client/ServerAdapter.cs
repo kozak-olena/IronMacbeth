@@ -1093,12 +1093,15 @@ namespace IronMacbeth.Client
         {
             byte[] bytes = Serialize(text);
 
-            Proxy.AddFile(bytes, out fileName);
+            AddFile(bytes, out fileName);
         }
 
         public void AddFile(byte[] file, out string fileName)
         {
-            Proxy.AddFile(file, out fileName);
+            using (var memoryStream = new MemoryStream(file))
+            {
+                fileName = Proxy.AddFile(memoryStream);
+            }
         }
 
         private void CreateIDisplayable(IDisplayable displayable)
@@ -1169,14 +1172,27 @@ namespace IronMacbeth.Client
 
         private string GetStringFileContent(string fileName)
         {
-            byte[] bytes = Proxy.GetFile(fileName);
+            byte[] bytes;
 
+            using (MemoryStream stream = new MemoryStream())
+            using (Stream serverStream = Proxy.GetFile(fileName))
+            {
+                serverStream.CopyTo(stream);
+                bytes = stream.ToArray();
+            }
             return Deserialize(bytes) as string;
         }
 
         public static BitmapImage GetImage(string fileName)
         {
-            byte[] bytes = Proxy.GetFile(fileName);
+            byte[] bytes;
+
+            using (MemoryStream stream = new MemoryStream())
+            using (Stream serverStream = Proxy.GetFile(fileName))
+            {
+                serverStream.CopyTo(stream);
+                bytes = stream.ToArray();
+            }
 
             Bitmap bitmap = Deserialize(bytes) as Bitmap;
 

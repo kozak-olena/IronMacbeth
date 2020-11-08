@@ -575,17 +575,19 @@ namespace IronMacbeth.BFF
 
         #endregion
 
-        public void AddFile(byte[] file, out string fileName)
+        public string AddFile(Stream fileStream)
         {
-            fileName = GetFileId();
+            var fileName = GetFileId();
 
             FileInfo fileInfo = new FileInfo($"Files\\{fileName}");
 
             using (var stream = fileInfo.Open(FileMode.CreateNew, FileAccess.Write))
             {
-                stream.Write(file, 0, file.Length);
+                fileStream.CopyTo(stream);
                 stream.Close();
             }
+
+            return fileName;
         }
 
         private static string GetFileId()
@@ -620,9 +622,12 @@ namespace IronMacbeth.BFF
             return result;
         }
 
-        public byte[] GetFile(string fileName)
+        public Stream GetFile(string fileName)
         {
-            return File.ReadAllBytes($"Files\\{fileName}");
+            // do not dispose stream here. It's disposed by WCF whenever it's done sending it to the client
+            var fileStream = File.OpenRead($"Files\\{fileName}");
+
+            return fileStream;
         }
 
         public bool Ping()
