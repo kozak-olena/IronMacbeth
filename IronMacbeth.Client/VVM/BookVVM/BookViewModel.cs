@@ -69,14 +69,14 @@ namespace IronMacbeth.Client.VVM.BookVVM
             }
         }
 
-        public void Update()
+        public void Update()           
         {
 
         }
 
         public void EditMethod(object parameter)
         {
-            var editBookViewModel = new EditBookViewModel(SelectedItem as Book);   //TODO: CREATE EditBookViewModel
+            var editBookViewModel = new EditBookViewModel(SelectedItem as Book);    
             new EditBookWindow2 { DataContext = editBookViewModel }.ShowDialog();
             if (editBookViewModel.CollectionChanged)
             {

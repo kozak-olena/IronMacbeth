@@ -5,6 +5,7 @@ namespace IronMacbeth.BFF
 {
     public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     {
+        public DbSet<Article> Articles { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<StoreBook> StoreBook { get; set; }
 
@@ -35,6 +36,9 @@ namespace IronMacbeth.BFF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Article>()
+              .ToTable(nameof(Article));
+
             modelBuilder.Entity<Book>()
                 .ToTable(nameof(Book));
 

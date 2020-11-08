@@ -14,4 +14,6 @@
     [ElectronicVersionFileName]VARCHAR (255) NOT NULL,
     [Rating]VARCHAR (255) NOT NULL,
     [Comments]VARCHAR (255) NOT NULL,
+      [ImageName] NVARCHAR (1024) NULL,
+    [DescriptionName] NVARCHAR (1024) NULL
 )

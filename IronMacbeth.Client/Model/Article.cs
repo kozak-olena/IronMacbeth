@@ -3,7 +3,7 @@ using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client
 {
-    class Article : Base, ISellable
+    public class Article : Base, ISellable
     {
         public int Id { get; set; }
 
@@ -17,7 +17,7 @@ namespace IronMacbeth.Client
 
         public string Availiability { get; set; }
 
-        public int MainDocumentId { get; set; }   //book, in which the article is published// foreighn key? //rent book, not article
+        public string MainDocumentId { get; set; }   //book, in which the article is published// foreighn key? //rent book, not article
 
         public string TypeOfDocument { get; set; }
 
@@ -25,7 +25,7 @@ namespace IronMacbeth.Client
 
         public string ElectronicVersionFileName { get; set; }
 
-        public int ElectronicVersionPrice { get; set; }
+        public string ElectronicVersionPrice { get; set; }
 
         public string Rating { get; set; }
 

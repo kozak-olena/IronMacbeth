@@ -22,13 +22,103 @@ namespace IronMacbeth.Client
             Proxy = proxy;
         }
 
+        #region Article
+
+        public void CreateArticle(Internal.Article article)
+        {
+            CreateIDisplayable(article);
+            CreateIDescribable(article);
+            string fileName;
+            AddFile(article.ElectronicVersion, out fileName);
+            article.ElectronicVersionFileName = fileName;
+
+            var contractArticle = MapInternalToContractArticle(article);
+
+            Proxy.CreateArticle(contractArticle);
+        }
+
+        public List<Internal.Article> GetAllArticles()
+        {
+            var articles = Proxy.GetAllArticles();
+
+            var internalArticles = articles.Select(MapContractToInternalArticle).ToList();
+
+            foreach (var article in internalArticles)
+            {
+                if (article.ImageName != null) { article.BitmapImage = GetImage(article.ImageName); }
+                if (article.DescriptionName != null)
+                { article.Description = GetStringFileContent(article.DescriptionName); }
+
+            }
+
+            return internalArticles;
+        }
+        public void UpdateArticle(Internal.Article article)
+        {
+            UpdateIDisplayable(article);
+            UpdateIDescribable(article);
+
+            var contractArticle = MapInternalToContractArticle(article);
+
+            Proxy.UpdateArticle(contractArticle);
+        }
+
+        public void DeleteArticle(int id)
+        {
+            Proxy.DeleteArticle(id);
+        }
+
+        private Contract.Article MapInternalToContractArticle(Internal.Article article)
+        {
+            return new Contract.Article
+            {
+                Id = article.Id,
+                Name = article.Name,
+                Author = article.Author,
+                Year = article.Year,
+                Pages = article.Pages,
+                MainDocumentId = article.MainDocumentId,
+                Availiability = article.Availiability,
+                TypeOfDocument = article.TypeOfDocument,
+                ElectronicVersionPrice = article.ElectronicVersionPrice,
+                ElectronicVersionFileName = article.ElectronicVersionFileName,
+                Rating = article.Rating,
+                Comments = article.Comments,
+                ImageName = article.ImageName,
+                DescriptionName = article.DescriptionName
+            };
+        }
+
+        private Internal.Article MapContractToInternalArticle(Contract.Article article)
+        {
+            return new Internal.Article
+            {
+                Id = article.Id,
+                Name = article.Name,
+                Author = article.Author,
+                Year = article.Year,
+                Pages = article.Pages,
+                MainDocumentId = article.MainDocumentId,
+                Availiability = article.Availiability,
+                TypeOfDocument = article.TypeOfDocument,
+                ElectronicVersionPrice = article.ElectronicVersionPrice,
+                ElectronicVersionFileName = article.ElectronicVersionFileName,
+                Rating = article.Rating,
+                Comments = article.Comments,
+                ImageName = article.ImageName,
+                DescriptionName = article.DescriptionName
+            };
+        }
+
+        #endregion
+
         #region Book
 
         public void CreateBook(Internal.Book book)
         {
             CreateIDisplayable(book);
             CreateIDescribable(book);
-            string fileName;  
+            string fileName;
             AddFile(book.ElectronicVersion, out fileName);
             book.ElectronicVersionFileName = fileName;
 

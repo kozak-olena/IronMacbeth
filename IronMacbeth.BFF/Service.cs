@@ -8,6 +8,48 @@ namespace IronMacbeth.BFF
 {
     public class Service : IService
     {
+
+        #region Article
+        public void CreateArticle(Article article)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(article);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public List<Article> GetAllArticles()
+        {
+            using (var dbContext = new DbContext())
+            {
+                return dbContext.Articles.ToList();
+            }
+        }
+
+        public void UpdateArticle(Article article)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Update(article);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteArticle(int id)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Articles.Remove(new Article { Id = id });
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        #endregion
+
         #region Book
         public void CreateBook(Book book)
         {

@@ -22,6 +22,20 @@ namespace IronMacbeth.BFF.Contract
 
         #endregion
 
+        #region Article
+        [OperationContract]
+        void CreateArticle(Article article);
+
+        [OperationContract]
+        List<Article> GetAllArticles();
+
+        [OperationContract]
+        void UpdateArticle(Article article);
+
+        [OperationContract]
+        void DeleteArticle(int id);
+        #endregion
+
         #region StoreBook
 
         [OperationContract]

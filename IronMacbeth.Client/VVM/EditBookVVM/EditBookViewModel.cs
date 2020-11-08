@@ -15,6 +15,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
     {
         public string PageViewName => "Book";
         public Book Book { get; private set; }
+        public Article Article { get; private set; }
 
         public bool CollectionChanged { get; private set; }
 
@@ -84,7 +85,19 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
         public Visibility PagesVisibility => IsPeriodicalSelected || IsBookSelected || IsThesisSelected || IsArticleSelected ? Visibility.Visible : Visibility.Collapsed;
 
-        #endregion
+        public Visibility ToAllVisibility => IsPeriodicalSelected || IsBookSelected || IsThesisSelected || IsArticleSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
+
+        // <WrapPanel Visibility = "{Binding  MainDocumentVisibility}" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
+        //            <TextBlock
+        //             VerticalAlignment = "Center"
+        ///            TextWrapping="Wrap"
+        //            Margin="17,0,0,0"
+        //             Text="MainDocumentId: "/>
+        //            <TextBox
+        //            Text = "{Binding MainDocumentId,UpdateSourceTrigger=PropertyChanged}"
+        //            Height="24" 
+        //           Width="145"/>
+        //      </WrapPanel>
         private void OnSelectedItemTypeChanged(string value)
         {
             if (value == "Book")
@@ -136,7 +149,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
         }
 
         public string[] AvailibleItemTypes => new[] { "Book", "Article", "Periodical", "Thesis", "Newspaper" };
-
+        #endregion
         public ICommand CloseCommand { get; set; }
         public ICommand SelectImageCommand { get; set; }
         public ICommand SelectPdfCommand { get; set; }
@@ -161,7 +174,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
                 City = Book.City;
                 Year = Book.Year;
                 Location = Book.Location;
-                
+
                 Availiability = Book.Availiability;
                 ElectronicVersion = Book.ElectronicVersion;
                 Rating = Book.Rating;
@@ -196,13 +209,12 @@ namespace IronMacbeth.Client.VVM.BookVVM
             }
         }
 
-        public void ApplyChangesMethod(object parameter)
+        public void ApplyChangesBookMethod(object parameter)
         {
             if (Book != null)
             {
                 Book.Name = Name;
                 Book.Author = Author;
-
                 Book.PublishingHouse = PublishingHouse;                     //}}TODO:????
                 Book.City = City;
                 Book.Year = Year;
@@ -251,9 +263,75 @@ namespace IronMacbeth.Client.VVM.BookVVM
             CollectionChanged = true;
 
             CloseMethod(parameter);
+
         }
 
-        public void CloseMethod(object parameter)
+        public void ApplyChangesArticleMethod(object parameter)
+        {
+            if (Article != null)
+            {
+                Article.Name = Name;
+                Article.Author = Author;
+                Article.Year = Year;
+                Article.Pages = Pages;
+                Article.Availiability = Availiability;
+                Article.TypeOfDocument = TypeOfDocument;
+                Article.ElectronicVersion = ElectronicVersion;
+                Article.Rating = Rating;
+                Article.Comments = Comments;
+
+                if (!Article.BitmapImage.Equals(BitmapImage))
+                {
+                    Article.BitmapImage = BitmapImage;
+                    Article.ImageName = null;
+                }
+                if (Article.Name != Name)
+                {
+                    Article.Name = Name;
+                    Article.DescriptionName = null;
+                }
+
+                MainViewModel.ServerAdapter.UpdateArticle(Article);
+            }
+            else
+            {
+                Article = new Article
+                {
+                    BitmapImage = BitmapImage,
+                    Name = Name,
+                    Author = Author,
+                    Year = Year,
+                    Pages = Pages,
+                    Availiability = Availiability,
+                    TypeOfDocument = TypeOfDocument,
+                    ElectronicVersion = ElectronicVersion,
+                    Rating = Rating,
+                    Comments = Comments
+                };
+                MainViewModel.ServerAdapter.CreateArticle(Article);
+            }
+
+            CollectionChanged = true;
+
+            CloseMethod(parameter);
+        }
+
+
+
+        public void ApplyChangesMethod(object parameter)
+        {
+            if (IsBookSelected)
+            {
+                ApplyChangesBookMethod(parameter);
+            }
+            else if (IsArticleSelected)
+            {
+                ApplyChangesArticleMethod(parameter);
+            }
+
+        }
+
+        public void CloseMethod(object parameter)   //>????????????
         {
             (parameter as Window)?.Close();
         }
@@ -281,15 +359,11 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
         public bool ApplyChangesCanExecute(object parameter)
         {
-
             return !string.IsNullOrWhiteSpace(Name) &&
-                   !string.IsNullOrWhiteSpace(Author) &&
-                   !string.IsNullOrWhiteSpace(PublishingHouse) &&
                    !string.IsNullOrWhiteSpace(City) &&
                    !string.IsNullOrWhiteSpace(Year) &&
                    !string.IsNullOrWhiteSpace(Pages) &&
                    !string.IsNullOrWhiteSpace(Availiability) &&
-                   !string.IsNullOrWhiteSpace(Location) &&
                    !string.IsNullOrWhiteSpace(ImagePath);
         }
 

@@ -160,17 +160,7 @@
                     Height="24" 
                     Width="145"/>
                 </WrapPanel>
-                <WrapPanel Visibility="{Binding  MainDocumentVisibility}" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
-                    <TextBlock
-                    VerticalAlignment="Center" 
-                    TextWrapping="Wrap"
-                    Margin="17,0,0,0"
-                    Text="MainDocumentId: "/>
-                    <TextBox 
-                    Text="{Binding MainDocumentId,UpdateSourceTrigger=PropertyChanged}"
-                    Height="24" 
-                    Width="145"/>
-                </WrapPanel>
+               
 
                 <WrapPanel
                 HorizontalAlignment="Right"
@@ -214,6 +204,30 @@
                     Text="IssueNumber: "/>
                     <TextBox 
                     Text="{Binding IssueNumber,UpdateSourceTrigger=PropertyChanged}"
+                    Height="24" 
+                    Width="145"/>
+                </WrapPanel>
+                <WrapPanel 
+                    Visibility="{Binding RentPriceVisibility}" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
+                    <TextBlock
+                    VerticalAlignment="Center" 
+                    TextWrapping="Wrap"
+                    Margin="17,0,0,0"
+                    Text="Rent price: "/>
+                    <TextBox 
+                    Text="{Binding RentPrice,UpdateSourceTrigger=PropertyChanged}"
+                    Height="24" 
+                    Width="145"/>
+                </WrapPanel>
+                <WrapPanel 
+                    Visibility="{Binding ToAllVisibility}" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
+                    <TextBlock
+                    VerticalAlignment="Center" 
+                    TextWrapping="Wrap"
+                    Margin="17,0,0,0"
+                    Text="ElectronicVersionPrice: "/>
+                    <TextBox 
+                    Text="{Binding ElectronicVersionPrice,UpdateSourceTrigger=PropertyChanged}"
                     Height="24" 
                     Width="145"/>
                 </WrapPanel>

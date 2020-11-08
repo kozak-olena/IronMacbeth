@@ -19,9 +19,9 @@
                     TextWrapping="Wrap" 
                     Margin="10"
                     VerticalAlignment="Stretch"
-                    Text="{Binding Book.Description}"/>
+                    Text="{Binding  Description}"/>
                 <Image
-                    Source="{Binding Book.BitmapImage}"
+                    Source="{Binding  BitmapImage}"
                     Height="150" 
                     Margin="10,10,10,10" 
                     VerticalAlignment="Top" 
