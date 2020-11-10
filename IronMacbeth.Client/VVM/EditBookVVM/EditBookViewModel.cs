@@ -22,7 +22,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
         public string PdfPath { get; set; }
 
-        //public static BitmapImage BitmapImage { get; set; }
+        //5public static BitmapImage BitmapImage { get; set; }
 
         public FilledFieldsInfo FilledFieldsInfo { get; set; }
 

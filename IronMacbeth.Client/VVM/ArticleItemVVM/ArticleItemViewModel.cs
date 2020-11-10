@@ -1,9 +1,9 @@
 ﻿using IronMacbeth.Client.VVM.ArticleInfoVVM;
- 
+using System;
 
 namespace IronMacbeth.Client.VVM.ArticleItemVVM
 {
-    class ArticleItemViewModel
+    class ArticleItemViewModel : IDocumentViewModel
     {
         private Article _item;
 
@@ -21,5 +21,10 @@ namespace IronMacbeth.Client.VVM.ArticleItemVVM
         public string ElectronicVersionPrice => _item.ElectronicVersionPrice;
 
         public ArticleInfoViewModel MoreInfoVm => new ArticleInfoViewModel(_item);
+
+        public object GetItem()
+        {
+            return _item;
+        }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using IronMacbeth.Client.VVM.PeriodicalInfoVVM;
-
+using System;
 using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client.VVM.PeriodicalItemVVM
 {
-  public  class PeriodicalItemViewModel
+    public class PeriodicalItemViewModel : IDocumentViewModel
     {
         private Periodical _item;
 
@@ -25,5 +25,11 @@ namespace IronMacbeth.Client.VVM.PeriodicalItemVVM
         public string Location => _item.Location;
 
         public PeriodicalInfoViewModel MoreInfoVm => new PeriodicalInfoViewModel(_item);
+
+        public object GetItem()
+        {
+            return _item;
+        }
+
     }
 }

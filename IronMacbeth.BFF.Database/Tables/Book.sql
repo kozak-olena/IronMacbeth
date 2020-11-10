@@ -14,7 +14,7 @@
     [Rating]VARCHAR (255) NULL,
     [Comments]VARCHAR (255) NULL,
     [ImageName] NVARCHAR (1024) NULL,
-    [RentPrice] INT   NULL,
-    [ElectronicVersionPrice] INT  NULL,
+    [RentPrice] VARCHAR (255)   NULL,
+    [ElectronicVersionPrice] VARCHAR (255)  NULL,
     [DescriptionName] NVARCHAR (1024) NULL
 )

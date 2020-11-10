@@ -22,9 +22,9 @@
 
         public string TypeOfDocument { get; set; }
 
-         public int RentPrice { get; set; }
+         public string RentPrice { get; set; }
 
-       public int ElectronicVersionPrice { get; set; }
+       public string ElectronicVersionPrice { get; set; }
 
         public string ElectronicVersionFileName { get; set; }
 

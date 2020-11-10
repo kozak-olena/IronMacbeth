@@ -13,22 +13,14 @@
         </Grid.ColumnDefinitions>
         <Image
             Grid.Column="0"
-            Source="{Binding FilledFieldsInfo.BitmapImage}"
+            Source="{Binding BitmapImage}"
             Width="100" 
             Margin="5,5,0,5" 
             HorizontalAlignment="Left"/>
         <WrapPanel Margin="5,0,0,0" Grid.Column="2" Orientation="Vertical">
-            <WrapPanel>
-                <Label 
-                    Content="{Binding FilledFieldsInfo.ElectronicVersionPrice}" 
-                    Margin="10,10,0,0"
-                    Foreground="CornflowerBlue" 
-                    FontWeight="Bold"
-                    FontSize="13"/>
 
-            </WrapPanel>
             <WrapPanel  Height="110" >
-                <Label Margin="5,0,5,0" Content="Rating  (5/5)" FontSize="13" Foreground="DimGray"/>
+                <Label Margin="10,0,5,0" Content="Rating  (5/5)" FontSize="13" Foreground="DimGray"/>
                 <Label Margin="0,0,5,0"  Content="{Binding Rating}" FontSize="13" Foreground="DimGray"/>
                 <Button VerticalAlignment="Bottom"
                     Width="120"
@@ -72,20 +64,20 @@
                     <Label Content="{Binding Availiability}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
                     <Label 
                     Content="Offerings:" 
-                    Margin="0,0,0,0"
+                    
                     FontSize="13"
                     Foreground="DimGray"/>
                     <Label 
                     Content="{Binding NumberOfOfferings}" 
-                    Margin="0,0,5,0"
-                    FontSize="10"
+                   
+                    FontSize="13"
                     Foreground="DimGray"/>
                 </WrapPanel>
             </WrapPanel>
             <WrapPanel>
                 <WrapPanel Margin="0,5,0,0">
                     <Label Margin="0,0,5,0" Content="Electronic version price:" FontSize="13" Foreground="DimGray"/>
-                    <Label Content="{Binding ElectronicVersionPrice}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
+                    <Label Content="{Binding  ElectronicVersionPrice}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
                     <Label
                     Content="₴"
                     Foreground="DimGray" 

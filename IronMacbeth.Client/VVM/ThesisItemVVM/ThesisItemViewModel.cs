@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IronMacbeth.Client.VVM.ThesisItemVVM
 {
-    public class ThesisItemViewModel
+    public class ThesisItemViewModel : IDocumentViewModel
     {
         private Thesis _item;
 
@@ -31,5 +31,10 @@ namespace IronMacbeth.Client.VVM.ThesisItemVVM
 
 
         public ThesisInfoViewModel MoreInfoVm => new ThesisInfoViewModel(_item);
+
+        public object GetItem()
+        {
+            return _item;
+        }
     }
 }

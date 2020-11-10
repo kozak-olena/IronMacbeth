@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IronMacbeth.Client.VVM.NewspaperItemVVM
 {
-    public class NewspaperItemViewModel
+    public class NewspaperItemViewModel : IDocumentViewModel
     {
         private Newspaper _item;
 
@@ -26,8 +26,13 @@ namespace IronMacbeth.Client.VVM.NewspaperItemVVM
         public string Rating => _item.Rating;
         public string ElectronicVersionPrice => _item.ElectronicVersionPrice;
         public string RentPrice => _item.RentPrice;
-        
+
 
         public NewspaperInfoViewModel MoreInfoVm => new NewspaperInfoViewModel(_item);
+
+        public object GetItem()
+        {
+            return _item;
+        }
     }
 }

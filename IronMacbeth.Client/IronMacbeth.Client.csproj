@@ -78,6 +78,7 @@
     <Compile Include="Factory.cs" />
     <Compile Include="GifImage.cs" />
     <Compile Include="GridLengthAnimation.cs" />
+    <Compile Include="IDocumentViewModel.cs" />
     <Compile Include="Model\Article.cs" />
     <Compile Include="Model\Base.cs" />
     <Compile Include="Model\Book.cs" />

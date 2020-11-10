@@ -1,4 +1,5 @@
 ﻿using IronMacbeth.Client.ViewModel;
+using IronMacbeth.Client.VVM.BookVVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,9 +28,17 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             }
 
         }
-        public void DeleteDispatch()
+        public void DeleteDispatch(object objectForUnwrapping)
         {
-
+            var handler = Handlers.SingleOrDefault(x => x.CanHandleUnwrapping(objectForUnwrapping));
+            if (handler != null)
+            {
+                handler.HandleDelete(objectForUnwrapping);
+            }
+            else
+            {
+                throw new InvalidOperationException("Can not handle operation");
+            }
         }
 
         public void DispatchCreation(FilledFieldsInfo filledFieldsInfo)
@@ -62,12 +71,14 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
 
         }
 
+
     }
 
     interface IHandler
     {
         void HandlerCreation(FilledFieldsInfo filledFieldsInfo);
         void HandleUpdate(FilledFieldsInfo filledFieldsInfo, object objectForEdit);
+        void HandleDelete(object objectForEdit);
         bool CandHandle(FilledFieldsInfo filledFieldsInfo);
         bool CandHandleUpdate(FilledFieldsInfo filledFieldsInfo);
         bool CanHandleUnwrapping(object objectForUnwrapping);
@@ -115,6 +126,12 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             }
         }
 
+        public void HandleDelete(object objectForEdit)
+        {
+            Book article = objectForEdit as Book;
+            MainViewModel.ServerAdapter.DeleteBook(article.Id);
+        }
+
         public void HandlerCreation(FilledFieldsInfo filledFieldsInfo)
         {
             Book book = new Book
@@ -151,6 +168,8 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             book.Availiability = filledFieldsInfo.Availiability;
             book.Location = filledFieldsInfo.Location;
             book.TypeOfDocument = filledFieldsInfo.TypeOfDocument;
+            book.ElectronicVersionPrice = filledFieldsInfo.ElectronicVersionPrice;
+            book.RentPrice = filledFieldsInfo.RentPrice;
             book.ElectronicVersionFileName = filledFieldsInfo.ElectronicVersionFileName;
             book.Rating = filledFieldsInfo.Rating;
             book.Comments = filledFieldsInfo.Comments;
@@ -181,6 +200,8 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             filledFieldsInfo.City = book.City;
             filledFieldsInfo.Year = book.Year;
             filledFieldsInfo.Pages = book.Pages;
+            filledFieldsInfo.ElectronicVersionPrice = book.ElectronicVersionPrice;
+            filledFieldsInfo.RentPrice = book.RentPrice;
             filledFieldsInfo.Availiability = book.Availiability;
             filledFieldsInfo.Location = book.Location;
             filledFieldsInfo.TypeOfDocument = book.TypeOfDocument;
@@ -232,11 +253,17 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             }
         }
 
+        public void HandleDelete(object objectForEdit)
+        {
+            Article article = objectForEdit as Article;
+            MainViewModel.ServerAdapter.DeleteArticle(article.Id);
+        }
+
         public void HandlerCreation(FilledFieldsInfo filledFieldsInfo)
         {
             Article article = new Article
             {
-                
+
                 Name = filledFieldsInfo.Name,
                 Author = filledFieldsInfo.Author,
                 Year = filledFieldsInfo.Year,
@@ -256,7 +283,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
         public void HandleUpdate(FilledFieldsInfo filledFieldsInfo, object objectForEdit)
         {
             Article article = objectForEdit as Article;
-           
+
             article.Name = filledFieldsInfo.Name;
             article.Author = filledFieldsInfo.Author;
             article.Year = filledFieldsInfo.Year;
@@ -334,6 +361,12 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             {
                 return false;
             }
+        }
+
+        public void HandleDelete(object objectForEdit)
+        {
+            Periodical article = objectForEdit as Periodical;
+            MainViewModel.ServerAdapter.DeletePeriodical(article.Id);
         }
 
         public void HandlerCreation(FilledFieldsInfo filledFieldsInfo)
@@ -454,6 +487,12 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             }
         }
 
+        public void HandleDelete(object objectForEdit)
+        {
+            Thesis thesis = objectForEdit as Thesis;
+            MainViewModel.ServerAdapter.DeleteThesis(thesis.Id);
+        }
+
         public void HandlerCreation(FilledFieldsInfo filledFieldsInfo)
         {
             Thesis thesis = new Thesis
@@ -560,6 +599,12 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             {
                 return false;
             }
+        }
+
+        public void HandleDelete(object objectForEdit)
+        {
+            Newspaper newspaper = objectForEdit as Newspaper;
+            MainViewModel.ServerAdapter.DeleteNewspaper(newspaper.Id);
         }
 
         public void HandlerCreation(FilledFieldsInfo filledFieldsInfo)
