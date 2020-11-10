@@ -5,7 +5,14 @@ namespace IronMacbeth.BFF
 {
     public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     {
+        public DbSet<Periodical> Periodicals { get; set; }
+
+        public DbSet<Thesis> Thesises { get; set; }
+
+        public DbSet<Newspaper> Newspapers { get; set; }
+
         public DbSet<Article> Articles { get; set; }
+
         public DbSet<Book> Books { get; set; }
         public DbSet<StoreBook> StoreBook { get; set; }
 
@@ -36,14 +43,24 @@ namespace IronMacbeth.BFF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Article>()
               .ToTable(nameof(Article));
 
             modelBuilder.Entity<Book>()
                 .ToTable(nameof(Book));
 
+            modelBuilder.Entity<Newspaper>()
+              .ToTable(nameof(Newspaper));
+
+            modelBuilder.Entity<Thesis>()
+             .ToTable(nameof(Thesis));
+
+            modelBuilder.Entity<Periodical>()
+            .ToTable(nameof(Periodical));
+
             modelBuilder.Entity<Memory>()
-                .ToTable(nameof(Memory));
+                 .ToTable(nameof(Memory));
 
             modelBuilder.Entity<Motherboard>()
                 .ToTable(nameof(Motherboard));

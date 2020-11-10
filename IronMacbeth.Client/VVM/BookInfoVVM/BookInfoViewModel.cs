@@ -20,7 +20,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
             Stores =
                 MainViewModel.ServerAdapter.GetAllStoresSellingMemory(book.Id)
-                    .Select(x => new StoreSellableItemViewModel(x.Store, book, x.StoreMemory))
+                    .Select(x => new StoreSellableItemViewModel(x.Store, book, x.StoreMemory))          //
                     .ToList();
         }
     }

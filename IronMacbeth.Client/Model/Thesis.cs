@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client
 {
-    class Thesis : Base, ISellable    //(IRENTABLE)
+    public class Thesis : Base, ISellable    //(IRENTABLE)
     {
         public int Id { get; set; }
 
@@ -15,23 +15,23 @@ namespace IronMacbeth.Client
 
         public string Author { get; set; }
 
-        public string Responsible { get; set; } //Крицевий О. Т.; Чернівецький держ. ун-т// Євген Нахлік : НАНУ ; Ін-т літератури ім. Т.Г. Шевченка
+        public string ResponsibleAuthors { get; set; } //Крицевий О. Т.; Чернівецький держ. ун-т// Євген Нахлік : НАНУ ; Ін-т літератури ім. Т.Г. Шевченка
 
         public string City { get; set; }
 
         public string Year { get; set; }
 
         public string Pages { get; set; }
-
+        
         public string Availiability { get; set; }   //electronic version???
 
-        public string Location { get; set; }
-
         public string TypeOfDocument { get; set; }
+
         public byte[] ElectronicVersion { get; set; }
+
         public string ElectronicVersionFileName { get; set; }
 
-        public int ElectronicVersionPrice { get; set; }
+        public string ElectronicVersionPrice { get; set; }
 
         public string Rating { get; set; }
 

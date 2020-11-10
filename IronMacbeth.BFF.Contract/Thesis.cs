@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IronMacbeth.BFF.Contract
 {
-    class Thesis
+    public class Thesis
     {
         public int Id { get; set; }
 
@@ -14,7 +14,7 @@ namespace IronMacbeth.BFF.Contract
 
         public string Author { get; set; }
 
-        public string Responsible { get; set; }
+        public string ResponsibleAuthors { get; set; }
 
         public string City { get; set; }
 
@@ -24,13 +24,13 @@ namespace IronMacbeth.BFF.Contract
 
         public string Availiability { get; set; }
 
-        public string Location { get; set; }
+
 
         public string TypeOfDocument { get; set; }
 
         public string ElectronicVersionFileName { get; set; }
 
-        public int ElectronicVersionPrice { get; set; }
+        public string ElectronicVersionPrice { get; set; }
 
         public string Rating { get; set; }
 

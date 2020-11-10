@@ -41,6 +41,11 @@ namespace IronMacbeth.Client
             get { return _bitmapImage; }
             set { _bitmapImage = value; }
         }
+
+        public int NumberOfOfferings   //the same as availability?
+        {
+            get { return 0; }
+        }
         [NonSerialized]
         private BitmapImage _bitmapImage;
         public string Description

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace IronMacbeth.BFF.Contract
 {
-    class Newspaper
+    public class Newspaper
     {
         public int Id { get; set; }
 
@@ -26,9 +21,9 @@ namespace IronMacbeth.BFF.Contract
 
         public string IssueNumber { get; set; }
 
-        public int RentPrice { get; set; }
+        public string RentPrice { get; set; }
 
-        public int ElectronicVersionPrice { get; set; }
+        public string ElectronicVersionPrice { get; set; }
 
         public string Rating { get; set; }
 

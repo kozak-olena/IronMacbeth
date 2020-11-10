@@ -22,15 +22,299 @@ namespace IronMacbeth.Client
             Proxy = proxy;
         }
 
+
+        #region Periodical
+
+        public void CreatePeriodical(Internal.Periodical periodical)
+        {
+            CreateIDisplayable(periodical);
+            CreateIDescribable(periodical);
+            string fileName;
+            AddFile(periodical.ElectronicVersion, out fileName);
+            periodical.ElectronicVersionFileName = fileName;
+
+            var contractPeriodical = MapInternalToContractPeriodical(periodical);
+
+            Proxy.CreatePeriodical(contractPeriodical);
+        }
+
+        public List<Internal.Periodical> GetAllPeriodicals()
+        {
+            var periodicals = Proxy.GetAllPeriodicals();
+
+            var internalPeriodicals = periodicals.Select(MapContractToInternalPeriodical).ToList();
+
+            foreach (var periodical in internalPeriodicals)
+            {
+                if (periodical.ImageName != null) { periodical.BitmapImage = GetImage(periodical.ImageName); }
+                if (periodical.DescriptionName != null)
+                { periodical.Description = GetStringFileContent(periodical.DescriptionName); }
+
+            }
+
+            return internalPeriodicals;
+        }
+        public void UpdatePeriodical(Internal.Periodical periodical)
+        {
+            UpdateIDisplayable(periodical);
+            UpdateIDescribable(periodical);
+
+            var contractPeriodical = MapInternalToContractPeriodical(periodical);
+
+            Proxy.UpdatePeriodical(contractPeriodical);
+        }
+
+        public void DeletePeriodical(int id)
+        {
+            Proxy.DeletePeriodical(id);
+        }
+
+        private Contract.Periodical MapInternalToContractPeriodical(Internal.Periodical periodical)
+        {
+            return new Contract.Periodical
+            {
+                Id = periodical.Id,
+                Name = periodical.Name,
+                Year = periodical.Year,
+                Pages = periodical.Pages,
+                City = periodical.City,
+                Location = periodical.Location,
+                PublishingHouse = periodical.PublishingHouse,
+                Availiability = periodical.Availiability,
+                TypeOfDocument = periodical.TypeOfDocument,
+                IssueNumber = periodical.IssueNumber,
+                ResponsibleAuthors = periodical.ResponsibleAuthors,
+                RentPrice = periodical.RentPrice,
+                ElectronicVersionPrice = periodical.ElectronicVersionPrice,
+                ElectronicVersionFileName = periodical.ElectronicVersionFileName,
+                Rating = periodical.Rating,
+                Comments = periodical.Comments,
+                ImageName = periodical.ImageName,
+                DescriptionName = periodical.DescriptionName
+            };
+        }
+
+        private Internal.Periodical MapContractToInternalPeriodical(Contract.Periodical periodical)
+        {
+            return new Internal.Periodical
+            {
+                Id = periodical.Id,
+                Name = periodical.Name,
+                Year = periodical.Year,
+                Pages = periodical.Pages,
+                Availiability = periodical.Availiability,
+                City = periodical.City,
+                PublishingHouse = periodical.PublishingHouse,
+                Location = periodical.Location,
+                TypeOfDocument = periodical.TypeOfDocument,
+                ElectronicVersionPrice = periodical.ElectronicVersionPrice,
+                ElectronicVersionFileName = periodical.ElectronicVersionFileName,
+                IssueNumber = periodical.IssueNumber,
+                ResponsibleAuthors = periodical.ResponsibleAuthors,
+                RentPrice = periodical.RentPrice,
+                Rating = periodical.Rating,
+                Comments = periodical.Comments,
+                ImageName = periodical.ImageName,
+                DescriptionName = periodical.DescriptionName
+            };
+        }
+
+        #endregion
+
+        #region Newspaper
+
+        public void CreateNewspaper(Internal.Newspaper newspaper)
+        {
+            CreateIDisplayable(newspaper);
+            CreateIDescribable(newspaper);
+            string fileName;
+            AddFile(newspaper.ElectronicVersion, out fileName);
+            newspaper.ElectronicVersionFileName = fileName;
+
+            var contractNewspaper = MapInternalToContractNewspaper(newspaper);
+
+            Proxy.CreateNewspaper(contractNewspaper);
+        }
+
+        public List<Internal.Newspaper> GetAllNewspapers()
+        {
+            var newspapers = Proxy.GetAllNewspapers();
+
+            var internalNewspapers = newspapers.Select(MapContractToInternalNewspaper).ToList();
+
+            foreach (var newspaper in internalNewspapers)
+            {
+                if (newspaper.ImageName != null) { newspaper.BitmapImage = GetImage(newspaper.ImageName); }
+                if (newspaper.DescriptionName != null)
+                { newspaper.Description = GetStringFileContent(newspaper.DescriptionName); }
+            }
+            return internalNewspapers;
+        }
+        public void UpdateNewspaper(Internal.Newspaper newspaper)
+        {
+            UpdateIDisplayable(newspaper);
+            UpdateIDescribable(newspaper);
+
+            var contractNewspaper = MapInternalToContractNewspaper(newspaper);
+
+            Proxy.UpdateNewspaper(contractNewspaper);
+        }
+
+        public void DeleteNewspaper(int id)
+        {
+            Proxy.DeleteNewspaper(id);
+        }
+
+        private Contract.Newspaper MapInternalToContractNewspaper(Internal.Newspaper newspaper)
+        {
+            return new Contract.Newspaper
+            {
+                Id = newspaper.Id,
+                Name = newspaper.Name,
+                Year = newspaper.Year,
+                City = newspaper.City,
+                Availiability = newspaper.Availiability,
+                TypeOfDocument = newspaper.TypeOfDocument,
+                IssueNumber = newspaper.IssueNumber,
+                RentPrice = newspaper.RentPrice,
+                Location = newspaper.Location,
+                ElectronicVersionFileName = newspaper.ElectronicVersionFileName,
+                Rating = newspaper.Rating,
+                ElectronicVersionPrice = newspaper.ElectronicVersionPrice,
+                Comments = newspaper.Comments,
+                //ImageName = periodical.ImageName,
+                // DescriptionName = periodical.DescriptionName
+            };
+        }
+
+        private Internal.Newspaper MapContractToInternalNewspaper(Contract.Newspaper newspaper)
+        {
+            return new Internal.Newspaper
+            {
+                Id = newspaper.Id,
+                Name = newspaper.Name,
+                Year = newspaper.Year,
+                City = newspaper.City,
+                Availiability = newspaper.Availiability,
+                TypeOfDocument = newspaper.TypeOfDocument,
+                ElectronicVersionPrice = newspaper.ElectronicVersionPrice,
+                ElectronicVersionFileName = newspaper.ElectronicVersionFileName,
+                IssueNumber = newspaper.IssueNumber,
+                Location = newspaper.Location,
+                RentPrice = newspaper.RentPrice,
+                Rating = newspaper.Rating,
+                Comments = newspaper.Comments,
+                // ImageName = periodical.ImageName,
+                // DescriptionName = periodical.DescriptionName
+            };
+        }
+        #endregion
+
+        #region Thesis
+
+        public void CreateThesis(Internal.Thesis thesis)
+        {
+            CreateIDisplayable(thesis);
+            CreateIDescribable(thesis);
+            string fileName;
+            AddFile(thesis.ElectronicVersion, out fileName);
+            thesis.ElectronicVersionFileName = fileName;
+
+            var contractThesis = MapInternalToContractThesis(thesis);
+
+            Proxy.CreateThesis(contractThesis);
+        }
+
+        public List<Internal.Thesis> GetAllThesises()
+        {
+            var thesises = Proxy.GetAllThesises();
+
+            var internalThesises = thesises.Select(MapContractToInternalPeriodical).ToList();
+
+            foreach (var thesis in internalThesises)
+            {
+                if (thesis.ImageName != null) { thesis.BitmapImage = GetImage(thesis.ImageName); }
+                if (thesis.DescriptionName != null)
+                { thesis.Description = GetStringFileContent(thesis.DescriptionName); }
+
+            }
+
+            return internalThesises;
+        }
+        public void UpdateThesis(Internal.Thesis thesis)
+        {
+            UpdateIDisplayable(thesis);
+            UpdateIDescribable(thesis);
+
+            var contractThesis = MapInternalToContractThesis(thesis);
+
+            Proxy.UpdateThesis(contractThesis);
+        }
+
+        public void DeleteThesis(int id)
+        {
+            Proxy.DeleteThesis(id);
+        }
+
+        private Contract.Thesis MapInternalToContractThesis(Internal.Thesis thesis)
+        {
+            return new Contract.Thesis
+            {
+                Id = thesis.Id,
+                Name = thesis.Name,
+                Year = thesis.Year,
+                Author = thesis.Author,
+                Pages = thesis.Pages,
+                City = thesis.City,
+
+                Availiability = thesis.Availiability,
+                TypeOfDocument = thesis.TypeOfDocument,
+                ResponsibleAuthors = thesis.ResponsibleAuthors,
+                ElectronicVersionPrice = thesis.ElectronicVersionPrice,
+                ElectronicVersionFileName = thesis.ElectronicVersionFileName,
+                Rating = thesis.Rating,
+                Comments = thesis.Comments,
+                // ImageName = periodical.ImageName,
+                // DescriptionName = periodical.DescriptionName
+            };
+        }
+
+        private Internal.Thesis MapContractToInternalPeriodical(Contract.Thesis thesis)
+        {
+            return new Internal.Thesis
+            {
+                Id = thesis.Id,
+                Name = thesis.Name,
+                Year = thesis.Year,
+                Author = thesis.Author,
+                City = thesis.City,
+                Pages = thesis.Pages,
+                Availiability = thesis.Availiability,
+                TypeOfDocument = thesis.TypeOfDocument,
+                ResponsibleAuthors = thesis.ResponsibleAuthors,
+                ElectronicVersionPrice = thesis.ElectronicVersionPrice,
+                ElectronicVersionFileName = thesis.ElectronicVersionFileName,
+                Rating = thesis.Rating,
+                Comments = thesis.Comments,
+                //ImageName = periodical.ImageName,
+                //DescriptionName = periodical.DescriptionName
+            };
+        }
+
+        #endregion
+
         #region Article
 
         public void CreateArticle(Internal.Article article)
         {
-            CreateIDisplayable(article);
-            CreateIDescribable(article);
+            //CreateIDisplayable(article);
+            //CreateIDescribable(article);
             string fileName;
-            AddFile(article.ElectronicVersion, out fileName);
-            article.ElectronicVersionFileName = fileName;
+            if (article.ElectronicVersion != null)
+            {
+                AddFile(article.ElectronicVersion, out fileName);
+                article.ElectronicVersionFileName = fileName;
+            }
 
             var contractArticle = MapInternalToContractArticle(article);
 
@@ -46,8 +330,8 @@ namespace IronMacbeth.Client
             foreach (var article in internalArticles)
             {
                 if (article.ImageName != null) { article.BitmapImage = GetImage(article.ImageName); }
-                if (article.DescriptionName != null)
-                { article.Description = GetStringFileContent(article.DescriptionName); }
+                //if (article.DescriptionName != null)
+                //{ article.Description = GetStringFileContent(article.DescriptionName); }
 
             }
 
@@ -84,8 +368,8 @@ namespace IronMacbeth.Client
                 ElectronicVersionFileName = article.ElectronicVersionFileName,
                 Rating = article.Rating,
                 Comments = article.Comments,
-                ImageName = article.ImageName,
-                DescriptionName = article.DescriptionName
+                /// ImageName = article.ImageName,
+                // DescriptionName = article.DescriptionName
             };
         }
 
@@ -105,8 +389,8 @@ namespace IronMacbeth.Client
                 ElectronicVersionFileName = article.ElectronicVersionFileName,
                 Rating = article.Rating,
                 Comments = article.Comments,
-                ImageName = article.ImageName,
-                DescriptionName = article.DescriptionName
+                // ImageName = article.ImageName,
+                // DescriptionName = article.DescriptionName
             };
         }
 
@@ -119,8 +403,11 @@ namespace IronMacbeth.Client
             CreateIDisplayable(book);
             CreateIDescribable(book);
             string fileName;
-            AddFile(book.ElectronicVersion, out fileName);
-            book.ElectronicVersionFileName = fileName;
+            if (book.ElectronicVersion != null)
+            {
+                AddFile(book.ElectronicVersion, out fileName);
+                book.ElectronicVersionFileName = fileName;
+            }
 
             var contractBook = MapInternalToContractBook(book);
 

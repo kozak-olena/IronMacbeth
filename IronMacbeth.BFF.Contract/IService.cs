@@ -36,6 +36,51 @@ namespace IronMacbeth.BFF.Contract
         void DeleteArticle(int id);
         #endregion
 
+        #region Periodical
+
+        [OperationContract]
+        void CreatePeriodical(Periodical periodical);
+
+        [OperationContract]
+        List<Periodical> GetAllPeriodicals();
+
+        [OperationContract]
+        void UpdatePeriodical(Periodical periodical);
+
+        [OperationContract]
+        void DeletePeriodical(int id);
+        #endregion
+
+        #region Thesis
+
+        [OperationContract]
+        void CreateThesis(Thesis thesis);
+
+        [OperationContract]
+        List<Thesis> GetAllThesises();
+
+        [OperationContract]
+        void UpdateThesis(Thesis thesis);
+
+        [OperationContract]
+        void DeleteThesis(int id);
+        #endregion
+
+        #region Newspaper
+
+        [OperationContract]
+        void CreateNewspaper(Newspaper newspaper);
+
+        [OperationContract]
+        List<Newspaper> GetAllNewspapers();
+
+        [OperationContract]
+        void UpdateNewspaper(Newspaper newspaper);
+
+        [OperationContract]
+        void DeleteNewspaper(int id);
+        #endregion
+
         #region StoreBook
 
         [OperationContract]

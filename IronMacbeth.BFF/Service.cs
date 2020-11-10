@@ -9,6 +9,130 @@ namespace IronMacbeth.BFF
     public class Service : IService
     {
 
+        #region  Periodical
+        public void CreatePeriodical(Periodical periodical)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(periodical);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public List<Periodical> GetAllPeriodicals()
+        {
+            using (var dbContext = new DbContext())
+            {
+                return dbContext.Periodicals.ToList();
+            }
+        }
+
+        public void UpdatePeriodical(Periodical article)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Update(article);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeletePeriodical(int id)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Periodicals.Remove(new Periodical { Id = id });
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        #endregion
+
+        #region Thesis
+        public void CreateThesis(Thesis thesis)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(thesis);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public List<Thesis> GetAllThesises()
+        {
+            using (var dbContext = new DbContext())
+            {
+                return dbContext.Thesises.ToList();
+            }
+        }
+
+        public void UpdateThesis(Thesis thesis)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Update(thesis);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteThesis(int id)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Thesises.Remove(new Thesis { Id = id });
+
+                dbContext.SaveChanges();
+            }
+
+        }
+        #endregion
+
+        #region Newspaper
+
+        public void CreateNewspaper(Newspaper newspaper)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(newspaper);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public List<Newspaper> GetAllNewspapers()
+        {
+            using (var dbContext = new DbContext())
+            {
+                return dbContext.Newspapers.ToList();
+            }
+        }
+
+        public void UpdateNewspaper(Newspaper newspaper)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Update(newspaper);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteNewspaper(int id)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Newspapers.Remove(new Newspaper { Id = id });
+
+                dbContext.SaveChanges();
+            }
+        }
+        #endregion
+
+
         #region Article
         public void CreateArticle(Article article)
         {
@@ -580,11 +704,13 @@ namespace IronMacbeth.BFF
             fileName = GetFileId();
 
             FileInfo fileInfo = new FileInfo($"Files\\{fileName}");
-
             using (var stream = fileInfo.Open(FileMode.CreateNew, FileAccess.Write))
             {
-                stream.Write(file, 0, file.Length);
-                stream.Close();
+                if (file != null)
+                {
+                    stream.Write(file, 0, file.Length);
+                    stream.Close();
+                }
             }
         }
 
@@ -629,5 +755,7 @@ namespace IronMacbeth.BFF
         {
             return true;
         }
+
+
     }
 }

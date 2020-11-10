@@ -1,5 +1,6 @@
 ﻿using IronMacbeth.Client.Annotations;
 using IronMacbeth.Client.ViewModel;
+using IronMacbeth.Client.VVM.EditBookVVM;
 using Microsoft.Win32;
 using System;
 using System.ComponentModel;
@@ -11,11 +12,9 @@ using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client.VVM.BookVVM
 {
-    class EditBookViewModel : IPageViewModel, INotifyPropertyChanged
+    public class EditBookViewModel : IPageViewModel, INotifyPropertyChanged
     {
         public string PageViewName => "Book";
-        public Book Book { get; private set; }
-        public Article Article { get; private set; }
 
         public bool CollectionChanged { get; private set; }
 
@@ -23,171 +22,43 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
         public string PdfPath { get; set; }
 
-        public BitmapImage BitmapImage { get; set; }
+        //public static BitmapImage BitmapImage { get; set; }
 
-        public string Name { get; set; }
+        public FilledFieldsInfo FilledFieldsInfo { get; set; }
 
-        public string Author { get; set; }
+        public ICommand CloseCommand { get; set; }
 
-        public string PublishingHouse { get; set; }
+        public ICommand SelectImageCommand { get; set; }
 
-        public string City { get; set; }
+        public ICommand SelectPdfCommand { get; set; }
 
-        public string Year { get; set; }
+        public ICommand ApplyChangesCommand { get; set; }
 
-        public string Pages { get; set; }
+        private Dispatch _dispatch;
 
-        public string Availiability { get; set; }   //electronic version???
+        private object _objectForEdit;
 
-        public string Location { get; set; }
-        public string IssueNumber { get; set; }
-        public string RentPrice { get; set; }
+        public string[] AvailibleItemTypes => new[] { "Book", "Article", "Periodical", "Thesis", "Newspaper" };
 
-        public string TypeOfDocument { get; set; }
-
-        public byte[] ElectronicVersion { get; set; }
-
-        public string Rating { get; set; }
-
-        public string Comments { get; set; }
-
-        private string _selecteItemType;
-        public string SelectedItemType
+        public EditBookViewModel(object objectForEdit)
         {
-            get { return _selecteItemType; }
-            set
+            _dispatch = new Dispatch(new IHandler[] { new BookHandler(), new ArticleHandler(), new PeriodicalHandler(), new ThesisHandler(), new NewspaperHandler() });
+            _objectForEdit = objectForEdit;
+            if (_objectForEdit != null)
             {
-                OnSelectedItemTypeChanged(value);
-                _selecteItemType = value;
-            }
-        }
-
-        public bool IsBookSelected = false;
-        public bool IsArticleSelected = false;
-        public bool IsPeriodicalSelected = false;
-        public bool IsThesisSelected = false;
-        public bool IsNewspaperSelected = false;
-
-        #region Visivility
-        public Visibility AuthorItemVisbility => IsBookSelected || IsArticleSelected || IsThesisSelected ? Visibility.Visible : Visibility.Collapsed;
-
-        public Visibility PublishingHouseVisibility => IsBookSelected || IsPeriodicalSelected || IsThesisSelected ? Visibility.Visible : Visibility.Collapsed;
-
-        public Visibility LocationVisibility => IsBookSelected || IsPeriodicalSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
-
-        public Visibility RentPriceVisibility => IsBookSelected || IsPeriodicalSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
-
-        public Visibility MainDocumentVisibility => IsArticleSelected ? Visibility.Visible : Visibility.Collapsed;
-
-        public Visibility IssueNumberVisibility => IsPeriodicalSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
-
-        public Visibility ResponsibleVisibility => IsPeriodicalSelected || IsThesisSelected ? Visibility.Visible : Visibility.Collapsed;
-
-        public Visibility PagesVisibility => IsPeriodicalSelected || IsBookSelected || IsThesisSelected || IsArticleSelected ? Visibility.Visible : Visibility.Collapsed;
-
-        public Visibility ToAllVisibility => IsPeriodicalSelected || IsBookSelected || IsThesisSelected || IsArticleSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
-
-        // <WrapPanel Visibility = "{Binding  MainDocumentVisibility}" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
-        //            <TextBlock
-        //             VerticalAlignment = "Center"
-        ///            TextWrapping="Wrap"
-        //            Margin="17,0,0,0"
-        //             Text="MainDocumentId: "/>
-        //            <TextBox
-        //            Text = "{Binding MainDocumentId,UpdateSourceTrigger=PropertyChanged}"
-        //            Height="24" 
-        //           Width="145"/>
-        //      </WrapPanel>
-        private void OnSelectedItemTypeChanged(string value)
-        {
-            if (value == "Book")
-            {
-                IsBookSelected = true;
-                OnPropertyChanged(nameof(AuthorItemVisbility));
-                OnPropertyChanged(nameof(PublishingHouseVisibility));
-                OnPropertyChanged(nameof(LocationVisibility));
-                OnPropertyChanged(nameof(RentPriceVisibility));
-                OnPropertyChanged(nameof(PagesVisibility));
-            }
-            else if (value == "Article")
-            {
-                IsArticleSelected = true;
-                OnPropertyChanged(nameof(AuthorItemVisbility));
-                OnPropertyChanged(nameof(MainDocumentVisibility));
-                OnPropertyChanged(nameof(PagesVisibility));
-
-            }
-            else if (value == "Periodical")
-            {
-                IsPeriodicalSelected = true;
-                OnPropertyChanged(nameof(PublishingHouseVisibility));
-                OnPropertyChanged(nameof(LocationVisibility));
-                OnPropertyChanged(nameof(RentPriceVisibility));
-                OnPropertyChanged(nameof(IssueNumberVisibility));
-                OnPropertyChanged(nameof(ResponsibleVisibility));
-                OnPropertyChanged(nameof(PagesVisibility));
-            }
-            else if (value == "Thesis")
-            {
-                IsThesisSelected = true;
-                OnPropertyChanged(nameof(PublishingHouseVisibility));
-                OnPropertyChanged(nameof(AuthorItemVisbility));
-                OnPropertyChanged(nameof(ResponsibleVisibility));
-                OnPropertyChanged(nameof(PagesVisibility));
-            }
-            else if (value == "Newspaper")
-            {
-                IsNewspaperSelected = true;
-                OnPropertyChanged(nameof(LocationVisibility));
-                OnPropertyChanged(nameof(RentPriceVisibility));
-                OnPropertyChanged(nameof(IssueNumberVisibility));
+                FilledFieldsInfo = _dispatch.UnwrapObjectForEdit(objectForEdit);
             }
             else
             {
-                throw new NotImplementedException("Selected item is not supported");
+                FilledFieldsInfo = new FilledFieldsInfo();
             }
-        }
-
-        public string[] AvailibleItemTypes => new[] { "Book", "Article", "Periodical", "Thesis", "Newspaper" };
-        #endregion
-        public ICommand CloseCommand { get; set; }
-        public ICommand SelectImageCommand { get; set; }
-        public ICommand SelectPdfCommand { get; set; }
-        public ICommand ApplyChangesCommand { get; set; }
-
-
-
-        public EditBookViewModel(Book book = null)
-        {
-            Name = "";
-            Book = book;
-            if (Book != null)
-            {
-                ImagePath = "<image>";
-                PdfPath = "<pdf>";
-                BitmapImage = Book.BitmapImage;
-
-                Author = Book.Author;
-                PublishingHouse = Book.PublishingHouse;
-                TypeOfDocument = Book.TypeOfDocument;
-                Pages = Book.Pages;
-                City = Book.City;
-                Year = Book.Year;
-                Location = Book.Location;
-
-                Availiability = Book.Availiability;
-                ElectronicVersion = Book.ElectronicVersion;
-                Rating = Book.Rating;
-                Comments = Book.Comments;
-            }
-
             CloseCommand = new RelayCommand(CloseMethod);
             SelectImageCommand = new RelayCommand(SelectImageMethod);
-            SelectPdfCommand = new RelayCommand(SelectPdfMethod);     //TODO: Select electronic version
-            ApplyChangesCommand = new RelayCommand(ApplyChangesMethod)
-            {
-                CanExecuteFunc = ApplyChangesCanExecute
-            };
+            SelectPdfCommand = new RelayCommand(SelectPdfMethod);
+            ApplyChangesCommand = new RelayCommand(ApplyChangesMethod);
+            //{
+            //    CanExecuteFunc = ApplyChangesCanExecute
+            //};
         }
 
         public void SelectPdfMethod(object parameter)
@@ -205,133 +76,28 @@ namespace IronMacbeth.Client.VVM.BookVVM
             {
                 PdfPath = openFileDialog.FileName;
                 OnPropertyChanged(nameof(PdfPath));
-                ElectronicVersion = File.ReadAllBytes(PdfPath);
+                FilledFieldsInfo.ElectronicVersion = File.ReadAllBytes(PdfPath);       //TODO???
             }
         }
-
-        public void ApplyChangesBookMethod(object parameter)
-        {
-            if (Book != null)
-            {
-                Book.Name = Name;
-                Book.Author = Author;
-                Book.PublishingHouse = PublishingHouse;                     //}}TODO:????
-                Book.City = City;
-                Book.Year = Year;
-                Book.Pages = Pages;
-                Book.Availiability = Availiability;
-                Book.Location = Location;
-                Book.TypeOfDocument = TypeOfDocument;
-                Book.ElectronicVersion = ElectronicVersion;
-                Book.Rating = Rating;
-                Book.Comments = Comments;
-
-                if (!Book.BitmapImage.Equals(BitmapImage))
-                {
-                    Book.BitmapImage = BitmapImage;
-                    Book.ImageName = null;
-                }
-                if (Book.Name != Name)
-                {
-                    Book.Name = Name;
-                    Book.DescriptionName = null;
-                }
-
-                MainViewModel.ServerAdapter.UpdateBook(Book);   //if article update article
-            }
-            else
-            {
-                Book = new Book
-                {
-                    BitmapImage = BitmapImage,
-                    Name = Name,
-                    Author = Author,
-                    PublishingHouse = PublishingHouse,
-                    City = City,
-                    Year = Year,
-                    Pages = Pages,
-                    Availiability = Availiability,
-                    Location = Location,
-                    TypeOfDocument = TypeOfDocument,
-                    ElectronicVersion = ElectronicVersion,
-                    Rating = Rating,
-                    Comments = Comments
-                };
-                MainViewModel.ServerAdapter.CreateBook(Book);
-            }
-
-            CollectionChanged = true;
-
-            CloseMethod(parameter);
-
-        }
-
-        public void ApplyChangesArticleMethod(object parameter)
-        {
-            if (Article != null)
-            {
-                Article.Name = Name;
-                Article.Author = Author;
-                Article.Year = Year;
-                Article.Pages = Pages;
-                Article.Availiability = Availiability;
-                Article.TypeOfDocument = TypeOfDocument;
-                Article.ElectronicVersion = ElectronicVersion;
-                Article.Rating = Rating;
-                Article.Comments = Comments;
-
-                if (!Article.BitmapImage.Equals(BitmapImage))
-                {
-                    Article.BitmapImage = BitmapImage;
-                    Article.ImageName = null;
-                }
-                if (Article.Name != Name)
-                {
-                    Article.Name = Name;
-                    Article.DescriptionName = null;
-                }
-
-                MainViewModel.ServerAdapter.UpdateArticle(Article);
-            }
-            else
-            {
-                Article = new Article
-                {
-                    BitmapImage = BitmapImage,
-                    Name = Name,
-                    Author = Author,
-                    Year = Year,
-                    Pages = Pages,
-                    Availiability = Availiability,
-                    TypeOfDocument = TypeOfDocument,
-                    ElectronicVersion = ElectronicVersion,
-                    Rating = Rating,
-                    Comments = Comments
-                };
-                MainViewModel.ServerAdapter.CreateArticle(Article);
-            }
-
-            CollectionChanged = true;
-
-            CloseMethod(parameter);
-        }
-
-
 
         public void ApplyChangesMethod(object parameter)
         {
-            if (IsBookSelected)
+            if (_objectForEdit == null)
             {
-                ApplyChangesBookMethod(parameter);
+                _dispatch.DispatchCreation(FilledFieldsInfo);
             }
-            else if (IsArticleSelected)
+            else
             {
-                ApplyChangesArticleMethod(parameter);
+                _dispatch.DispatchUpdate(FilledFieldsInfo, _objectForEdit);
             }
+
+            CollectionChanged = true;
+
+            CloseMethod(parameter);
 
         }
 
-        public void CloseMethod(object parameter)   //>????????????
+        public void CloseMethod(object parameter)
         {
             (parameter as Window)?.Close();
         }
@@ -352,20 +118,20 @@ namespace IronMacbeth.Client.VVM.BookVVM
                 ImagePath = openFileDialog.FileName;
                 OnPropertyChanged(nameof(ImagePath));
 
-                BitmapImage = new BitmapImage(new Uri(ImagePath));
+               FilledFieldsInfo.BitmapImage = new BitmapImage(new Uri(ImagePath));
                 OnPropertyChanged(nameof(BitmapImage));
             }
         }
 
-        public bool ApplyChangesCanExecute(object parameter)
-        {
-            return !string.IsNullOrWhiteSpace(Name) &&
-                   !string.IsNullOrWhiteSpace(City) &&
-                   !string.IsNullOrWhiteSpace(Year) &&
-                   !string.IsNullOrWhiteSpace(Pages) &&
-                   !string.IsNullOrWhiteSpace(Availiability) &&
-                   !string.IsNullOrWhiteSpace(ImagePath);
-        }
+        //public bool ApplyChangesCanExecute(object parameter)
+        //{
+        //    return !string.IsNullOrWhiteSpace(Name) &&
+        //           !string.IsNullOrWhiteSpace(City) &&
+        //           !string.IsNullOrWhiteSpace(Year) &&
+        //           !string.IsNullOrWhiteSpace(Pages) &&
+        //           !string.IsNullOrWhiteSpace(Availiability) &&
+        //           !string.IsNullOrWhiteSpace(ImagePath);
+        //}
 
         public void Update() { }
 

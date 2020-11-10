@@ -1,7 +1,12 @@
 ﻿using IronMacbeth.Client.Annotations;
 using IronMacbeth.Client.ViewModel;
+using IronMacbeth.Client.VVM.ArticleItemVVM;
 using IronMacbeth.Client.VVM.EditBookVVM;
 using IronMacbeth.Client.VVM.EditMemoryVVM;
+using IronMacbeth.Client.VVM.NewspaperItemVVM;
+using IronMacbeth.Client.VVM.PeriodicalItemVVM;
+using IronMacbeth.Client.VVM.ThesisInfoVVM;
+using IronMacbeth.Client.VVM.ThesisItemVVM;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -14,9 +19,9 @@ namespace IronMacbeth.Client.VVM.BookVVM
     {
         public string PageViewName => "Book";
 
-        private List<BookItemViewModel> _items;
+        private List<object> _items;
 
-        public List<BookItemViewModel> Items
+        public List<object> Items
         {
             get
             {
@@ -60,7 +65,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
         public void AddMethod(object parameter)
         {
-            var editBookViewModel = new EditBookViewModel();
+            var editBookViewModel = new EditBookViewModel(null);
             new EditBookWindow2 { DataContext = editBookViewModel }.ShowDialog();
             if (editBookViewModel.CollectionChanged)
             {
@@ -69,14 +74,14 @@ namespace IronMacbeth.Client.VVM.BookVVM
             }
         }
 
-        public void Update()           
+        public void Update()
         {
 
         }
 
         public void EditMethod(object parameter)
         {
-            var editBookViewModel = new EditBookViewModel(SelectedItem as Book);    
+            var editBookViewModel = new EditBookViewModel(SelectedItem);
             new EditBookWindow2 { DataContext = editBookViewModel }.ShowDialog();
             if (editBookViewModel.CollectionChanged)
             {
@@ -87,22 +92,58 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
         public void DeleteMethod(object parameter)
         {
-            if (SelectedItem is Book book)
-            {
-                MainViewModel.ServerAdapter.DeleteBook(book.Id);
-                Update();
-                UpdateCollection(false);
-            }
+            // MainViewModel.ServerAdapter.DeleteBook(book.Id);
+            Update();
+            UpdateCollection(false);
         }
+
 
         public void UpdateCollection(bool innerCall)
         {
-            _items =
+            _items = new List<object>();
+
+            _items.AddRange
+            (
                 MainViewModel.ServerAdapter.GetAllBooks()
                     .OrderByDescending(item => item.NumberOfOfferings)
                     .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
-                    .Select(x => new BookItemViewModel(x))
-                    .ToList();
+                    .Select(x => (object)new BookItemViewModel(x))
+                    .ToList()
+            );
+
+            _items.AddRange
+               (
+                MainViewModel.ServerAdapter.GetAllArticles()
+                    .OrderByDescending(item => item.NumberOfOfferings)
+                   .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
+                   .Select(x => (object)new ArticleItemViewModel(x))
+                    .ToList()
+                  );
+
+            _items.AddRange
+                (
+                 MainViewModel.ServerAdapter.GetAllPeriodicals()
+                    .OrderByDescending(item => item.NumberOfOfferings)
+                    .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
+                  .Select(x => (object)new PeriodicalItemViewModel(x))
+                   .ToList()
+                 );
+            _items.AddRange
+                (
+                 MainViewModel.ServerAdapter.GetAllNewspapers()
+                    .OrderByDescending(item => item.NumberOfOfferings)
+                    .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
+                    .Select(x => (object)new NewspaperItemViewModel(x))
+                   .ToList()
+                 );
+            _items.AddRange
+                (
+                 MainViewModel.ServerAdapter.GetAllThesises()
+                    .OrderByDescending(item => item.NumberOfOfferings)
+                    .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
+                    .Select(x => (object)new ThesisItemViewModel(x))
+                   .ToList()
+                 );
 
             if (!innerCall)
             {
@@ -115,7 +156,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
             _items =
                 MainViewModel.ServerAdapter.GetAllBooks()
                     .OrderByDescending(item => item.NumberOfOfferings)
-                    .Select(x => new BookItemViewModel(x))
+                    .Select(x => (object)new BookItemViewModel(x))
                     .ToList();
 
 

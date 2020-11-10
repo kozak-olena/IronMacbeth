@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client
 {
-    class Newspaper : Base, ISellable
+    public class Newspaper : Base, ISellable
     {
         public int Id { get; set; }
 
@@ -24,9 +24,9 @@ namespace IronMacbeth.Client
         public byte[] ElectronicVersion { get; set; }
 
         public string ElectronicVersionFileName { get; set; }
-        public int RentPrice { get; set; }
+        public string RentPrice { get; set; }
 
-        public int ElectronicVersionPrice { get; set; }
+        public string ElectronicVersionPrice { get; set; }
 
         public string Rating { get; set; }
 

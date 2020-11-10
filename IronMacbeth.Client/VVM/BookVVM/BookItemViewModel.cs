@@ -21,18 +21,11 @@ namespace IronMacbeth.Client.VVM.BookVVM
         public string TypeOfDocument => _item.TypeOfDocument;
 
         public string Rating => _item.Rating;
+        public string RentPrice => _item.RentPrice;
 
-       // public MemoryInfoViewModel MoreInfoVm => new MemoryInfoViewModel(_item);
+        public string ElectronicVersionPrice => _item.ElectronicVersionPrice;
 
-       
-        //public int MinPrice => _item.MinPrice;
-        // public int MaxPrice => _item.MaxPrice;
         public int NumberOfOfferings => _item.NumberOfOfferings;
-        //public string Model => _item.Model;
-        // public string MPN => _item.MPN;
-        //  public string Standart => _item.Standart;
-        //public string Timings => _item.Timings;
-        //public string Voltage => _item.Voltage;
 
         public BookInfoViewModel MoreInfoVm => new BookInfoViewModel(_item);
     }
