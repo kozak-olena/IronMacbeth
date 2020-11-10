@@ -34,7 +34,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
         public int NumberOfOfferings => _item.NumberOfOfferings;
 
-        public BookInfoViewModel MoreInfoVm => new BookInfoViewModel(_item);
+        public DocumentInfoViewModel MoreInfoVm => new DocumentInfoViewModel(_item);
 
         public object GetItem()
         {

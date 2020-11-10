@@ -37,7 +37,7 @@
     <DataTemplate DataType="{x:Type book:BookViewModel}">
         <book:BookUserControl/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type book:BookInfoViewModel}">
+    <DataTemplate DataType="{x:Type book:DocumentInfoViewModel}">
         <bookInfo:BookInfoUserControl/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type motherboardinfo:MotherboardInfoViewModel}">
