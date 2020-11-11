@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IronMacbeth.Client.VVM.EditBookVVM;
+using System;
 using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client.VVM.BookVVM
@@ -34,6 +35,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
         public int NumberOfOfferings => _item.NumberOfOfferings;
 
+           
         public DocumentInfoViewModel MoreInfoVm => new DocumentInfoViewModel(_item);
 
         public object GetItem()

@@ -105,7 +105,18 @@
                     Height="24" 
                     Width="145"/>
                 </WrapPanel>
-                <WrapPanel Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
+                <WrapPanel Visibility="{Binding FilledFieldsInfo.MainDocumentVisibility}" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
+                    <TextBlock
+                    VerticalAlignment="Center" 
+                    TextWrapping="Wrap"
+                    Margin="17,0,0,0"
+                    Text="Main document: "/>
+                    <TextBox 
+                    Text="{Binding FilledFieldsInfo.MainDocumentId,UpdateSourceTrigger=PropertyChanged}"
+                    Height="24" 
+                    Width="145"/>
+                </WrapPanel>
+                <WrapPanel Visibility="{Binding FilledFieldsInfo.CityVisibility}" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
                     <TextBlock
                     VerticalAlignment="Center" 
                     TextWrapping="Wrap"
@@ -191,7 +202,7 @@
                     Margin="17,0,0,0"
                     Text="ResponsibleAuthors: "/>
                     <TextBox 
-                    Text="{Binding FilledFieldsInfo.ResponsibleAuthors,UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding FilledFieldsInfo.Responsible,UpdateSourceTrigger=PropertyChanged}"
                     Height="24" 
                     Width="145"/>
                 </WrapPanel>

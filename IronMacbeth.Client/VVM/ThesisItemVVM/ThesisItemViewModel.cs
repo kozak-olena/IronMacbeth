@@ -1,9 +1,5 @@
-﻿using IronMacbeth.Client.VVM.ThesisInfoVVM;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using IronMacbeth.Client.VVM.BookVVM;
+ 
 
 namespace IronMacbeth.Client.VVM.ThesisItemVVM
 {
@@ -25,12 +21,12 @@ namespace IronMacbeth.Client.VVM.ThesisItemVVM
         public string Pages => _item.Pages;
         public string City => _item.City;
         public string ElectonicVersionPrice => _item.ElectronicVersionPrice;
-        public string ResponsibleAuthors => _item.ResponsibleAuthors;
+        public string Responsible => _item.Responsible;
         public string Rating => _item.Rating;
         public string ElectronicVersionPrice => _item.ElectronicVersionPrice;
 
 
-        public ThesisInfoViewModel MoreInfoVm => new ThesisInfoViewModel(_item);
+        public DocumentInfoViewModel MoreInfoVm => new DocumentInfoViewModel(_item);
 
         public object GetItem()
         {

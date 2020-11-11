@@ -1,9 +1,5 @@
-﻿using IronMacbeth.Client.VVM.PeriodicalInfoVVM;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using IronMacbeth.Client.VVM.BookVVM;
+ 
 
 namespace IronMacbeth.Client.VVM.NewspaperItemVVM
 {
@@ -27,8 +23,7 @@ namespace IronMacbeth.Client.VVM.NewspaperItemVVM
         public string ElectronicVersionPrice => _item.ElectronicVersionPrice;
         public string RentPrice => _item.RentPrice;
 
-
-        public NewspaperInfoViewModel MoreInfoVm => new NewspaperInfoViewModel(_item);
+        public DocumentInfoViewModel MoreInfoVm => new DocumentInfoViewModel(_item);
 
         public object GetItem()
         {

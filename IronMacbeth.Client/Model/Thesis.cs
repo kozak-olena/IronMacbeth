@@ -15,7 +15,7 @@ namespace IronMacbeth.Client
 
         public string Author { get; set; }
 
-        public string ResponsibleAuthors { get; set; } //Крицевий О. Т.; Чернівецький держ. ун-т// Євген Нахлік : НАНУ ; Ін-т літератури ім. Т.Г. Шевченка
+        public string Responsible { get; set; } //Крицевий О. Т.; Чернівецький держ. ун-т// Євген Нахлік : НАНУ ; Ін-т літератури ім. Т.Г. Шевченка
 
         public string City { get; set; }
 

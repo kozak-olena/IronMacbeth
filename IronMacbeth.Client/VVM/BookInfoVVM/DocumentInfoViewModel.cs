@@ -1,24 +1,34 @@
 ﻿using IronMacbeth.Client.ViewModel;
+using IronMacbeth.Client.VVM.BookInfoVVM;
+using IronMacbeth.Client.VVM.EditBookVVM;
 using IronMacbeth.Client.VVM.StoreVVM;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace IronMacbeth.Client.VVM.BookVVM
 {
-    class DocumentInfoViewModel : IPageViewModel
+  public  class DocumentInfoViewModel : IPageViewModel
     {
         public string PageViewName => "BookInfo";
         public void Update() { }
 
-        public Book Book { get; }
+        public FilledFieldsInfo FilledFieldsInfo { get; set; }
 
-       // public List<StoreSellableItemViewModel> Stores { get; }
+        private object _objectForEdit;
 
-        public DocumentInfoViewModel(Book book)
+        private Dispatch _dispatch;
+        public DocumentInfoViewModel(object item)
         {
-            Book = book;
-
-             
+            _dispatch = new Dispatch(new IHandler[] { new BookHandler(), new ArticleHandler(), new PeriodicalHandler(), new ThesisHandler(), new NewspaperHandler() });
+            _objectForEdit = item;
+            if (_objectForEdit != null)
+            {
+                FilledFieldsInfo = _dispatch.UnwrapObjectForEdit(item);
+            }
+            else
+            {
+                FilledFieldsInfo = new FilledFieldsInfo();
+            }
         }
     }
 }

@@ -19,9 +19,9 @@
                     TextWrapping="Wrap" 
                     Margin="10"
                     VerticalAlignment="Stretch"
-                    Text="{Binding  Description}"/>
-                <Image
-                    Source="{Binding  BitmapImage}"
+                    Text="{Binding  FilledFieldsInfo.Description}"/>
+                <Image Visibility="{Binding FilledFieldsInfo.ImageVisibility}"
+                    Source="{Binding  FilledFieldsInfo.BitmapImage}"
                     Height="150" 
                     Margin="10,10,10,10" 
                     VerticalAlignment="Top" 
@@ -32,140 +32,363 @@
                 MaxWidth="900"
                 MinWidth="400"
                 Margin="10,10,10,10" 
-                Height="405" 
+                Height="420" 
                 VerticalAlignment="Top" BorderBrush="#FFFFFCFC">
-                <TabItem Header="Information" Height="25">
-                    <Grid Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="White" RenderTransformOrigin="0.453,0.497">
+                <TabItem Header="Information" Margin ="0,0,0,0" Height="25">
+                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="White" RenderTransformOrigin="0.453,0.497">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock 
+                        <WrapPanel Grid.Column="0" Orientation="Vertical">
+                            <WrapPanel Orientation="Vertical" Margin="5,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                <TextBlock 
                             Grid.Column="0"
                             HorizontalAlignment="Left" 
-                            Margin="10,10,0,0" 
-                            Text="Name:                                                                            " 
+                            TextWrapping="Wrap"
+                            Margin="5,0,0,0"
+                            Text="Name: " 
                             VerticalAlignment="Top"/>
-                        <TextBlock 
+                            </WrapPanel>
+                            <WrapPanel Visibility="{Binding FilledFieldsInfo.AuthorItemVisbility}" 
+                                       Orientation="Vertical" Margin="5,5,0,0" 
+                                       VerticalAlignment="Top" 
+                                       HorizontalAlignment="Left">
+                                <TextBlock 
                             Grid.Column="0"
                             HorizontalAlignment="Left" 
-                            Margin="10,31,0,0" 
-                            Text="Autor:                                                                              " 
+                            Margin="5,5,0,0" 
+                            Text="Author:" 
                             VerticalAlignment="Top"/>
-                        <TextBlock 
+                            </WrapPanel>
+                            <WrapPanel Visibility="{Binding FilledFieldsInfo.PublishingHouseVisibility}"
+                                Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock  
                             Grid.Column="0"
                             HorizontalAlignment="Left" 
-                            Margin="10,52,0,0" 
-                            Text="PublishingHouse:                                                              " 
+                            Margin="5,5,0,0" 
+                            Text="PublishingHouse:" 
                             VerticalAlignment="Top"/>
-                        <TextBlock 
+                            </WrapPanel>
+                            <WrapPanel
+                                Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock 
                             Grid.Column="0"
                             HorizontalAlignment="Left" 
-                            Margin="10,178,0,0" 
-                            Text="TypeOfDocument:                                                            " 
+                            Margin="5,5,0,0" 
+                            Text="TypeOfDocument:" 
                             VerticalAlignment="Top"/>
-                        <TextBlock 
+                            </WrapPanel>
+                            <WrapPanel  Visibility="{Binding FilledFieldsInfo.CityVisibility}"
+                                Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock 
                         	Grid.Column="0"
                         	HorizontalAlignment="Left" 
-                        	Margin="10,73,0,0" 
-                        	Text="City:                                                                               " 
+                        	Margin="5,5,0,0" 
+                        	Text="City:" 
                         	VerticalAlignment="Top"/>
-                        <TextBlock 
+                            </WrapPanel>
+                            <WrapPanel Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock 
                         	Grid.Column="0"
                         	HorizontalAlignment="Left" 
-                        	Margin="10,94,0,0" 
-                        	Text="Year:                                                                                 " 
+                        	Margin="5,5,0,0" 
+                        	Text="Year:" 
                         	VerticalAlignment="Top"/>
-                        <TextBlock 
+                            </WrapPanel>
+                            <WrapPanel Visibility="{Binding FilledFieldsInfo.PagesVisibility}" Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock 
                         	Grid.Column="0"
                         	HorizontalAlignment="Left" 
-                        	Margin="10,115,0,0" 
-                        	Text="Availiability:                                                                     " 
+                        	Margin="5,5,0,0" 
+                        	Text="Pages:" 
                         	VerticalAlignment="Top"/>
-                        <TextBlock 
+                            </WrapPanel>
+                            <WrapPanel Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock 
                         	Grid.Column="0"
                         	HorizontalAlignment="Left" 
-                        	Margin="10,136,0,0" 
-                        	Text="Location:                                                                       " 
+                        	Margin="5,5,0,0" 
+                        	Text="Availiability:" 
                         	VerticalAlignment="Top"/>
-                        <TextBlock 
+                            </WrapPanel>
+                            <WrapPanel Visibility="{Binding FilledFieldsInfo.LocationVisibility}"
+                                       Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock 
                         	Grid.Column="0"
                         	HorizontalAlignment="Left" 
-                        	Margin="10,157,0,0" 
-                        	Text="ElectronicVersion                                                            " 
+                        	Margin="5,5,0,0" 
+                        	Text="Location:" 
                         	VerticalAlignment="Top"/>
-                        <TextBlock 
+                            </WrapPanel>
+                            <WrapPanel Visibility="{Binding FilledFieldsInfo.MainDocumentVisibility}"
+                                       Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock 
                         	Grid.Column="0"
                         	HorizontalAlignment="Left" 
-                        	Margin="10,199,0,0" 
-                        	Text="Rating                                                            " 
+                        	Margin="5,5,0,0" 
+                        	Text="MainDocumentId:" 
                         	VerticalAlignment="Top"/>
-                        <TextBlock 
+                            </WrapPanel>
+                            <WrapPanel Visibility="{Binding FilledFieldsInfo.ResponsibleVisibility}"
+                                 Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock 
                         	Grid.Column="0"
                         	HorizontalAlignment="Left" 
-                        	Margin="10,220,0,0" 
-                        	Text="Comments                                                            " 
+                        	Margin="5,5,0,0" 
+                        	Text="Responsible" 
                         	VerticalAlignment="Top"/>
-                        <TextBlock 
-                            Grid.Column="1"
+                            </WrapPanel>
+                            <WrapPanel Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock 
+                        	Grid.Column="0"
+                        	HorizontalAlignment="Left" 
+                        	Margin="5,5,0,0" 
+                        	Text="ElectronicVersionPrice:" 
+                        	VerticalAlignment="Top"/>
+                            </WrapPanel>
+                            <WrapPanel Visibility="{Binding FilledFieldsInfo.IssueNumberVisibility}"
+                                Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock 
+                        	Grid.Column="0"
+                        	HorizontalAlignment="Left" 
+                        	Margin="5,5,0,0" 
+                        	Text="IssueNumber:" 
+                        	VerticalAlignment="Top"/>
+                            </WrapPanel>
+                            <WrapPanel Visibility="{Binding FilledFieldsInfo.RentPriceVisibility}"
+                                Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock 
+                        	Grid.Column="0"
+                        	HorizontalAlignment="Left" 
+                        	Margin="5,5,0,0" 
+                        	Text="RentPrice:" 
+                        	VerticalAlignment="Top"/>
+                            </WrapPanel>
+                            <WrapPanel  Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock 
+                        	Grid.Column="0"
+                        	HorizontalAlignment="Left" 
+                        	Margin="5,5,0,0" 
+                        	Text="ElectronicVersion:" 
+                        	VerticalAlignment="Top"/>
+                            </WrapPanel>
+                            <WrapPanel Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock 
+                        	Grid.Column="0"
+                        	HorizontalAlignment="Left" 
+                        	Margin="5,5,0,0" 
+                        	Text="Rating:" 
+                        	VerticalAlignment="Top"/>
+                            </WrapPanel>
+                            <WrapPanel Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock 
+                        	Grid.Column="0"
+                        	HorizontalAlignment="Left" 
+                        	Margin="5,5,0,0" 
+                        	Text="Comments:" 
+                        	VerticalAlignment="Top"/>
+                            </WrapPanel>
+                        </WrapPanel>
+                        <WrapPanel Background="White" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" >
+                            <WrapPanel Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock
                             HorizontalAlignment="Left" 
-                            Margin="10,10,0,0" 
-                            Text="{Binding Book.Name}"
+                            Text="{Binding FilledFieldsInfo.Name}"
+                            Margin="5,0,0,0"
                             VerticalAlignment="Top"/>
-                        <TextBlock 
-                            Grid.Column="1"
+                            </WrapPanel>
+                            <WrapPanel Visibility="{Binding FilledFieldsInfo.AuthorItemVisbility}"
+                             Orientation="Vertical" Margin="5,5,0,0" 
+                             VerticalAlignment="Top" 
+                             HorizontalAlignment="Left">
+                                <TextBlock
                             HorizontalAlignment="Left" 
-                            Margin="10,52,0,0" 
-                            Text="{Binding Book.PublishingHouse}"
+                            Margin="5,5,0,0" 
+                            Text="{Binding FilledFieldsInfo.Author}"
                             VerticalAlignment="Top"/>
-                        <TextBlock 
-                            Grid.Column="1"
+                            </WrapPanel>
+                            <WrapPanel Visibility="{Binding FilledFieldsInfo.PublishingHouseVisibility}"
+                                      Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock 
                             HorizontalAlignment="Left" 
-                            Margin="10,73,0,0" 
-                            Text="{Binding Book.City}"
+                            Margin="5,5,0,0" 
+                            Text="{Binding  FilledFieldsInfo.PublishingHouse}"
                             VerticalAlignment="Top"/>
-                        <TextBlock 
-                            Grid.Column="1"
+                            </WrapPanel>
+                            <WrapPanel
+                                Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock 
                             HorizontalAlignment="Left" 
-                            Margin="10,94,0,0" 
-                            Text="{Binding Book.Year}"
+                            Margin="5,5,0,0" 
+                            Text="{Binding  FilledFieldsInfo.TypeOfDocument}"
                             VerticalAlignment="Top"/>
-                        <TextBlock 
-                            Grid.Column="1"
+                            </WrapPanel>
+                            <WrapPanel Visibility="{Binding FilledFieldsInfo.CityVisibility}"
+                                Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock 
                             HorizontalAlignment="Left" 
-                            Margin="10,115,0,0" 
-                            Text="{Binding Book.Availiability}"
+                            Margin="5,5,0,0" 
+                            Text="{Binding  FilledFieldsInfo.City}"
                             VerticalAlignment="Top"/>
-                        <TextBlock 
-                            Grid.Column="1"
+                            </WrapPanel>
+                            <WrapPanel Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock
                             HorizontalAlignment="Left" 
-                            Margin="10,136,0,0" 
-                            Text="{Binding Book.Location}"
+                            Margin="5,5,0,0" 
+                            Text="{Binding  FilledFieldsInfo.Year}"
                             VerticalAlignment="Top"/>
-                        <TextBlock 
-                            Grid.Column="1"
+                            </WrapPanel>
+                            <WrapPanel Visibility="{Binding PagesVisibility}"
+                                Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock
                             HorizontalAlignment="Left" 
-                            Margin="10,157,0,0" 
-                            Text="{Binding Book.ElectronicVersion}"
+                            Margin="5,5,0,0" 
+                            Text="{Binding  FilledFieldsInfo.Pages}"
                             VerticalAlignment="Top"/>
-                        <TextBlock 
-                            Grid.Column="1"
+                            </WrapPanel>
+                            <WrapPanel
+                                Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock
                             HorizontalAlignment="Left" 
-                            Margin="10,178,0,0" 
-                            Text="{Binding Book.TypeOfDocument}"
+                            Margin="5,5,0,0" 
+                            Text="{Binding  FilledFieldsInfo.Availiability}"
                             VerticalAlignment="Top"/>
-                        <TextBlock 
-                            Grid.Column="1"
+                            </WrapPanel>
+                            <WrapPanel Visibility="{Binding FilledFieldsInfo.LocationVisibility}"
+                                Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock 
                             HorizontalAlignment="Left" 
-                            Margin="10,199,0,0" 
-                            Text="{Binding Book.Rating}"
+                            Margin="5,5,0,0" 
+                            Text="{Binding  FilledFieldsInfo.Location}"
                             VerticalAlignment="Top"/>
-                        <TextBlock 
-                            Grid.Column="1"
+                            </WrapPanel>
+                            <WrapPanel Visibility="{Binding FilledFieldsInfo.MainDocumentVisibility}"
+                                Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock
                             HorizontalAlignment="Left" 
-                            Margin="10,220,0,0" 
-                            Text="{Binding Book.Comments}"
+                            Margin="5,5,0,0" 
+                            Text="{Binding  FilledFieldsInfo.MainDocumentId}"
                             VerticalAlignment="Top"/>
+                            </WrapPanel>
+                            <WrapPanel Visibility="{Binding FilledFieldsInfo.ResponsibleVisibility}"
+                                Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock
+                            HorizontalAlignment="Left" 
+                            Margin="5,5,0,0" 
+                            Text="{Binding  FilledFieldsInfo.Responsible}"
+                            VerticalAlignment="Top"/>
+                            </WrapPanel>
+                            <WrapPanel
+                                Orientation="Vertical" Margin="5,5,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left">
+                                <TextBlock
+                            HorizontalAlignment="Left" 
+                            Margin="5,5,0,0" 
+                            Text="{Binding  FilledFieldsInfo.ElectronicVersionPrice}"
+                            VerticalAlignment="Top"/>
+                            </WrapPanel>
+                            <WrapPanel Visibility="{Binding FilledFieldsInfo.IssueNumberVisibility}"
+                            Orientation="Vertical" Margin="5,5,0,0" 
+                            VerticalAlignment="Top" 
+                            HorizontalAlignment="Left">
+                                <TextBlock
+                            HorizontalAlignment="Left" 
+                            Margin="5,5,0,0" 
+                            Text="{Binding  FilledFieldsInfo.IssueNumber}"
+                            VerticalAlignment="Top"/>
+                            </WrapPanel>
+                            <WrapPanel Visibility="{Binding FilledFieldsInfo. RentPriceVisibility}"
+                            Orientation="Vertical" Margin="5,5,0,0" 
+                            VerticalAlignment="Top" 
+                            HorizontalAlignment="Left">
+                                <TextBlock
+                            HorizontalAlignment="Left" 
+                            Margin="5,5,0,0" 
+                            Text="{Binding  FilledFieldsInfo.RentPrice}"
+                            VerticalAlignment="Top"/>
+                            </WrapPanel>
+                            <WrapPanel
+                            Orientation="Vertical" Margin="5,5,0,0" 
+                            VerticalAlignment="Top" 
+                            HorizontalAlignment="Left">
+                                <TextBlock
+                            HorizontalAlignment="Left" 
+                            Margin="5,5,0,0" 
+                            Text="Electronic version name"
+                            VerticalAlignment="Top"/>
+                            </WrapPanel>
+                            <WrapPanel 
+                            Orientation="Vertical" Margin="5,5,0,0" 
+                            VerticalAlignment="Top" 
+                            HorizontalAlignment="Left">
+                                <TextBlock
+                            HorizontalAlignment="Left" 
+                            Margin="5,5,0,0" 
+                            Text="{Binding  FilledFieldsInfo.Rating}"
+                            VerticalAlignment="Top"/>
+                            </WrapPanel>
+                            <WrapPanel  Orientation="Vertical" Margin="5,5,0,0" 
+                            VerticalAlignment="Top" 
+                            HorizontalAlignment="Left">
+                                <TextBlock
+                            HorizontalAlignment="Left" 
+                            Margin="5,5,0,0" 
+                            Text="{Binding  FilledFieldsInfo.Comments}"
+                            VerticalAlignment="Top"/>
+                            </WrapPanel>
+                        </WrapPanel>
                     </Grid>
                 </TabItem>
             </TabControl>

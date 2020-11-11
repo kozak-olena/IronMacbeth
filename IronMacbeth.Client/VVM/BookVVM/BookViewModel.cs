@@ -157,7 +157,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
             }
         }
 
-        public void UpdateCollectionNoFilter()
+        public void UpdateCollectionNoFilter() ///////////////////////////////
         {
             _items =
                 MainViewModel.ServerAdapter.GetAllBooks()

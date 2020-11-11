@@ -122,6 +122,7 @@
       <DependentUpon>BookInfoUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="VVM\BookInfoVVM\DocumentInfoViewModel.cs" />
+    <Compile Include="VVM\BookInfoVVM\InfoItemsDipatch.cs" />
     <Compile Include="VVM\BookVVM\BookItemUserControl.xaml.cs">
       <DependentUpon>BookItemUserControl.xaml</DependentUpon>
     </Compile>

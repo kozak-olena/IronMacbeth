@@ -9,7 +9,7 @@ namespace IronMacbeth.Client
 
         public string Name { get; set; }
 
-        public string ResponsibleAuthors { get; set; }  //Київ. нац. ун-т ім. Тараса Шевченка ; голов. ред. Л.І. Шевченко ; редкол.: Ф.С. Бацевич, А. Брацкі, П.Ю. Гриценко [та ін.]
+        public string Responsible { get; set; }  //Київ. нац. ун-т ім. Тараса Шевченка ; голов. ред. Л.І. Шевченко ; редкол.: Ф.С. Бацевич, А. Брацкі, П.Ю. Гриценко [та ін.]
 
         public string PublishingHouse { get; set; }
 

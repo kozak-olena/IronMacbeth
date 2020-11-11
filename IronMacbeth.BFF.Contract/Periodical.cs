@@ -6,7 +6,7 @@
 
         public string Name { get; set; }
 
-        public string ResponsibleAuthors { get; set; }
+        public string Responsible { get; set; }
 
         public string PublishingHouse { get; set; }
 

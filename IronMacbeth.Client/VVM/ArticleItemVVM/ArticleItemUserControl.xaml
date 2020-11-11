@@ -61,10 +61,10 @@
             </WrapPanel>
             <WrapPanel>
                 <WrapPanel Margin="0,5,0,0">
+                    <Label Margin="0,0,5,0" Content="Main document:" FontSize="13" Foreground="DimGray"/>
+                    <Label Content="{Binding MainDocument}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
                     <Label Margin="0,0,5,0" Content="Availiability:" FontSize="13" Foreground="DimGray"/>
                     <Label Content="{Binding Availiability}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
-                    <Label Margin="5,0,5,0" Content="Main document:" FontSize="13" Foreground="DimGray"/>
-                    <Label Content="{Binding MainDocumentId}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
                 </WrapPanel>
             </WrapPanel>
             <WrapPanel>

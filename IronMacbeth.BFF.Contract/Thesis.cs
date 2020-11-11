@@ -14,7 +14,7 @@ namespace IronMacbeth.BFF.Contract
 
         public string Author { get; set; }
 
-        public string ResponsibleAuthors { get; set; }
+        public string Responsible { get; set; }
 
         public string City { get; set; }
 

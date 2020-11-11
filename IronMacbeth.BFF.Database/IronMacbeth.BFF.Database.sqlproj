@@ -81,4 +81,7 @@
     <Build Include="Tables\StoreArticle.sql" />
     <Build Include="Tables\Newspaper.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="IronMacbeth.BFF.Database.refactorlog" />
+  </ItemGroup>
 </Project>
