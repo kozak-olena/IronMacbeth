@@ -5,7 +5,7 @@ using IronMacbeth.Client.VVM.EditBookVVM;
 using IronMacbeth.Client.VVM.EditMemoryVVM;
 using IronMacbeth.Client.VVM.NewspaperItemVVM;
 using IronMacbeth.Client.VVM.PeriodicalItemVVM;
-using IronMacbeth.Client.VVM.ThesisInfoVVM;
+ 
 using IronMacbeth.Client.VVM.ThesisItemVVM;
 using System;
 using System.Collections.Generic;

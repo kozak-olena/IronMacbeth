@@ -122,7 +122,6 @@
       <DependentUpon>BookInfoUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="VVM\BookInfoVVM\DocumentInfoViewModel.cs" />
-    <Compile Include="VVM\BookInfoVVM\InfoItemsDipatch.cs" />
     <Compile Include="VVM\BookVVM\BookItemUserControl.xaml.cs">
       <DependentUpon>BookItemUserControl.xaml</DependentUpon>
     </Compile>
@@ -176,12 +175,10 @@
     </Compile>
     <Compile Include="VVM\MotherboardVVM\MotherboardViewModel.cs" />
     <Compile Include="VVM\MotherboardVVM\MotherboardItemViewModel.cs" />
-    <Compile Include="VVM\NewsaperInfoVVM\NewspaperInfoViewModel.cs" />
     <Compile Include="VVM\NewspaperItemVVM\NewspaperItemUserControl.xaml.cs">
       <DependentUpon>NewspaperItemUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="VVM\NewspaperItemVVM\NewspaperItemViewModel.cs" />
-    <Compile Include="VVM\PeriodicalInfoVVM\PeriodicalInfoViewModel.cs" />
     <Compile Include="VVM\PeriodicalItemVVM\PeriodicalItemViewModel.cs" />
     <Compile Include="VVM\PeriodicalItemVVM\PeriodicalItemUserControl.xaml.cs">
       <DependentUpon>PeriodicalItemUserControl.xaml</DependentUpon>
@@ -243,7 +240,6 @@
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="VVM\MainVVM\MainViewModel.cs" />
-    <Compile Include="VVM\ThesisInfoVVM\ThesisInfoViewModel.cs" />
     <Compile Include="VVM\ThesisItemVVM\ThesisItemUserControl.xaml.cs">
       <DependentUpon>ThesisItemUserControl.xaml</DependentUpon>
     </Compile>

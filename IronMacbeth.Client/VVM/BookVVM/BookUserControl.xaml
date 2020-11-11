@@ -64,13 +64,13 @@
                     <articleVvm:ArticleItemUserControl/>
                 </DataTemplate>
                 <DataTemplate   DataType="{x:Type thesisVvm:ThesisItemViewModel}">
-                    <articleVvm:ArticleItemUserControl/>
+                    <thesisVvm:ThesisItemUserControl/>
                 </DataTemplate>
                 <DataTemplate  DataType ="{x:Type periodicalVvm:PeriodicalItemViewModel}">
                     <periodicalVvm:PeriodicalItemUserControl/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type newspaperVvm:NewspaperItemViewModel}">
-                    <articleVvm:ArticleItemUserControl/>
+                    <newspaperVvm:NewspaperItemUserControl/>
                 </DataTemplate>
                 <Style TargetType="GridViewColumnHeader">
                     <Setter Property="Visibility" Value="Collapsed"/>

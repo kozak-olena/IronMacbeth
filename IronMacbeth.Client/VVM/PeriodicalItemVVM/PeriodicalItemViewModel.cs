@@ -1,5 +1,5 @@
 ﻿using IronMacbeth.Client.VVM.BookVVM;
-using IronMacbeth.Client.VVM.PeriodicalInfoVVM;
+ 
 using System;
 using System.Windows.Media.Imaging;
 
