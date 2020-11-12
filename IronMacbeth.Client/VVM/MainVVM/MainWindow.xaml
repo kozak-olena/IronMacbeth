@@ -91,7 +91,7 @@
             <DockPanel DockPanel.Dock="Left">
                 <Border 
                     DockPanel.Dock="Left" 
-                    BorderBrush="#FFB1703C" 
+                    BorderBrush="#FF405DC0" 
                     BorderThickness="1"
                     CornerRadius="1"
                     Width="85">
@@ -122,7 +122,7 @@
                         </Border>
                         <ItemsControl ItemsSource="{Binding PageViewModels}" Grid.Row="1" >
                             <ItemsControl.ItemTemplate>
-                                <DataTemplate>
+                                <DataTemplate >
                                     <Button 
                                     Content="{Binding PageViewName}"
                                     Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
@@ -131,7 +131,7 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                        <Border Grid.Row="2" BorderThickness="0,1,0,0" BorderBrush="#FFB1703C">
+                        <Border Grid.Row="2" BorderThickness="0,1,0,0" BorderBrush="#FF395FB9">
                             <Button 
                             x:Name="CloseButton" 
                             Content="Close" 
@@ -174,7 +174,7 @@
             BorderThickness="3"
             CornerRadius="5"
             Background="White"
-            BorderBrush="#FFB1703C">
+            BorderBrush="#FF2D56A6">
             <StackPanel 
                 Orientation="Horizontal"
                 Background="White">

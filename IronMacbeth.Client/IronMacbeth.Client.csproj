@@ -184,6 +184,11 @@
       <DependentUpon>PeriodicalItemUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="VVM\ProcessorVVM\ProcessorItemViewModel.cs" />
+    <Compile Include="VVM\SearchPageViewModel\SearchFilledFields.cs" />
+    <Compile Include="VVM\SearchPageViewModel\SearchUserControl.xaml.cs">
+      <DependentUpon>SearchUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VVM\SearchPageViewModel\SearchViewModel.cs" />
     <Compile Include="VVM\StorePurchaseVVM\StorePurchaseUserControl.xaml.cs">
       <DependentUpon>StorePurchaseUserControl.xaml</DependentUpon>
     </Compile>
@@ -333,6 +338,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VVM\PeriodicalItemVVM\PeriodicalItemUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VVM\SearchPageViewModel\SearchUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

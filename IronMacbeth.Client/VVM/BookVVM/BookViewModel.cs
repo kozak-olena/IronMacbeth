@@ -18,7 +18,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
 {
     class BookViewModel : IPageViewModel, INotifyPropertyChanged
     {
-        public string PageViewName => "Book";
+        public string PageViewName => "Books";
 
         private List<IDocumentViewModel> _items;
 

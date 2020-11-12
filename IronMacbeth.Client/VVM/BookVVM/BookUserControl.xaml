@@ -11,7 +11,7 @@
               mc:Ignorable="d"
     d:DesignHeight="500" d:DesignWidth="700">
     <DockPanel VerticalAlignment="Stretch">
-        <Grid Background="White">
+        <Grid Background="#FFB8DBF1">
         </Grid>
         <WrapPanel 
             DockPanel.Dock="Bottom"

@@ -20,6 +20,7 @@ using IronMacbeth.Client.VVM.VideocardVVM;
 using Timer = System.Timers.Timer;
 using IronMacbeth.Client.VVM.BookVVM;
 using IService = IronMacbeth.BFF.Contract.IService;
+using IronMacbeth.Client.VVM.SearchPageViewModel;
 
 namespace IronMacbeth.Client.ViewModel
 {
@@ -214,11 +215,12 @@ namespace IronMacbeth.Client.ViewModel
             {
 
                 new HomeViewModel(),
-                new MemoryViewModel(),
-                new ProcessorViewModel(),
-                new VideocardViewModel(),
-                new MotherboardViewModel(),
-                new BookViewModel()
+               // new MemoryViewModel(),
+               // new ProcessorViewModel(),
+               // new VideocardViewModel(),
+               // new MotherboardViewModel(),
+                new BookViewModel(),
+                new SearchViewModel()
             };
 
             _previousPages = new Stack<IPageViewModel>();
