@@ -94,6 +94,7 @@
                     BorderBrush="#FF405DC0" 
                     BorderThickness="1"
                     CornerRadius="1"
+                    Visibility="{Binding MenuVisibility}"
                     Width="85">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -146,13 +147,6 @@
                 <ContentControl Content="{Binding CurrentPageViewModel}" />
             </DockPanel>
         </DockPanel>
-        <ContentControl 
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            Width="200"
-            Height="100"
-            Margin="10"
-            Content="{Binding NotificationPageViewModel}"/>
         <WrapPanel
             Visibility="{Binding MenuVisibility}"
             HorizontalAlignment="Right"

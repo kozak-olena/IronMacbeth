@@ -336,6 +336,12 @@ namespace IronMacbeth.Client.ViewModel
         {
             ChannelFactory<IService> channelFactory = new ChannelFactory<IService>("IronMacbeth.BFF.Endpoint");
 
+            // TODO: use proper credentials
+            channelFactory.Credentials.UserName.UserName = "asd";
+            channelFactory.Credentials.UserName.Password = "asdasdd123";
+
+            channelFactory.Credentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
+
             var proxy = channelFactory.CreateChannel();
 
             ServerAdapter = new ServerAdapter(proxy);
