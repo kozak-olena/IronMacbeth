@@ -5,6 +5,7 @@ namespace IronMacbeth.BFF
 {
     public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     {
+        public DbSet<Order> Orders { get; set; }
         public DbSet<Periodical> Periodicals { get; set; }
 
         public DbSet<Thesis> Thesises { get; set; }
@@ -43,6 +44,8 @@ namespace IronMacbeth.BFF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Order>()
+             .ToTable(nameof(Order));
 
             modelBuilder.Entity<Article>()
               .ToTable(nameof(Article));

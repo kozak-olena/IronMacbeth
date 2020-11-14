@@ -13,5 +13,7 @@ namespace IronMacbeth.Client
         public string Password { get; set; }
         
         public int AccessLevel { get; set; }
+
+        public bool IsAdmin => AccessLevel == 9;
     }
 }

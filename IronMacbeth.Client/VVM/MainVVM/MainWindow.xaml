@@ -97,12 +97,16 @@
                     Visibility="{Binding MenuVisibility}"
                     Width="85">
                     <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="59*"/>
+                            <ColumnDefinition Width="24*"/>
+                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
-                        <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="#FF4285C9">
+                        <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="#FF4285C9" Grid.ColumnSpan="2" Margin="0,0,0.2,0.4">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
@@ -121,7 +125,7 @@
                                 Command="{Binding ForwardCommand}"/>
                             </Grid>
                         </Border>
-                        <ItemsControl ItemsSource="{Binding PageViewModels}" Grid.Row="1" >
+                        <ItemsControl ItemsSource="{Binding PageViewModels}" Grid.ColumnSpan="2" Margin="0,30,0.2,0.4" Grid.RowSpan="2" >
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate >
                                     <Button 
@@ -132,7 +136,7 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                        <Border Grid.Row="2" BorderThickness="0,1,0,0" BorderBrush="#FF395FB9">
+                        <Border Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="#FF395FB9" Grid.ColumnSpan="2" Margin="0,383.6,0.2,-0.6" Grid.RowSpan="2">
                             <Button 
                             x:Name="CloseButton" 
                             Content="Close" 

@@ -49,6 +49,7 @@
     <Compile Include="Memory.cs" />
     <Compile Include="Motherboard.cs" />
     <Compile Include="Newspaper.cs" />
+    <Compile Include="Order.cs" />
     <Compile Include="Periodical.cs" />
     <Compile Include="Processor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
