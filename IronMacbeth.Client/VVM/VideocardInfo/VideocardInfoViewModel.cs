@@ -18,7 +18,7 @@ namespace IronMacbeth.Client.VVM.VideocardInfo
             Videocard = videocard;
 
             Stores =
-                MainViewModel.ServerAdapter.GetAllStoresSellingVideoCard(videocard.Id)
+                ServerAdapter.Instance.GetAllStoresSellingVideoCard(videocard.Id)
                     .Select(x => new StoreSellableItemViewModel(x.Store, videocard, x.StoreVideoCard))
                     .ToList();
 

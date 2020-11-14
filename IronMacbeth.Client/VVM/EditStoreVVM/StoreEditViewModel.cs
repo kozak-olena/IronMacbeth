@@ -114,19 +114,19 @@ namespace IronMacbeth.Client.VVM.EditStoreVVM
             {
                 if (sellable is Memory)
                 {
-                    MainViewModel.ServerAdapter.CreateStoreMemory(new StoreMemory { SellableId = sellable.Id, StoreId = Store.Id });
+                    ServerAdapter.Instance.CreateStoreMemory(new StoreMemory { SellableId = sellable.Id, StoreId = Store.Id });
                 }
                 else if (sellable is Motherboard)
                 {
-                    MainViewModel.ServerAdapter.CreateStoreMotherboard(new StoreMotherboard { SellableId = sellable.Id, StoreId = Store.Id });
+                    ServerAdapter.Instance.CreateStoreMotherboard(new StoreMotherboard { SellableId = sellable.Id, StoreId = Store.Id });
                 }
                 else if (sellable is Processor)
                 {
-                    MainViewModel.ServerAdapter.CreateStoreProcessor(new StoreProcessor { SellableId = sellable.Id, StoreId = Store.Id });
+                    ServerAdapter.Instance.CreateStoreProcessor(new StoreProcessor { SellableId = sellable.Id, StoreId = Store.Id });
                 }
                 else if (sellable is Videocard)
                 {
-                    MainViewModel.ServerAdapter.CreateStoreVideocard(new StoreVideocard { SellableId = sellable.Id, StoreId = Store.Id });
+                    ServerAdapter.Instance.CreateStoreVideocard(new StoreVideocard { SellableId = sellable.Id, StoreId = Store.Id });
                 }
                 else
                 {
@@ -148,19 +148,19 @@ namespace IronMacbeth.Client.VVM.EditStoreVVM
             {
                 if (sellableLink is StoreMemory)
                 {
-                    MainViewModel.ServerAdapter.DeleteStoreMemory(sellableLink.Id);
+                    ServerAdapter.Instance.DeleteStoreMemory(sellableLink.Id);
                 }
                 else if (sellableLink is StoreMotherboard)
                 {
-                    MainViewModel.ServerAdapter.DeleteStoreMotherboard(sellableLink.Id);
+                    ServerAdapter.Instance.DeleteStoreMotherboard(sellableLink.Id);
                 }
                 else if (sellableLink is StoreProcessor)
                 {
-                    MainViewModel.ServerAdapter.DeleteStoreProcessor(sellableLink.Id);
+                    ServerAdapter.Instance.DeleteStoreProcessor(sellableLink.Id);
                 }
                 else if( sellableLink is StoreVideocard)
                 {
-                    MainViewModel.ServerAdapter.DeleteStoreVideocard(sellableLink.Id);
+                    ServerAdapter.Instance.DeleteStoreVideocard(sellableLink.Id);
                 }
                 else
                 {
@@ -194,7 +194,7 @@ namespace IronMacbeth.Client.VVM.EditStoreVVM
                     Store.ImageName = null;
                 }
 
-                MainViewModel.ServerAdapter.UpdateStore(Store);
+                ServerAdapter.Instance.UpdateStore(Store);
 
                 UpdateModifiedLinks();
             }
@@ -207,7 +207,7 @@ namespace IronMacbeth.Client.VVM.EditStoreVVM
                     BitmapImage = BitmapImage,
                     OwnerId = _user.Login
                 };
-                MainViewModel.ServerAdapter.CreateStore(Store);
+                ServerAdapter.Instance.CreateStore(Store);
             }
 
             CollectionChanged = true;
@@ -248,7 +248,7 @@ namespace IronMacbeth.Client.VVM.EditStoreVVM
 
             SellableAdded.AddRange
             (
-                MainViewModel.ServerAdapter
+                ServerAdapter.Instance
                     .GetStoreSellableLinks(Store.Id)
                     .Select
                     (
@@ -258,19 +258,19 @@ namespace IronMacbeth.Client.VVM.EditStoreVVM
 
                             if (link is StoreMemory storeMemory)
                             {
-                                sellable = MainViewModel.ServerAdapter.GetMemoryFromStoreMemory(storeMemory);
+                                sellable = ServerAdapter.Instance.GetMemoryFromStoreMemory(storeMemory);
                             }
                             else if (link is StoreMotherboard storeMotherboard)
                             {
-                                sellable = MainViewModel.ServerAdapter.GetMotherboardFromStoreMotherboard(storeMotherboard);
+                                sellable = ServerAdapter.Instance.GetMotherboardFromStoreMotherboard(storeMotherboard);
                             }
                             else if (link is StoreProcessor storeProcessor)
                             {
-                                sellable = MainViewModel.ServerAdapter.GetProcessorFromStoreProcessor(storeProcessor);
+                                sellable = ServerAdapter.Instance.GetProcessorFromStoreProcessor(storeProcessor);
                             }
                             else if (link is StoreVideocard storeVideocard)
                             {
-                                sellable = MainViewModel.ServerAdapter.GetVideoCardFromStoreVideoCard(storeVideocard);
+                                sellable = ServerAdapter.Instance.GetVideoCardFromStoreVideoCard(storeVideocard);
                             }
                             else
                             {
@@ -289,24 +289,24 @@ namespace IronMacbeth.Client.VVM.EditStoreVVM
 
         public void UpdateCollectionToAdd()
         {
-            var storeSellables = MainViewModel.ServerAdapter.GetStoreSellables(Store.Id);
+            var storeSellables = ServerAdapter.Instance.GetStoreSellables(Store.Id);
 
             SellableToAdd = new List<ISellable>();
 
             SellableToAdd.AddRange(
-                MainViewModel.ServerAdapter.GetAllProcessors().Where(item => !storeSellables.Contains(item)).
+                ServerAdapter.Instance.GetAllProcessors().Where(item => !storeSellables.Contains(item)).
                                 Where(item => item.Name.ToLower().Contains(ItemsToAddSearch.ToLower())));
 
             SellableToAdd.AddRange(
-                MainViewModel.ServerAdapter.GetAllVideoCards().Where(item => !storeSellables.Contains(item)).
+                ServerAdapter.Instance.GetAllVideoCards().Where(item => !storeSellables.Contains(item)).
                                 Where(item => item.Name.ToLower().Contains(ItemsToAddSearch.ToLower())));
             
             SellableToAdd.AddRange(
-                MainViewModel.ServerAdapter.GetAllMotherboards().Where(item => !storeSellables.Contains(item)).
+                ServerAdapter.Instance.GetAllMotherboards().Where(item => !storeSellables.Contains(item)).
                                 Where(item => item.Name.ToLower().Contains(ItemsToAddSearch.ToLower())));
             
             SellableToAdd.AddRange(
-                MainViewModel.ServerAdapter.GetAllMemories().Where(item => !storeSellables.Contains(item)).
+                ServerAdapter.Instance.GetAllMemories().Where(item => !storeSellables.Contains(item)).
                                 Where(item => item.Name.ToLower().Contains(ItemsToAddSearch.ToLower())));
 
 
@@ -318,7 +318,7 @@ namespace IronMacbeth.Client.VVM.EditStoreVVM
         {
             SellableAdded = new List<ISellableLink>();
 
-            var storeSellableLinks = MainViewModel.ServerAdapter.GetStoreSellableLinks(Store.Id);
+            var storeSellableLinks = ServerAdapter.Instance.GetStoreSellableLinks(Store.Id);
 
             SellableAdded.AddRange(storeSellableLinks);
 
@@ -327,21 +327,21 @@ namespace IronMacbeth.Client.VVM.EditStoreVVM
 
         public void UpdateCollectionToAddNoFilter()
         {
-            var storeSellables = MainViewModel.ServerAdapter.GetStoreSellables(Store.Id);
+            var storeSellables = ServerAdapter.Instance.GetStoreSellables(Store.Id);
 
             SellableToAdd = new List<ISellable>();
 
             SellableToAdd.AddRange(
-                MainViewModel.ServerAdapter.GetAllProcessors().Where(item => !storeSellables.Contains(item)));
+                ServerAdapter.Instance.GetAllProcessors().Where(item => !storeSellables.Contains(item)));
             
             SellableToAdd.AddRange(
-                MainViewModel.ServerAdapter.GetAllVideoCards().Where(item => !storeSellables.Contains(item)));
+                ServerAdapter.Instance.GetAllVideoCards().Where(item => !storeSellables.Contains(item)));
             
             SellableToAdd.AddRange(
-                MainViewModel.ServerAdapter.GetAllMotherboards().Where(item => !storeSellables.Contains(item)));
+                ServerAdapter.Instance.GetAllMotherboards().Where(item => !storeSellables.Contains(item)));
             
             SellableToAdd.AddRange(
-                MainViewModel.ServerAdapter.GetAllMemories().Where(item => !storeSellables.Contains(item)));
+                ServerAdapter.Instance.GetAllMemories().Where(item => !storeSellables.Contains(item)));
 
             OnPropertyChanged(nameof(SellableToAdd));
         }
@@ -363,19 +363,19 @@ namespace IronMacbeth.Client.VVM.EditStoreVVM
 
                     if (link is StoreMemory storeMemory)
                     {
-                        MainViewModel.ServerAdapter.UpdateStoreMemory(storeMemory);
+                        ServerAdapter.Instance.UpdateStoreMemory(storeMemory);
                     }
                     else if (link is StoreMotherboard storeMotherboard)
                     {
-                        MainViewModel.ServerAdapter.UpdateStoreMotherboard(storeMotherboard);
+                        ServerAdapter.Instance.UpdateStoreMotherboard(storeMotherboard);
                     }
                     else if (link is StoreProcessor storeProcessor)
                     {
-                        MainViewModel.ServerAdapter.UpdateStoreProcessor(storeProcessor);
+                        ServerAdapter.Instance.UpdateStoreProcessor(storeProcessor);
                     }
                     else if (link is StoreVideocard storeVideocard)
                     {
-                        MainViewModel.ServerAdapter.UpdateStoreVideocard(storeVideocard);
+                        ServerAdapter.Instance.UpdateStoreVideocard(storeVideocard);
                     }
                     else
                     {

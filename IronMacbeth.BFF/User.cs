@@ -1,13 +1,11 @@
 ﻿using IronMacbeth.BFF.Contract;
 
-namespace IronMacbeth.Client
+namespace IronMacbeth.BFF
 {
-    public class User
+    class User
     {
         public string Login { get; set; }
-
+        public string PasswordHash { get; set; }
         public UserRole UserRole { get; set; }
-
-        public bool IsAdmin => UserRole == UserRole.Admin;
     }
 }

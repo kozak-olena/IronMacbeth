@@ -1,4 +1,13 @@
-﻿using System;
+﻿using IronMacbeth.BFF.Contract;
+using IronMacbeth.Client.Annotations;
+using IronMacbeth.Client.VVM;
+using IronMacbeth.Client.VVM.BookVVM;
+using IronMacbeth.Client.VVM.Home;
+using IronMacbeth.Client.VVM.LogInVVM;
+using IronMacbeth.Client.VVM.PurchaseVVM;
+using IronMacbeth.Client.VVM.SearchPageViewModel;
+using IronMacbeth.Client.VVM.StoreVVM;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -7,20 +16,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Input;
-using IronMacbeth.Client.Annotations;
-using IronMacbeth.Client.VVM.Home;
-using IronMacbeth.Client.VVM.LogInVVM;
-using IronMacbeth.Client.VVM.MemoryVVM;
-using IronMacbeth.Client.VVM.MotherboardVVM;
-using IronMacbeth.Client.VVM.ProcessorVVM;
-using IronMacbeth.Client.VVM.PurchaseVVM;
-using IronMacbeth.Client.VVM;
-using IronMacbeth.Client.VVM.StoreVVM;
-using IronMacbeth.Client.VVM.VideocardVVM;
 using Timer = System.Timers.Timer;
-using IronMacbeth.Client.VVM.BookVVM;
-using IService = IronMacbeth.BFF.Contract.IService;
-using IronMacbeth.Client.VVM.SearchPageViewModel;
 using System.Linq;
 using IronMacbeth.Client.VVM.MyOrdersVVM;
 
@@ -28,21 +24,9 @@ namespace IronMacbeth.Client.ViewModel
 {
     internal class MainViewModel : INotifyPropertyChanged
     {
-        public User User
-        {
-            get { return _user; }
-            set
-            {
-                _user = value;
+        public User User => UserService.LoggedInUser;
+        private bool UserLoggedIn => User != null;
 
-                _userLoggedIn = value != null;
-
-                OnPropertyChanged(nameof(MenuVisibility));
-                OnPropertyChanged(nameof(Login));
-            }
-        }
-
-        public static ServerAdapter ServerAdapter { get; private set; }
 
         public ICommand BackCommand { get; }
         public ICommand CloseCommand { get; }
@@ -57,11 +41,6 @@ namespace IronMacbeth.Client.ViewModel
         public ICommand HideNotificationCommand { get; }
         public ICommand ViewNotificationCommand { get; }
         public ICommand AnimationCompletedCommand { get; }
-
-
-        private User _user;
-
-        private bool _userLoggedIn;
 
         private IPageViewModel _currentPageViewModel;
 
@@ -80,7 +59,7 @@ namespace IronMacbeth.Client.ViewModel
 
         public string Login => User?.Login;
 
-        public Visibility MenuVisibility => _userLoggedIn ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility MenuVisibility => UserLoggedIn ? Visibility.Visible : Visibility.Collapsed;
         public Visibility AdminToolsVisibility
         {
             get
@@ -183,7 +162,7 @@ namespace IronMacbeth.Client.ViewModel
         {
             try
             {
-                return ServerAdapter.Ping();
+                return AnonymousServerAdapter.Instance.Ping();
             }
             catch
             {
@@ -198,7 +177,6 @@ namespace IronMacbeth.Client.ViewModel
             connectionCheckTimer.Interval = 10000;
             connectionCheckTimer.Elapsed += ConnectionCheck;
             connectionCheckTimer.Start();
-            _userLoggedIn = false;
 
             ConnectAsync();
 
@@ -235,7 +213,8 @@ namespace IronMacbeth.Client.ViewModel
 
         private void LogOutMethod(object parameter)
         {
-            User = null;
+            UserService.LogOut();
+            OnUserChanged();
         }
 
         public void ShowStoresMethod(object parameter)
@@ -258,35 +237,35 @@ namespace IronMacbeth.Client.ViewModel
             LogInViewModel logInViewModel = new LogInViewModel();
             new LogInWindow { DataContext = logInViewModel }.ShowDialog();
 
-            User = logInViewModel.User;
-
-            if (User != null && User.IsAdmin)
+            if (UserLoggedIn && User.IsAdmin)
             {
                 PageViewModels = PageViewModels.Append(new BookViewModel()).ToList();
                 OnPropertyChanged(nameof(PageViewModels));
             }
-            else if (User != null)
+            else if (UserLoggedIn)
             {
                 PageViewModels = PageViewModels.Append(new MyOrdersViewModel()).ToList();
                 OnPropertyChanged(nameof(PageViewModels));
             }
+
+            OnUserChanged();
         }
 
         public void RegisterMethod(object parameter)
         {
             LogInViewModel logInViewModel = new LogInViewModel(false);
             new LogInWindow { DataContext = logInViewModel }.ShowDialog();
-            User = logInViewModel.User;
+            OnUserChanged();
         }
 
         public bool CanExecuteAutorizationMethods(object parameter)
         {
-            return !_userLoggedIn;
+            return !UserLoggedIn;
         }
 
         public bool CanExecuteLogOutMethod(object parameter)
         {
-            return _userLoggedIn;
+            return UserLoggedIn;
         }
 
         public void ChangePageMethod(object parameter)
@@ -350,21 +329,15 @@ namespace IronMacbeth.Client.ViewModel
 
         private bool Connect()
         {
-            ChannelFactory<IService> channelFactory = new ChannelFactory<IService>("IronMacbeth.BFF.Endpoint");
+            var anonymousChannelFactory = new ChannelFactory<IAnonymousService>("IronMacbeth.BFF.AnonymousEndpoint");
 
-            // TODO: use proper credentials
-            channelFactory.Credentials.UserName.UserName = "asd";
-            channelFactory.Credentials.UserName.Password = "asdasdd123";
+            var anonymousServiceClient = anonymousChannelFactory.CreateChannel();
 
-            channelFactory.Credentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
-
-            var proxy = channelFactory.CreateChannel();
-
-            ServerAdapter = new ServerAdapter(proxy);
+            AnonymousServerAdapter.Initialize(anonymousServiceClient);
 
             try
             {
-                return ServerAdapter.Ping();
+                return AnonymousServerAdapter.Instance.Ping();
             }
             catch
             {
@@ -388,7 +361,7 @@ namespace IronMacbeth.Client.ViewModel
                 {
                     try
                     {
-                        return ServerAdapter.Ping();
+                        return AnonymousServerAdapter.Instance.Ping();
                     }
                     catch
                     {
@@ -410,6 +383,13 @@ namespace IronMacbeth.Client.ViewModel
         private void ReconnectMethod(object parameter)
         {
             ConnectAsync();
+        }
+
+        private void OnUserChanged()
+        {
+            OnPropertyChanged(nameof(AdminToolsVisibility));
+            OnPropertyChanged(nameof(MenuVisibility));
+            OnPropertyChanged(nameof(Login));
         }
     }
 }

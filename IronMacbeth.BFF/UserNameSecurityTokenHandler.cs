@@ -9,45 +9,47 @@ namespace IronMacbeth.BFF
 {
     public class UserNameSecurityTokenHandler : System.IdentityModel.Tokens.UserNameSecurityTokenHandler
     {
-        public static string Generated = "yyyy-MM-ddTHH:mm:ss.fffZ";
-        public static Claim Now
-        {
-            get
-            {
-                return new Claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/authenticationinstant", XmlConvert.ToString(DateTime.UtcNow, Generated), "http://www.w3.org/2001/XMLSchema#dateTime");
-            }
-        }
-
         protected virtual bool ValidateUserNameCredentialCore(string userName, string password)
         {
-            return true;
+            var result = UserLoginService.VerifyUserCredentials(userName, password);
+
+            return result;
         }
 
-        public override ReadOnlyCollection<ClaimsIdentity> ValidateToken(
-          SecurityToken token)
+        public override ReadOnlyCollection<ClaimsIdentity> ValidateToken(SecurityToken token)
         {
             if (token == null)
                 throw new ArgumentNullException(nameof(token));
-            if (this.Configuration == null)
+
+            if (Configuration == null)
                 throw new InvalidOperationException("No Configuration set");
+
             UserNameSecurityToken nameSecurityToken = token as UserNameSecurityToken;
             if (nameSecurityToken == null)
                 throw new ArgumentException("SecurityToken is not a UserNameSecurityToken");
-            if (!this.ValidateUserNameCredentialCore(nameSecurityToken.UserName, nameSecurityToken.Password))
+
+            if (!ValidateUserNameCredentialCore(nameSecurityToken.UserName, nameSecurityToken.Password))
                 throw new SecurityTokenValidationException(nameSecurityToken.UserName);
-            List<Claim> claimList = new List<Claim>()
-              {
-                new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name", nameSecurityToken.UserName),
-                new Claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/authenticationmethod", "http://schemas.microsoft.com/ws/2008/06/identity/authenticationmethod/password"),
-                Now
-              };
-            ClaimsIdentity claimsIdentity = new ClaimsIdentity((IEnumerable<Claim>)claimList);
-            if (this.Configuration.SaveBootstrapContext)
-                claimsIdentity.BootstrapContext = !this.RetainPassword ? (object)new BootstrapContext((SecurityToken)new UserNameSecurityToken(nameSecurityToken.UserName, (string)null), (SecurityTokenHandler)this) : (object)new BootstrapContext((SecurityToken)nameSecurityToken, (SecurityTokenHandler)this);
-            return new List<ClaimsIdentity>()
-      {
-        new ClaimsIdentity((IEnumerable<Claim>) claimList, "Password")
-      }.AsReadOnly();
+
+            List<Claim> claimList = 
+                new List<Claim>()
+                {
+                    new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name", nameSecurityToken.UserName),
+                    new Claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/authenticationmethod", "http://schemas.microsoft.com/ws/2008/06/identity/authenticationmethod/password"),
+                    new Claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/authenticationinstant", XmlConvert.ToString(DateTime.UtcNow, "yyyy-MM-ddTHH:mm:ss.fffZ"), "http://www.w3.org/2001/XMLSchema#dateTime")
+                };
+
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(claimList);
+
+            if (Configuration.SaveBootstrapContext)
+            {
+                claimsIdentity.BootstrapContext = 
+                    RetainPassword 
+                        ? new BootstrapContext(nameSecurityToken, this)
+                        : new BootstrapContext(new UserNameSecurityToken(nameSecurityToken.UserName, null), this);
+            }
+
+            return new List<ClaimsIdentity>() { new ClaimsIdentity(claimList, "Password") }.AsReadOnly();
         }
 
         public override bool CanValidateToken

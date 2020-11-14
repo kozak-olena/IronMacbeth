@@ -88,7 +88,7 @@ namespace IronMacbeth.Client.VVM.MemoryVVM
         {
             if (SelectedItem is Memory memory)
             {
-                MainViewModel.ServerAdapter.DeleteMemory(memory.Id);
+                ServerAdapter.Instance.DeleteMemory(memory.Id);
                 Update();
                 UpdateCollection(false);
             }
@@ -97,7 +97,7 @@ namespace IronMacbeth.Client.VVM.MemoryVVM
         public void UpdateCollection(bool innerCall)
         {
             _items = 
-                MainViewModel.ServerAdapter.GetAllMemories()
+                ServerAdapter.Instance.GetAllMemories()
                     .OrderByDescending(item => item.NumberOfOfferings)
                     .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
                     .Select(x => new MemoryItemViewModel(x))
@@ -112,7 +112,7 @@ namespace IronMacbeth.Client.VVM.MemoryVVM
         public void UpdateCollectionNoFilter()
         {
             _items =
-                MainViewModel.ServerAdapter.GetAllMemories()
+                ServerAdapter.Instance.GetAllMemories()
                     .OrderByDescending(item => item.NumberOfOfferings)
                     .Select(x => new MemoryItemViewModel(x))
                     .ToList();

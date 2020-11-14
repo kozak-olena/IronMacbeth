@@ -19,7 +19,7 @@ namespace IronMacbeth.Client.VVM.MotherboardInfo
             Motherboard = motherboard;
 
             Stores =
-                MainViewModel.ServerAdapter.GetAllStoresSellingMotherboard(motherboard.Id)
+                ServerAdapter.Instance.GetAllStoresSellingMotherboard(motherboard.Id)
                     .Select(x => new StoreSellableItemViewModel(x.Store, motherboard, x.StoreMotherboard))
                     .ToList();
         }

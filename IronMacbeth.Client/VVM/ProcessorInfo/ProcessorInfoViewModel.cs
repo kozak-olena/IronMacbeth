@@ -19,7 +19,7 @@ namespace IronMacbeth.Client.VVM.ProcessorInfo
             Processor = processor;
 
             Stores = 
-                MainViewModel.ServerAdapter.GetAllStoresSellingProcessor(processor.Id)
+                ServerAdapter.Instance.GetAllStoresSellingProcessor(processor.Id)
                     .Select(x => new StoreSellableItemViewModel(x.Store, processor, x.StoreProcessor))
                     .ToList();
         }

@@ -121,7 +121,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
         public void ShowCollection()
         {
             _items = new List<IDocumentViewModel>();
-            DocumentsSearchResults documentsSearchResults = MainViewModel.ServerAdapter.SearchDocuments(_searchFilledFields);
+            DocumentsSearchResults documentsSearchResults = ServerAdapter.Instance.SearchDocuments(_searchFilledFields);
 
             _items.AddRange(documentsSearchResults.Books.Select(x => new BookItemViewModel(x)));
             _items.AddRange(documentsSearchResults.Articles.Select(x => new ArticleItemViewModel(x)));

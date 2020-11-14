@@ -22,7 +22,7 @@ namespace IronMacbeth.Client.VVM.ArticleInfoVVM
             Article = article;
 
             Stores =
-                MainViewModel.ServerAdapter.GetAllStoresSellingMemory(article.Id)
+                ServerAdapter.Instance.GetAllStoresSellingMemory(article.Id)
                     .Select(x => new StoreSellableItemViewModel(x.Store, article, x.StoreMemory))          //
                     .ToList();
         }

@@ -12,19 +12,37 @@ using Contract = IronMacbeth.BFF.Contract;
 
 namespace IronMacbeth.Client
 {
-    public class ServerAdapter
+    class ServerAdapter
     {
-        public static IService Proxy;
+        private static ServerAdapter _instance;
+        public static ServerAdapter Instance => _instance ?? throw new Exception($"{nameof(ServerAdapter)} was not initialized. Use '{nameof(Initialize)}' method.");
 
-        public ServerAdapter(IService proxy)
+        public static void Initialize(IService proxy)
         {
-            Proxy = proxy;
+            if (_instance != null)
+            {
+                throw new Exception($"{nameof(ServerAdapter.Instance)} was already initialized.");
+            }
+
+            _instance = new ServerAdapter(proxy);
+        }
+
+        public static void ClearInstance()
+        {
+            _instance = null;
+        }
+
+        private IService _proxy;
+
+        private ServerAdapter(IService proxy)
+        {
+            _proxy = proxy;
         }
 
         public DocumentsSearchResults SearchDocuments(Internal.SearchFilledFields searchFilledFields)
         {
             var contractSearch = MapInternalToContractSearchCriteria(searchFilledFields);
-            var documents = Proxy.SearchDocuments(contractSearch);
+            var documents = _proxy.SearchDocuments(contractSearch);
             var internalBooks = MapContractToInternalSearchCriteria(documents);
             return internalBooks;
         }
@@ -89,12 +107,12 @@ namespace IronMacbeth.Client
 
             var contractPeriodical = MapInternalToContractPeriodical(periodical);
 
-            Proxy.CreatePeriodical(contractPeriodical);
+            _proxy.CreatePeriodical(contractPeriodical);
         }
 
         public List<Internal.Periodical> GetAllPeriodicals()
         {
-            var periodicals = Proxy.GetAllPeriodicals();
+            var periodicals = _proxy.GetAllPeriodicals();
 
             var internalPeriodicals = periodicals.Select(MapContractToInternalPeriodical).ToList();
 
@@ -115,12 +133,12 @@ namespace IronMacbeth.Client
 
             var contractPeriodical = MapInternalToContractPeriodical(periodical);
 
-            Proxy.UpdatePeriodical(contractPeriodical);
+            _proxy.UpdatePeriodical(contractPeriodical);
         }
 
         public void DeletePeriodical(int id)
         {
-            Proxy.DeletePeriodical(id);
+            _proxy.DeletePeriodical(id);
         }
 
         private Contract.Periodical MapInternalToContractPeriodical(Internal.Periodical periodical)
@@ -187,12 +205,12 @@ namespace IronMacbeth.Client
 
             var contractNewspaper = MapInternalToContractNewspaper(newspaper);
 
-            Proxy.CreateNewspaper(contractNewspaper);
+            _proxy.CreateNewspaper(contractNewspaper);
         }
 
         public List<Internal.Newspaper> GetAllNewspapers()
         {
-            var newspapers = Proxy.GetAllNewspapers();
+            var newspapers = _proxy.GetAllNewspapers();
 
             var internalNewspapers = newspapers.Select(MapContractToInternalNewspaper).ToList();
 
@@ -211,12 +229,12 @@ namespace IronMacbeth.Client
 
             var contractNewspaper = MapInternalToContractNewspaper(newspaper);
 
-            Proxy.UpdateNewspaper(contractNewspaper);
+            _proxy.UpdateNewspaper(contractNewspaper);
         }
 
         public void DeleteNewspaper(int id)
         {
-            Proxy.DeleteNewspaper(id);
+            _proxy.DeleteNewspaper(id);
         }
 
         private Contract.Newspaper MapInternalToContractNewspaper(Internal.Newspaper newspaper)
@@ -276,12 +294,12 @@ namespace IronMacbeth.Client
 
             var contractThesis = MapInternalToContractThesis(thesis);
 
-            Proxy.CreateThesis(contractThesis);
+            _proxy.CreateThesis(contractThesis);
         }
 
         public List<Internal.Thesis> GetAllThesises()
         {
-            var thesises = Proxy.GetAllThesises();
+            var thesises = _proxy.GetAllThesises();
 
             var internalThesises = thesises.Select(MapContractToInternalPeriodical).ToList();
 
@@ -302,12 +320,12 @@ namespace IronMacbeth.Client
 
             var contractThesis = MapInternalToContractThesis(thesis);
 
-            Proxy.UpdateThesis(contractThesis);
+            _proxy.UpdateThesis(contractThesis);
         }
 
         public void DeleteThesis(int id)
         {
-            Proxy.DeleteThesis(id);
+            _proxy.DeleteThesis(id);
         }
 
         private Contract.Thesis MapInternalToContractThesis(Internal.Thesis thesis)
@@ -372,12 +390,12 @@ namespace IronMacbeth.Client
 
             var contractArticle = MapInternalToContractArticle(article);
 
-            Proxy.CreateArticle(contractArticle);
+            _proxy.CreateArticle(contractArticle);
         }
 
         public List<Internal.Article> GetAllArticles()
         {
-            var articles = Proxy.GetAllArticles();
+            var articles = _proxy.GetAllArticles();
 
             var internalArticles = articles.Select(MapContractToInternalArticle).ToList();
 
@@ -408,12 +426,12 @@ namespace IronMacbeth.Client
 
             var contractArticle = MapInternalToContractArticle(article);
 
-            Proxy.UpdateArticle(contractArticle);
+            _proxy.UpdateArticle(contractArticle);
         }
 
         public void DeleteArticle(int id)
         {
-            Proxy.DeleteArticle(id);
+            _proxy.DeleteArticle(id);
         }
 
         private Contract.Article MapInternalToContractArticle(Internal.Article article)
@@ -467,7 +485,7 @@ namespace IronMacbeth.Client
         public void CreateOrder(Internal.Order orderInfo)
         {
             var contractOrder = MapInternalToContractOrder(orderInfo);
-            Proxy.CreateOrder(contractOrder);
+            _proxy.CreateOrder(contractOrder);
         }
         private Contract.Order MapInternalToContractOrder(Internal.Order orderInfo)
         {
@@ -498,12 +516,12 @@ namespace IronMacbeth.Client
 
             var contractBook = MapInternalToContractBook(book);
 
-            Proxy.CreateBook(contractBook);
+            _proxy.CreateBook(contractBook);
         }
 
         public List<Internal.Book> GetAllBooks()
         {
-            var books = Proxy.GetAllBooks();
+            var books = _proxy.GetAllBooks();
 
             var internalBooks = books.Select(MapContractToInternalBook).ToList();
 
@@ -529,12 +547,12 @@ namespace IronMacbeth.Client
 
             var contractBook = MapInternalToContractBook(book);
 
-            Proxy.UpdateBook(contractBook);
+            _proxy.UpdateBook(contractBook);
         }
 
         public void DeleteBook(int id)
         {
-            Proxy.DeleteBook(id);
+            _proxy.DeleteBook(id);
         }
 
         private Contract.Book MapInternalToContractBook(Internal.Book book)
@@ -592,24 +610,24 @@ namespace IronMacbeth.Client
 
         public void CreateStoreBook(Internal.StoreBook storeBooks)
         {
-            Proxy.CreateStoreBook(MapInternalToContractStoreBook(storeBooks));
+            _proxy.CreateStoreBook(MapInternalToContractStoreBook(storeBooks));
         }
 
         public List<Internal.StoreBook> GetAllStoreBooks()
         {
-            var result = Proxy.GetAllStoreBooks();
+            var result = _proxy.GetAllStoreBooks();
 
             return result.Select(MapContractToInternalStoreBook).ToList();
         }
 
         public void UpdateStoreBook(Internal.StoreBook storeBooks)
         {
-            Proxy.UpdateStoreBooks(MapInternalToContractStoreBook(storeBooks));
+            _proxy.UpdateStoreBooks(MapInternalToContractStoreBook(storeBooks));
         }
 
         public void DeleteStoreBook(int id)
         {
-            Proxy.DeleteStoreBook(id);
+            _proxy.DeleteStoreBook(id);
         }
 
         public Internal.Book GetBookFromStoreBook(Internal.StoreBook storeBooks)
@@ -650,12 +668,12 @@ namespace IronMacbeth.Client
             CreateIDisplayable(memory);
             CreateIDescribable(memory);
 
-            Proxy.CreateMemory(MapInternalToContractMemory(memory));
+            _proxy.CreateMemory(MapInternalToContractMemory(memory));
         }
 
         public List<Internal.Memory> GetAllMemories()
         {
-            var memories = Proxy.GetAllMemories().Select(MapContractToInternalMemory).ToList();
+            var memories = _proxy.GetAllMemories().Select(MapContractToInternalMemory).ToList();
 
             foreach (var memory in memories)
             {
@@ -671,12 +689,12 @@ namespace IronMacbeth.Client
             UpdateIDisplayable(memory);
             UpdateIDescribable(memory);
 
-            Proxy.UpdateMemory(MapInternalToContractMemory(memory));
+            _proxy.UpdateMemory(MapInternalToContractMemory(memory));
         }
 
         public void DeleteMemory(int id)
         {
-            Proxy.DeleteMemory(id);
+            _proxy.DeleteMemory(id);
         }
 
         public List<(Internal.Store Store, Internal.StoreMemory StoreMemory)> GetAllStoresSellingMemory(int id)
@@ -744,12 +762,12 @@ namespace IronMacbeth.Client
             CreateIDisplayable(motherboard);
             CreateIDescribable(motherboard);
 
-            Proxy.CreateMotherboard(MapInternalToContractMotherboard(motherboard));
+            _proxy.CreateMotherboard(MapInternalToContractMotherboard(motherboard));
         }
 
         public List<Internal.Motherboard> GetAllMotherboards()
         {
-            var motherboards = Proxy.GetAllMotherboards().Select(MapContractToInternalMotherboard).ToList();
+            var motherboards = _proxy.GetAllMotherboards().Select(MapContractToInternalMotherboard).ToList();
 
             foreach (var motherboard in motherboards)
             {
@@ -765,12 +783,12 @@ namespace IronMacbeth.Client
             UpdateIDisplayable(motherboard);
             UpdateIDescribable(motherboard);
 
-            Proxy.UpdateMotherboard(MapInternalToContractMotherboard(motherboard));
+            _proxy.UpdateMotherboard(MapInternalToContractMotherboard(motherboard));
         }
 
         public void DeleteMotherboard(int id)
         {
-            Proxy.DeleteMotherboard(id);
+            _proxy.DeleteMotherboard(id);
         }
 
         public List<(Internal.Store Store, Internal.StoreMotherboard StoreMotherboard)> GetAllStoresSellingMotherboard(int id)
@@ -837,12 +855,12 @@ namespace IronMacbeth.Client
             CreateIDisplayable(processor);
             CreateIDescribable(processor);
 
-            Proxy.CreateProcessor(MapInternalToContractProcessor(processor));
+            _proxy.CreateProcessor(MapInternalToContractProcessor(processor));
         }
 
         public List<Internal.Processor> GetAllProcessors()
         {
-            var processors = Proxy.GetAllProcessors().Select(MapContractToInternalProcessor).ToList();
+            var processors = _proxy.GetAllProcessors().Select(MapContractToInternalProcessor).ToList();
 
             foreach (var processor in processors)
             {
@@ -858,12 +876,12 @@ namespace IronMacbeth.Client
             UpdateIDisplayable(processor);
             UpdateIDescribable(processor);
 
-            Proxy.UpdateProcessor(MapInternalToContractProcessor(processor));
+            _proxy.UpdateProcessor(MapInternalToContractProcessor(processor));
         }
 
         public void DeleteProcessor(int id)
         {
-            Proxy.DeleteProcessor(id);
+            _proxy.DeleteProcessor(id);
         }
 
         public List<(Internal.Store Store, Internal.StoreProcessor StoreProcessor)> GetAllStoresSellingProcessor(int id)
@@ -933,24 +951,24 @@ namespace IronMacbeth.Client
 
         public void CreatePurchase(Internal.Purchase purchase)
         {
-            Proxy.CreatePurchase(MapInternalToContractPurchase(purchase));
+            _proxy.CreatePurchase(MapInternalToContractPurchase(purchase));
         }
 
         public List<Internal.Purchase> GetAllPurchases()
         {
-            var purchases = Proxy.GetAllPurchases().Select(MapContractToInternalPurchase).ToList();
+            var purchases = _proxy.GetAllPurchases().Select(MapContractToInternalPurchase).ToList();
 
             return purchases;
         }
 
         public void UpdatePurchase(Internal.Purchase purchase)
         {
-            Proxy.UpdatePurchase(MapInternalToContractPurchase(purchase));
+            _proxy.UpdatePurchase(MapInternalToContractPurchase(purchase));
         }
 
         public void DeletePurchase(int id)
         {
-            Proxy.DeletePurchase(id);
+            _proxy.DeletePurchase(id);
         }
 
         public Internal.Store GetStoreFromPurchase(Internal.Purchase purchase)
@@ -1023,12 +1041,12 @@ namespace IronMacbeth.Client
         {
             CreateIDisplayable(store);
 
-            Proxy.CreateStore(MapInternalToContractStore(store));
+            _proxy.CreateStore(MapInternalToContractStore(store));
         }
 
         public List<Internal.Store> GetAllStores()
         {
-            var stores = Proxy.GetAllStores().Select(MapContractToInternalStore).ToList();
+            var stores = _proxy.GetAllStores().Select(MapContractToInternalStore).ToList();
 
             foreach (var store in stores)
             {
@@ -1042,12 +1060,12 @@ namespace IronMacbeth.Client
         {
             UpdateIDisplayable(store);
 
-            Proxy.UpdateStore(MapInternalToContractStore(store));
+            _proxy.UpdateStore(MapInternalToContractStore(store));
         }
 
         public void DeleteStore(int id)
         {
-            Proxy.DeleteStore(id);
+            _proxy.DeleteStore(id);
         }
 
         public List<ISellableLink> GetStoreSellableLinks(int storeId)
@@ -1115,24 +1133,24 @@ namespace IronMacbeth.Client
 
         public void CreateStoreMemory(Internal.StoreMemory storeMemory)
         {
-            Proxy.CreateStoreMemory(MapInternalToContractStoreMemory(storeMemory));
+            _proxy.CreateStoreMemory(MapInternalToContractStoreMemory(storeMemory));
         }
 
         public List<Internal.StoreMemory> GetAllStoreMemories()
         {
-            var result = Proxy.GetAllStoreMemories().Select(MapContractToInternalStoreMemory).ToList();
+            var result = _proxy.GetAllStoreMemories().Select(MapContractToInternalStoreMemory).ToList();
 
             return result;
         }
 
         public void UpdateStoreMemory(Internal.StoreMemory storeMemory)
         {
-            Proxy.UpdateStoreMemory(MapInternalToContractStoreMemory(storeMemory));
+            _proxy.UpdateStoreMemory(MapInternalToContractStoreMemory(storeMemory));
         }
 
         public void DeleteStoreMemory(int id)
         {
-            Proxy.DeleteStoreMemory(id);
+            _proxy.DeleteStoreMemory(id);
         }
 
         public Internal.Memory GetMemoryFromStoreMemory(Internal.StoreMemory storeMemory)
@@ -1170,24 +1188,24 @@ namespace IronMacbeth.Client
 
         public void CreateStoreMotherboard(Internal.StoreMotherboard storeMotherboard)
         {
-            Proxy.CreateStoreMotherboard(MapInternalToContractStoreMotherboard(storeMotherboard));
+            _proxy.CreateStoreMotherboard(MapInternalToContractStoreMotherboard(storeMotherboard));
         }
 
         public List<Internal.StoreMotherboard> GetAllStoreMotherboards()
         {
-            var result = Proxy.GetAllStoreMotherboards().Select(MapContractToInternalStoreMotherboard).ToList();
+            var result = _proxy.GetAllStoreMotherboards().Select(MapContractToInternalStoreMotherboard).ToList();
 
             return result;
         }
 
         public void UpdateStoreMotherboard(Internal.StoreMotherboard storeMotherboard)
         {
-            Proxy.UpdateStoreMotherboard(MapInternalToContractStoreMotherboard(storeMotherboard));
+            _proxy.UpdateStoreMotherboard(MapInternalToContractStoreMotherboard(storeMotherboard));
         }
 
         public void DeleteStoreMotherboard(int id)
         {
-            Proxy.DeleteStoreMotherboard(id);
+            _proxy.DeleteStoreMotherboard(id);
         }
 
         public Internal.Motherboard GetMotherboardFromStoreMotherboard(Internal.StoreMotherboard storeMotherboard)
@@ -1225,24 +1243,24 @@ namespace IronMacbeth.Client
 
         public void CreateStoreProcessor(Internal.StoreProcessor storeProcessor)
         {
-            Proxy.CreateStoreProcessor(MapInternalToContractStoreProcessor(storeProcessor));
+            _proxy.CreateStoreProcessor(MapInternalToContractStoreProcessor(storeProcessor));
         }
 
         public List<Internal.StoreProcessor> GetAllStoreProcessors()
         {
-            var result = Proxy.GetAllStoreProcessors().Select(MapContractToInternalStoreProcessor).ToList();
+            var result = _proxy.GetAllStoreProcessors().Select(MapContractToInternalStoreProcessor).ToList();
 
             return result;
         }
 
         public void UpdateStoreProcessor(Internal.StoreProcessor storeProcessor)
         {
-            Proxy.UpdateStoreProcessor(MapInternalToContractStoreProcessor(storeProcessor));
+            _proxy.UpdateStoreProcessor(MapInternalToContractStoreProcessor(storeProcessor));
         }
 
         public void DeleteStoreProcessor(int id)
         {
-            Proxy.DeleteStoreProcessor(id);
+            _proxy.DeleteStoreProcessor(id);
         }
 
         public Internal.Processor GetProcessorFromStoreProcessor(Internal.StoreProcessor storeProcessor)
@@ -1280,24 +1298,24 @@ namespace IronMacbeth.Client
 
         public void CreateStoreVideocard(Internal.StoreVideocard storeVideocard)
         {
-            Proxy.CreateStoreVideocard(MapInternalToContractStoreVideocard(storeVideocard));
+            _proxy.CreateStoreVideocard(MapInternalToContractStoreVideocard(storeVideocard));
         }
 
         public List<Internal.StoreVideocard> GetAllStoreVideoCards()
         {
-            var result = Proxy.GetAllStoreVideoCards().Select(MapContractToInternalStoreVideocard).ToList();
+            var result = _proxy.GetAllStoreVideoCards().Select(MapContractToInternalStoreVideocard).ToList();
 
             return result;
         }
 
         public void UpdateStoreVideocard(Internal.StoreVideocard storeVideocard)
         {
-            Proxy.UpdateStoreVideocard(MapInternalToContractStoreVideocard(storeVideocard));
+            _proxy.UpdateStoreVideocard(MapInternalToContractStoreVideocard(storeVideocard));
         }
 
         public void DeleteStoreVideocard(int id)
         {
-            Proxy.DeleteStoreVideocard(id);
+            _proxy.DeleteStoreVideocard(id);
         }
 
         public Internal.Videocard GetVideoCardFromStoreVideoCard(Internal.StoreVideocard storeVideocard)
@@ -1333,14 +1351,9 @@ namespace IronMacbeth.Client
 
         #region User
 
-        public void Register(Internal.User user)
+        public Internal.User LogIn()
         {
-            Proxy.Register(MapInternalToContractUser(user));
-        }
-
-        public Internal.User LogIn(string login, string password)
-        {
-            var result = Proxy.LogIn(login, password);
+            var result = _proxy.GetLoggedInUser();
 
             if (result != null)
             {
@@ -1355,23 +1368,12 @@ namespace IronMacbeth.Client
             return GetAllStores().Where(item => item.OwnerId == user.Login).ToList();
         }
 
-        private Contract.User MapInternalToContractUser(Internal.User user)
-        {
-            return new Contract.User
-            {
-                Login = user.Login,
-                Password = user.Password,
-                AccessLevel = user.AccessLevel
-            };
-        }
-
         private Internal.User MapContractToInternalUser(Contract.User user)
         {
             return new Internal.User
             {
                 Login = user.Login,
-                Password = user.Password,
-                AccessLevel = user.AccessLevel
+                UserRole = user.UserRole
             };
         }
 
@@ -1384,12 +1386,12 @@ namespace IronMacbeth.Client
             CreateIDisplayable(videocard);
             CreateIDescribable(videocard);
 
-            Proxy.CreateVideoCard(MapInternalToContractVideocard(videocard));
+            _proxy.CreateVideoCard(MapInternalToContractVideocard(videocard));
         }
 
         public List<Internal.Videocard> GetAllVideoCards()
         {
-            var videoCards = Proxy.GetAllVideoCards().Select(MapContractToInternalVideocard).ToList();
+            var videoCards = _proxy.GetAllVideoCards().Select(MapContractToInternalVideocard).ToList();
 
             foreach (var videoCart in videoCards)
             {
@@ -1405,12 +1407,12 @@ namespace IronMacbeth.Client
             UpdateIDisplayable(videocard);
             UpdateIDescribable(videocard);
 
-            Proxy.UpdateVideoCard(MapInternalToContractVideocard(videocard));
+            _proxy.UpdateVideoCard(MapInternalToContractVideocard(videocard));
         }
 
         public void DeleteVideoCard(int id)
         {
-            Proxy.DeleteVideoCard(id);
+            _proxy.DeleteVideoCard(id);
         }
 
         public List<(Internal.Store Store, Internal.StoreVideocard StoreVideoCard)> GetAllStoresSellingVideoCard(int id)
@@ -1483,7 +1485,7 @@ namespace IronMacbeth.Client
         {
             using (var memoryStream = new MemoryStream(file))
             {
-                fileName = Proxy.AddFile(memoryStream);
+                fileName = _proxy.AddFile(memoryStream);
             }
         }
 
@@ -1558,7 +1560,7 @@ namespace IronMacbeth.Client
             byte[] bytes;
 
             using (MemoryStream stream = new MemoryStream())
-            using (Stream serverStream = Proxy.GetFile(fileName))
+            using (Stream serverStream = _proxy.GetFile(fileName))
             {
                 serverStream.CopyTo(stream);
                 bytes = stream.ToArray();
@@ -1566,12 +1568,12 @@ namespace IronMacbeth.Client
             return Deserialize(bytes) as string;
         }
 
-        public static BitmapImage GetImage(string fileName)
+        public BitmapImage GetImage(string fileName)
         {
             byte[] bytes;
 
             using (MemoryStream stream = new MemoryStream())
-            using (Stream serverStream = Proxy.GetFile(fileName))
+            using (Stream serverStream = _proxy.GetFile(fileName))
             {
                 serverStream.CopyTo(stream);
                 bytes = stream.ToArray();
@@ -1625,11 +1627,6 @@ namespace IronMacbeth.Client
             }
 
             return bitmapImage;
-        }
-
-        public bool Ping()
-        {
-            return Proxy.Ping();
         }
     }
 }

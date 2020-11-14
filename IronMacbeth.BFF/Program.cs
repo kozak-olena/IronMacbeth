@@ -8,7 +8,8 @@ namespace IronMacbeth.BFF
     {
         private static void Main(string[] args)
         {
-            using (var host = new ServiceHost(typeof (Service)))          
+            using (var host = new ServiceHost(typeof (Service)))
+            using (var anonymousServiceHost = new ServiceHost(typeof (AnonymousService)))
             {
                 host.Credentials.UseIdentityConfiguration = true;
 
@@ -22,15 +23,17 @@ namespace IronMacbeth.BFF
 
                 try
                 {
+                    anonymousServiceHost.Open();
                     host.Open();
                 }
                 catch (Exception exception)
                 {
                     Console.WriteLine("Unable to start server");
                     Console.WriteLine("Error: ");
-                    Console.WriteLine(exception.Message);
+                    Console.WriteLine(exception.ToString());
                     Console.WriteLine("Press any key to continue");
                     Console.ReadKey();
+                    anonymousServiceHost.Abort();
                     host.Abort();
                     return;
                 }
