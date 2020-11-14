@@ -79,9 +79,13 @@ namespace IronMacbeth.Client
         {
             CreateIDisplayable(periodical);
             CreateIDescribable(periodical);
-            string fileName;
-            AddFile(periodical.ElectronicVersion, out fileName);
-            periodical.ElectronicVersionFileName = fileName;
+
+            if (periodical.ElectronicVersion != null)
+            {
+                string fileName;
+                AddFile(periodical.ElectronicVersion, out fileName);
+                periodical.ElectronicVersionFileName = fileName;
+            }
 
             var contractPeriodical = MapInternalToContractPeriodical(periodical);
 
