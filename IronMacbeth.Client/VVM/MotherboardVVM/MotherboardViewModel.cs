@@ -90,7 +90,7 @@ namespace IronMacbeth.Client.VVM.MotherboardVVM
         {
             if (SelectedItem is Motherboard motherboard)
             {
-                MainViewModel.ServerAdapter.DeleteMotherboard(motherboard.Id);
+                ServerAdapter.Instance.DeleteMotherboard(motherboard.Id);
                 Update();
                 UpdateCollection(false);
             }
@@ -99,7 +99,7 @@ namespace IronMacbeth.Client.VVM.MotherboardVVM
         public void UpdateCollection(bool innerCall)
         {
             _items = 
-                MainViewModel.ServerAdapter.GetAllMotherboards()
+                ServerAdapter.Instance.GetAllMotherboards()
                     .OrderByDescending(item => item.NumberOfOfferings)
                     .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
                     .Select(x => new MotherboardItemViewModel(x))
@@ -114,7 +114,7 @@ namespace IronMacbeth.Client.VVM.MotherboardVVM
         public void UpdateCollectionNoFilter()
         {
             _items =
-                MainViewModel.ServerAdapter.GetAllMotherboards()
+                ServerAdapter.Instance.GetAllMotherboards()
                     .OrderByDescending(item => item.NumberOfOfferings)
                     .Select(x => new MotherboardItemViewModel(x))
                     .ToList();

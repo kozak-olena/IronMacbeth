@@ -103,7 +103,7 @@ namespace IronMacbeth.Client.VVM.EditProcessorVVM
                     Processor.DescriptionName = null;
                 }
 
-                MainViewModel.ServerAdapter.UpdateProcessor(Processor);
+                ServerAdapter.Instance.UpdateProcessor(Processor);
             }
             else
             {
@@ -124,7 +124,7 @@ namespace IronMacbeth.Client.VVM.EditProcessorVVM
                     MPN = MPN,
                     Description = Description
                 };
-                MainViewModel.ServerAdapter.CreateProcessor(Processor);
+                ServerAdapter.Instance.CreateProcessor(Processor);
             }
 
             CollectionChanged = true;

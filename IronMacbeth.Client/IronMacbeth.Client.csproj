@@ -73,6 +73,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AnonymousServerAdapter.cs" />
     <Compile Include="ConnectingAnimation.xaml.cs">
       <DependentUpon>ConnectingAnimation.xaml</DependentUpon>
     </Compile>
@@ -112,6 +113,7 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\Videocard.cs" />
     <Compile Include="TestAnimation.cs" />
+    <Compile Include="UserService.cs" />
     <Compile Include="VVM\ArticleInfoVVM\ArticleInfoUserControl.xaml.cs">
       <DependentUpon>ArticleInfoUserControl.xaml</DependentUpon>
     </Compile>

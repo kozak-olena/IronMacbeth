@@ -24,7 +24,7 @@ namespace IronMacbeth.Client.VVM.StoreVVM
         {
             _user = user;
 
-            Items = MainViewModel.ServerAdapter.GetUserStores(_user);
+            Items = ServerAdapter.Instance.GetUserStores(_user);
             
             EditCommand = new RelayCommand(EditMethod);
             CloseCommand = new RelayCommand(CloseMethod);
@@ -61,14 +61,14 @@ namespace IronMacbeth.Client.VVM.StoreVVM
         {
             if (parameter is Store store)
             {
-                MainViewModel.ServerAdapter.DeleteStore(store.Id);
+                ServerAdapter.Instance.DeleteStore(store.Id);
                 UpdateCollection();
             }
         }
 
         public void UpdateCollection()
         {
-            Items = MainViewModel.ServerAdapter.GetUserStores(_user);
+            Items = ServerAdapter.Instance.GetUserStores(_user);
             OnPropertyChanged(nameof(Items));
         }
 

@@ -90,7 +90,7 @@ namespace IronMacbeth.Client.VVM.ProcessorVVM
         {
             if (SelectedItem is Processor processor)
             {
-                MainViewModel.ServerAdapter.DeleteProcessor(processor.Id);
+                ServerAdapter.Instance.DeleteProcessor(processor.Id);
                 Update();
                 UpdateCollection(false);
             }
@@ -99,7 +99,7 @@ namespace IronMacbeth.Client.VVM.ProcessorVVM
         public void UpdateCollection(bool innerCall)
         {
             _items = 
-                MainViewModel.ServerAdapter.GetAllProcessors()
+                ServerAdapter.Instance.GetAllProcessors()
                     .OrderByDescending(item=>item.NumberOfOfferings)
                     .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
                     .Select(x => new ProcessorItemViewModel(x))
@@ -114,7 +114,7 @@ namespace IronMacbeth.Client.VVM.ProcessorVVM
         public void UpdateCollectionNoFilter()
         {
             _items =
-                MainViewModel.ServerAdapter.GetAllProcessors()
+                ServerAdapter.Instance.GetAllProcessors()
                     .OrderByDescending(item => item.NumberOfOfferings)
                     .Select(x => new ProcessorItemViewModel(x))
                     .ToList();

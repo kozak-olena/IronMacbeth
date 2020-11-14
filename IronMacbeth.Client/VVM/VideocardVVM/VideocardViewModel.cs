@@ -90,7 +90,7 @@ namespace IronMacbeth.Client.VVM.VideocardVVM
         {
             if (SelectedItem is Videocard videocard)
             {
-                MainViewModel.ServerAdapter.DeleteVideoCard(videocard.Id);
+                ServerAdapter.Instance.DeleteVideoCard(videocard.Id);
                 Update();
                 UpdateCollection(false);
             }
@@ -99,7 +99,7 @@ namespace IronMacbeth.Client.VVM.VideocardVVM
         public void UpdateCollection(bool innerCall)
         {
             _items = 
-                MainViewModel.ServerAdapter.GetAllVideoCards()
+                ServerAdapter.Instance.GetAllVideoCards()
                     .OrderByDescending(item => item.NumberOfOfferings)
                     .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
                     .Select(x => new VideoCardItemViewModel(x))
@@ -114,7 +114,7 @@ namespace IronMacbeth.Client.VVM.VideocardVVM
         public void UpdateCollectionNoFilter()
         {
             _items =
-                MainViewModel.ServerAdapter.GetAllVideoCards()
+                ServerAdapter.Instance.GetAllVideoCards()
                     .OrderByDescending(item => item.NumberOfOfferings)
                     .Select(x => new VideoCardItemViewModel(x))
                     .ToList();

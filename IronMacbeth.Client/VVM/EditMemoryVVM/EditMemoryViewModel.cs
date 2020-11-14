@@ -92,7 +92,7 @@ namespace IronMacbeth.Client.VVM.EditMemoryVVM
                     Memory.DescriptionName = null;
                 }
 
-                MainViewModel.ServerAdapter.UpdateMemory(Memory);
+                ServerAdapter.Instance.UpdateMemory(Memory);
             }
             else
             {
@@ -110,7 +110,7 @@ namespace IronMacbeth.Client.VVM.EditMemoryVVM
                     MPN = MPN,
                     Description = Description
                 };
-                MainViewModel.ServerAdapter.CreateMemory(Memory);
+                ServerAdapter.Instance.CreateMemory(Memory);
             }
 
             CollectionChanged = true;

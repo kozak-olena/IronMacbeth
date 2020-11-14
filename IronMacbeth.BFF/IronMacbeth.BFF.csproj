@@ -170,6 +170,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnonymousService.cs" />
+    <Compile Include="SecurePasswordHasher.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserLoginService.cs" />
     <Compile Include="UserNameSecurityTokenHandler.cs" />
     <Compile Include="DbContext.cs" />
     <Compile Include="Program.cs" />

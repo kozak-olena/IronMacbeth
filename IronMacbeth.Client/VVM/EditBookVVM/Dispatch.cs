@@ -129,7 +129,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
         public void HandleDelete(object objectForEdit)
         {
             Book article = objectForEdit as Book;
-            MainViewModel.ServerAdapter.DeleteBook(article.Id);
+            ServerAdapter.Instance.DeleteBook(article.Id);
         }
 
         public void HandlerCreation(FilledFieldsInfo filledFieldsInfo)
@@ -152,7 +152,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
                 Rating = filledFieldsInfo.Rating,
                 Comments = filledFieldsInfo.Comments
             };
-            MainViewModel.ServerAdapter.CreateBook(book);
+            ServerAdapter.Instance.CreateBook(book);
 
         }
 
@@ -185,7 +185,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
                 book.DescriptionName = null;
             }
 
-            MainViewModel.ServerAdapter.UpdateBook(book);
+            ServerAdapter.Instance.UpdateBook(book);
         }
 
         public FilledFieldsInfo Unwrap(object objectForUnwrapping)
@@ -256,7 +256,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
         public void HandleDelete(object objectForEdit)
         {
             Article article = objectForEdit as Article;
-            MainViewModel.ServerAdapter.DeleteArticle(article.Id);
+            ServerAdapter.Instance.DeleteArticle(article.Id);
         }
 
         public void HandlerCreation(FilledFieldsInfo filledFieldsInfo)
@@ -276,7 +276,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
                 Rating = filledFieldsInfo.Rating,
                 Comments = filledFieldsInfo.Comments
             };
-            MainViewModel.ServerAdapter.CreateArticle(article);
+            ServerAdapter.Instance.CreateArticle(article);
 
         }
 
@@ -296,7 +296,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             article.Rating = filledFieldsInfo.Rating;
             article.Comments = filledFieldsInfo.Comments;
 
-            MainViewModel.ServerAdapter.UpdateArticle(article);
+            ServerAdapter.Instance.UpdateArticle(article);
         }
 
 
@@ -366,7 +366,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
         public void HandleDelete(object objectForEdit)
         {
             Periodical article = objectForEdit as Periodical;
-            MainViewModel.ServerAdapter.DeletePeriodical(article.Id);
+            ServerAdapter.Instance.DeletePeriodical(article.Id);
         }
 
         public void HandlerCreation(FilledFieldsInfo filledFieldsInfo)
@@ -392,7 +392,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
                 ImageName = filledFieldsInfo.ImageName,
                 DescriptionName = filledFieldsInfo.DescriptionName,
             };
-            MainViewModel.ServerAdapter.CreatePeriodical(periodical);
+            ServerAdapter.Instance.CreatePeriodical(periodical);
         }
 
         public void HandleUpdate(FilledFieldsInfo filledFieldsInfo, object objectForEdit)
@@ -428,7 +428,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
                 periodical.DescriptionName = null;
             }
 
-            MainViewModel.ServerAdapter.UpdatePeriodical(periodical);
+            ServerAdapter.Instance.UpdatePeriodical(periodical);
         }
 
         public FilledFieldsInfo Unwrap(object objectForUnwrapping)
@@ -503,7 +503,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
         public void HandleDelete(object objectForEdit)
         {
             Thesis thesis = objectForEdit as Thesis;
-            MainViewModel.ServerAdapter.DeleteThesis(thesis.Id);
+            ServerAdapter.Instance.DeleteThesis(thesis.Id);
         }
 
         public void HandlerCreation(FilledFieldsInfo filledFieldsInfo)
@@ -524,7 +524,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
                 Comments = filledFieldsInfo.Comments,
                 DescriptionName = filledFieldsInfo.DescriptionName,
             };
-            MainViewModel.ServerAdapter.CreateThesis(thesis);
+            ServerAdapter.Instance.CreateThesis(thesis);
         }
 
         public void HandleUpdate(FilledFieldsInfo filledFieldsInfo, object objectForEdit)
@@ -545,7 +545,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             thesis.ImageName = filledFieldsInfo.ImageName;
             thesis.DescriptionName = filledFieldsInfo.DescriptionName;
 
-            MainViewModel.ServerAdapter.UpdateThesis(thesis);
+            ServerAdapter.Instance.UpdateThesis(thesis);
         }
 
         public FilledFieldsInfo Unwrap(object objectForUnwrapping)
@@ -617,7 +617,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
         public void HandleDelete(object objectForEdit)
         {
             Newspaper newspaper = objectForEdit as Newspaper;
-            MainViewModel.ServerAdapter.DeleteNewspaper(newspaper.Id);
+            ServerAdapter.Instance.DeleteNewspaper(newspaper.Id);
         }
 
         public void HandlerCreation(FilledFieldsInfo filledFieldsInfo)
@@ -638,7 +638,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
                 Comments = filledFieldsInfo.Comments,
                 DescriptionName = filledFieldsInfo.DescriptionName,
             };
-            MainViewModel.ServerAdapter.CreateNewspaper(newspaper);
+            ServerAdapter.Instance.CreateNewspaper(newspaper);
         }
 
 
@@ -661,7 +661,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             newspaper.Comments = filledFieldsInfo.Comments;
             newspaper.DescriptionName = filledFieldsInfo.DescriptionName;
 
-            MainViewModel.ServerAdapter.UpdateNewspaper(newspaper);
+            ServerAdapter.Instance.UpdateNewspaper(newspaper);
         }
 
         public FilledFieldsInfo Unwrap(object objectForUnwrapping)

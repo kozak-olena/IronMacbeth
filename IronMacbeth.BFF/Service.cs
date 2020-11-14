@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http.Headers;
+using System.Security.Claims;
+using System.Threading;
 using IronMacbeth.BFF.Contract;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +11,6 @@ namespace IronMacbeth.BFF
 {
     public class Service : IService
     {
-
         #region  Periodical
         public void CreatePeriodical(Periodical periodical)
         {
@@ -808,23 +808,13 @@ namespace IronMacbeth.BFF
 
         #region User
 
-        public void Register(User user)
+        public Contract.User GetLoggedInUser()
         {
-            using (var dbContext = new DbContext())
-            {
-                // EntityFramework doesn't support adding entities without primary key
-                dbContext.Database.ExecuteSqlRaw("INSERT [dbo].[User](Login, Password, AccessLevel) VALUES(@p0, @p1, 0)", user.Login, user.Password);
+            var internalUser = GetLoggedInUserInternal();
 
-                dbContext.SaveChanges();
-            }
-        }
+            var contractUser = new Contract.User { Login = internalUser.Login, UserRole = internalUser.UserRole };
 
-        public User LogIn(string login, string password)
-        {
-            using (var dbContext = new DbContext())
-            {
-                return dbContext.Users.SingleOrDefault(x => x.Login == login && x.Password == password);
-            }
+            return contractUser;
         }
 
         #endregion
@@ -925,11 +915,18 @@ namespace IronMacbeth.BFF
             return fileStream;
         }
 
-        public bool Ping()
+        private User GetLoggedInUserInternal()
         {
-            return true;
+            var identity = (ClaimsIdentity)Thread.CurrentPrincipal.Identity;
+
+            var userLogin = identity.Claims.Single(x => string.Equals(x.Type, identity.NameClaimType, StringComparison.OrdinalIgnoreCase)).Value;
+
+            using (var dbContext = new DbContext())
+            {
+                var internalUser = dbContext.Users.SingleOrDefault(x => x.Login == userLogin);
+
+                return internalUser;
+            }
         }
-
-
     }
 }

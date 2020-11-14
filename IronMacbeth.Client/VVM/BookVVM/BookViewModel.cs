@@ -110,7 +110,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
             _items.AddRange
             (
-                MainViewModel.ServerAdapter.GetAllBooks()
+                ServerAdapter.Instance.GetAllBooks()
                     .OrderByDescending(item => item.NumberOfOfferings)
                     .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
                     .Select(x => new BookItemViewModel(x))
@@ -119,7 +119,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
             _items.AddRange
                (
-                MainViewModel.ServerAdapter.GetAllArticles()
+                ServerAdapter.Instance.GetAllArticles()
                     .OrderByDescending(item => item.NumberOfOfferings)
                    .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
                    .Select(x => new ArticleItemViewModel(x))
@@ -128,7 +128,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
             _items.AddRange
                 (
-                 MainViewModel.ServerAdapter.GetAllPeriodicals()
+                 ServerAdapter.Instance.GetAllPeriodicals()
                     .OrderByDescending(item => item.NumberOfOfferings)
                     .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
                   .Select(x => new PeriodicalItemViewModel(x))
@@ -136,7 +136,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
                  );
             _items.AddRange
                 (
-                 MainViewModel.ServerAdapter.GetAllNewspapers()
+                 ServerAdapter.Instance.GetAllNewspapers()
                     .OrderByDescending(item => item.NumberOfOfferings)
                     .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
                     .Select(x => new NewspaperItemViewModel(x))
@@ -144,7 +144,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
                  );
             _items.AddRange
                 (
-                 MainViewModel.ServerAdapter.GetAllThesises()
+                 ServerAdapter.Instance.GetAllThesises()
                     .OrderByDescending(item => item.NumberOfOfferings)
                     .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
                     .Select(x => new ThesisItemViewModel(x))
@@ -160,7 +160,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
         public void UpdateCollectionNoFilter() ///////////////////////////////
         {
             _items =
-                MainViewModel.ServerAdapter.GetAllBooks()
+                ServerAdapter.Instance.GetAllBooks()
                     .OrderByDescending(item => item.NumberOfOfferings)
                     .Select(x => new BookItemViewModel(x))
                     .ToList<IDocumentViewModel>();

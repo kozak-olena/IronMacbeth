@@ -250,10 +250,7 @@ namespace IronMacbeth.BFF.Contract
         #region User
 
         [OperationContract]
-        void Register(User user);
-
-        [OperationContract]
-        User LogIn(string login, string password);
+        User GetLoggedInUser();
 
         #endregion
 
@@ -278,8 +275,5 @@ namespace IronMacbeth.BFF.Contract
 
         [OperationContract]
         Stream GetFile(string fileName);
-
-        [OperationContract]
-        bool Ping();
     }
 }

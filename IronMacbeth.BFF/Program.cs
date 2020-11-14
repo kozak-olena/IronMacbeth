@@ -8,8 +8,8 @@ namespace IronMacbeth.BFF
     {
         private static void Main(string[] args)
         {
-            using (var host = new ServiceHost(typeof (Service)))          //Конструкция using оформляет блок кода и создает объект некоторого класса, который реализует интерфейс IDisposable,
-                //в частности, его метод Dispose. При завершении блока кода у объекта вызывается метод Dispose.
+            using (var host = new ServiceHost(typeof (Service)))
+            using (var anonymousServiceHost = new ServiceHost(typeof (AnonymousService)))
             {
                 host.Credentials.UseIdentityConfiguration = true;
 
@@ -23,15 +23,17 @@ namespace IronMacbeth.BFF
 
                 try
                 {
+                    anonymousServiceHost.Open();
                     host.Open();
                 }
                 catch (Exception exception)
                 {
                     Console.WriteLine("Unable to start server");
                     Console.WriteLine("Error: ");
-                    Console.WriteLine(exception.Message);
+                    Console.WriteLine(exception.ToString());
                     Console.WriteLine("Press any key to continue");
                     Console.ReadKey();
+                    anonymousServiceHost.Abort();
                     host.Abort();
                     return;
                 }

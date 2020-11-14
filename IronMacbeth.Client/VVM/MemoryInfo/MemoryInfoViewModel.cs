@@ -19,7 +19,7 @@ namespace IronMacbeth.Client.VVM.MemoryInfo
             Memory = memory;
 
             Stores =
-                MainViewModel.ServerAdapter.GetAllStoresSellingMemory(memory.Id)
+                ServerAdapter.Instance.GetAllStoresSellingMemory(memory.Id)
                     .Select(x => new StoreSellableItemViewModel(x.Store, memory, x.StoreMemory))
                     .ToList();
         }

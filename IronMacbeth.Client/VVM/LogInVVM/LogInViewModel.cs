@@ -1,6 +1,8 @@
-﻿using System.Windows;
-using System.Windows.Input;
+﻿using IronMacbeth.BFF.Contract;
 using IronMacbeth.Client.ViewModel;
+using System;
+using System.Windows;
+using System.Windows.Input;
 
 namespace IronMacbeth.Client.VVM.LogInVVM
 {
@@ -13,15 +15,13 @@ namespace IronMacbeth.Client.VVM.LogInVVM
         public string Login { get; set; }
         public string Password { private get; set; }
 
-        public User User { get; private set; }
-
         public ICommand LogInCommand { get; }
         public ICommand CloseCommand { get; }
 
         public LogInViewModel(bool loginMode = true)
         {
             _loginMode = loginMode;
-            LogInCommand = new RelayCommand(LogInMethod) {CanExecuteFunc = LogInCanExecute};
+            LogInCommand = new RelayCommand(LogInMethod) { CanExecuteFunc = LogInCanExecute };
             CloseCommand = new RelayCommand(CloseMethod);
         }
 
@@ -29,46 +29,42 @@ namespace IronMacbeth.Client.VVM.LogInVVM
         {
             if (_loginMode)
             {
-                if (string.IsNullOrWhiteSpace(Password))
-                {
-                    User = MainViewModel.ServerAdapter.LogIn(Login, "");
-                }
-                else
-                {
-                    User = MainViewModel.ServerAdapter.LogIn(Login, Password);
-                }
-                if (User != null)
+                if (UserService.LogIn(Login, Password))
                 {
                     CloseMethod(parameter);
                 }
                 else
                 {
-                    MessageBox.Show("Incorrect username or password", "error", MessageBoxButton.OK,
-                        MessageBoxImage.Error);
+                    MessageBox.Show("Incorrect username or password", "error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
             {
-                User user = new User
+                var registrationStatus = AnonymousServerAdapter.Instance.Register(Login, Password);
+
+                if (registrationStatus == UserRegistrationStatus.Success)
                 {
-                    Login = Login,
-                    Password = Password
-                };
+                    _loginMode = true;
 
-                MainViewModel.ServerAdapter.Register(user);
-
-                _loginMode = true;
-
-                LogInMethod(parameter);
+                    LogInMethod(parameter);
+                }
+                else if (registrationStatus == UserRegistrationStatus.UserNameAlreadyTaken)
+                {
+                    MessageBox.Show("Username is already taken.", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    throw new NotSupportedException($"{nameof(UserRegistrationStatus)} is not supported. value = '{registrationStatus}'.");
+                }
             }
         }
 
-        public bool LogInCanExecute(object parameter)
+        private bool LogInCanExecute(object parameter)
         {
-            return !string.IsNullOrWhiteSpace(Login);
+            return !string.IsNullOrWhiteSpace(Login) && !string.IsNullOrWhiteSpace(Password);
         }
 
-        public void CloseMethod(object parameter)
+        private void CloseMethod(object parameter)
         {
             (parameter as Window)?.Close();
         }

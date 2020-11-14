@@ -14,6 +14,7 @@ namespace IronMacbeth.BFF
         public DbSet<Article> Articles { get; set; }
 
         public DbSet<Book> Books { get; set; }
+
         public DbSet<StoreBook> StoreBook { get; set; }
 
         public DbSet<Memory> Memories { get; set; }
@@ -34,7 +35,7 @@ namespace IronMacbeth.BFF
 
         public DbSet<StoreVideocard> StoreVideoCards { get; set; }
 
-        public DbSet<User> Users { get; set; }
+        internal DbSet<User> Users { get; set; }
 
         public DbSet<Videocard> VideoCards { get; set; }
 
@@ -88,7 +89,11 @@ namespace IronMacbeth.BFF
 
             modelBuilder.Entity<User>()
                 .ToTable(nameof(User))
-                .HasNoKey();
+                .HasKey(nameof(User.Login));
+
+            modelBuilder.Entity<User>()
+                .Property(x => x.UserRole).HasColumnName("RoleId");
+
 
             modelBuilder.Entity<Videocard>()
                 .ToTable(nameof(Videocard));

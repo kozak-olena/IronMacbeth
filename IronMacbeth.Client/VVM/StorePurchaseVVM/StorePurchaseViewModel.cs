@@ -32,7 +32,7 @@ namespace IronMacbeth.Client.VVM
         {
             if (parameter is Purchase purchase)
             {
-                MainViewModel.ServerAdapter.DeletePurchase(purchase.Id);
+                ServerAdapter.Instance.DeletePurchase(purchase.Id);
                 UpdateCollection();
             }
         }
@@ -41,8 +41,8 @@ namespace IronMacbeth.Client.VVM
         {
             Items = new List<Purchase>();
             Items.AddRange(
-                MainViewModel.ServerAdapter.GetAllPurchases().
-                    Where(item => MainViewModel.ServerAdapter.GetUserStores(_user).Select(x => x.Id).Contains(MainViewModel.ServerAdapter.GetStoreFromPurchase(item).Id)).
+                ServerAdapter.Instance.GetAllPurchases().
+                    Where(item => ServerAdapter.Instance.GetUserStores(_user).Select(x => x.Id).Contains(ServerAdapter.Instance.GetStoreFromPurchase(item).Id)).
                     OrderByDescending(item => item.Date)
             );
             OnPropertyChanged(nameof(Items));
@@ -52,7 +52,7 @@ namespace IronMacbeth.Client.VVM
         {
             foreach (var item in Items.Where(item => item.Modified))
             {
-                MainViewModel.ServerAdapter.UpdatePurchase(item);
+                ServerAdapter.Instance.UpdatePurchase(item);
             }
 
             (parameter as Window)?.Close();
