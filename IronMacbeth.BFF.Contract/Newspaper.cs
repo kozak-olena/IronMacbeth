@@ -9,7 +9,7 @@ namespace IronMacbeth.BFF.Contract
 
         public string City { get; set; }
 
-        public string Year { get; set; }
+        public int Year { get; set; }
 
         public string Availiability { get; set; }
 

@@ -5,7 +5,7 @@
     [Author] VARCHAR (255) NOT NULL,
     [PublishingHouse] VARCHAR (255) NOT NULL,
     [City] VARCHAR (255) NOT NULL,
-    [Year] VARCHAR (255) NOT NULL,
+    [Year] INT NOT NULL,
     [Pages] VARCHAR (255) NOT NULL,
     [TypeOfDocument] VARCHAR (255) NULL,
     [Availiability] VARCHAR (255) NOT NULL,

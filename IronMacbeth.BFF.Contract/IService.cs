@@ -6,10 +6,15 @@ namespace IronMacbeth.BFF.Contract
     [ServiceContract]
     public interface IService
     {
+        [OperationContract]
+        DocumentsSearchResults SearchDocuments(SearchFilledFields searchFilledFields);
+
         #region Book
 
         [OperationContract]
         void CreateBook(Book book);
+
+         
 
         [OperationContract]
         List<Book> GetAllBooks();

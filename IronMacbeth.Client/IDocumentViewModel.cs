@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IronMacbeth.Client
 {
-    interface IDocumentViewModel
+    public interface IDocumentViewModel
     {
         object GetItem();
 

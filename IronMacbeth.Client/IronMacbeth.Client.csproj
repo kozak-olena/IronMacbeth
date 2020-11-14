@@ -82,6 +82,7 @@
     <Compile Include="Model\Article.cs" />
     <Compile Include="Model\Base.cs" />
     <Compile Include="Model\Book.cs" />
+    <Compile Include="Model\DocumentsSearchResults.cs" />
     <Compile Include="Model\IDescribable.cs" />
     <Compile Include="Model\IDisplayable.cs" />
     <Compile Include="Model\ISellable.cs" />
@@ -189,6 +190,10 @@
       <DependentUpon>SearchUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="VVM\SearchPageViewModel\SearchViewModel.cs" />
+    <Compile Include="VVM\SearchResultsVVM\SearchResultsUserControl.xaml.cs">
+      <DependentUpon>SearchResultsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VVM\SearchResultsVVM\SearchResultsViewModel.cs" />
     <Compile Include="VVM\StorePurchaseVVM\StorePurchaseUserControl.xaml.cs">
       <DependentUpon>StorePurchaseUserControl.xaml</DependentUpon>
     </Compile>
@@ -342,6 +347,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VVM\SearchPageViewModel\SearchUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VVM\SearchResultsVVM\SearchResultsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -12,7 +12,8 @@
                     xmlns:videocardVvm="clr-namespace:IronMacbeth.Client.VVM.VideocardVVM"
                     xmlns:book ="clr-namespace:IronMacbeth.Client.VVM.BookVVM"
                     xmlns:bookInfo ="clr-namespace:IronMacbeth.Client.VVM.BookInfoVVM"
-                    xmlns:searchVvm ="clr-namespace:IronMacbeth.Client.VVM.SearchPageViewModel">
+                    xmlns:searchVvm ="clr-namespace:IronMacbeth.Client.VVM.SearchPageViewModel"
+                    xmlns:searchResults ="clr-namespace:IronMacbeth.Client.VVM.SearchResultsVVM">
 
 
     <DataTemplate DataType="{x:Type home:HomeViewModel}">
@@ -45,6 +46,10 @@
     <DataTemplate DataType="{x:Type searchVvm:SearchViewModel}">
         <searchVvm:SearchUserControl/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type searchResults:SearchResultsViewModel}">
+        <searchResults:SearchResultsUserControl/>
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type motherboardinfo:MotherboardInfoViewModel}">
         <motherboardinfo:MotherboardInfoUserControl/>
     </DataTemplate>

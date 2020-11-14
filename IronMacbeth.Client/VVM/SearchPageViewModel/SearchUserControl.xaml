@@ -1,4 +1,5 @@
 ﻿<UserControl x:Class="IronMacbeth.Client.VVM.SearchPageViewModel.SearchUserControl"
+             x:Name="SearchPageViewModel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700">
     <DockPanel VerticalAlignment="Stretch">
-        <Grid Background="LightBlue" Opacity="0.7">
+        <Grid Background="LightBlue" Opacity="0.9">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.25*"/>
                 <RowDefinition Height="1.5*"/>
@@ -47,9 +48,9 @@
                     TextWrapping="Wrap"
                     Margin="10,10,10,0"
                     Text="Name: " FontSize="20"/>
-                <TextBox
+                <TextBox Name="NameTextBox"
                     Margin="10,10,10,0"
-                    Text="{Binding FilledFieldsInfo.Name, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding SearchName, UpdateSourceTrigger=PropertyChanged}"
                     Height="24" 
                     Width="300"/>
             </WrapPanel>
@@ -66,7 +67,7 @@
                     Text="Author: " FontSize="20"/>
                 <TextBox
                     Margin="5,10,0,0"
-                    Text="{Binding FilledFieldsInfo.Name, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding SearchFilledFields.SearchAuthor, UpdateSourceTrigger=PropertyChanged}"
                     Height="24" 
                     Width="300"/>
             </WrapPanel>
@@ -87,7 +88,7 @@
                     Text="from" FontSize="18"/>
                 <TextBox
                     Margin="10,10,10,0"
-                    Text="{Binding FilledFieldsInfo.Name, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding SearchFilledFields.SearchYearFrom, UpdateSourceTrigger=PropertyChanged}"
                     Height="24" 
                     Width="60"/>
                 <TextBlock
@@ -96,7 +97,7 @@
                     Text="to" FontSize="18"/>
                 <TextBox
                     Margin="10,10,10,0"
-                    Text="{Binding FilledFieldsInfo.Name, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding SearchFilledFields.SearchYearTo, UpdateSourceTrigger=PropertyChanged}"
                     Height="24" 
                     Width="60"/>
             </WrapPanel>
@@ -115,20 +116,24 @@
                        Grid.Column="1"
                        Orientation="Vertical" Margin="10,0,0,0" 
                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <CheckBox Margin="10,10,0,0" Content="Book" FontSize="18">
+                <CheckBox IsChecked="{Binding SearchFilledFields.IsTypeBookSelected}"
+                    Margin="10,10,0,0" Content="Book" FontSize="18">
                 </CheckBox>
-                <CheckBox Margin="10,10,0,0" Content="Article" FontSize="18">
+                <CheckBox  IsChecked="{Binding SearchFilledFields.IsArticleSelected}"
+                     Margin="10,10,0,0" Content="Article" FontSize="18">
                 </CheckBox>
-                <CheckBox Margin="10,10,0,0" Content="Thesis" FontSize="18">
+                <CheckBox IsChecked="{Binding  SearchFilledFields.IsThesisSelected }"
+                    Margin="10,10,0,0" Content="Thesis" FontSize="18">
                 </CheckBox>
             </WrapPanel>
             <WrapPanel Grid.Row="7"
                        Grid.Column="2"
                        Orientation="Vertical" Margin="10,0,0,0" 
                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <CheckBox Margin="10,10,0,0" Content="Newpaper" FontSize="18">
+                <CheckBox IsChecked="{Binding SearchFilledFields.IsNewspaperSelected}"
+                    Margin="10,10,0,0" Content="Newpaper" FontSize="18">
                 </CheckBox>
-                <CheckBox Margin="10,10,0,0" Content="Periodical" FontSize="18">
+                <CheckBox IsChecked="{Binding SearchFilledFields.IsPeriodicalSelected}" Margin="10,10,0,0" Content="Periodical" FontSize="18">
                 </CheckBox>
             </WrapPanel>
             <WrapPanel 
@@ -140,25 +145,17 @@
             VerticalAlignment="Bottom"
                 >
                 <Button 
-                Visibility="{Binding DataContext.AdminToolsVisibility, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
-                Command="{Binding SearchCommand}"
-                Width="90"
+                Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                CommandParameter="{Binding SearchResultsViewModel}"
                 Margin="10,10,10,10"
                 Content="Search" Background="White"/>
-                <Button 
-                Visibility="{Binding DataContext.AdminToolsVisibility, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                <Button  
                 Command="{Binding DeleteAllComand}"
                 Width="90"
                 Margin="10,10,10,10"
                 Content="Delete all"/>
-                <Button 
-                Visibility="{Binding DataContext.AdminToolsVisibility, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
-                Command="{Binding ExitCommand}"
-                Width="90"
-                Margin="10,10,10,10"
-                Content="Exit" Background="White"
-                />
             </WrapPanel>
         </Grid>
+
     </DockPanel>
 </UserControl>

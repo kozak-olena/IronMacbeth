@@ -16,7 +16,7 @@ namespace IronMacbeth.Client
 
         public string City { get; set; }
 
-        public string Year { get; set; }
+        public int Year { get; set; }
 
         public string Pages { get; set; }
 

@@ -24,7 +24,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
 
         public string City { get; set; }
 
-        public string Year { get; set; }
+        public int Year { get; set; }
 
         public string Pages { get; set; }
 

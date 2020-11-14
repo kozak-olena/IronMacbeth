@@ -11,13 +11,13 @@ namespace IronMacbeth.Client
 
         public string Author { get; set; }
 
-        public string Year { get; set; }
+        public int Year { get; set; }
 
         public string Pages { get; set; }
 
         public string Availiability { get; set; }
 
-        public string MainDocumentId { get; set; }   //book, in which the article is published// foreighn key? //rent book, not article
+        public string MainDocumentId { get; set; }
 
         public string TypeOfDocument { get; set; }
 

@@ -402,6 +402,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             periodical.Year = filledFieldsInfo.Year;
             periodical.Pages = filledFieldsInfo.Pages;
             periodical.City = filledFieldsInfo.City;
+            periodical.BitmapImage = filledFieldsInfo.BitmapImage;
             periodical.PublishingHouse = filledFieldsInfo.PublishingHouse;
             periodical.Location = filledFieldsInfo.Location;
             periodical.Availiability = filledFieldsInfo.Availiability;

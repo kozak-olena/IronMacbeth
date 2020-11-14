@@ -15,7 +15,7 @@ namespace IronMacbeth.Client.VVM.NewspaperItemVVM
         public string Name => _item.Name;
         public string Availiability => _item.Availiability;
         public string IssueNumber => _item.IssueNumber;
-        public string Year => _item.Year;
+        public int Year => _item.Year;
         public string City => _item.City;
         public string Location => _item.Location;
         public string TypeOfDocument => _item.TypeOfDocument;

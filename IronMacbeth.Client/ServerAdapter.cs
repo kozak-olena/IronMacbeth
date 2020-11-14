@@ -9,7 +9,6 @@ using System.Windows.Media.Imaging;
 using IronMacbeth.BFF.Contract;
 using Internal = IronMacbeth.Client;
 using Contract = IronMacbeth.BFF.Contract;
-using IronMacbeth.Client;
 
 namespace IronMacbeth.Client
 {
@@ -22,6 +21,57 @@ namespace IronMacbeth.Client
             Proxy = proxy;
         }
 
+        public DocumentsSearchResults SearchDocuments(Internal.SearchFilledFields searchFilledFields)
+        {
+            var contractSearch = MapInternalToContractSearchCriteria(searchFilledFields);
+            var documents = Proxy.SearchDocuments(contractSearch);
+            var internalBooks = MapContractToInternalSearchCriteria(documents);
+            return internalBooks;
+        }
+
+        private Contract.SearchFilledFields MapInternalToContractSearchCriteria(Internal.SearchFilledFields searchFilledFields)
+        {
+            return new Contract.SearchFilledFields
+            {
+                SearchName = searchFilledFields.SearchName,
+                SearchAuthor = searchFilledFields.SearchAuthor,
+                SearchYearFrom = searchFilledFields.SearchYearFrom,
+                SearchYearTo = searchFilledFields.SearchYearTo,
+                IsArticleSelected = searchFilledFields.IsArticleSelected,
+                IsBookSelected = searchFilledFields.IsBookSelected,
+                IsNewspaperSelected = searchFilledFields.IsNewspaperSelected,
+                IsPeriodicalSelected = searchFilledFields.IsPeriodicalSelected,
+                IsThesisSelected = searchFilledFields.IsThesisSelected
+
+            };
+        }
+
+        private Internal.DocumentsSearchResults MapContractToInternalSearchCriteria(Contract.DocumentsSearchResults documentsSearchResults)
+        {
+            var documents = new Internal.DocumentsSearchResults();
+
+            documents.Books = documentsSearchResults.Books?.Select(MapContractToInternalBook).ToList() ?? new List<Book>();
+            foreach (var book in documents.Books)
+            {
+                if (book.ImageName != null) { book.BitmapImage = GetImage(book.ImageName); }
+                if (book.DescriptionName != null)
+                { book.Description = GetStringFileContent(book.DescriptionName); }
+
+            }
+
+            documents.Articles = documentsSearchResults.Articles?.Select(MapContractToInternalArticle).ToList() ?? new List<Article>();
+            documents.Periodicals = documentsSearchResults.Periodicals?.Select(MapContractToInternalPeriodical).ToList() ?? new List<Periodical>();
+            foreach (var periodical in documents.Periodicals)
+            {
+                if (periodical.ImageName != null) { periodical.BitmapImage = GetImage(periodical.ImageName); }
+                if (periodical.DescriptionName != null)
+                { periodical.Description = GetStringFileContent(periodical.DescriptionName); }
+            }
+            documents.Newspapers = documentsSearchResults.Newspapers?.Select(MapContractToInternalNewspaper).ToList() ?? new List<Newspaper>();
+            documents.Theses = documentsSearchResults.Theses?.Select(MapContractToInternalPeriodical).ToList() ?? new List<Thesis>();
+
+            return documents;
+        }
 
         #region Periodical
 
@@ -337,6 +387,16 @@ namespace IronMacbeth.Client
 
             return internalArticles;
         }
+
+        private Contract.Article MapInternalToContractSearchCriteria(Internal.Article article)
+        {
+            return new Contract.Article
+            {
+            };
+        }
+
+
+
         public void UpdateArticle(Internal.Article article)
         {
             UpdateIDisplayable(article);
@@ -372,6 +432,9 @@ namespace IronMacbeth.Client
                 // DescriptionName = article.DescriptionName
             };
         }
+
+
+
 
         private Internal.Article MapContractToInternalArticle(Contract.Article article)
         {
@@ -430,6 +493,10 @@ namespace IronMacbeth.Client
 
             return internalBooks;
         }
+
+
+
+
 
         public void UpdateBook(Internal.Book book)
         {

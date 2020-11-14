@@ -1,12 +1,21 @@
 ﻿using IronMacbeth.Client.Annotations;
+using IronMacbeth.Client.ViewModel;
+using IronMacbeth.Client.VVM.ArticleItemVVM;
+using IronMacbeth.Client.VVM.BookVVM;
+using IronMacbeth.Client.VVM.Home;
+using IronMacbeth.Client.VVM.NewspaperItemVVM;
+using IronMacbeth.Client.VVM.PeriodicalItemVVM;
+using IronMacbeth.Client.VVM.SearchResultsVVM;
+using IronMacbeth.Client.VVM.ThesisItemVVM;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+
 
 namespace IronMacbeth.Client.VVM.SearchPageViewModel
 {
@@ -14,6 +23,15 @@ namespace IronMacbeth.Client.VVM.SearchPageViewModel
     {
         public string PageViewName => "Search";
 
+        public SearchResultsViewModel SearchResultsViewModel
+        {
+            get
+            {
+                return new SearchResultsViewModel(SearchFilledFields);
+
+            }
+        }
+        public SearchFilledFields SearchFilledFields { get; set; }
         public void Update()
         {
         }
@@ -21,6 +39,36 @@ namespace IronMacbeth.Client.VVM.SearchPageViewModel
         public ICommand ExitCommand { get; }
         public ICommand SearchCommand { get; }
         public ICommand DeleteAllComand { get; }
+
+
+
+        public SearchViewModel()
+        {
+
+            SearchFilledFields = new SearchFilledFields();
+            DeleteAllComand = new RelayCommand(DeleteAllMethod);
+
+        }
+
+        public string SearchName { get => SearchFilledFields.SearchName; set => SearchFilledFields.SearchName = value; }
+
+        public string SearchAuthor { get => SearchFilledFields.SearchAuthor; set => SearchFilledFields.SearchAuthor = value; }
+
+        public int? SearchYearFrom { get => SearchFilledFields.SearchYearFrom; set => SearchFilledFields.SearchYearFrom = value; }
+
+        public int? SearchYearTo { get => SearchFilledFields.SearchYearTo; set => SearchFilledFields.SearchYearTo = value; }
+
+        public void DeleteAllMethod(object parameter)
+        {
+            SearchFilledFields.SearchName = "";
+            OnPropertyChanged(nameof(SearchFilledFields.SearchName));
+            SearchFilledFields.SearchAuthor = "";
+            OnPropertyChanged(nameof(SearchFilledFields.SearchAuthor));
+            SearchFilledFields.SearchYearFrom = null;
+            OnPropertyChanged(nameof(SearchFilledFields.SearchYearFrom));
+            SearchFilledFields.SearchYearTo = null;
+            OnPropertyChanged(nameof(SearchFilledFields.SearchYearTo));
+        }
 
 
         #region INotifyPropertyChanged

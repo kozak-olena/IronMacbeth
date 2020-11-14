@@ -20,7 +20,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
         public string PublishingHouse => _item.PublishingHouse;
 
         public string City => _item.City;
-        public string Year => _item.Year;
+        public int Year => _item.Year;
         public string Pages => _item.Pages;
         public string ElectronicVersionFileName => _item.ElectronicVersionFileName;
         public string Comments => _item.Comments;

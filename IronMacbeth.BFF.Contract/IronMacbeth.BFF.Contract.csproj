@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Article.cs" />
     <Compile Include="Book.cs" />
+    <Compile Include="DocumentsSearchResults.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="Memory.cs" />
     <Compile Include="Motherboard.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Purchase.cs" />
     <Compile Include="RentBook.cs" />
     <Compile Include="RentPeriodical.cs" />
+    <Compile Include="SearchFilledFields.cs" />
     <Compile Include="Store.cs" />
     <Compile Include="StoreArticles.cs" />
     <Compile Include="StoreBook.cs" />

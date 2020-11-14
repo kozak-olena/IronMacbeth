@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using IronMacbeth.BFF.Contract;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,6 +37,33 @@ namespace IronMacbeth.BFF
                 dbContext.Update(article);
 
                 dbContext.SaveChanges();
+            }
+        }
+        private List<Periodical> GetPeriodicalsByCriteria(SearchFilledFields searchFilledFields)
+        {
+            if (searchFilledFields.SearchAuthor != null) return new List<Periodical>();
+            using (var dbContext = new DbContext())
+            {
+                IQueryable<Periodical> intermediate = dbContext.Periodicals;
+
+                if (searchFilledFields.SearchName != null)
+                {
+                    intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
+                }
+                if (searchFilledFields.SearchYearFrom != null && searchFilledFields.SearchYearTo == null)
+                {
+                    intermediate = intermediate.Where(x => x.Year > searchFilledFields.SearchYearFrom);
+                }
+                if (searchFilledFields.SearchYearTo != null && searchFilledFields.SearchYearFrom == null)
+                {
+                    intermediate = intermediate.Where(x => x.Year < searchFilledFields.SearchYearTo);
+                }
+                if (searchFilledFields.SearchYearFrom != null & searchFilledFields.SearchYearTo != null)
+                {
+                    intermediate = intermediate.Where(x => x.Year > searchFilledFields.SearchYearFrom && x.Year < searchFilledFields.SearchYearTo);
+                }
+
+                return intermediate.ToList();
             }
         }
 
@@ -79,6 +108,30 @@ namespace IronMacbeth.BFF
             }
         }
 
+        private List<Thesis> GetThesesByCriteria(SearchFilledFields searchFilledFields)
+        {
+            using (var dbContext = new DbContext())
+            {
+                IQueryable<Thesis> intermediate = dbContext.Thesises;
+                if (searchFilledFields.SearchName != null)
+                {
+                    intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
+                }
+                if (searchFilledFields.SearchYearFrom != null && searchFilledFields.SearchYearTo == null)
+                {
+                    intermediate = intermediate.Where(x => x.Year > searchFilledFields.SearchYearFrom);
+                }
+                if (searchFilledFields.SearchYearTo != null && searchFilledFields.SearchYearFrom == null)
+                {
+                    intermediate = intermediate.Where(x => x.Year < searchFilledFields.SearchYearTo);
+                }
+                if (searchFilledFields.SearchYearFrom != null & searchFilledFields.SearchYearTo != null)
+                {
+                    intermediate = intermediate.Where(x => x.Year > searchFilledFields.SearchYearFrom && x.Year < searchFilledFields.SearchYearTo);
+                }
+                return intermediate.ToList();
+            }
+        }
         public void DeleteThesis(int id)
         {
             using (var dbContext = new DbContext())
@@ -121,6 +174,34 @@ namespace IronMacbeth.BFF
             }
         }
 
+        private List<Newspaper> GetNewspapersByCriteria(SearchFilledFields searchFilledFields)
+        {
+            if (searchFilledFields.SearchAuthor != null) return new List<Newspaper>();
+            using (var dbContext = new DbContext())
+            {
+                IQueryable<Newspaper> intermediate = dbContext.Newspapers;
+                if (searchFilledFields.SearchName != null)
+                {
+                    intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
+                }
+                if (searchFilledFields.SearchYearFrom != null && searchFilledFields.SearchYearTo == null)
+                {
+                    intermediate = intermediate.Where(x => x.Year > searchFilledFields.SearchYearFrom);
+                }
+                if (searchFilledFields.SearchYearTo != null && searchFilledFields.SearchYearFrom == null)
+                {
+                    intermediate = intermediate.Where(x => x.Year < searchFilledFields.SearchYearTo);
+                }
+                if (searchFilledFields.SearchYearFrom != null & searchFilledFields.SearchYearTo != null)
+                {
+                    intermediate = intermediate.Where(x => x.Year > searchFilledFields.SearchYearFrom && x.Year < searchFilledFields.SearchYearTo);
+                }
+                return intermediate.ToList();
+            }
+
+        }
+
+
         public void DeleteNewspaper(int id)
         {
             using (var dbContext = new DbContext())
@@ -131,6 +212,37 @@ namespace IronMacbeth.BFF
             }
         }
         #endregion
+
+        public DocumentsSearchResults SearchDocuments(SearchFilledFields searchFilledFields)
+        {
+            var result = new DocumentsSearchResults();
+            if (searchFilledFields.IsArticleSelected)
+            {
+                List<Article> articles = GetArticlesByCriteria(searchFilledFields);
+                result.Articles = articles;
+            }
+            if (searchFilledFields.IsBookSelected)
+            {
+                List<Book> books = GetBooksByCriteria(searchFilledFields);
+                result.Books = books;
+            }
+            if (searchFilledFields.IsPeriodicalSelected)
+            {
+                List<Periodical> periodicals = GetPeriodicalsByCriteria(searchFilledFields);
+                result.Periodicals = periodicals;
+            }
+            if (searchFilledFields.IsNewspaperSelected)
+            {
+                List<Newspaper> newspapers = GetNewspapersByCriteria(searchFilledFields);
+                result.Newspapers = newspapers;
+            }
+            if (searchFilledFields.IsThesisSelected)
+            {
+                List<Thesis> theses = GetThesesByCriteria(searchFilledFields);
+                result.Theses = theses;
+            }
+            return result;
+        }
 
 
         #region Article
@@ -149,6 +261,35 @@ namespace IronMacbeth.BFF
             using (var dbContext = new DbContext())
             {
                 return dbContext.Articles.ToList();
+            }
+        }
+
+        private List<Article> GetArticlesByCriteria(SearchFilledFields searchFilledFields)
+        {
+            using (var dbContext = new DbContext())
+            {
+                IQueryable<Article> intermediate = dbContext.Articles;
+                if (searchFilledFields.SearchName != null)
+                {
+                    intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
+                }
+                if (searchFilledFields.SearchAuthor != null)
+                {
+                    intermediate = intermediate.Where(x => x.Author == searchFilledFields.SearchAuthor);
+                }
+                if (searchFilledFields.SearchYearFrom != null && searchFilledFields.SearchYearTo == null)
+                {
+                    intermediate = intermediate.Where(x => x.Year > searchFilledFields.SearchYearFrom);
+                }
+                if (searchFilledFields.SearchYearTo != null && searchFilledFields.SearchYearFrom == null)
+                {
+                    intermediate = intermediate.Where(x => x.Year < searchFilledFields.SearchYearTo);
+                }
+                if (searchFilledFields.SearchYearFrom != null & searchFilledFields.SearchYearTo != null)
+                {
+                    intermediate = intermediate.Where(x => x.Year > searchFilledFields.SearchYearFrom && x.Year < searchFilledFields.SearchYearTo);
+                }
+                return intermediate.ToList();
             }
         }
 
@@ -182,6 +323,37 @@ namespace IronMacbeth.BFF
                 dbContext.Add(book);
 
                 dbContext.SaveChanges();
+            }
+        }
+
+        private List<Book> GetBooksByCriteria(SearchFilledFields searchFilledFields)
+        {
+            using (var dbContext = new DbContext())
+            {
+                IQueryable<Book> intermediate = dbContext.Books;
+
+                if (searchFilledFields.SearchName != null)
+                {
+                    intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
+                }
+                if (searchFilledFields.SearchAuthor != null)
+                {
+                    intermediate = intermediate.Where(x => x.Author == searchFilledFields.SearchAuthor);
+                }
+                if (searchFilledFields.SearchYearFrom != null && searchFilledFields.SearchYearTo == null)
+                {
+                    intermediate = intermediate.Where(x => x.Year > searchFilledFields.SearchYearFrom);
+                }
+                if (searchFilledFields.SearchYearTo != null && searchFilledFields.SearchYearFrom == null)
+                {
+                    intermediate = intermediate.Where(x => x.Year < searchFilledFields.SearchYearTo);
+                }
+                if (searchFilledFields.SearchYearFrom != null & searchFilledFields.SearchYearTo != null)
+                {
+                    intermediate = intermediate.Where(x => x.Year > searchFilledFields.SearchYearFrom && x.Year < searchFilledFields.SearchYearTo);
+                }
+
+                return intermediate.ToList();
             }
         }
 

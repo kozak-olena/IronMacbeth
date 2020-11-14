@@ -1,5 +1,5 @@
 ﻿using IronMacbeth.Client.VVM.BookVVM;
- 
+
 
 namespace IronMacbeth.Client.VVM.ThesisItemVVM
 {
@@ -16,7 +16,7 @@ namespace IronMacbeth.Client.VVM.ThesisItemVVM
         public string Author => _item.Author;
         public string Availiability => _item.Availiability;
         public string TypeOfDocument => _item.TypeOfDocument;
-        public string Year => _item.Year;
+        public int Year => _item.Year;
 
         public string Pages => _item.Pages;
         public string City => _item.City;

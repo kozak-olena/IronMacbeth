@@ -3,7 +3,7 @@
     [Id] INT NOT NULL IDENTITY(1, 1) PRIMARY KEY,
     [Name] VARCHAR (255) NOT NULL,
     [Author] VARCHAR (255) NOT NULL,
-    [Year] VARCHAR (255) NOT NULL,
+    [Year] INT NOT NULL,
     [Pages] VARCHAR (255) NOT NULL,
     [TypeOfDocument] VARCHAR (255) NOT NULL,
     [Availiability] VARCHAR (255) NULL,
