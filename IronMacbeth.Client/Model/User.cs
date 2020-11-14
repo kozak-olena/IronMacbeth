@@ -7,5 +7,7 @@ namespace IronMacbeth.Client
         public string Login { get; set; }
 
         public UserRole UserRole { get; set; }
+
+        public bool IsAdmin => UserRole == UserRole.Admin;
     }
 }

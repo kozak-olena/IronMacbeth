@@ -481,6 +481,26 @@ namespace IronMacbeth.Client
 
         #endregion
 
+
+        public void CreateOrder(Internal.Order orderInfo)
+        {
+            var contractOrder = MapInternalToContractOrder(orderInfo);
+            _proxy.CreateOrder(contractOrder);
+        }
+        private Contract.Order MapInternalToContractOrder(Internal.Order orderInfo)
+        {
+            return new Contract.Order
+            {
+                UserLogin = orderInfo.UserLogin,
+                BookId = orderInfo.BookId,
+                ArticleId = orderInfo.ArticleId,
+                PeriodicalId = orderInfo.PeriodicalId,
+                NewspaperId = orderInfo.NewspaperId,
+                ThesesID = orderInfo.ThesesID
+            };
+        }
+
+
         #region Book
 
         public void CreateBook(Internal.Book book)

@@ -10,12 +10,15 @@ namespace IronMacbeth.BFF.Contract
         [OperationContract]
         DocumentsSearchResults SearchDocuments(SearchFilledFields searchFilledFields);
 
+        [OperationContract]
+        void CreateOrder(Order orderInfo);
+
         #region Book
 
         [OperationContract]
         void CreateBook(Book book);
 
-         
+
 
         [OperationContract]
         List<Book> GetAllBooks();

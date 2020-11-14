@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 namespace IronMacbeth.Client.VVM.SearchResultsVVM
 {
@@ -29,13 +30,82 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             private set { _items = value; }
         }
 
+        public ICommand AddtoMyOrdersCommand { get; }
+        public ICommand OrderToReadingRoomCommand { get; }
+
+        //private Order _order;
+
+        //public Order Order
+        //{
+        //    get { return _order; }
+        //    set
+        //    {
+        //        _order = value;
+        //    }
+        //}
+
+        private object _selectedItem;
+        public Order order;
+
+        public void AddtoMyOrdersMethod(object parameter)
+        {
+            _selectedItem = SelectedItem.GetItem();
+            order = new Order();
+            if (_selectedItem is Book)
+            {
+                Book book = (Book)_selectedItem;
+                order.BookId = book.Id;
+                order.UserLogin = "me";
+                ServerAdapter.Instance.CreateOrder(order);
+            }
+            else if (_selectedItem is Article)
+            {
+                Article book = (Article)_selectedItem;
+                order.ArticleId = book.Id;
+                order.UserLogin = "me";
+                ServerAdapter.Instance.CreateOrder(order);
+            }
+            else if (_selectedItem is Periodical)
+            {
+                Periodical book = (Periodical)_selectedItem;
+                order.PeriodicalId = book.Id;
+                order.UserLogin = "me";
+                ServerAdapter.Instance.CreateOrder(order);
+            }
+            else if (_selectedItem is Newspaper)
+            {
+                Newspaper book = (Newspaper)_selectedItem;
+                order.NewspaperId = book.Id;
+                order.UserLogin = "me";
+                ServerAdapter.Instance.CreateOrder(order);
+            }
+            else if (_selectedItem is Thesis)
+            {
+                Thesis book = (Thesis)_selectedItem;
+                order.ThesesID = book.Id;
+                order.UserLogin = "me";
+                ServerAdapter.Instance.CreateOrder(order);
+            }
+        }
+
+        public void OrderToReadingRoomMethod(object parameter)
+        {
+        }
+
         private SearchFilledFields _searchFilledFields;
         public SearchResultsViewModel(SearchFilledFields searchFilledFields)
         {
             _searchFilledFields = searchFilledFields;
+            AddtoMyOrdersCommand = new RelayCommand(AddtoMyOrdersMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
+            OrderToReadingRoomCommand = new RelayCommand(OrderToReadingRoomMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
         }
 
         public IDocumentViewModel SelectedItem { get; set; }
+
+        public bool CanExecuteMaintenanceMethods(object parameter)
+        {
+            return SelectedItem != null;
+        }
 
         public void ShowCollection()
         {

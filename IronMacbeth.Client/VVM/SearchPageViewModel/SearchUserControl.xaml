@@ -116,7 +116,7 @@
                        Grid.Column="1"
                        Orientation="Vertical" Margin="10,0,0,0" 
                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <CheckBox IsChecked="{Binding SearchFilledFields.IsTypeBookSelected}"
+                <CheckBox IsChecked="{Binding SearchFilledFields.IsBookSelected}"
                     Margin="10,10,0,0" Content="Book" FontSize="18">
                 </CheckBox>
                 <CheckBox  IsChecked="{Binding SearchFilledFields.IsArticleSelected}"

@@ -17,6 +17,8 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Input;
 using Timer = System.Timers.Timer;
+using System.Linq;
+using IronMacbeth.Client.VVM.MyOrdersVVM;
 
 namespace IronMacbeth.Client.ViewModel
 {
@@ -62,7 +64,7 @@ namespace IronMacbeth.Client.ViewModel
         {
             get
             {
-                if (UserLoggedIn && User.UserRole == UserRole.Admin)
+                if (User != null && User.IsAdmin)
                 {
                     return Visibility.Visible;
                 }
@@ -73,7 +75,7 @@ namespace IronMacbeth.Client.ViewModel
             }
         }
 
-        public List<IPageViewModel> PageViewModels { get; }
+        public List<IPageViewModel> PageViewModels { get; set; }
 
 
         private readonly Stack<IPageViewModel> _previousPages;
@@ -168,6 +170,7 @@ namespace IronMacbeth.Client.ViewModel
             }
         });
 
+
         public MainViewModel()
         {
             connectionCheckTimer = new Timer();
@@ -189,16 +192,17 @@ namespace IronMacbeth.Client.ViewModel
             ShowPurchasesCommand = new RelayCommand(ShowPurchasesMethod);
             AnimationCompletedCommand = new RelayCommand(OnAnimationCompleted);
 
+
+            // new MemoryViewModel(),
+            // new ProcessorViewModel(),
+            // new VideocardViewModel(),
+            // new MotherboardViewModel(),
+
             PageViewModels = new List<IPageViewModel>
             {
-
                 new HomeViewModel(),
-               // new MemoryViewModel(),
-               // new ProcessorViewModel(),
-               // new VideocardViewModel(),
-               // new MotherboardViewModel(),
-                new BookViewModel(),
                 new SearchViewModel()
+                //,new MyOrdersBookVisibility()
             };
 
             _previousPages = new Stack<IPageViewModel>();
@@ -232,6 +236,18 @@ namespace IronMacbeth.Client.ViewModel
         {
             LogInViewModel logInViewModel = new LogInViewModel();
             new LogInWindow { DataContext = logInViewModel }.ShowDialog();
+
+            if (UserLoggedIn && User.IsAdmin)
+            {
+                PageViewModels = PageViewModels.Append(new BookViewModel()).ToList();
+                OnPropertyChanged(nameof(PageViewModels));
+            }
+            else if (UserLoggedIn)
+            {
+                PageViewModels = PageViewModels.Append(new MyOrdersViewModel()).ToList();
+                OnPropertyChanged(nameof(PageViewModels));
+            }
+
             OnUserChanged();
         }
 

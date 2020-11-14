@@ -179,6 +179,11 @@
     </Compile>
     <Compile Include="VVM\MotherboardVVM\MotherboardViewModel.cs" />
     <Compile Include="VVM\MotherboardVVM\MotherboardItemViewModel.cs" />
+    <Compile Include="VVM\MyOrdersVVM\MyOrdersUserControl.xaml.cs">
+      <DependentUpon>MyOrdersUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VVM\MyOrdersVVM\MyOrdersViewModel.cs" />
+    <Compile Include="VVM\MyOrdersVVM\Order.cs" />
     <Compile Include="VVM\NewspaperItemVVM\NewspaperItemUserControl.xaml.cs">
       <DependentUpon>NewspaperItemUserControl.xaml</DependentUpon>
     </Compile>
@@ -338,6 +343,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VVM\MotherboardVVM\MotherboardUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VVM\MyOrdersVVM\MyOrdersUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -514,7 +523,9 @@
       <Name>IronMacbeth.BFF.Contract</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="VVM\MyOrdersVVM\MyOrdersItemsVVM\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

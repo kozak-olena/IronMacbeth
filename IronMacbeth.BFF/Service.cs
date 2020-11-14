@@ -11,6 +11,50 @@ namespace IronMacbeth.BFF
 {
     public class Service : IService
     {
+        #region Order
+        public void CreateOrder(Order orderInfo)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(orderInfo);
+                dbContext.SaveChanges();
+            }
+        }
+        #endregion
+
+        #region Search
+        public DocumentsSearchResults SearchDocuments(SearchFilledFields searchFilledFields)
+        {
+            var result = new DocumentsSearchResults();
+            if (searchFilledFields.IsArticleSelected)
+            {
+                List<Article> articles = GetArticlesByCriteria(searchFilledFields);
+                result.Articles = articles;
+            }
+            if (searchFilledFields.IsBookSelected)
+            {
+                List<Book> books = GetBooksByCriteria(searchFilledFields);
+                result.Books = books;
+            }
+            if (searchFilledFields.IsPeriodicalSelected)
+            {
+                List<Periodical> periodicals = GetPeriodicalsByCriteria(searchFilledFields);
+                result.Periodicals = periodicals;
+            }
+            if (searchFilledFields.IsNewspaperSelected)
+            {
+                List<Newspaper> newspapers = GetNewspapersByCriteria(searchFilledFields);
+                result.Newspapers = newspapers;
+            }
+            if (searchFilledFields.IsThesisSelected)
+            {
+                List<Thesis> theses = GetThesesByCriteria(searchFilledFields);
+                result.Theses = theses;
+            }
+            return result;
+        }
+        #endregion
+
         #region  Periodical
         public void CreatePeriodical(Periodical periodical)
         {
@@ -212,38 +256,6 @@ namespace IronMacbeth.BFF
             }
         }
         #endregion
-
-        public DocumentsSearchResults SearchDocuments(SearchFilledFields searchFilledFields)
-        {
-            var result = new DocumentsSearchResults();
-            if (searchFilledFields.IsArticleSelected)
-            {
-                List<Article> articles = GetArticlesByCriteria(searchFilledFields);
-                result.Articles = articles;
-            }
-            if (searchFilledFields.IsBookSelected)
-            {
-                List<Book> books = GetBooksByCriteria(searchFilledFields);
-                result.Books = books;
-            }
-            if (searchFilledFields.IsPeriodicalSelected)
-            {
-                List<Periodical> periodicals = GetPeriodicalsByCriteria(searchFilledFields);
-                result.Periodicals = periodicals;
-            }
-            if (searchFilledFields.IsNewspaperSelected)
-            {
-                List<Newspaper> newspapers = GetNewspapersByCriteria(searchFilledFields);
-                result.Newspapers = newspapers;
-            }
-            if (searchFilledFields.IsThesisSelected)
-            {
-                List<Thesis> theses = GetThesesByCriteria(searchFilledFields);
-                result.Theses = theses;
-            }
-            return result;
-        }
-
 
         #region Article
         public void CreateArticle(Article article)

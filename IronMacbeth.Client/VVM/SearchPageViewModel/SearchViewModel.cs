@@ -36,7 +36,6 @@ namespace IronMacbeth.Client.VVM.SearchPageViewModel
         {
         }
 
-        public ICommand ExitCommand { get; }
         public ICommand SearchCommand { get; }
         public ICommand DeleteAllComand { get; }
 
