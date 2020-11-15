@@ -55,7 +55,8 @@ namespace IronMacbeth.Client
                 ArticleId = orderInfo.Article?.Id,
                 PeriodicalId = orderInfo.Periodical?.Id,
                 NewspaperId = orderInfo.Newspaper?.Id,
-                ThesesId = orderInfo.Thesis?.Id
+                ThesesId = orderInfo.Thesis?.Id,
+                TypeOfOrder = orderInfo.TypeOfOrder
             };
         }
 
@@ -64,8 +65,7 @@ namespace IronMacbeth.Client
             var orders = _proxy.GetAllOrders();
 
             var internalOrders = orders.Select(MapContractToInternalOrder).ToList();
-            
-           
+
             return internalOrders;
         }
 
@@ -76,6 +76,7 @@ namespace IronMacbeth.Client
             {
                 Id = order.Id,
                 UserLogin = order.UserLogin,
+                TypeOfOrder = order.TypeOfOrder,
                 Book = order.Book != null ? MapContractToInternalBook(order.Book) : null,
                 Article = order.Article != null ? MapContractToInternalArticle(order.Article) : null,
                 Periodical = order.Periodical != null ? MapContractToInternalPeriodical(order.Periodical) : null,

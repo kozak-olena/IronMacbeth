@@ -35,9 +35,16 @@ namespace IronMacbeth.Client.VVM.MyOrdersVVM
         public void CancelMethod(object parameter)
         {
             _selectedItem = SelectedItem.GetItem();
-            Order orderToDelete = (Order)_selectedItem;
-            ServerAdapter.Instance.DeleteOrder(orderToDelete.Id);
-            Update();
+            if (_selectedItem is Order)
+            {
+                Order orderToDelete = (Order)_selectedItem;
+                ServerAdapter.Instance.DeleteOrder(orderToDelete.Id);
+                Update();
+            }
+            else if (_selectedItem is ReadingRoomOrder) 
+            {
+
+            }
 
         }
 

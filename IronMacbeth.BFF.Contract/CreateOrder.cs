@@ -16,6 +16,6 @@ namespace IronMacbeth.BFF.Contract
         public int? NewspaperId { get; set; }
         public int? ThesesId { get; set; }
 
-        public string TypeOfOrder { get; set; } = "Issueing document";
+        public string TypeOfOrder { get; set; }
     }
 }

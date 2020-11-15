@@ -2,10 +2,10 @@
 (
     [Id] INT  NOT NULL IDENTITY(1, 1) PRIMARY KEY,
     [UserLogin] VARCHAR (255) NOT NULL,
-    [BookId] INT NOT NULL,
-    [ArticleId] INT NOT NULL,
-    [PeriodicalId] INT NOT NULL,
-    [NewspaperId] INT NOT NULL,
-    [ThesesId] INT NOT NULL,
+    [BookId] INT NULL,
+    [ArticleId] INT NULL,
+    [PeriodicalId] INT NULL,
+    [NewspaperId] INT NULL,
+    [ThesesId] INT NULL,
     [TypeOfOrder] VARCHAR (255) NOT NULL
 )

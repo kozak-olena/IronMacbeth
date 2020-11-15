@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              
              d:DesignWidth="800" Height="130" BorderBrush="#FF90AAD8">
-    <Grid  Background="#FFA6CAD4">
+    <Grid  Background="#FFBAE3EE">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="2*"/>
@@ -17,7 +17,7 @@
             Grid.Column="0">
             <WrapPanel Orientation="Horizontal">
                 <TextBlock 
-                    Margin="0,10,5,0"
+                    Margin="5,10,5,0"
                     Text="{Binding Name}"
                     Foreground="CornflowerBlue" 
                     FontWeight="Bold" 
@@ -34,21 +34,26 @@
                 <WrapPanel Margin="0,5,0,0">
                     <Label Margin="5,0,5,0" Content="Number of order:" FontSize="13" Foreground="DimGray"/>
                     <Label Margin="5,0,5,0" Content="{Binding Id}" FontSize="13" Foreground="DimGray"/>
-                    <Label Content="•" FontSize="13" Foreground="DimGray"/>
+                </WrapPanel>
+                <WrapPanel Orientation="Horizontal">
                     <Label Margin="5,0,5,0" Content="User name:" FontSize="13" Foreground="DimGray"/>
                     <Label Margin="5,0,5,0" Content="{Binding UserLogin}" FontSize="13" Foreground="DimGray"/>
                 </WrapPanel>
-                <WrapPanel Orientation="Vertical">
+                <WrapPanel Orientation="Horizontal">
                     <Label Margin="5,0,5,0" Content="Type of order:" FontSize="13" Foreground="DimGray"/>
-                    <Label Margin="5,0,5,0" Content="{Binding TypeOfOrder}" FontSize="13" Foreground="DimGray"/>
+                    <Label Margin="5,0,5,0" Content="{Binding TypeOfDocument}" FontSize="13" Foreground="DimGray"/>
                 </WrapPanel>
-                <WrapPanel Orientation="Vertical">
+                <WrapPanel Orientation="Horizontal">
+                    <Label Margin="5,0,5,0" Content="Status of order:" FontSize="13" Foreground="DimGray"/>
+                    <Label Margin="5,0,5,0" Content="{Binding TypeOfDocument}" FontSize="13" Foreground="DimGray"/>
+                </WrapPanel>
+                <WrapPanel Orientation="Horizontal">
                     <Label Margin="5,0,5,0" Content="Date of order:" FontSize="13" Foreground="DimGray"/>
-                    <Label Margin="5,0,5,0" Content="{Binding TypeOfOrder}" FontSize="13" Foreground="DimGray"/>
+                    <Label Margin="5,0,5,0" Content="{Binding TypeOfDocument}" FontSize="13" Foreground="DimGray"/>
                 </WrapPanel>
-                <WrapPanel Orientation="Vertical">
+                <WrapPanel Orientation="Horizontal">
                     <Label Margin="5,0,5,0" Content="Date of return:" FontSize="13" Foreground="DimGray"/>
-                    <Label Margin="5,0,5,0" Content="{Binding TypeOfOrder}" FontSize="13" Foreground="DimGray"/>
+                    <Label Margin="5,0,5,0" Content="{Binding TypeOfDocument}" FontSize="13" Foreground="DimGray"/>
                 </WrapPanel>
             </WrapPanel>
         </WrapPanel>

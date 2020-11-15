@@ -14,7 +14,7 @@ namespace IronMacbeth.BFF
         #region Order
         public void CreateOrder(Contract.CreateOrder orderInfo)
         {
-            var order = new Order { Id = orderInfo.Id, UserLogin = orderInfo.UserLogin, BookId = orderInfo.BookId, ArticleId = orderInfo.ArticleId, PeriodicalId = orderInfo.PeriodicalId, ThesesId = orderInfo.ThesesId, NewspaperId = orderInfo.NewspaperId };
+            var order = new Order { Id = orderInfo.Id, UserLogin = orderInfo.UserLogin, BookId = orderInfo.BookId, ArticleId = orderInfo.ArticleId, PeriodicalId = orderInfo.PeriodicalId, ThesesId = orderInfo.ThesesId, NewspaperId = orderInfo.NewspaperId, TypeOfOrder = orderInfo.TypeOfOrder };
 
             using (var dbContext = new DbContext())
             {
@@ -36,7 +36,7 @@ namespace IronMacbeth.BFF
 
                 var result = intermediate.ToList();
 
-                return result.Select(x => new Contract.Order { Id = x.Id, UserLogin = x.UserLogin, Book = x.Book, Article = x.Article, Periodical = x.Periodical, Theses = x.Theses, Newspaper = x.Newspaper }).ToList();
+                return result.Select(x => new Contract.Order { Id = x.Id, UserLogin = x.UserLogin, Book = x.Book, Article = x.Article, Periodical = x.Periodical, Theses = x.Theses, Newspaper = x.Newspaper, TypeOfOrder=x.TypeOfOrder }).ToList();
             }
 
         }

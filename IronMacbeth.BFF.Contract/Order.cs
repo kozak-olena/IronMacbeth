@@ -16,6 +16,7 @@ namespace IronMacbeth.BFF.Contract
         public Newspaper Newspaper { get; set; }
         public Thesis Theses { get; set; }
 
+        
         public string TypeOfOrder { get; set; } = "Issueing document";
     }
 }

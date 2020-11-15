@@ -21,7 +21,7 @@ namespace IronMacbeth.Client
         public Newspaper Newspaper { get; set; }
         public Thesis Thesis { get; set; }
 
-        public string TypeOfOrder { get; set; } = "Issueing document";
+        public string TypeOfOrder { get; set; }  
 
         public object GetOrderedItem()
         {

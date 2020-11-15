@@ -20,30 +20,11 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
         public string PageViewName => "SearchResults";
         public void Update() { ShowCollection(); }
 
-        private List<IDocumentViewModel> _items;
-        public List<IDocumentViewModel> Items
-        {
-            get
-            {
-                //UpdateCollection(true);
-                return _items;
-            }
-            private set { _items = value; }
-        }
+        public List<IDocumentViewModel> Items { get; private set; }
 
         public ICommand AddtoMyOrdersCommand { get; }
         public ICommand OrderToReadingRoomCommand { get; }
 
-        //private Order _order;
-
-        //public Order Order
-        //{
-        //    get { return _order; }
-        //    set
-        //    {
-        //        _order = value;
-        //    }
-        //}
 
         private object _selectedItem;
         public Order order;
@@ -57,6 +38,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
                 Book book = (Book)_selectedItem;
                 order.Book = book;
                 order.UserLogin = UserService.LoggedInUser.Login;
+                order.TypeOfOrder = "Issueing order";
                 ServerAdapter.Instance.CreateOrder(order);
                 MessageBox.Show($"Book \"{book.Name}\" added to your orders", "Book added", MessageBoxButton.OK,
                       MessageBoxImage.Information);
@@ -66,6 +48,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
                 Article article = (Article)_selectedItem;
                 order.Article = article;
                 order.UserLogin = UserService.LoggedInUser.Login;
+                order.TypeOfOrder = "Issueing order";
                 ServerAdapter.Instance.CreateOrder(order);
                 MessageBox.Show($"Article \"{article.Name}\" added to your orders", "Article added", MessageBoxButton.OK,
                    MessageBoxImage.Information);
@@ -75,6 +58,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
                 Periodical periodical = (Periodical)_selectedItem;
                 order.Periodical = periodical;
                 order.UserLogin = UserService.LoggedInUser.Login;
+                order.TypeOfOrder = "Issueing order";
                 ServerAdapter.Instance.CreateOrder(order);
                 MessageBox.Show($"Periodical \"{periodical.Name}\" added to your orders", "Periodical added", MessageBoxButton.OK,
                   MessageBoxImage.Information);
@@ -84,6 +68,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
                 Newspaper newspaper = (Newspaper)_selectedItem;
                 order.Newspaper = newspaper;
                 order.UserLogin = UserService.LoggedInUser.Login;
+                order.TypeOfOrder = "Issueing order";
                 ServerAdapter.Instance.CreateOrder(order);
                 MessageBox.Show($"Newspaper \"{newspaper.Name}\" added to your orders", "Newspaper added", MessageBoxButton.OK,
                  MessageBoxImage.Information);
@@ -93,6 +78,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
                 Thesis theses = (Thesis)_selectedItem;
                 order.Thesis = theses;
                 order.UserLogin = UserService.LoggedInUser.Login;
+                order.TypeOfOrder = "Issueing order";
                 ServerAdapter.Instance.CreateOrder(order);
                 MessageBox.Show($"Theses \"{theses.Name}\" added to your orders", "Theses added", MessageBoxButton.OK,
                 MessageBoxImage.Information);
@@ -101,6 +87,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
 
         public void OrderToReadingRoomMethod(object parameter)
         {
+
         }
 
         private SearchFilledFields _searchFilledFields;
@@ -120,14 +107,14 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
 
         public void ShowCollection()
         {
-            _items = new List<IDocumentViewModel>();
+            Items = new List<IDocumentViewModel>();
             DocumentsSearchResults documentsSearchResults = ServerAdapter.Instance.SearchDocuments(_searchFilledFields);
 
-            _items.AddRange(documentsSearchResults.Books.Select(x => new BookItemViewModel(x)));
-            _items.AddRange(documentsSearchResults.Articles.Select(x => new ArticleItemViewModel(x)));
-            _items.AddRange(documentsSearchResults.Periodicals.Select(x => new PeriodicalItemViewModel(x)));
-            _items.AddRange(documentsSearchResults.Newspapers.Select(x => new NewspaperItemViewModel(x)));
-            _items.AddRange(documentsSearchResults.Theses.Select(x => new ThesisItemViewModel(x)));
+            Items.AddRange(documentsSearchResults.Books.Select(x => new BookItemViewModel(x)));
+            Items.AddRange(documentsSearchResults.Articles.Select(x => new ArticleItemViewModel(x)));
+            Items.AddRange(documentsSearchResults.Periodicals.Select(x => new PeriodicalItemViewModel(x)));
+            Items.AddRange(documentsSearchResults.Newspapers.Select(x => new NewspaperItemViewModel(x)));
+            Items.AddRange(documentsSearchResults.Theses.Select(x => new ThesisItemViewModel(x)));
             OnPropertyChanged(nameof(Items));
         }
 
