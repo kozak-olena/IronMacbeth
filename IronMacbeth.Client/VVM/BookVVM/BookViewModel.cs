@@ -2,12 +2,9 @@
 using IronMacbeth.Client.ViewModel;
 using IronMacbeth.Client.VVM.ArticleItemVVM;
 using IronMacbeth.Client.VVM.EditBookVVM;
-using IronMacbeth.Client.VVM.EditMemoryVVM;
 using IronMacbeth.Client.VVM.NewspaperItemVVM;
 using IronMacbeth.Client.VVM.PeriodicalItemVVM;
- 
 using IronMacbeth.Client.VVM.ThesisItemVVM;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;

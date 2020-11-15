@@ -1,15 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:processorinfo="clr-namespace:IronMacbeth.Client.VVM.ProcessorInfo"
-                    xmlns:videocardinfo="clr-namespace:IronMacbeth.Client.VVM.VideocardInfo"
-                    xmlns:motherboardinfo="clr-namespace:IronMacbeth.Client.VVM.MotherboardInfo"
-                    xmlns:memorydinfo="clr-namespace:IronMacbeth.Client.VVM.MemoryInfo"
-                    xmlns:processor="clr-namespace:IronMacbeth.Client.VVM.ProcessorVVM"
-                    xmlns:purchase="clr-namespace:IronMacbeth.Client.VVM.PuchaseVVM"
-                    xmlns:motherboard="clr-namespace:IronMacbeth.Client.VVM.MotherboardVVM"
                     xmlns:home="clr-namespace:IronMacbeth.Client.VVM.Home"
-                    xmlns:memory="clr-namespace:IronMacbeth.Client.VVM.MemoryVVM"
-                    xmlns:videocardVvm="clr-namespace:IronMacbeth.Client.VVM.VideocardVVM"
                     xmlns:book ="clr-namespace:IronMacbeth.Client.VVM.BookVVM"
                     xmlns:bookInfo ="clr-namespace:IronMacbeth.Client.VVM.BookInfoVVM"
                     xmlns:searchVvm ="clr-namespace:IronMacbeth.Client.VVM.SearchPageViewModel"
@@ -19,26 +10,8 @@
     <DataTemplate DataType="{x:Type home:HomeViewModel}">
         <home:HomeUserControl />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type processor:ProcessorViewModel}">
-        <processor:ProcessorUserControl/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type processorinfo:ProcessorInfoViewModel}">
-        <processorinfo:ProcessorInfoUserControl/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type videocardinfo:VideocardInfoViewModel}">
-        <videocardinfo:VideocardInfoUserControl/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type purchase:PurchaseViewModel}">
-        <purchase:PurchaseUserControl/>
-    </DataTemplate>
     <DataTemplate DataType="{x:Type orderVvm:MyOrdersViewModel}">
         <orderVvm:MyOrdersUserControl/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type videocardVvm:VideocardViewModel}">
-        <videocardVvm:VideocardUserControl/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type motherboard:MotherboardViewModel}">
-        <motherboard:MotherboardUserControl/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type book:BookViewModel}">
         <book:BookUserControl/>
@@ -51,15 +24,5 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type searchResults:SearchResultsViewModel}">
         <searchResults:SearchResultsUserControl/>
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type motherboardinfo:MotherboardInfoViewModel}">
-        <motherboardinfo:MotherboardInfoUserControl/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type memory:MemoryViewModel}">
-        <memory:MemoryUserControl/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type memorydinfo:MemoryInfoViewModel}">
-        <memorydinfo:MemoryInfoUserControl/>
     </DataTemplate>
 </ResourceDictionary>

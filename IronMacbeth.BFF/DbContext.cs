@@ -6,6 +6,7 @@ namespace IronMacbeth.BFF
     public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     {
         internal DbSet<Order> Orders { get; set; }
+
         public DbSet<ReadingRoomOrder> ReadingRoomOrders { get; set; }
 
         public DbSet<Periodical> Periodicals { get; set; }
@@ -17,26 +18,6 @@ namespace IronMacbeth.BFF
         public DbSet<Article> Articles { get; set; }
 
         public DbSet<Book> Books { get; set; }
-
-        public DbSet<StoreBook> StoreBook { get; set; }
-
-        public DbSet<Memory> Memories { get; set; }
-
-        public DbSet<Motherboard> Motherboards { get; set; }
-
-        public DbSet<Processor> Processors { get; set; }
-
-        public DbSet<Purchase> Purchases { get; set; }
-
-        public DbSet<Store> Stores { get; set; }
-
-        public DbSet<StoreMemory> StoreMemories { get; set; }
-
-        public DbSet<StoreMotherboard> StoreMotherboards { get; set; }
-
-        public DbSet<StoreProcessor> StoreProcessors { get; set; }
-
-        public DbSet<StoreVideocard> StoreVideoCards { get; set; }
 
         internal DbSet<User> Users { get; set; }
 
@@ -67,33 +48,6 @@ namespace IronMacbeth.BFF
 
             modelBuilder.Entity<Periodical>()
             .ToTable(nameof(Periodical));
-
-            modelBuilder.Entity<Memory>()
-                 .ToTable(nameof(Memory));
-
-            modelBuilder.Entity<Motherboard>()
-                .ToTable(nameof(Motherboard));
-
-            modelBuilder.Entity<Processor>()
-                .ToTable(nameof(Processor));
-
-            modelBuilder.Entity<Purchase>()
-                .ToTable(nameof(Purchase));
-
-            modelBuilder.Entity<Store>()
-                .ToTable(nameof(Store));
-
-            modelBuilder.Entity<StoreMemory>()
-                .ToTable(nameof(StoreMemory));
-
-            modelBuilder.Entity<StoreMotherboard>()
-                .ToTable(nameof(StoreMotherboard));
-
-            modelBuilder.Entity<StoreProcessor>()
-                .ToTable(nameof(StoreProcessor));
-
-            modelBuilder.Entity<StoreVideocard>()
-                .ToTable(nameof(StoreVideocard));
 
             modelBuilder.Entity<User>()
                 .ToTable(nameof(User))

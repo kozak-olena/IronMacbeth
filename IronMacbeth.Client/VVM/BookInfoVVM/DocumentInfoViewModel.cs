@@ -1,13 +1,8 @@
-﻿using IronMacbeth.Client.ViewModel;
-using IronMacbeth.Client.VVM.BookInfoVVM;
-using IronMacbeth.Client.VVM.EditBookVVM;
-using IronMacbeth.Client.VVM.StoreVVM;
-using System.Collections.Generic;
-using System.Linq;
+﻿using IronMacbeth.Client.VVM.EditBookVVM;
 
 namespace IronMacbeth.Client.VVM.BookVVM
 {
-  public  class DocumentInfoViewModel : IPageViewModel
+    public  class DocumentInfoViewModel : IPageViewModel
     {
         public string PageViewName => "BookInfo";
         public void Update() { }

@@ -1,15 +1,14 @@
 ﻿using IronMacbeth.BFF.Contract;
 using IronMacbeth.Client.Annotations;
-using IronMacbeth.Client.VVM;
 using IronMacbeth.Client.VVM.BookVVM;
 using IronMacbeth.Client.VVM.Home;
 using IronMacbeth.Client.VVM.LogInVVM;
-using IronMacbeth.Client.VVM.PurchaseVVM;
+using IronMacbeth.Client.VVM.MyOrdersVVM;
 using IronMacbeth.Client.VVM.SearchPageViewModel;
-using IronMacbeth.Client.VVM.StoreVVM;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.ServiceModel;
 using System.Threading.Tasks;
@@ -17,8 +16,6 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Input;
 using Timer = System.Timers.Timer;
-using System.Linq;
-using IronMacbeth.Client.VVM.MyOrdersVVM;
 
 namespace IronMacbeth.Client.ViewModel
 {
@@ -36,8 +33,6 @@ namespace IronMacbeth.Client.ViewModel
         public ICommand RegisterCommand { get; }
         public ICommand ReconnectCommand { get; }
         public ICommand ChangePageCommand { get; }
-        public ICommand ShowStoresCommand { get; }
-        public ICommand ShowPurchasesCommand { get; }
 
         private IPageViewModel _currentPageViewModel;
 
@@ -179,8 +174,6 @@ namespace IronMacbeth.Client.ViewModel
             RegisterCommand = new RelayCommand(RegisterMethod) { CanExecuteFunc = CanExecuteAutorizationMethods };
             ReconnectCommand = new RelayCommand(ReconnectMethod);
             ChangePageCommand = new RelayCommand(ChangePageMethod);
-            ShowStoresCommand = new RelayCommand(ShowStoresMethod);
-            ShowPurchasesCommand = new RelayCommand(ShowPurchasesMethod);
             PageViewModels = new List<IPageViewModel>
             {
                 new HomeViewModel(),
@@ -197,16 +190,6 @@ namespace IronMacbeth.Client.ViewModel
         {
             UserService.LogOut();
             OnUserChanged();
-        }
-
-        public void ShowStoresMethod(object parameter)
-        {
-            new UserStoresWindow { DataContext = new UserStoresViewModel(User) }.ShowDialog();
-        }
-
-        public void ShowPurchasesMethod(object parameter)
-        {
-            new StorePurchaseWindow { DataContext = new StorePurchaseViewModel(User) }.ShowDialog();
         }
 
         public void CloseMethod(object parameter)
