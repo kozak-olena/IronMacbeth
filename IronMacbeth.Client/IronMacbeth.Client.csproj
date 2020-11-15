@@ -38,7 +38,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>Images\icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -74,12 +74,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AnonymousServerAdapter.cs" />
-    <Compile Include="ConnectingAnimation.xaml.cs">
-      <DependentUpon>ConnectingAnimation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Factory.cs" />
-    <Compile Include="GifImage.cs" />
-    <Compile Include="GridLengthAnimation.cs" />
     <Compile Include="IDocumentViewModel.cs" />
     <Compile Include="Model\Article.cs" />
     <Compile Include="Model\Base.cs" />
@@ -112,7 +106,6 @@
     <Compile Include="Model\Thesis.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\Videocard.cs" />
-    <Compile Include="TestAnimation.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="VVM\ArticleInfoVVM\ArticleInfoUserControl.xaml.cs">
       <DependentUpon>ArticleInfoUserControl.xaml</DependentUpon>
@@ -275,10 +268,6 @@
       <DependentUpon>VideocardUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="VVM\VideocardVVM\VideocardViewModel.cs" />
-    <Page Include="ConnectingAnimation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Themes\BureauBlue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -498,24 +487,6 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\loading-2.gif">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\ConnectionAnimation.gif">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\loadingNoTransparency.gif">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\loadingSmall.gif" />
   </ItemGroup>
   <ItemGroup>
@@ -526,6 +497,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="VVM\MyOrdersVVM\MyOrdersItemsVVM\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
