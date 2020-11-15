@@ -56,8 +56,8 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             {
                 Book book = (Book)_selectedItem;
                 order.BookId = book.Id;
-                order.UserLogin = "me";
-                MainViewModel.ServerAdapter.CreateOrder(order);
+                order.UserLogin = UserService.LoggedInUser.Login;
+                ServerAdapter.Instance.CreateOrder(order);
                 MessageBox.Show($"Book \"{book.Name}\" added to your orders", "Book added", MessageBoxButton.OK,
                       MessageBoxImage.Information);
             }
@@ -65,8 +65,8 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             {
                 Article article = (Article)_selectedItem;
                 order.ArticleId = article.Id;
-                order.UserLogin = "me";
-                MainViewModel.ServerAdapter.CreateOrder(order);
+                order.UserLogin = UserService.LoggedInUser.Login;
+                ServerAdapter.Instance.CreateOrder(order);
                 MessageBox.Show($"Article \"{article.Name}\" added to your orders", "Article added", MessageBoxButton.OK,
                    MessageBoxImage.Information);
             }
@@ -74,8 +74,8 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             {
                 Periodical periodical = (Periodical)_selectedItem;
                 order.PeriodicalId = periodical.Id;
-                order.UserLogin = "me";
-                MainViewModel.ServerAdapter.CreateOrder(order);
+                order.UserLogin = UserService.LoggedInUser.Login;
+                ServerAdapter.Instance.CreateOrder(order);
                 MessageBox.Show($"Periodical \"{periodical.Name}\" added to your orders", "Periodical added", MessageBoxButton.OK,
                   MessageBoxImage.Information);
             }
@@ -83,8 +83,8 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             {
                 Newspaper newspaper = (Newspaper)_selectedItem;
                 order.NewspaperId = newspaper.Id;
-                order.UserLogin = "me";
-                MainViewModel.ServerAdapter.CreateOrder(order);
+                order.UserLogin = UserService.LoggedInUser.Login;
+                ServerAdapter.Instance.CreateOrder(order);
                 MessageBox.Show($"Newspaper \"{newspaper.Name}\" added to your orders", "Newspaper added", MessageBoxButton.OK,
                  MessageBoxImage.Information);
             }
@@ -92,8 +92,8 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             {
                 Thesis theses = (Thesis)_selectedItem;
                 order.ThesesID = theses.Id;
-                order.UserLogin = "me";
-                MainViewModel.ServerAdapter.CreateOrder(order);
+                order.UserLogin = UserService.LoggedInUser.Login;
+                ServerAdapter.Instance.CreateOrder(order);
                 MessageBox.Show($"Theses \"{theses.Name}\" added to your orders", "Theses added", MessageBoxButton.OK,
                 MessageBoxImage.Information);
             }

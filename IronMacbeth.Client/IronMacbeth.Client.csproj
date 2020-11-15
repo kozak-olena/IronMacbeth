@@ -184,6 +184,7 @@
     </Compile>
     <Compile Include="VVM\MyOrdersVVM\MyOrdersViewModel.cs" />
     <Compile Include="VVM\MyOrdersVVM\Order.cs" />
+    <Compile Include="VVM\MyOrdersVVM\ReadingRoomOrder.cs" />
     <Compile Include="VVM\NewspaperItemVVM\NewspaperItemUserControl.xaml.cs">
       <DependentUpon>NewspaperItemUserControl.xaml</DependentUpon>
     </Compile>

@@ -39,6 +39,47 @@ namespace IronMacbeth.Client
             _proxy = proxy;
         }
 
+        #region Order
+        public void CreateOrder(Internal.Order orderInfo)
+        {
+            var contractOrder = MapInternalToContractOrder(orderInfo);
+            _proxy.CreateOrder(contractOrder);
+        }
+        private Contract.Order MapInternalToContractOrder(Internal.Order orderInfo)
+        {
+            return new Contract.Order
+            {
+                UserLogin = orderInfo.UserLogin,
+                BookId = orderInfo.BookId,
+                ArticleId = orderInfo.ArticleId,
+                PeriodicalId = orderInfo.PeriodicalId,
+                NewspaperId = orderInfo.NewspaperId,
+                ThesesID = orderInfo.ThesesID
+            };
+        }
+        #endregion
+
+        #region Order
+        public void CreateReadingRoomOrder(Internal.ReadingRoomOrder orderInfo)
+        {
+            var contractOrder = MapInternalToContractReadingRoomOrder(orderInfo);
+            _proxy.CreateReadingRoomOrder(contractOrder);
+        }
+        private Contract.ReadingRoomOrder MapInternalToContractReadingRoomOrder(Internal.ReadingRoomOrder orderInfo)
+        {
+            return new Contract.ReadingRoomOrder
+            {
+                UserLogin = orderInfo.UserLogin,
+                BookId = orderInfo.BookId,
+                ArticleId = orderInfo.ArticleId,
+                PeriodicalId = orderInfo.PeriodicalId,
+                NewspaperId = orderInfo.NewspaperId,
+                ThesesID = orderInfo.ThesesID
+            };
+        }
+        #endregion
+
+        #region SearchDocument
         public DocumentsSearchResults SearchDocuments(Internal.SearchFilledFields searchFilledFields)
         {
             var contractSearch = MapInternalToContractSearchCriteria(searchFilledFields);
@@ -90,6 +131,7 @@ namespace IronMacbeth.Client
 
             return documents;
         }
+        #endregion
 
         #region Periodical
 
@@ -480,26 +522,6 @@ namespace IronMacbeth.Client
         }
 
         #endregion
-
-
-        public void CreateOrder(Internal.Order orderInfo)
-        {
-            var contractOrder = MapInternalToContractOrder(orderInfo);
-            _proxy.CreateOrder(contractOrder);
-        }
-        private Contract.Order MapInternalToContractOrder(Internal.Order orderInfo)
-        {
-            return new Contract.Order
-            {
-                UserLogin = orderInfo.UserLogin,
-                BookId = orderInfo.BookId,
-                ArticleId = orderInfo.ArticleId,
-                PeriodicalId = orderInfo.PeriodicalId,
-                NewspaperId = orderInfo.NewspaperId,
-                ThesesID = orderInfo.ThesesID
-            };
-        }
-
 
         #region Book
 

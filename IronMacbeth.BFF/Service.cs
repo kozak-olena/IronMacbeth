@@ -22,6 +22,19 @@ namespace IronMacbeth.BFF
         }
         #endregion
 
+        #region ReadingRoomOrder
+        public void CreateReadingRoomOrder(Order orderInfo)
+        {
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(orderInfo);
+                dbContext.SaveChanges();
+            }
+        }
+        #endregion
+
+
+
         #region Search
         public DocumentsSearchResults SearchDocuments(SearchFilledFields searchFilledFields)
         {

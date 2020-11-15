@@ -13,6 +13,9 @@ namespace IronMacbeth.BFF.Contract
         [OperationContract]
         void CreateOrder(Order orderInfo);
 
+        [OperationContract]
+        void CreateReadingRoomOrder(ReadingRoomOrder orderInfo);
+
         #region Book
 
         [OperationContract]

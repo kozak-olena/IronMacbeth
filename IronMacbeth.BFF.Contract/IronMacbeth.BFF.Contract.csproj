@@ -55,6 +55,7 @@
     <Compile Include="Processor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purchase.cs" />
+    <Compile Include="ReadingRoomOrder.cs" />
     <Compile Include="RentBook.cs" />
     <Compile Include="RentPeriodical.cs" />
     <Compile Include="SearchFilledFields.cs" />
