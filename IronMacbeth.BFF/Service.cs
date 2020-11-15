@@ -23,7 +23,7 @@ namespace IronMacbeth.BFF
         #endregion
 
         #region ReadingRoomOrder
-        public void CreateReadingRoomOrder(Order orderInfo)
+        public void CreateReadingRoomOrder(ReadingRoomOrder orderInfo)
         {
             using (var dbContext = new DbContext())
             {
