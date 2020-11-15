@@ -5,102 +5,27 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="630">
-    <UserControl.Resources>
-        <Storyboard x:Key="ConnectionStoryboard">
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="border2">
-                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0"/>
-            </ThicknessAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border2">
-                <EasingColorKeyFrame KeyTime="0" Value="Blue"/>
-                <EasingColorKeyFrame KeyTime="0:0:0.3" Value="Blue"/>
-            </ColorAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="ConnectedStoryboard">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border2">
-                <EasingColorKeyFrame KeyTime="0:0:0.7" Value="#FF00FF2E"/>
-            </ColorAnimationUsingKeyFrames>
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="border2">
-                <EasingThicknessKeyFrame KeyTime="0" Value="0"/>
-                <EasingThicknessKeyFrame KeyTime="0:0:0.7" Value="0"/>
-                <EasingThicknessKeyFrame KeyTime="0:0:1" Value="0,-50,0,0"/>
-            </ThicknessAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="RetryStoryboard">
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="border1">
-                <EasingThicknessKeyFrame KeyTime="0" Value="-200,-50,0,0"/>
-                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="-200,0,0,0"/>
-            </ThicknessAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="RetryHideStoryboard">
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="border1">
-                <EasingThicknessKeyFrame KeyTime="0" Value="-200,0,0,0"/>
-                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="-200,-50,0,0"/>
-            </ThicknessAnimationUsingKeyFrames>
-        </Storyboard>
-    </UserControl.Resources>
-    <UserControl.Triggers>
-        <EventTrigger RoutedEvent="UserControl.MouseLeftButtonDown">
-            <BeginStoryboard Storyboard="{StaticResource ConnectionStoryboard}"/>
-            <BeginStoryboard Storyboard="{StaticResource RetryStoryboard}"/>
-        </EventTrigger>
-        <EventTrigger RoutedEvent="UserControl.MouseLeftButtonUp">
-            <BeginStoryboard Storyboard="{StaticResource ConnectedStoryboard}"/>
-            <BeginStoryboard Storyboard="{StaticResource RetryHideStoryboard}"/>
-        </EventTrigger>
-    </UserControl.Triggers>
-
     <Grid Background="LightBlue">
         <Image Source="../../Images/logoMedium.png" Margin="30"/>
-        <Button 
-            Content="Log in" 
-            Margin="0,10,10,0" 
+        <WrapPanel
+            Orientation="Horizontal"
             VerticalAlignment="Top" 
-            HorizontalAlignment="Right" 
-            Width="75"
-            Command="{Binding DataContext.LogInCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
-        <Button 
-            Content="Register" 
-            Margin="0,10,90,0" 
-            VerticalAlignment="Top" 
-            HorizontalAlignment="Right" 
-            Width="75"
-            Command="{Binding DataContext.RegisterCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
-        <Button 
-            Content="Log Out" 
-            Margin="0,10,170,0" 
-            VerticalAlignment="Top" 
-            HorizontalAlignment="Right" 
-            Width="75"
-            Command="{Binding DataContext.LogOutCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
-        <Border x:Name="border2"
-            Width="100"
-            Height="50"
-            Margin="0,-50,0,0"
-            VerticalAlignment="Top"
-            HorizontalAlignment="Center"
-            Background="#FF00C5FF">
-            <TextBlock
-                Text="Connecting..."
-                
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center" Foreground="#FF002EFF"/>
-            <!--<Border
-                Width="90"
-                Height="30"
-                Background="Yellow">
-                
-            </Border>-->
-        </Border>
-        <Border 
-            x:Name="border1"
-            Width="100"
-            Height="50"
-            Margin="-200,-50,0,0"
-            VerticalAlignment="Top"
-            HorizontalAlignment="Center"
-            Background="#FF00C5FF">
-            <Button
-                Content="Retry"/>
-        </Border>
+            HorizontalAlignment="Right">
+            <Button 
+                Content="Log in" 
+                Margin="0,10,10,0" 
+                Width="75"
+                Command="{Binding DataContext.LogInCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
+            <Button 
+                Content="Register" 
+                Margin="0,10,10,0" 
+                Width="75"
+                Command="{Binding DataContext.RegisterCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
+            <Button 
+                Content="Log Out" 
+                Margin="0,10,10,0" 
+                Width="75"
+                Command="{Binding DataContext.LogOutCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
+        </WrapPanel>
     </Grid>
 </UserControl>

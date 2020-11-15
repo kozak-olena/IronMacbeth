@@ -38,7 +38,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>Images\icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -63,10 +63,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WpfAnimatedGif, Version=1.4.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WpfAnimatedGif.1.4.13\lib\net\WpfAnimatedGif.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -74,12 +70,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AnonymousServerAdapter.cs" />
-    <Compile Include="ConnectingAnimation.xaml.cs">
-      <DependentUpon>ConnectingAnimation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Factory.cs" />
-    <Compile Include="GifImage.cs" />
-    <Compile Include="GridLengthAnimation.cs" />
     <Compile Include="IDocumentViewModel.cs" />
     <Compile Include="Model\Article.cs" />
     <Compile Include="Model\Base.cs" />
@@ -112,7 +102,6 @@
     <Compile Include="Model\Thesis.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\Videocard.cs" />
-    <Compile Include="TestAnimation.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="VVM\ArticleInfoVVM\ArticleInfoUserControl.xaml.cs">
       <DependentUpon>ArticleInfoUserControl.xaml</DependentUpon>
@@ -279,10 +268,6 @@
       <DependentUpon>VideocardUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="VVM\VideocardVVM\VideocardViewModel.cs" />
-    <Page Include="ConnectingAnimation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Themes\BureauBlue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -506,33 +491,15 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\loading-2.gif">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\ConnectionAnimation.gif">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\loadingNoTransparency.gif">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\loadingSmall.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\IronMacbeth.BFF.Contract\IronMacbeth.BFF.Contract.csproj">
       <Project>{7147F8FD-500B-4BD9-97B2-3AD28C2496E2}</Project>
       <Name>IronMacbeth.BFF.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\icon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

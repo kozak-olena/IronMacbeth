@@ -38,9 +38,6 @@ namespace IronMacbeth.Client.ViewModel
         public ICommand ChangePageCommand { get; }
         public ICommand ShowStoresCommand { get; }
         public ICommand ShowPurchasesCommand { get; }
-        public ICommand HideNotificationCommand { get; }
-        public ICommand ViewNotificationCommand { get; }
-        public ICommand AnimationCompletedCommand { get; }
 
         private IPageViewModel _currentPageViewModel;
 
@@ -89,12 +86,13 @@ namespace IronMacbeth.Client.ViewModel
             {
                 if (ConnectionMenuShown && value)
                 {
-                    ConnectionMenuText = "Connected";
+                    ConnectionMenuText = "Connected to server";
                     ConnectionMenuHideRequired = true;
                 }
                 if (!value && !ReconnectButtonShown)
                 {
-                    ConnectionMenuText = "No Connection";
+                    ConnectionMenuText = "Not connected to server";
+                    LogOutMethod(null);
                     ReconnectButtonShown = true;
                 }
                 if (value && ReconnectButtonShown)
@@ -107,20 +105,13 @@ namespace IronMacbeth.Client.ViewModel
                 }
 
                 _connected = value;
-                OnPropertyChanged(nameof(Connected));
+
+                // Forces view to re-check all CanExecute statuses
+                CommandManager.InvalidateRequerySuggested();
             }
         }
 
-        private bool _connectionMenuShown;
-        public bool ConnectionMenuShown
-        {
-            get { return _connectionMenuShown; }
-            set
-            {
-                _connectionMenuShown = value;
-                OnPropertyChanged(nameof(ConnectionMenuShown));
-            }
-        }
+        private bool ConnectionMenuShown { get; set; }
 
         private bool _connectionMenuHideRequired;
         public bool ConnectionMenuHideRequired
@@ -190,7 +181,6 @@ namespace IronMacbeth.Client.ViewModel
             ChangePageCommand = new RelayCommand(ChangePageMethod);
             ShowStoresCommand = new RelayCommand(ShowStoresMethod);
             ShowPurchasesCommand = new RelayCommand(ShowPurchasesMethod);
-            AnimationCompletedCommand = new RelayCommand(OnAnimationCompleted);
             PageViewModels = new List<IPageViewModel>
             {
                 new HomeViewModel(),
@@ -252,7 +242,7 @@ namespace IronMacbeth.Client.ViewModel
 
         public bool CanExecuteAutorizationMethods(object parameter)
         {
-            return !UserLoggedIn;
+            return Connected && !UserLoggedIn;
         }
 
         public bool CanExecuteLogOutMethod(object parameter)
@@ -325,6 +315,8 @@ namespace IronMacbeth.Client.ViewModel
 
             var anonymousServiceClient = anonymousChannelFactory.CreateChannel();
 
+            AnonymousServerAdapter.ClearInstance();
+
             AnonymousServerAdapter.Initialize(anonymousServiceClient);
 
             try
@@ -339,8 +331,10 @@ namespace IronMacbeth.Client.ViewModel
 
         private async void ConnectAsync()
         {
-            ConnectionMenuText = "Connecting...";
+            ConnectionMenuText = "Connecting to server...";
+
             ConnectionMenuShown = true;
+            ReconnectButtonShown = false;
 
             Connected = await Task<bool>.Factory.StartNew(Connect);
         }
@@ -367,11 +361,6 @@ namespace IronMacbeth.Client.ViewModel
             }
         }
 
-        public void OnAnimationCompleted(object parameter)
-        {
-            Console.Beep();
-        }
-
         private void ReconnectMethod(object parameter)
         {
             ConnectAsync();
@@ -382,6 +371,9 @@ namespace IronMacbeth.Client.ViewModel
             OnPropertyChanged(nameof(AdminToolsVisibility));
             OnPropertyChanged(nameof(MenuVisibility));
             OnPropertyChanged(nameof(Login));
+
+            // Forces view to re-check all CanExecute statuses
+            CommandManager.InvalidateRequerySuggested();
         }
     }
 }

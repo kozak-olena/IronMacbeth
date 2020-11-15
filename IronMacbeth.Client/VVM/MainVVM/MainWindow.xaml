@@ -6,51 +6,77 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
-        Title="IronMacbeth" Height="500" Width="800" MinWidth="800" Background="#FFC8E1EE">
+        Title="IronMacbeth" Height="500" Width="800" MinWidth="800" MinHeight="400" Background="#FFC8E1EE">
 
     <Window.Resources>
-        <Storyboard x:Key="ConnectionStoryboard">
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="border">
-                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0"/>
-            </ThicknessAnimationUsingKeyFrames>
-        </Storyboard>
         <Storyboard x:Key="ConnectedStoryboard">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border">
-                <EasingColorKeyFrame KeyTime="0:0:0.7" Value="#FF00FFA2"/>
-            </ColorAnimationUsingKeyFrames>
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="border">
-                <EasingThicknessKeyFrame KeyTime="0" Value="0"/>
-                <EasingThicknessKeyFrame KeyTime="0:0:0.7" Value="0"/>
-                <EasingThicknessKeyFrame KeyTime="0:0:1" Value="0,-50,0,0"/>
+            <DoubleAnimation Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(ProgressBar.Width)" From="100" To="0" Duration="0:0:0.5"/>
+            <DoubleAnimation Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(ProgressBar.Opacity)" From="1" To="0" Duration="0:0:0.25"/>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0,5"/>
             </ThicknessAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:0.5" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <ColorAnimation Storyboard.TargetName="ConnectionStatusTextBlock" To="Green" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" FillBehavior="HoldEnd" Duration="0:0:0.25"/>
         </Storyboard>
 
         <Storyboard x:Key="RetryStoryboard">
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="border1">
-                <EasingThicknessKeyFrame KeyTime="0" Value="-200,-55,0,0"/>
-                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="-200,0,0,0"/>
+            <DoubleAnimation Storyboard.TargetName="RetryButton" Storyboard.TargetProperty="(Button.Opacity)" From="0" To="1" Duration="0:0:0.25"/>
+            <DoubleAnimation Storyboard.TargetName="RetryButton" Storyboard.TargetProperty="(Button.Width)" From="0" To="75" Duration="0:0:0.5"/>
+            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="RetryButton" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="RetryButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+                <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
+            </BooleanAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="RetryButton" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="5,5"/>
             </ThicknessAnimationUsingKeyFrames>
+            
+            <DoubleAnimation Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(ProgressBar.Width)" From="100" To="0" Duration="0:0:0.5"/>
+            <DoubleAnimation Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(ProgressBar.Opacity)" From="1" To="0" Duration="0:0:0.25"/>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0,5"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:0.5" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <ColorAnimation Storyboard.TargetName="ConnectionStatusTextBlock" To="Red" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" FillBehavior="HoldEnd" Duration="0:0:0.25"/>
         </Storyboard>
         <Storyboard x:Key="RetryHideStoryboard">
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="border1">
-                <EasingThicknessKeyFrame KeyTime="0" Value="-200,0,0,0"/>
-                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="-200,-55,0,0"/>
+            <DoubleAnimation Storyboard.TargetName="RetryButton" Storyboard.TargetProperty="(Button.Opacity)" From="1" To="0" Duration="0:0:0.25"/>
+            <DoubleAnimation Storyboard.TargetName="RetryButton" Storyboard.TargetProperty="(Button.Width)" From="75" To="0" Duration="0:0:0.5"/>
+            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="RetryButton" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="RetryButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+                <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
+            </BooleanAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="RetryButton" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0,5"/>
             </ThicknessAnimationUsingKeyFrames>
+            
+            <DoubleAnimation Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(ProgressBar.Width)" From="0" To="100" Duration="0:0:0.5"/>
+            <DoubleAnimation Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(ProgressBar.Opacity)" From="0" To="1" BeginTime="0:0:0.25" Duration="0:0:0.25"/>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="5,5"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            
+            <ColorAnimation Storyboard.TargetName="ConnectionStatusTextBlock" To="Black" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" FillBehavior="HoldEnd" Duration="0:0:0.25"/>
         </Storyboard>
-        <Storyboard x:Key="Rotate"/>
     </Window.Resources>
 
     <i:Interaction.Triggers>
         <ei:DataTrigger Binding="{Binding ConnectionMenuHideRequired}" Value="True">
             <ei:ControlStoryboardAction 
                 Storyboard="{StaticResource ConnectedStoryboard}"     
-                ControlStoryboardOption="Play"/>
-        </ei:DataTrigger>
-        <ei:DataTrigger Binding="{Binding ConnectionMenuShown}" Value="True">
-            <ei:ControlStoryboardAction 
-                Storyboard="{StaticResource ConnectionStoryboard}"   
                 ControlStoryboardOption="Play"/>
         </ei:DataTrigger>
         <ei:DataTrigger Binding="{Binding ReconnectButtonShown}" Value="True">
@@ -65,145 +91,91 @@
         </ei:DataTrigger>
     </i:Interaction.Triggers>
 
-
-    <Window.Triggers>
-        <EventTrigger RoutedEvent="Window.Loaded">
-            <BeginStoryboard Storyboard="{StaticResource ConnectionStoryboard}"/>
-            <BeginStoryboard Storyboard="{StaticResource Rotate}"/>
-        </EventTrigger>
-    </Window.Triggers>
-
-
-    <Grid>
-        <DockPanel>
-            <Menu 
-                x:Name="Menu" 
-                Height="25" 
-                Visibility="{Binding MenuVisibility}"
-                DockPanel.Dock="Top" Background="#FFF0F0F0">
-                <MenuItem 
-                    Header="My Stores"
-                    Command="{Binding ShowStoresCommand}"/>
-                <MenuItem 
-                    Header="New Purchases"
-                    Command="{Binding ShowPurchasesCommand}"/>
-            </Menu>
-            <DockPanel DockPanel.Dock="Left">
-                <Border 
-                    DockPanel.Dock="Left" 
-                    BorderBrush="#FF405DC0" 
-                    BorderThickness="1"
-                    CornerRadius="1"
-                    Visibility="{Binding MenuVisibility}"
-                    Width="85">
+    <DockPanel>
+        <Menu 
+            x:Name="Menu" 
+            Height="25" 
+            Visibility="{Binding MenuVisibility}"
+            DockPanel.Dock="Top">
+            <MenuItem 
+                Header="My Stores"
+                Command="{Binding ShowStoresCommand}"/>
+            <MenuItem 
+                Header="New Purchases"
+                Command="{Binding ShowPurchasesCommand}"/>
+        </Menu>
+        <Border 
+            DockPanel.Dock="Left" 
+            BorderBrush="#FF405DC0" 
+            BorderThickness="1"
+            CornerRadius="1"
+            Visibility="{Binding MenuVisibility}"
+            Width="85">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="1*" MinHeight="{Binding ActualHeight, ElementName=MainNavigationItemsControl}"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="#FF4285C9">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="59*"/>
-                            <ColumnDefinition Width="24*"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="30"/>
-                        </Grid.RowDefinitions>
-                        <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="#FF4285C9" Grid.ColumnSpan="2" Margin="0,0,0.2,0.4">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Button 
-                                Margin="2,5,1,5" 
-                                HorizontalAlignment="Stretch" 
-                                Content="&lt;"
-                                Command="{Binding BackCommand}"/>
-                                <Button 
-                                Margin="1,5,2,5" 
-                                HorizontalAlignment="Stretch" 
-                                Content="&gt;" 
-                                Grid.Column="1"
-                                Command="{Binding ForwardCommand}"/>
-                            </Grid>
-                        </Border>
-                        <ItemsControl ItemsSource="{Binding PageViewModels}" Grid.ColumnSpan="2" Margin="0,30,0.2,0.4" Grid.RowSpan="2" >
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate >
-                                    <Button 
-                                    Content="{Binding PageViewName}"
-                                    Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                                    CommandParameter="{Binding}"
-                                    Margin="2,5"/>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                        <Border Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="#FF395FB9" Grid.ColumnSpan="2" Margin="0,383.6,0.2,-0.6" Grid.RowSpan="2">
-                            <Button 
-                            x:Name="CloseButton" 
-                            Content="Close" 
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Bottom" 
-                            Margin="2,0,2,5" 
-                            Command="{Binding CloseCommand}" 
-                            CommandParameter="{Binding ElementName=Window}"/>
-                        </Border>
+                        <Button 
+                            Margin="2,5,1,5" 
+                            HorizontalAlignment="Stretch" 
+                            Content="&lt;"
+                            Grid.Column="0"
+                            Command="{Binding BackCommand}"/>
+                        <Button 
+                            Margin="1,5,2,5" 
+                            HorizontalAlignment="Stretch" 
+                            Content="&gt;" 
+                            Grid.Column="1"
+                            Command="{Binding ForwardCommand}"/>
                     </Grid>
                 </Border>
-                <ContentControl Content="{Binding CurrentPageViewModel}" />
-            </DockPanel>
-        </DockPanel>
-        <WrapPanel
-            Visibility="{Binding MenuVisibility}"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Top"
-            Margin="5">
-            <TextBlock
-                Text="Logged in as "/>
-            <TextBlock
-                Text="{Binding Login}"
-                FontWeight="Bold"/>
-        </WrapPanel>
-        <Border 
-            x:Name="border"
-            Width="125"
-            Height="50"
-            Margin="0,-50,0,0"
-            VerticalAlignment="Top"
-            HorizontalAlignment="Center"
-            BorderThickness="3"
-            CornerRadius="5"
-            Background="White"
-            BorderBrush="#FF2D56A6">
-            <StackPanel 
-                Orientation="Horizontal"
-                Background="White">
-                <Image
-                    Margin="2,0,0,0"
-                    Height="40"
-                    gif:ImageBehavior.RepeatBehavior="2x"
-                    gif:ImageBehavior.AnimatedSource="../../Images/loadingSmall.gif">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="AnimationCompleted">
-                            <i:InvokeCommandAction Command="{Binding AnimationCompletedCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Image>
-                <TextBlock
-                    Text="{Binding ConnectionMenuText}"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"/>
+                <ItemsControl 
+                    x:Name="MainNavigationItemsControl" 
+                    ItemsSource="{Binding PageViewModels}" 
+                    Grid.Row="1" 
+                    VerticalAlignment="Top">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button 
+                                Content="{Binding PageViewName}"
+                                Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                CommandParameter="{Binding}"
+                                Margin="2,5"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Border Grid.Row="2" BorderThickness="0,1,0,0" BorderBrush="#FF395FB9">
+                    <Button
+                        Content="Close" 
+                        HorizontalAlignment="Stretch"
+                        Margin="2,5" 
+                        Command="{Binding CloseCommand}" 
+                        CommandParameter="{Binding ElementName=Window}"/>
+                </Border>
+            </Grid>
+        </Border>
+        <Border DockPanel.Dock="Bottom" Height="30" Background="#FFBFDBFF">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock x:Name="ConnectionStatusTextBlock" Text="{Binding ConnectionMenuText}" Margin="5" Foreground="Black"/>
+                <ProgressBar x:Name="BusyProgressBar" Margin="5" Width="100" IsIndeterminate="True" />
+                <Button x:Name="RetryButton" Margin="5" Width="75" Content="Retry" Command="{Binding ReconnectCommand}" Visibility="Collapsed"/>
+                <WrapPanel Visibility="{Binding MenuVisibility}">
+                    <Border Margin="5,2.5,5,0"  BorderThickness="1,0,0,0" BorderBrush="#FF395FB9"/>
+                    <TextBlock Margin="5,5,0,5" Text="Logged in as "/>
+                    <TextBlock Margin="0,5,5,5" Text="{Binding Login}" FontWeight="Bold"/>
+                </WrapPanel>                
             </StackPanel>
         </Border>
-
-        <Border 
-            x:Name="border1"
-            Width="100"
-            Height="50"
-            Margin="-200,-55,0,0"
-            VerticalAlignment="Top"
-            HorizontalAlignment="Center">
-            <Button
-                Content="Retry"
-                Command="{Binding ReconnectCommand}"/>
-        </Border>
-    </Grid>
+        <Grid>
+            <ContentControl Content="{Binding CurrentPageViewModel}"/>
+        </Grid>
+    </DockPanel>
 </Window>
