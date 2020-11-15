@@ -558,10 +558,6 @@ namespace IronMacbeth.Client
             return internalBooks;
         }
 
-
-
-
-
         public void UpdateBook(Internal.Book book)
         {
             UpdateIDisplayable(book);

@@ -18,6 +18,11 @@ namespace IronMacbeth.Client
             _instance = new AnonymousServerAdapter(proxy);
         }
 
+        public static void ClearInstance()
+        {
+            _instance = null;
+        }
+
         private IAnonymousService _proxy;
 
         private AnonymousServerAdapter(IAnonymousService proxy)
