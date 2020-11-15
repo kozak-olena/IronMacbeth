@@ -483,9 +483,6 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\loadingSmall.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\IronMacbeth.BFF.Contract\IronMacbeth.BFF.Contract.csproj">
       <Project>{7147F8FD-500B-4BD9-97B2-3AD28C2496E2}</Project>
       <Name>IronMacbeth.BFF.Contract</Name>
