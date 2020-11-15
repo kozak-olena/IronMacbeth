@@ -11,7 +11,13 @@ namespace IronMacbeth.BFF.Contract
         DocumentsSearchResults SearchDocuments(SearchFilledFields searchFilledFields);
 
         [OperationContract]
-        void CreateOrder(Order orderInfo);
+        void CreateOrder(CreateOrder orderInfo);
+        [OperationContract]
+        List<Order> GetAllOrders();
+
+
+        [OperationContract]
+        void DeleteOrder(int id);
 
         [OperationContract]
         void CreateReadingRoomOrder(ReadingRoomOrder orderInfo);

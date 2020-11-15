@@ -6,27 +6,26 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client
 {
-    public class Order : INotifyPropertyChanged
+    public class Order
     {
+         
         public int Id { get; set; }
         public string UserLogin { get; set; }
-        public int BookId { get; set; }
-        public int ArticleId { get; set; }
-        public int PeriodicalId { get; set; }
-        public int NewspaperId { get; set; }
-        public int ThesesID { get; set; }
+        public Book Book { get; set; }
+        public Article Article { get; set; }
+        public Periodical Periodical { get; set; }
+        public Newspaper Newspaper { get; set; }
+        public Thesis Thesis { get; set; }
 
-        #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
+        public string TypeOfOrder { get; set; } = "Issueing document";
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public object GetOrderedItem()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            return Book ?? Article ?? Periodical ?? Newspaper ?? (object)Thesis;
         }
-        #endregion}
     }
 }

@@ -5,7 +5,7 @@ namespace IronMacbeth.BFF
 {
     public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     {
-        public DbSet<Order> Orders { get; set; }
+        internal DbSet<Order> Orders { get; set; }
         public DbSet<ReadingRoomOrder> ReadingRoomOrders { get; set; }
 
         public DbSet<Periodical> Periodicals { get; set; }

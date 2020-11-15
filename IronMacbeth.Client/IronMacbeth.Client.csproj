@@ -179,6 +179,10 @@
     </Compile>
     <Compile Include="VVM\MotherboardVVM\MotherboardViewModel.cs" />
     <Compile Include="VVM\MotherboardVVM\MotherboardItemViewModel.cs" />
+    <Compile Include="VVM\MyOrdersVVM\MyOrdersItemsVVM\OrderBookItemUserControl.xaml.cs">
+      <DependentUpon>OrderBookItemUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VVM\MyOrdersVVM\MyOrdersItemsVVM\OrderBookItemViewModel.cs" />
     <Compile Include="VVM\MyOrdersVVM\MyOrdersUserControl.xaml.cs">
       <DependentUpon>MyOrdersUserControl.xaml</DependentUpon>
     </Compile>
@@ -344,6 +348,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VVM\MotherboardVVM\MotherboardUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VVM\MyOrdersVVM\MyOrdersItemsVVM\OrderBookItemUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -524,9 +532,7 @@
       <Name>IronMacbeth.BFF.Contract</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="VVM\MyOrdersVVM\MyOrdersItemsVVM\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

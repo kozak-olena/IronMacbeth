@@ -126,10 +126,10 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             }
         }
 
-        public void HandleDelete(object objectForEdit)
+        public void HandleDelete(object objectToDelete)
         {
-            Book article = objectForEdit as Book;
-            ServerAdapter.Instance.DeleteBook(article.Id);
+            Book book = objectToDelete as Book;
+            ServerAdapter.Instance.DeleteBook(book.Id);
         }
 
         public void HandlerCreation(FilledFieldsInfo filledFieldsInfo)

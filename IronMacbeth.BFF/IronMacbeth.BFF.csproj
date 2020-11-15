@@ -171,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnonymousService.cs" />
+    <Compile Include="Order.cs" />
     <Compile Include="SecurePasswordHasher.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserLoginService.cs" />

@@ -191,19 +191,11 @@ namespace IronMacbeth.Client.ViewModel
             ShowStoresCommand = new RelayCommand(ShowStoresMethod);
             ShowPurchasesCommand = new RelayCommand(ShowPurchasesMethod);
             AnimationCompletedCommand = new RelayCommand(OnAnimationCompleted);
-
-
-            // new MemoryViewModel(),
-            // new ProcessorViewModel(),
-            // new VideocardViewModel(),
-            // new MotherboardViewModel(),
-
             PageViewModels = new List<IPageViewModel>
             {
                 new HomeViewModel(),
                 new SearchViewModel()
-                //,new MyOrdersBookVisibility()
-            };
+             };
 
             _previousPages = new Stack<IPageViewModel>();
             _nextPages = new Stack<IPageViewModel>();

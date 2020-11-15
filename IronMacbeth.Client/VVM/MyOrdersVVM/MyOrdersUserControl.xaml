@@ -4,11 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:IronMacbeth.Client.VVM.MyOrdersVVM"
-             xmlns:bookVvm="clr-namespace:IronMacbeth.Client.VVM.BookVVM"
-             xmlns:articleVvm ="clr-namespace:IronMacbeth.Client.VVM.ArticleItemVVM"
-             xmlns:periodicalVvm ="clr-namespace:IronMacbeth.Client.VVM.PeriodicalItemVVM"
-             xmlns:thesisVvm ="clr-namespace:IronMacbeth.Client.VVM.ThesisItemVVM"
-             xmlns:newspaperVvm = "clr-namespace:IronMacbeth.Client.VVM.NewspaperItemVVM"
+             xmlns:orderVvm ="clr-namespace:IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM"
               mc:Ignorable="d"
     d:DesignHeight="500" d:DesignWidth="700">
     <DockPanel VerticalAlignment="Stretch">
@@ -26,6 +22,17 @@
                 Width="130"
                 Text="{Binding Search,UpdateSourceTrigger=PropertyChanged}"/>
         </WrapPanel>
+        <WrapPanel 
+            DockPanel.Dock="Bottom"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom">
+            <Button 
+                Command="{Binding CancelCommand}"
+                Width="150"
+                Margin="5,10,10,10"
+                Content="Cancel" Background="White"/>
+        </WrapPanel>
         <ListView
             DockPanel.Dock="Top"
             ScrollViewer.CanContentScroll="False"
@@ -33,20 +40,8 @@
             SelectedItem="{Binding SelectedItem, Mode=TwoWay}" 
             SelectionMode="Single">
             <ListView.Resources>
-                <DataTemplate DataType="{x:Type bookVvm:BookItemViewModel}">
-                    <bookVvm:BookItemUserControl/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type articleVvm:ArticleItemViewModel}">
-                    <articleVvm:ArticleItemUserControl/>
-                </DataTemplate>
-                <DataTemplate   DataType="{x:Type thesisVvm:ThesisItemViewModel}">
-                    <thesisVvm:ThesisItemUserControl/>
-                </DataTemplate>
-                <DataTemplate  DataType ="{x:Type periodicalVvm:PeriodicalItemViewModel}">
-                    <periodicalVvm:PeriodicalItemUserControl/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type newspaperVvm:NewspaperItemViewModel}">
-                    <newspaperVvm:NewspaperItemUserControl/>
+                <DataTemplate DataType="{x:Type orderVvm:OrderBookItemViewModel}">
+                    <orderVvm:OrderBookItemUserControl/>
                 </DataTemplate>
                 <Style TargetType="GridViewColumnHeader">
                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -59,6 +54,7 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
+
 
     </DockPanel>
 </UserControl>

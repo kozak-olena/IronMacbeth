@@ -6,5 +6,6 @@
     [ArticleId] INT NOT NULL,
     [PeriodicalId] INT NOT NULL,
     [NewspaperId] INT NOT NULL,
-    [ThesesId] INT NOT NULL
+    [ThesesId] INT NOT NULL,
+    [TypeOfOrder] VARCHAR (255) NOT NULL
 )

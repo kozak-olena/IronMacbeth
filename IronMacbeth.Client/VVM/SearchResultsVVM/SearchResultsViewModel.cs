@@ -55,7 +55,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             if (_selectedItem is Book)
             {
                 Book book = (Book)_selectedItem;
-                order.BookId = book.Id;
+                order.Book = book;
                 order.UserLogin = UserService.LoggedInUser.Login;
                 ServerAdapter.Instance.CreateOrder(order);
                 MessageBox.Show($"Book \"{book.Name}\" added to your orders", "Book added", MessageBoxButton.OK,
@@ -64,7 +64,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             else if (_selectedItem is Article)
             {
                 Article article = (Article)_selectedItem;
-                order.ArticleId = article.Id;
+                order.Article = article;
                 order.UserLogin = UserService.LoggedInUser.Login;
                 ServerAdapter.Instance.CreateOrder(order);
                 MessageBox.Show($"Article \"{article.Name}\" added to your orders", "Article added", MessageBoxButton.OK,
@@ -73,7 +73,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             else if (_selectedItem is Periodical)
             {
                 Periodical periodical = (Periodical)_selectedItem;
-                order.PeriodicalId = periodical.Id;
+                order.Periodical = periodical;
                 order.UserLogin = UserService.LoggedInUser.Login;
                 ServerAdapter.Instance.CreateOrder(order);
                 MessageBox.Show($"Periodical \"{periodical.Name}\" added to your orders", "Periodical added", MessageBoxButton.OK,
@@ -82,7 +82,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             else if (_selectedItem is Newspaper)
             {
                 Newspaper newspaper = (Newspaper)_selectedItem;
-                order.NewspaperId = newspaper.Id;
+                order.Newspaper = newspaper;
                 order.UserLogin = UserService.LoggedInUser.Login;
                 ServerAdapter.Instance.CreateOrder(order);
                 MessageBox.Show($"Newspaper \"{newspaper.Name}\" added to your orders", "Newspaper added", MessageBoxButton.OK,
@@ -91,7 +91,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             else if (_selectedItem is Thesis)
             {
                 Thesis theses = (Thesis)_selectedItem;
-                order.ThesesID = theses.Id;
+                order.Thesis = theses;
                 order.UserLogin = UserService.LoggedInUser.Login;
                 ServerAdapter.Instance.CreateOrder(order);
                 MessageBox.Show($"Theses \"{theses.Name}\" added to your orders", "Theses added", MessageBoxButton.OK,

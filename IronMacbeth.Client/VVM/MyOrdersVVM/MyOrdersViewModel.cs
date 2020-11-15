@@ -1,4 +1,7 @@
 ﻿using IronMacbeth.Client.Annotations;
+using IronMacbeth.Client.ViewModel;
+using IronMacbeth.Client.VVM.EditBookVVM;
+using IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace IronMacbeth.Client.VVM.MyOrdersVVM
 {
@@ -14,39 +18,41 @@ namespace IronMacbeth.Client.VVM.MyOrdersVVM
 
         public string PageViewName => "My orders";
 
-        private List<IDocumentViewModel> _items;
+        public List<IDocumentViewModel> Items { get; private set; }
 
-        public List<IDocumentViewModel> Items
+        public void Update() { ShowCollection(); }
+        public ICommand CancelCommand { get; }
+
+        public MyOrdersViewModel()
         {
-            get
-            {
-                // UpdateCollection(true);
-                return _items;
-            }
-            private set { _items = value; }
+            CancelCommand = new RelayCommand(CancelMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
         }
-
-        public void Update() { }
 
         public IDocumentViewModel SelectedItem { get; set; }
 
-        public MyOrdersViewModel() 
+        private object _selectedItem;
+
+        public void CancelMethod(object parameter)
         {
+            _selectedItem = SelectedItem.GetItem();
+            Order orderToDelete = (Order)_selectedItem;
+            ServerAdapter.Instance.DeleteOrder(orderToDelete.Id);
+            Update();
 
         }
-        public void CreateCoolection()
+
+        public void ShowCollection()
         {
-            _items = new List<IDocumentViewModel>();
-            //  _items.AddRange
-            //(
-            //    MainViewModel.ServerAdapter.GetAllBooks()
-            //        .OrderByDescending(item => item.NumberOfOfferings)
-            //        .Where(item => item.Name.ToLower().Contains(Search.ToLower()))
-            //        .Select(x => new BookItemViewModel(x))
-            //        .ToList()
-            //);
+            Items = new List<IDocumentViewModel>();
+            List<Order> orders = ServerAdapter.Instance.GetAllOrders();
+            Items.AddRange(orders.Select(x => new OrderBookItemViewModel(x)));
+            OnPropertyChanged(nameof(Items));
         }
 
+        public bool CanExecuteMaintenanceMethods(object parameter)
+        {
+            return SelectedItem != null;
+        }
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

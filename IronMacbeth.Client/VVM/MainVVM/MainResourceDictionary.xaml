@@ -13,8 +13,8 @@
                     xmlns:book ="clr-namespace:IronMacbeth.Client.VVM.BookVVM"
                     xmlns:bookInfo ="clr-namespace:IronMacbeth.Client.VVM.BookInfoVVM"
                     xmlns:searchVvm ="clr-namespace:IronMacbeth.Client.VVM.SearchPageViewModel"
-                    xmlns:searchResults ="clr-namespace:IronMacbeth.Client.VVM.SearchResultsVVM">
-
+                    xmlns:searchResults ="clr-namespace:IronMacbeth.Client.VVM.SearchResultsVVM"
+                    xmlns:orderVvm ="clr-namespace:IronMacbeth.Client.VVM.MyOrdersVVM">
 
     <DataTemplate DataType="{x:Type home:HomeViewModel}">
         <home:HomeUserControl />
@@ -30,6 +30,9 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type purchase:PurchaseViewModel}">
         <purchase:PurchaseUserControl/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type orderVvm:MyOrdersViewModel}">
+        <orderVvm:MyOrdersUserControl/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type videocardVvm:VideocardViewModel}">
         <videocardVvm:VideocardUserControl/>

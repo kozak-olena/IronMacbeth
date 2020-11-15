@@ -12,11 +12,41 @@ namespace IronMacbeth.BFF
     public class Service : IService
     {
         #region Order
-        public void CreateOrder(Order orderInfo)
+        public void CreateOrder(Contract.CreateOrder orderInfo)
+        {
+            var order = new Order { Id = orderInfo.Id, UserLogin = orderInfo.UserLogin, BookId = orderInfo.BookId, ArticleId = orderInfo.ArticleId, PeriodicalId = orderInfo.PeriodicalId, ThesesId = orderInfo.ThesesId, NewspaperId = orderInfo.NewspaperId };
+
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Add(order);
+                dbContext.SaveChanges();
+            }
+        }
+
+        public List<Contract.Order> GetAllOrders()
         {
             using (var dbContext = new DbContext())
             {
-                dbContext.Add(orderInfo);
+                User currentUser = GetLoggedInUserInternal();
+                IQueryable<Order> intermediate = dbContext.Orders.Include(x => x.Book).Include(x => x.Article).Include(x => x.Periodical).Include(x => x.Theses).Include(x => x.Newspaper);
+                if (currentUser != null)
+                {
+                    intermediate = intermediate.Where(x => x.UserLogin == currentUser.Login);
+                }
+
+                var result = intermediate.ToList();
+
+                return result.Select(x => new Contract.Order { Id = x.Id, UserLogin = x.UserLogin, Book = x.Book, Article = x.Article, Periodical = x.Periodical, Theses = x.Theses, Newspaper = x.Newspaper }).ToList();
+            }
+
+        }
+
+        public void DeleteOrder(int id)
+        {
+
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Orders.Remove(new Order { Id = id });
                 dbContext.SaveChanges();
             }
         }

@@ -45,21 +45,52 @@ namespace IronMacbeth.Client
             var contractOrder = MapInternalToContractOrder(orderInfo);
             _proxy.CreateOrder(contractOrder);
         }
-        private Contract.Order MapInternalToContractOrder(Internal.Order orderInfo)
+        private Contract.CreateOrder MapInternalToContractOrder(Internal.Order orderInfo)
         {
-            return new Contract.Order
+            return new Contract.CreateOrder
             {
+                Id = orderInfo.Id,
                 UserLogin = orderInfo.UserLogin,
-                BookId = orderInfo.BookId,
-                ArticleId = orderInfo.ArticleId,
-                PeriodicalId = orderInfo.PeriodicalId,
-                NewspaperId = orderInfo.NewspaperId,
-                ThesesID = orderInfo.ThesesID
+                BookId = orderInfo.Book?.Id,
+                ArticleId = orderInfo.Article?.Id,
+                PeriodicalId = orderInfo.Periodical?.Id,
+                NewspaperId = orderInfo.Newspaper?.Id,
+                ThesesId = orderInfo.Thesis?.Id
             };
+        }
+
+        public List<Internal.Order> GetAllOrders()
+        {
+            var orders = _proxy.GetAllOrders();
+
+            var internalOrders = orders.Select(MapContractToInternalOrder).ToList();
+            
+           
+            return internalOrders;
+        }
+
+
+        private Internal.Order MapContractToInternalOrder(Contract.Order order)
+        {
+            return new Internal.Order
+            {
+                Id = order.Id,
+                UserLogin = order.UserLogin,
+                Book = order.Book != null ? MapContractToInternalBook(order.Book) : null,
+                Article = order.Article != null ? MapContractToInternalArticle(order.Article) : null,
+                Periodical = order.Periodical != null ? MapContractToInternalPeriodical(order.Periodical) : null,
+                Newspaper = order.Newspaper != null ? MapContractToInternalNewspaper(order.Newspaper) : null,
+                Thesis = order.Theses != null ? MapContractToInternalTheses(order.Theses) : null
+            };
+        }
+
+        public void DeleteOrder(int id)
+        {
+            _proxy.DeleteOrder(id);
         }
         #endregion
 
-        #region Order
+        #region ReadingRoomOrder
         public void CreateReadingRoomOrder(Internal.ReadingRoomOrder orderInfo)
         {
             var contractOrder = MapInternalToContractReadingRoomOrder(orderInfo);
@@ -127,7 +158,7 @@ namespace IronMacbeth.Client
                 { periodical.Description = GetStringFileContent(periodical.DescriptionName); }
             }
             documents.Newspapers = documentsSearchResults.Newspapers?.Select(MapContractToInternalNewspaper).ToList() ?? new List<Newspaper>();
-            documents.Theses = documentsSearchResults.Theses?.Select(MapContractToInternalPeriodical).ToList() ?? new List<Thesis>();
+            documents.Theses = documentsSearchResults.Theses?.Select(MapContractToInternalTheses).ToList() ?? new List<Thesis>();
 
             return documents;
         }
@@ -343,7 +374,7 @@ namespace IronMacbeth.Client
         {
             var thesises = _proxy.GetAllThesises();
 
-            var internalThesises = thesises.Select(MapContractToInternalPeriodical).ToList();
+            var internalThesises = thesises.Select(MapContractToInternalTheses).ToList();
 
             foreach (var thesis in internalThesises)
             {
@@ -393,7 +424,7 @@ namespace IronMacbeth.Client
             };
         }
 
-        private Internal.Thesis MapContractToInternalPeriodical(Contract.Thesis thesis)
+        private Internal.Thesis MapContractToInternalTheses(Contract.Thesis thesis)
         {
             return new Internal.Thesis
             {
@@ -557,11 +588,6 @@ namespace IronMacbeth.Client
 
             return internalBooks;
         }
-
-
-
-
-
         public void UpdateBook(Internal.Book book)
         {
             UpdateIDisplayable(book);
