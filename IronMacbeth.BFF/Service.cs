@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
+using System.ServiceModel;
 using System.Threading;
 using IronMacbeth.BFF.Contract;
+using IronMacbeth.UserManagement.Contract;
 using Microsoft.EntityFrameworkCore;
 
 namespace IronMacbeth.BFF
@@ -443,6 +445,19 @@ namespace IronMacbeth.BFF
 
         public Contract.User GetLoggedInUser()
         {
+            //TODO: remove following. This is just to test service to service communication
+            #region The following
+
+            var channelFactory = new ChannelFactory<IUserManagementService>("IronMacbeth.BFF.UserManagementEndpoint");
+
+            var serviceClient = channelFactory.CreateChannel();
+
+            var time = serviceClient.GetCurrentTime();
+
+            Console.WriteLine($"Asked UserManagement the time. It was {time}");
+
+            #endregion
+
             var internalUser = GetLoggedInUserInternal();
 
             var contractUser = new Contract.User { Login = internalUser.Login, UserRole = internalUser.UserRole };
