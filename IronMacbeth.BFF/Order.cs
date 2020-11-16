@@ -1,4 +1,5 @@
 ﻿using IronMacbeth.BFF.Contract;
+using System;
 
 namespace IronMacbeth.BFF
 {
@@ -27,6 +28,17 @@ namespace IronMacbeth.BFF
         public int? ThesesId { get; set; }
 
         public Thesis Theses { get; set; }
+
+        public string StatusOfOrder { get; set; }
+
+
+        public DateTime DateOfOrder { get; set; }
+
+        public DateTime DateOfReturn { get; set; }
+
+
+        public DateTime ReceiveDate { get; set; }
+
 
         public string TypeOfOrder { get; set; }
     }

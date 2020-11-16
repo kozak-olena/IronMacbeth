@@ -23,6 +23,14 @@ namespace IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM
 
         public int Id => _item.Id;
 
+        public string StatusOfOrder => _item.StatusOfOrder;
+
+        public DateTime DateOfOrder => _item.DateOfOrder;
+
+        public DateTime DateOfReturn => _item.DateOfReturn;
+
+        public DateTime ReceiveDate => _item.ReceiveDate;
+
         public string UserLogin => _item.UserLogin;
 
         public string TypeOfDocument => _item.TypeOfOrder;

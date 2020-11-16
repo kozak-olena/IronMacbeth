@@ -15,15 +15,28 @@ namespace IronMacbeth.Client
 
         public string UserLogin { get; set; }
 
-        public int BookId { get; set; }
+        public Book Book { get; set; }
 
-        public int ArticleId { get; set; }
+        public Article Article { get; set; }
 
-        public int PeriodicalId { get; set; }
+        public Periodical Periodical { get; set; }
 
-        public int NewspaperId { get; set; }
+        public Newspaper Newspaper { get; set; }
 
-        public int ThesesID { get; set; }
+        public Thesis Thesis { get; set; }
+
+        public string TypeOfOrder { get; set; }
+
+        public string StatusOfOrder { get; set; }
+
+        public DateTime DateOfOrder { get; set; }
+
+        public DateTime ReceiveDate { get; set; }
+
+        public object GetOrderedItem()
+        {
+            return Book ?? Article ?? Periodical ?? Newspaper ?? (object)Thesis;
+        }
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

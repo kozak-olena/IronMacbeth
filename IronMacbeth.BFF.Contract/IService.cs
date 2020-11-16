@@ -10,6 +10,7 @@ namespace IronMacbeth.BFF.Contract
         [OperationContract]
         DocumentsSearchResults SearchDocuments(SearchFilledFields searchFilledFields);
 
+        #region Order
         [OperationContract]
         void CreateOrder(CreateOrder orderInfo);
         [OperationContract]
@@ -19,8 +20,13 @@ namespace IronMacbeth.BFF.Contract
         [OperationContract]
         void DeleteOrder(int id);
 
+        #endregion
+
+        #region ReadingRoomOrder
         [OperationContract]
         void CreateReadingRoomOrder(ReadingRoomOrder orderInfo);
+
+        #endregion
 
         #region Book
 

@@ -12,8 +12,7 @@
             <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <WrapPanel
-            Orientation="Vertical"
+        <WrapPanel Orientation="Vertical"
             Grid.Column="0">
             <WrapPanel Orientation="Horizontal">
                 <TextBlock 
@@ -57,14 +56,24 @@
                 </WrapPanel>
             </WrapPanel>
         </WrapPanel>
-        <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">
-            <Button VerticalAlignment="Center"
+        <WrapPanel Orientation="Vertical" Grid.Column="1">
+            <WrapPanel Orientation="Horizontal" VerticalAlignment="Top">
+                <Label Margin="5,0,5,0" Content="Date of issueing:" FontSize="13" Foreground="DimGray"/>
+                <Label Margin="5,0,5,0" Content="{Binding TypeOfDocument}" FontSize="13" Foreground="DimGray"/>
+            </WrapPanel>
+            <WrapPanel Orientation="Horizontal" VerticalAlignment="Top"  Grid.Column="1">
+                <Label Margin="5,0,5,0" Content="Price:" FontSize="13" Foreground="DimGray"/>
+                <Label Margin="5,0,5,0" Content="{Binding TypeOfDocument}" FontSize="13" Foreground="DimGray"/>
+            </WrapPanel>
+            <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button VerticalAlignment="Center"
                     Width="120"
                     Content="More"
                     Margin="5,50,5,0" 
                     Height="25"
                     Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
                     CommandParameter="{Binding MoreInfoVm}"/>
+            </WrapPanel>
         </WrapPanel>
 
     </Grid>

@@ -56,7 +56,11 @@ namespace IronMacbeth.Client
                 PeriodicalId = orderInfo.Periodical?.Id,
                 NewspaperId = orderInfo.Newspaper?.Id,
                 ThesesId = orderInfo.Thesis?.Id,
-                TypeOfOrder = orderInfo.TypeOfOrder
+                TypeOfOrder = orderInfo.TypeOfOrder,
+                StatusOfOrder = orderInfo.StatusOfOrder,
+                ReceiveDate = orderInfo.ReceiveDate,
+                DateOfOrer = orderInfo.DateOfOrder,
+                DateOfReturn = orderInfo.DateOfReturn
             };
         }
 
@@ -92,23 +96,8 @@ namespace IronMacbeth.Client
         #endregion
 
         #region ReadingRoomOrder
-        public void CreateReadingRoomOrder(Internal.ReadingRoomOrder orderInfo)
-        {
-            var contractOrder = MapInternalToContractReadingRoomOrder(orderInfo);
-            _proxy.CreateReadingRoomOrder(contractOrder);
-        }
-        private Contract.ReadingRoomOrder MapInternalToContractReadingRoomOrder(Internal.ReadingRoomOrder orderInfo)
-        {
-            return new Contract.ReadingRoomOrder
-            {
-                UserLogin = orderInfo.UserLogin,
-                BookId = orderInfo.BookId,
-                ArticleId = orderInfo.ArticleId,
-                PeriodicalId = orderInfo.PeriodicalId,
-                NewspaperId = orderInfo.NewspaperId,
-                ThesesID = orderInfo.ThesesID
-            };
-        }
+       
+       
         #endregion
 
         #region SearchDocument

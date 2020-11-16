@@ -9,14 +9,26 @@ namespace IronMacbeth.BFF.Contract
     public class Order
     {
         public int Id { get; set; }
+
         public string UserLogin { get; set; }
+
         public Book Book { get; set; }
+
         public Article Article { get; set; }
+
         public Periodical Periodical { get; set; }
+
         public Newspaper Newspaper { get; set; }
+
         public Thesis Theses { get; set; }
 
-        
-        public string TypeOfOrder { get; set; } = "Issueing document";
+        public string StatusOfOrder { get; set; }
+
+        public DateTime DateOfOrder { get; set; }
+
+        public DateTime DateOfReturn { get; set; }
+        public DateTime ReceiveDate { get; set; }
+
+        public string TypeOfOrder { get; set; }
     }
 }

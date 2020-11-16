@@ -6,6 +6,7 @@ using IronMacbeth.Client.VVM.BookVVM;
 using IronMacbeth.Client.VVM.NewspaperItemVVM;
 using IronMacbeth.Client.VVM.PeriodicalItemVVM;
 using IronMacbeth.Client.VVM.ThesisItemVVM;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -27,74 +28,28 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
 
 
         private object _selectedItem;
+
         public Order order;
 
-        public void AddtoMyOrdersMethod(object parameter)
+        public SearchResultsDispatch SearchResultsDispatch;
+        public void AddToMyOrdersMethod(object parameter)
         {
+            //order = new Order();
             _selectedItem = SelectedItem.GetItem();
-            order = new Order();
-            if (_selectedItem is Book)
-            {
-                Book book = (Book)_selectedItem;
-                order.Book = book;
-                order.UserLogin = UserService.LoggedInUser.Login;
-                order.TypeOfOrder = "Issueing order";
-                ServerAdapter.Instance.CreateOrder(order);
-                MessageBox.Show($"Book \"{book.Name}\" added to your orders", "Book added", MessageBoxButton.OK,
-                      MessageBoxImage.Information);
-            }
-            else if (_selectedItem is Article)
-            {
-                Article article = (Article)_selectedItem;
-                order.Article = article;
-                order.UserLogin = UserService.LoggedInUser.Login;
-                order.TypeOfOrder = "Issueing order";
-                ServerAdapter.Instance.CreateOrder(order);
-                MessageBox.Show($"Article \"{article.Name}\" added to your orders", "Article added", MessageBoxButton.OK,
-                   MessageBoxImage.Information);
-            }
-            else if (_selectedItem is Periodical)
-            {
-                Periodical periodical = (Periodical)_selectedItem;
-                order.Periodical = periodical;
-                order.UserLogin = UserService.LoggedInUser.Login;
-                order.TypeOfOrder = "Issueing order";
-                ServerAdapter.Instance.CreateOrder(order);
-                MessageBox.Show($"Periodical \"{periodical.Name}\" added to your orders", "Periodical added", MessageBoxButton.OK,
-                  MessageBoxImage.Information);
-            }
-            else if (_selectedItem is Newspaper)
-            {
-                Newspaper newspaper = (Newspaper)_selectedItem;
-                order.Newspaper = newspaper;
-                order.UserLogin = UserService.LoggedInUser.Login;
-                order.TypeOfOrder = "Issueing order";
-                ServerAdapter.Instance.CreateOrder(order);
-                MessageBox.Show($"Newspaper \"{newspaper.Name}\" added to your orders", "Newspaper added", MessageBoxButton.OK,
-                 MessageBoxImage.Information);
-            }
-            else if (_selectedItem is Thesis)
-            {
-                Thesis theses = (Thesis)_selectedItem;
-                order.Thesis = theses;
-                order.UserLogin = UserService.LoggedInUser.Login;
-                order.TypeOfOrder = "Issueing order";
-                ServerAdapter.Instance.CreateOrder(order);
-                MessageBox.Show($"Theses \"{theses.Name}\" added to your orders", "Theses added", MessageBoxButton.OK,
-                MessageBoxImage.Information);
-            }
+            SearchResultsDispatch = new SearchResultsDispatch(_selectedItem);
         }
 
         public void OrderToReadingRoomMethod(object parameter)
         {
-
+            _selectedItem = SelectedItem.GetItem();
+            SearchResultsDispatch = new SearchResultsDispatch(_selectedItem);
         }
 
         private SearchFilledFields _searchFilledFields;
         public SearchResultsViewModel(SearchFilledFields searchFilledFields)
         {
             _searchFilledFields = searchFilledFields;
-            AddtoMyOrdersCommand = new RelayCommand(AddtoMyOrdersMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
+            AddtoMyOrdersCommand = new RelayCommand(AddToMyOrdersMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
             OrderToReadingRoomCommand = new RelayCommand(OrderToReadingRoomMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
         }
 
