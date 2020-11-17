@@ -20,7 +20,40 @@ namespace IronMacbeth.Client.VVM.MyOrdersVVM
 
         public List<IDocumentViewModel> Items { get; private set; }
 
+        private string _search = "";
+        public string Search
+        {
+            get { return _search; }
+
+            set
+            {
+                _search = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    UpdateCollection(false);
+                }
+                else
+                {
+                    ShowCollection();
+                }
+            }
+        }
+
+        public void UpdateCollection(bool innerCall)
+        {
+            Items = new List<IDocumentViewModel>();
+            List<Order> orders = ServerAdapter.Instance.GetAllOrders();
+
+            Items.AddRange(orders.OrderByDescending(item => item.DateOfOrder).Where(item => item.Book != null && item.Book.Name.ToLower().Contains(Search.ToLower())).Select(x => new OrderBookItemViewModel(x)));
+            Items.AddRange(orders.OrderByDescending(item => item.DateOfOrder).Where(item => item.Article != null && item.Article.Name.ToLower().Contains(Search.ToLower())).Select(x => new OrderBookItemViewModel(x)));
+            Items.AddRange(orders.OrderByDescending(item => item.DateOfOrder).Where(item => item.Periodical != null && item.Periodical.Name.ToLower().Contains(Search.ToLower())).Select(x => new OrderBookItemViewModel(x)));
+            Items.AddRange(orders.OrderByDescending(item => item.DateOfOrder).Where(item => item.Newspaper != null && item.Newspaper.Name.ToLower().Contains(Search.ToLower())).Select(x => new OrderBookItemViewModel(x)));
+            Items.AddRange(orders.OrderByDescending(item => item.DateOfOrder).Where(item => item.Thesis != null && item.Thesis.Name.ToLower().Contains(Search.ToLower())).Select(x => new OrderBookItemViewModel(x)));
+            OnPropertyChanged(nameof(Items));
+        }
+
         public void Update() { ShowCollection(); }
+
         public ICommand CancelCommand { get; }
 
         public MyOrdersViewModel()
@@ -35,24 +68,18 @@ namespace IronMacbeth.Client.VVM.MyOrdersVVM
         public void CancelMethod(object parameter)
         {
             _selectedItem = SelectedItem.GetItem();
-            if (_selectedItem is Order)
-            {
-                Order orderToDelete = (Order)_selectedItem;
-                ServerAdapter.Instance.DeleteOrder(orderToDelete.Id);
-                Update();
-            }
-            else if (_selectedItem is ReadingRoomOrder) 
-            {
 
-            }
-
+            Order orderToDelete = (Order)_selectedItem;
+            ServerAdapter.Instance.DeleteOrder(orderToDelete.Id);
+            Update();
         }
+
 
         public void ShowCollection()
         {
             Items = new List<IDocumentViewModel>();
             List<Order> orders = ServerAdapter.Instance.GetAllOrders();
-            Items.AddRange(orders.Select(x => new OrderBookItemViewModel(x)));
+            Items.AddRange(orders.OrderByDescending(item => item.DateOfOrder).Select(x => new OrderBookItemViewModel(x)));
             OnPropertyChanged(nameof(Items));
         }
 

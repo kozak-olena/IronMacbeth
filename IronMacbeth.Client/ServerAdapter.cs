@@ -42,10 +42,10 @@ namespace IronMacbeth.Client
         #region Order
         public void CreateOrder(Internal.Order orderInfo)
         {
-            var contractOrder = MapInternalToContractOrder(orderInfo);
+            var contractOrder = MapInternalToContractCreateOrder(orderInfo);
             _proxy.CreateOrder(contractOrder);
         }
-        private Contract.CreateOrder MapInternalToContractOrder(Internal.Order orderInfo)
+        private Contract.CreateOrder MapInternalToContractCreateOrder(Internal.Order orderInfo)
         {
             return new Contract.CreateOrder
             {
@@ -97,12 +97,50 @@ namespace IronMacbeth.Client
         {
             _proxy.DeleteOrder(id);
         }
+
+        public void UpdateOrder(Internal.Order order, Internal.SpecifiedOrderFields specifyOrderFields)
+        {
+            var contractOrder = MapInternalToContractUpdateOrder(order);
+            var contractSpecifiedOrderFields = MapInternalToContractOrderFields(specifyOrderFields);
+            _proxy.UpdateOrder(contractOrder, contractSpecifiedOrderFields);
+        }
+
+
+        private Contract.Order MapInternalToContractUpdateOrder(Internal.Order order)
+        {
+            return new Contract.Order
+            {
+                Id = order.Id,
+                UserLogin = order.UserLogin,
+                BookId = order.Book?.Id,
+                ArticleId = order.Article?.Id,
+                PeriodicalId = order.Periodical?.Id,
+                NewspaperId = order.Newspaper?.Id,
+                ThesesId = order.Thesis?.Id,
+                TypeOfOrder = order.TypeOfOrder,
+                //StatusOfOrder = order.StatusOfOrder,
+                //ReceiveDate = order.ReceiveDate,
+                DateOfOrder = order.DateOfOrder,
+                DateOfReturn = order.DateOfReturn
+            };
+        }
+        private Contract.SpecifiedOrderFields MapInternalToContractOrderFields(Internal.SpecifiedOrderFields specifyOrderFields)
+        {
+            return new Contract.SpecifiedOrderFields
+            {
+                DateOfReturning = specifyOrderFields.DateOfReturning,
+                Status = specifyOrderFields.Status,
+                ReceiveDate = specifyOrderFields.ReceiveDate
+            };
+        }
+
+
+
+
+
         #endregion
 
-        #region ReadingRoomOrder
 
-
-        #endregion
 
         #region SearchDocument
         public DocumentsSearchResults SearchDocuments(Internal.SearchFilledFields searchFilledFields)

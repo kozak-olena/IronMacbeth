@@ -3,7 +3,7 @@ using System;
 
 namespace IronMacbeth.BFF
 {
-    class Order
+    public class Order
     {
         public int Id { get; set; }
 

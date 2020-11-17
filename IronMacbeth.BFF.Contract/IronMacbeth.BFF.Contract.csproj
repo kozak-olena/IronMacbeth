@@ -56,6 +56,7 @@
     <Compile Include="RentBook.cs" />
     <Compile Include="RentPeriodical.cs" />
     <Compile Include="SearchFilledFields.cs" />
+    <Compile Include="SpecifiedOrderFields.cs" />
     <Compile Include="Thesis.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserRegistrationStatus.cs" />

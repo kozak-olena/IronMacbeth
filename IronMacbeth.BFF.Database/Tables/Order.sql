@@ -7,7 +7,7 @@
     [PeriodicalId] INT NULL,
     [NewspaperId] INT NULL,
     [ThesesId] INT NULL,
-    [DateOfOrder] DATETIME2 NULL,
+    [DateOfOrder] DATETIME2 NOT NULL,
     [DateOfReturn] DATETIME2 NULL,
     [ReceiveDate] DATETIME2 NOT NULL,
     [StatusOfOrder] VARCHAR (255) NOT NULL,

@@ -26,8 +26,8 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
         public ICommand AddtoMyOrdersCommand { get; }
         public ICommand OrderToReadingRoomCommand { get; }
 
+        public IDocumentViewModel SelectedItem { get; set; }
 
-        private object _selectedItem;
 
         public Order order;
 
@@ -35,29 +35,36 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
         public void AddToMyOrdersMethod(object parameter)
         {
             //order = new Order();
-            _selectedItem = SelectedItem.GetItem();
-            SearchResultsDispatch = new SearchResultsDispatch(_selectedItem);
+
+            SearchResultsDispatch = new SearchResultsDispatch(SelectedItem.GetItem(), IsTypeReadingRoom);
         }
+
+        public bool IsTypeReadingRoom = false;
 
         public void OrderToReadingRoomMethod(object parameter)
         {
-            _selectedItem = SelectedItem.GetItem();
-            SearchResultsDispatch = new SearchResultsDispatch(_selectedItem);
+            IsTypeReadingRoom = true;
+            SearchResultsDispatch = new SearchResultsDispatch(SelectedItem.GetItem(), IsTypeReadingRoom);
         }
+
 
         private SearchFilledFields _searchFilledFields;
         public SearchResultsViewModel(SearchFilledFields searchFilledFields)
         {
             _searchFilledFields = searchFilledFields;
+
             AddtoMyOrdersCommand = new RelayCommand(AddToMyOrdersMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
             OrderToReadingRoomCommand = new RelayCommand(OrderToReadingRoomMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
         }
 
-        public IDocumentViewModel SelectedItem { get; set; }
+
 
         public bool CanExecuteMaintenanceMethods(object parameter)
         {
-            return SelectedItem != null;
+            object selectedItem = SelectedItem?.GetItem();
+            bool isSelectedItemIsThesisOrArticle = selectedItem is Article || selectedItem is Thesis;
+
+            return SelectedItem != null && !isSelectedItemIsThesisOrArticle;
         }
 
         public void ShowCollection()

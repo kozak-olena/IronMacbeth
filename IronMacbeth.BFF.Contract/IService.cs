@@ -13,6 +13,10 @@ namespace IronMacbeth.BFF.Contract
         #region Order
         [OperationContract]
         void CreateOrder(CreateOrder orderInfo);
+
+        [OperationContract]
+        void UpdateOrder(Order order, SpecifiedOrderFields specifyOrderFieldso);
+
         [OperationContract]
         List<Order> GetAllOrders();
 
@@ -22,11 +26,6 @@ namespace IronMacbeth.BFF.Contract
 
         #endregion
 
-        #region ReadingRoomOrder
-        [OperationContract]
-        void CreateReadingRoomOrder(ReadingRoomOrder orderInfo);
-
-        #endregion
 
         #region Book
 

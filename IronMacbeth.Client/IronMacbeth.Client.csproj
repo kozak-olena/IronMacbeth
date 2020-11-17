@@ -103,6 +103,7 @@
     <Compile Include="Model\RentBook.cs" />
     <Compile Include="Model\RentNewspaper.cs" />
     <Compile Include="Model\RentPeriodical.cs" />
+    <Compile Include="Model\SpecifiedOrderFields.cs" />
     <Compile Include="ServerAdapter.cs" />
     <Compile Include="Model\Store.cs" />
     <Compile Include="Model\StoreArticles.cs" />
@@ -118,6 +119,14 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\Videocard.cs" />
     <Compile Include="UserService.cs" />
+    <Compile Include="VVM\AdminOrderVVM\AdminOrderUserControl.xaml.cs">
+      <DependentUpon>AdminOrderUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VVM\AdminOrderVVM\AdminOrderViewModel.cs" />
+    <Compile Include="VVM\AdminOrderVVM\EditOrderViewModel.cs" />
+    <Compile Include="VVM\AdminOrderVVM\EditOrderWindow.xaml.cs">
+      <DependentUpon>EditOrderWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VVM\ArticleInfoVVM\ArticleInfoUserControl.xaml.cs">
       <DependentUpon>ArticleInfoUserControl.xaml</DependentUpon>
     </Compile>
@@ -160,7 +169,6 @@
     </Compile>
     <Compile Include="VVM\MyOrdersVVM\MyOrdersViewModel.cs" />
     <Compile Include="VVM\MyOrdersVVM\Order.cs" />
-    <Compile Include="VVM\MyOrdersVVM\ReadingRoomOrder.cs" />
     <Compile Include="VVM\NewspaperItemVVM\NewspaperItemUserControl.xaml.cs">
       <DependentUpon>NewspaperItemUserControl.xaml</DependentUpon>
     </Compile>
@@ -195,6 +203,14 @@
     <Page Include="Themes\BureauBlue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VVM\AdminOrderVVM\AdminOrderUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VVM\AdminOrderVVM\EditOrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VVM\ArticleInfoVVM\ArticleInfoUserControl.xaml">
       <SubType>Designer</SubType>

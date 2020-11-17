@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM
 {
-    class OrderBookItemViewModel : IDocumentViewModel
+    public class OrderBookItemViewModel : IDocumentViewModel
     {
         private Order _item;
 

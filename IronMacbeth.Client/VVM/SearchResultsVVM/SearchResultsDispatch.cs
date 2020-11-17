@@ -10,7 +10,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
     public class SearchResultsDispatch
     {
         public Order order;
-        public SearchResultsDispatch(object selectedItem)
+        public SearchResultsDispatch(object selectedItem, bool IsTypeReadingRoom)
         {
 
             order = new Order();
@@ -18,9 +18,11 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             {
                 Book book = (Book)selectedItem;
                 order.Book = book;
-                CreateOrder(order);
+
+                if (IsTypeReadingRoom && order.Book.Location.ToLower().Contains("reading room")) { CreateReadingRoomOrder(order); }
+                else { CreateOrder(order); }
                 MessageBox.Show($"Book \"{book.Name}\" added to your orders", "Book added", MessageBoxButton.OK,
-              MessageBoxImage.Information);
+                MessageBoxImage.Information);
             }
             else if (selectedItem is Article)
             {
@@ -34,7 +36,8 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             {
                 Periodical periodical = (Periodical)selectedItem;
                 order.Periodical = periodical;
-                CreateOrder(order);
+                if (IsTypeReadingRoom && order.Periodical.Location.ToLower().Contains("reading room")) { CreateReadingRoomOrder(order); }
+                else { CreateOrder(order); }
                 MessageBox.Show($"Periodical \"{periodical.Name}\" added to your orders", "Periodical added", MessageBoxButton.OK,
                  MessageBoxImage.Information);
             }
@@ -42,7 +45,8 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             {
                 Newspaper newspaper = (Newspaper)selectedItem;
                 order.Newspaper = newspaper;
-                CreateOrder(order);
+                if (IsTypeReadingRoom && order.Newspaper.Location.ToLower().Contains("reading room")) { CreateReadingRoomOrder(order); }
+                else { CreateOrder(order); }
                 MessageBox.Show($"Newspaper \"{newspaper.Name}\" added to your orders", "Newspaper added", MessageBoxButton.OK,
                MessageBoxImage.Information);
             }
@@ -56,18 +60,18 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             }
 
         }
-        public void CreateReadingRoomOrder(ReadingRoomOrder readingRoomOrder)
+        public void CreateReadingRoomOrder(Order readingRoomOrder)
         {
             var editDateTimeViewModel = new EditDateTimeViewModel();
             new EditDateTimeWindow { DataContext = editDateTimeViewModel }.ShowDialog();
             DateTime receiveDateTime = editDateTimeViewModel.ReceiveDate;
             order.ReceiveDate = receiveDateTime.ToUniversalTime();
             order.UserLogin = UserService.LoggedInUser.Login;
-            order.TypeOfOrder = "Reading room";
+            order.TypeOfOrder = "Reading room order";
             order.StatusOfOrder = "Order in processing";
             DateTime dateOfOrdering = DateTime.Now.ToUniversalTime();
             order.DateOfOrder = dateOfOrdering;
-             
+
             ServerAdapter.Instance.CreateOrder(order);
         }
 

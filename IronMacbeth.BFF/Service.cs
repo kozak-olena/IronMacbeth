@@ -39,13 +39,46 @@ namespace IronMacbeth.BFF
             }
         }
 
+        public void UpdateOrder(Contract.Order order, Contract.SpecifiedOrderFields specifyOrderFields)
+        {
+            var Corder = new Order()
+            {
+                Id = order.Id,
+                UserLogin = order.UserLogin,
+                TypeOfOrder = order.TypeOfOrder,
+                BookId = order.BookId,
+                ArticleId = order.ArticleId,
+                PeriodicalId = order.PeriodicalId,
+                ThesesId = order.ThesesId,
+                NewspaperId = order.NewspaperId,
+                DateOfOrder = order.DateOfOrder,
+                Book = order.Book,
+                Article = order.Article,
+                Periodical = order.Periodical,
+                Newspaper = order.Newspaper,
+                Theses = order.Theses,
+                StatusOfOrder = specifyOrderFields.Status,
+                ReceiveDate = specifyOrderFields.ReceiveDate,
+                DateOfReturn = specifyOrderFields.DateOfReturning
+            };
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Update(Corder);
+                //dbContext.Orders.Attach(order);
+                //dbContext.Entry(order).Property(x => x.StatusOfOrder).IsModified = true;
+                //dbContext.Entry(order).Property(x => x.ReceiveDate).IsModified = true;
+                //dbContext.Entry(order).Property(x => x.DateOfReturn).IsModified = true;
+                dbContext.SaveChanges();
+            }
+        }
+
         public List<Contract.Order> GetAllOrders()
         {
             using (var dbContext = new DbContext())
             {
                 User currentUser = GetLoggedInUserInternal();
                 IQueryable<Order> intermediate = dbContext.Orders.Include(x => x.Book).Include(x => x.Article).Include(x => x.Periodical).Include(x => x.Theses).Include(x => x.Newspaper);
-                if (currentUser != null)
+                if (currentUser.UserRole != UserRole.Admin)
                 {
                     intermediate = intermediate.Where(x => x.UserLogin == currentUser.Login);
                 }
@@ -82,16 +115,6 @@ namespace IronMacbeth.BFF
         }
         #endregion
 
-        #region ReadingRoomOrder
-        public void CreateReadingRoomOrder(ReadingRoomOrder orderInfo)
-        {
-            using (var dbContext = new DbContext())
-            {
-                dbContext.Add(orderInfo);
-                dbContext.SaveChanges();
-            }
-        }
-        #endregion
 
         #region Search
         public DocumentsSearchResults SearchDocuments(SearchFilledFields searchFilledFields)
