@@ -42,10 +42,10 @@ namespace IronMacbeth.Client
         #region Order
         public void CreateOrder(Internal.Order orderInfo)
         {
-            var contractOrder = MapInternalToContractOrder(orderInfo);
+            var contractOrder = MapInternalToContractCreateOrder(orderInfo);
             _proxy.CreateOrder(contractOrder);
         }
-        private Contract.CreateOrder MapInternalToContractOrder(Internal.Order orderInfo)
+        private Contract.CreateOrder MapInternalToContractCreateOrder(Internal.Order orderInfo)
         {
             return new Contract.CreateOrder
             {
@@ -55,7 +55,12 @@ namespace IronMacbeth.Client
                 ArticleId = orderInfo.Article?.Id,
                 PeriodicalId = orderInfo.Periodical?.Id,
                 NewspaperId = orderInfo.Newspaper?.Id,
-                ThesesId = orderInfo.Thesis?.Id
+                ThesesId = orderInfo.Thesis?.Id,
+                TypeOfOrder = orderInfo.TypeOfOrder,
+                StatusOfOrder = orderInfo.StatusOfOrder,
+                ReceiveDate = orderInfo.ReceiveDate,
+                DateOfOrer = orderInfo.DateOfOrder,
+                DateOfReturn = orderInfo.DateOfReturn
             };
         }
 
@@ -64,8 +69,7 @@ namespace IronMacbeth.Client
             var orders = _proxy.GetAllOrders();
 
             var internalOrders = orders.Select(MapContractToInternalOrder).ToList();
-            
-           
+
             return internalOrders;
         }
 
@@ -76,6 +80,11 @@ namespace IronMacbeth.Client
             {
                 Id = order.Id,
                 UserLogin = order.UserLogin,
+                TypeOfOrder = order.TypeOfOrder,
+                StatusOfOrder = order.StatusOfOrder,
+                DateOfOrder = order.DateOfOrder.ToLocalTime(),
+                DateOfReturn = order.DateOfReturn.ToLocalTime(),
+                ReceiveDate = order.ReceiveDate.ToLocalTime(),
                 Book = order.Book != null ? MapContractToInternalBook(order.Book) : null,
                 Article = order.Article != null ? MapContractToInternalArticle(order.Article) : null,
                 Periodical = order.Periodical != null ? MapContractToInternalPeriodical(order.Periodical) : null,
@@ -88,27 +97,50 @@ namespace IronMacbeth.Client
         {
             _proxy.DeleteOrder(id);
         }
-        #endregion
 
-        #region ReadingRoomOrder
-        public void CreateReadingRoomOrder(Internal.ReadingRoomOrder orderInfo)
+        public void UpdateOrder(Internal.Order order, Internal.SpecifiedOrderFields specifyOrderFields)
         {
-            var contractOrder = MapInternalToContractReadingRoomOrder(orderInfo);
-            _proxy.CreateReadingRoomOrder(contractOrder);
+            var contractOrder = MapInternalToContractUpdateOrder(order);
+            var contractSpecifiedOrderFields = MapInternalToContractOrderFields(specifyOrderFields);
+            _proxy.UpdateOrder(contractOrder, contractSpecifiedOrderFields);
         }
-        private Contract.ReadingRoomOrder MapInternalToContractReadingRoomOrder(Internal.ReadingRoomOrder orderInfo)
+
+
+        private Contract.Order MapInternalToContractUpdateOrder(Internal.Order order)
         {
-            return new Contract.ReadingRoomOrder
+            return new Contract.Order
             {
-                UserLogin = orderInfo.UserLogin,
-                BookId = orderInfo.BookId,
-                ArticleId = orderInfo.ArticleId,
-                PeriodicalId = orderInfo.PeriodicalId,
-                NewspaperId = orderInfo.NewspaperId,
-                ThesesID = orderInfo.ThesesID
+                Id = order.Id,
+                UserLogin = order.UserLogin,
+                BookId = order.Book?.Id,
+                ArticleId = order.Article?.Id,
+                PeriodicalId = order.Periodical?.Id,
+                NewspaperId = order.Newspaper?.Id,
+                ThesesId = order.Thesis?.Id,
+                TypeOfOrder = order.TypeOfOrder,
+                //StatusOfOrder = order.StatusOfOrder,
+                //ReceiveDate = order.ReceiveDate,
+                DateOfOrder = order.DateOfOrder,
+                DateOfReturn = order.DateOfReturn
             };
         }
+        private Contract.SpecifiedOrderFields MapInternalToContractOrderFields(Internal.SpecifiedOrderFields specifyOrderFields)
+        {
+            return new Contract.SpecifiedOrderFields
+            {
+                DateOfReturning = specifyOrderFields.DateOfReturning,
+                Status = specifyOrderFields.Status,
+                ReceiveDate = specifyOrderFields.ReceiveDate
+            };
+        }
+
+
+
+
+
         #endregion
+
+
 
         #region SearchDocument
         public DocumentsSearchResults SearchDocuments(Internal.SearchFilledFields searchFilledFields)
@@ -489,8 +521,6 @@ namespace IronMacbeth.Client
             {
             };
         }
-
-
 
         public void UpdateArticle(Internal.Article article)
         {

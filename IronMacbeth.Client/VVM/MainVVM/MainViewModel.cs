@@ -1,5 +1,6 @@
 ﻿using IronMacbeth.BFF.Contract;
 using IronMacbeth.Client.Annotations;
+using IronMacbeth.Client.VVM.AdminOrderVVM;
 using IronMacbeth.Client.VVM.BookVVM;
 using IronMacbeth.Client.VVM.Home;
 using IronMacbeth.Client.VVM.LogInVVM;
@@ -205,6 +206,8 @@ namespace IronMacbeth.Client.ViewModel
             if (UserLoggedIn && User.IsAdmin)
             {
                 PageViewModels = PageViewModels.Append(new BookViewModel()).ToList();
+                OnPropertyChanged(nameof(PageViewModels));
+                PageViewModels = PageViewModels.Append(new AdminOrderViewModel()).ToList();
                 OnPropertyChanged(nameof(PageViewModels));
             }
             else if (UserLoggedIn)

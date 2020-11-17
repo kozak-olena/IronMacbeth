@@ -63,6 +63,21 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -88,6 +103,7 @@
     <Compile Include="Model\RentBook.cs" />
     <Compile Include="Model\RentNewspaper.cs" />
     <Compile Include="Model\RentPeriodical.cs" />
+    <Compile Include="Model\SpecifiedOrderFields.cs" />
     <Compile Include="ServerAdapter.cs" />
     <Compile Include="Model\Store.cs" />
     <Compile Include="Model\StoreArticles.cs" />
@@ -103,6 +119,14 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\Videocard.cs" />
     <Compile Include="UserService.cs" />
+    <Compile Include="VVM\AdminOrderVVM\AdminOrderUserControl.xaml.cs">
+      <DependentUpon>AdminOrderUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VVM\AdminOrderVVM\AdminOrderViewModel.cs" />
+    <Compile Include="VVM\AdminOrderVVM\EditOrderViewModel.cs" />
+    <Compile Include="VVM\AdminOrderVVM\EditOrderWindow.xaml.cs">
+      <DependentUpon>EditOrderWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VVM\ArticleInfoVVM\ArticleInfoUserControl.xaml.cs">
       <DependentUpon>ArticleInfoUserControl.xaml</DependentUpon>
     </Compile>
@@ -132,6 +156,10 @@
       <DependentUpon>EditBookWindow2.xaml</DependentUpon>
     </Compile>
     <Compile Include="VVM\EditBookVVM\FilledFieldsInfo.cs" />
+    <Compile Include="VVM\EditDateTimeViewModel.cs" />
+    <Compile Include="VVM\EditDateTimeWindow.xaml.cs">
+      <DependentUpon>EditDateTimeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VVM\MyOrdersVVM\MyOrdersItemsVVM\OrderBookItemUserControl.xaml.cs">
       <DependentUpon>OrderBookItemUserControl.xaml</DependentUpon>
     </Compile>
@@ -141,7 +169,6 @@
     </Compile>
     <Compile Include="VVM\MyOrdersVVM\MyOrdersViewModel.cs" />
     <Compile Include="VVM\MyOrdersVVM\Order.cs" />
-    <Compile Include="VVM\MyOrdersVVM\ReadingRoomOrder.cs" />
     <Compile Include="VVM\NewspaperItemVVM\NewspaperItemUserControl.xaml.cs">
       <DependentUpon>NewspaperItemUserControl.xaml</DependentUpon>
     </Compile>
@@ -155,6 +182,7 @@
       <DependentUpon>SearchUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="VVM\SearchPageViewModel\SearchViewModel.cs" />
+    <Compile Include="VVM\SearchResultsVVM\SearchResultsDispatch.cs" />
     <Compile Include="VVM\SearchResultsVVM\SearchResultsUserControl.xaml.cs">
       <DependentUpon>SearchResultsUserControl.xaml</DependentUpon>
     </Compile>
@@ -175,6 +203,14 @@
     <Page Include="Themes\BureauBlue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VVM\AdminOrderVVM\AdminOrderUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VVM\AdminOrderVVM\EditOrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VVM\ArticleInfoVVM\ArticleInfoUserControl.xaml">
       <SubType>Designer</SubType>
@@ -201,6 +237,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VVM\EditBookVVM\EditBookWindow2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VVM\EditDateTimeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

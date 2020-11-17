@@ -16,11 +16,58 @@ namespace IronMacbeth.BFF
         #region Order
         public void CreateOrder(Contract.CreateOrder orderInfo)
         {
-            var order = new Order { Id = orderInfo.Id, UserLogin = orderInfo.UserLogin, BookId = orderInfo.BookId, ArticleId = orderInfo.ArticleId, PeriodicalId = orderInfo.PeriodicalId, ThesesId = orderInfo.ThesesId, NewspaperId = orderInfo.NewspaperId };
+            var order = new Order
+            {
+                Id = orderInfo.Id,
+                UserLogin = orderInfo.UserLogin,
+                BookId = orderInfo.BookId,
+                ArticleId = orderInfo.ArticleId,
+                PeriodicalId = orderInfo.PeriodicalId,
+                ThesesId = orderInfo.ThesesId,
+                NewspaperId = orderInfo.NewspaperId,
+                TypeOfOrder = orderInfo.TypeOfOrder,
+                StatusOfOrder = orderInfo.StatusOfOrder,
+                DateOfReturn = orderInfo.DateOfReturn,
+                DateOfOrder = orderInfo.DateOfOrer,
+                ReceiveDate = orderInfo.ReceiveDate
+            };
 
             using (var dbContext = new DbContext())
             {
                 dbContext.Add(order);
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void UpdateOrder(Contract.Order order, Contract.SpecifiedOrderFields specifyOrderFields)
+        {
+            var Corder = new Order()
+            {
+                Id = order.Id,
+                UserLogin = order.UserLogin,
+                TypeOfOrder = order.TypeOfOrder,
+                BookId = order.BookId,
+                ArticleId = order.ArticleId,
+                PeriodicalId = order.PeriodicalId,
+                ThesesId = order.ThesesId,
+                NewspaperId = order.NewspaperId,
+                DateOfOrder = order.DateOfOrder,
+                Book = order.Book,
+                Article = order.Article,
+                Periodical = order.Periodical,
+                Newspaper = order.Newspaper,
+                Theses = order.Theses,
+                StatusOfOrder = specifyOrderFields.Status,
+                ReceiveDate = specifyOrderFields.ReceiveDate,
+                DateOfReturn = specifyOrderFields.DateOfReturning
+            };
+            using (var dbContext = new DbContext())
+            {
+                dbContext.Update(Corder);
+                //dbContext.Orders.Attach(order);
+                //dbContext.Entry(order).Property(x => x.StatusOfOrder).IsModified = true;
+                //dbContext.Entry(order).Property(x => x.ReceiveDate).IsModified = true;
+                //dbContext.Entry(order).Property(x => x.DateOfReturn).IsModified = true;
                 dbContext.SaveChanges();
             }
         }
@@ -31,14 +78,28 @@ namespace IronMacbeth.BFF
             {
                 User currentUser = GetLoggedInUserInternal();
                 IQueryable<Order> intermediate = dbContext.Orders.Include(x => x.Book).Include(x => x.Article).Include(x => x.Periodical).Include(x => x.Theses).Include(x => x.Newspaper);
-                if (currentUser != null)
+                if (currentUser.UserRole != UserRole.Admin)
                 {
                     intermediate = intermediate.Where(x => x.UserLogin == currentUser.Login);
                 }
 
                 var result = intermediate.ToList();
 
-                return result.Select(x => new Contract.Order { Id = x.Id, UserLogin = x.UserLogin, Book = x.Book, Article = x.Article, Periodical = x.Periodical, Theses = x.Theses, Newspaper = x.Newspaper }).ToList();
+                return result.Select(x => new Contract.Order
+                {
+                    Id = x.Id,
+                    UserLogin = x.UserLogin,
+                    Book = x.Book,
+                    Article = x.Article,
+                    Periodical = x.Periodical,
+                    Theses = x.Theses,
+                    Newspaper = x.Newspaper,
+                    TypeOfOrder = x.TypeOfOrder,
+                    StatusOfOrder = x.StatusOfOrder,
+                    DateOfOrder = x.DateOfOrder,
+                    DateOfReturn = x.DateOfReturn,
+                    ReceiveDate = x.ReceiveDate
+                }).ToList();
             }
 
         }
@@ -54,16 +115,6 @@ namespace IronMacbeth.BFF
         }
         #endregion
 
-        #region ReadingRoomOrder
-        public void CreateReadingRoomOrder(ReadingRoomOrder orderInfo)
-        {
-            using (var dbContext = new DbContext())
-            {
-                dbContext.Add(orderInfo);
-                dbContext.SaveChanges();
-            }
-        }
-        #endregion
 
         #region Search
         public DocumentsSearchResults SearchDocuments(SearchFilledFields searchFilledFields)
@@ -133,7 +184,7 @@ namespace IronMacbeth.BFF
             {
                 IQueryable<Periodical> intermediate = dbContext.Periodicals;
 
-                if (searchFilledFields.SearchName != null)
+                if (searchFilledFields.SearchName != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchName))
                 {
                     intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
                 }
@@ -200,9 +251,13 @@ namespace IronMacbeth.BFF
             using (var dbContext = new DbContext())
             {
                 IQueryable<Thesis> intermediate = dbContext.Thesises;
-                if (searchFilledFields.SearchName != null)
+                if (searchFilledFields.SearchName != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchName))
                 {
                     intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
+                }
+                if (searchFilledFields.SearchAuthor != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
+                {
+                    intermediate = intermediate.Where(x => x.Author == searchFilledFields.SearchAuthor);
                 }
                 if (searchFilledFields.SearchYearFrom != null && searchFilledFields.SearchYearTo == null)
                 {
@@ -324,14 +379,15 @@ namespace IronMacbeth.BFF
             using (var dbContext = new DbContext())
             {
                 IQueryable<Article> intermediate = dbContext.Articles;
-                if (searchFilledFields.SearchName != null)
+                if (searchFilledFields.SearchName != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchName))
                 {
                     intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
                 }
-                if (searchFilledFields.SearchAuthor != null)
+                if (searchFilledFields.SearchAuthor != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
                 {
                     intermediate = intermediate.Where(x => x.Author == searchFilledFields.SearchAuthor);
                 }
+
                 if (searchFilledFields.SearchYearFrom != null && searchFilledFields.SearchYearTo == null)
                 {
                     intermediate = intermediate.Where(x => x.Year > searchFilledFields.SearchYearFrom);
@@ -344,6 +400,7 @@ namespace IronMacbeth.BFF
                 {
                     intermediate = intermediate.Where(x => x.Year > searchFilledFields.SearchYearFrom && x.Year < searchFilledFields.SearchYearTo);
                 }
+
                 return intermediate.ToList();
             }
         }
@@ -387,11 +444,11 @@ namespace IronMacbeth.BFF
             {
                 IQueryable<Book> intermediate = dbContext.Books;
 
-                if (searchFilledFields.SearchName != null)
+                if (searchFilledFields.SearchName != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
                 {
                     intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
                 }
-                if (searchFilledFields.SearchAuthor != null)
+                if (searchFilledFields.SearchAuthor != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
                 {
                     intermediate = intermediate.Where(x => x.Author == searchFilledFields.SearchAuthor);
                 }
