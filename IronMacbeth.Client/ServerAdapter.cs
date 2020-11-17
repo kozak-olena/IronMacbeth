@@ -81,6 +81,10 @@ namespace IronMacbeth.Client
                 Id = order.Id,
                 UserLogin = order.UserLogin,
                 TypeOfOrder = order.TypeOfOrder,
+                StatusOfOrder = order.StatusOfOrder,
+                DateOfOrder = order.DateOfOrder.ToLocalTime(),
+                DateOfReturn = order.DateOfReturn.ToLocalTime(),
+                ReceiveDate = order.ReceiveDate.ToLocalTime(),
                 Book = order.Book != null ? MapContractToInternalBook(order.Book) : null,
                 Article = order.Article != null ? MapContractToInternalArticle(order.Article) : null,
                 Periodical = order.Periodical != null ? MapContractToInternalPeriodical(order.Periodical) : null,
@@ -96,8 +100,8 @@ namespace IronMacbeth.Client
         #endregion
 
         #region ReadingRoomOrder
-       
-       
+
+
         #endregion
 
         #region SearchDocument
@@ -479,8 +483,6 @@ namespace IronMacbeth.Client
             {
             };
         }
-
-
 
         public void UpdateArticle(Internal.Article article)
         {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM
@@ -21,19 +22,23 @@ namespace IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM
 
         public string Author => GetAuthor(_item.GetOrderedItem());
 
+        public Visibility AuthorVisibility => Author != null ? Visibility.Visible : Visibility.Collapsed;
+
         public int Id => _item.Id;
 
         public string StatusOfOrder => _item.StatusOfOrder;
 
-        public DateTime DateOfOrder => _item.DateOfOrder;
+        public string DateOfOrder => _item.DateOfOrder.ToString();
 
-        public DateTime DateOfReturn => _item.DateOfReturn;
+        public string DateOfReturn => _item.DateOfReturn.ToString();
 
-        public DateTime ReceiveDate => _item.ReceiveDate;
+        public string ReceiveDate => _item.ReceiveDate.ToString();
 
         public string UserLogin => _item.UserLogin;
 
         public string TypeOfDocument => _item.TypeOfOrder;
+
+
 
 
         public DocumentInfoViewModel MoreInfoVm => new DocumentInfoViewModel(_item.GetOrderedItem());
@@ -50,6 +55,25 @@ namespace IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM
                 Book book = (Book)order;
                 return book.Author;
             }
+            if (order is Article)
+            {
+                Article article = (Article)order;
+                return article.Author;
+            }
+            if (order is Periodical)
+            {
+                Periodical periodical = (Periodical)order;
+                return periodical.Responsible;
+            }
+            if (order is Thesis)
+            {
+                Thesis theses = (Thesis)order;
+                return theses.Author;
+            }
+            if (order is Newspaper)
+            {
+                return null;
+            }
             else
             {
                 throw new InvalidCastException();
@@ -63,10 +87,26 @@ namespace IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM
                 Book book = (Book)order;
                 return book.Name;
             }
-            else if (order is Article)
+            if (order is Article)
             {
                 Article article = (Article)order;
                 return article.Name;
+            }
+            if (order is Periodical)
+            {
+                Periodical periodical = (Periodical)order;
+                return periodical.Name;
+            }
+            if (order is Thesis)
+            {
+                Thesis theses = (Thesis)order;
+                return theses.Name;
+            }
+            if (order is Newspaper)
+            {
+
+                Newspaper newspaper = (Newspaper)order;
+                return newspaper.Name;
             }
             else
             {

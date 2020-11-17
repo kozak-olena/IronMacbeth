@@ -26,7 +26,7 @@ namespace IronMacbeth.BFF
                 TypeOfOrder = orderInfo.TypeOfOrder,
                 StatusOfOrder = orderInfo.StatusOfOrder,
                 DateOfReturn = orderInfo.DateOfReturn,
-                DateOfOrder = orderInfo.DateOfReturn,
+                DateOfOrder = orderInfo.DateOfOrer,
                 ReceiveDate = orderInfo.ReceiveDate
             };
 
@@ -62,7 +62,8 @@ namespace IronMacbeth.BFF
                     TypeOfOrder = x.TypeOfOrder,
                     StatusOfOrder = x.StatusOfOrder,
                     DateOfOrder = x.DateOfOrder,
-                    DateOfReturn = x.DateOfReturn
+                    DateOfReturn = x.DateOfReturn,
+                    ReceiveDate = x.ReceiveDate
                 }).ToList();
             }
 
@@ -160,7 +161,7 @@ namespace IronMacbeth.BFF
             {
                 IQueryable<Periodical> intermediate = dbContext.Periodicals;
 
-                if (searchFilledFields.SearchName != null)
+                if (searchFilledFields.SearchName != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchName))
                 {
                     intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
                 }
@@ -227,9 +228,13 @@ namespace IronMacbeth.BFF
             using (var dbContext = new DbContext())
             {
                 IQueryable<Thesis> intermediate = dbContext.Thesises;
-                if (searchFilledFields.SearchName != null)
+                if (searchFilledFields.SearchName != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchName))
                 {
                     intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
+                }
+                if (searchFilledFields.SearchAuthor != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
+                {
+                    intermediate = intermediate.Where(x => x.Author == searchFilledFields.SearchAuthor);
                 }
                 if (searchFilledFields.SearchYearFrom != null && searchFilledFields.SearchYearTo == null)
                 {
@@ -351,14 +356,15 @@ namespace IronMacbeth.BFF
             using (var dbContext = new DbContext())
             {
                 IQueryable<Article> intermediate = dbContext.Articles;
-                if (searchFilledFields.SearchName != null)
+                if (searchFilledFields.SearchName != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchName))
                 {
                     intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
                 }
-                if (searchFilledFields.SearchAuthor != null)
+                if (searchFilledFields.SearchAuthor != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
                 {
                     intermediate = intermediate.Where(x => x.Author == searchFilledFields.SearchAuthor);
                 }
+
                 if (searchFilledFields.SearchYearFrom != null && searchFilledFields.SearchYearTo == null)
                 {
                     intermediate = intermediate.Where(x => x.Year > searchFilledFields.SearchYearFrom);
@@ -371,6 +377,7 @@ namespace IronMacbeth.BFF
                 {
                     intermediate = intermediate.Where(x => x.Year > searchFilledFields.SearchYearFrom && x.Year < searchFilledFields.SearchYearTo);
                 }
+
                 return intermediate.ToList();
             }
         }
@@ -414,11 +421,11 @@ namespace IronMacbeth.BFF
             {
                 IQueryable<Book> intermediate = dbContext.Books;
 
-                if (searchFilledFields.SearchName != null)
+                if (searchFilledFields.SearchName != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
                 {
                     intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
                 }
-                if (searchFilledFields.SearchAuthor != null)
+                if (searchFilledFields.SearchAuthor != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
                 {
                     intermediate = intermediate.Where(x => x.Author == searchFilledFields.SearchAuthor);
                 }

@@ -16,9 +16,8 @@
         <WrapPanel  Grid.Row="0" Orientation="Vertical" VerticalAlignment="Bottom">
             <TextBlock Text="Choose date and time of issueing:" Margin="5,5,0,10" />
         </WrapPanel>
-        <WrapPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-            <xctk:DateTimePicker Height="30" Value="{Binding ReceiveDate}"  Minimum="{Binding  Min}"
-                         Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="3" Margin="89,1,0,10" Grid.RowSpan="2" />
+        <WrapPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <xctk:DateTimePicker Height="30" Value="{Binding ReceiveDate}"  Minimum="{Binding  Min}"/>
         </WrapPanel>
         <WrapPanel  
                 HorizontalAlignment="Center"

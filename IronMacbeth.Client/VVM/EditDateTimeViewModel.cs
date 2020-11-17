@@ -17,7 +17,7 @@ namespace IronMacbeth.Client.VVM
         public string PageViewName => "DateTime";
 
         public void Update() { }
-        public DateTime Min => DateTime.Now.AddMinutes(179);
+        public DateTime Min { get; }
 
         private DateTime _receiveDate;
 
@@ -35,6 +35,9 @@ namespace IronMacbeth.Client.VVM
 
         public EditDateTimeViewModel()
         {
+            DateTime dateTime = DateTime.Now.AddMinutes(179);
+            Min = new DateTime(dateTime.Ticks - (dateTime.Ticks % TimeSpan.TicksPerSecond), dateTime.Kind);
+
             _receiveDate = DateTime.Now.AddHours(3);
             CloseCommand = new RelayCommand(CloseMethod);
             ApplyChangesCommand = new RelayCommand(ApplyChangesMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
