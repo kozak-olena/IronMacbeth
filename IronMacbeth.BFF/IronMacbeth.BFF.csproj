@@ -195,6 +195,10 @@
       <Project>{7147f8fd-500b-4bd9-97b2-3ad28c2496e2}</Project>
       <Name>IronMacbeth.BFF.Contract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UserManagement\IronMacbeth.UserManagement.Contract\IronMacbeth.UserManagement.Contract.csproj">
+      <Project>{AAB2111A-8B50-43CE-BF1A-1C9734DE51B3}</Project>
+      <Name>IronMacbeth.UserManagement.Contract</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets')" />

@@ -151,42 +151,6 @@
     <Compile Include="VVM\EditDateTimeWindow.xaml.cs">
       <DependentUpon>EditDateTimeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VVM\EditMemoryVVM\EditMemoryViewModel.cs" />
-    <Compile Include="VVM\EditMemoryVVM\EditMemoryWindow.xaml.cs">
-      <DependentUpon>EditMemoryWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\EditMotherboardVVM\EditMotherboardViewModel.cs" />
-    <Compile Include="VVM\EditMotherboardVVM\EditMotherboardWindow.xaml.cs">
-      <DependentUpon>EditMotherboardWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\EditVideocardVVM\EditVideocardViewModel.cs" />
-    <Compile Include="VVM\EditVideocardVVM\EditVideocardWindow.xaml.cs">
-      <DependentUpon>EditVideocardWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\MemoryInfo\MemoryInfoUserControl.xaml.cs">
-      <DependentUpon>MemoryInfoUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\MemoryInfo\MemoryInfoViewModel.cs" />
-    <Compile Include="VVM\MemoryVVM\MemoryItemUserControl.xaml.cs">
-      <DependentUpon>MemoryItemUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\MemoryVVM\MemoryUserControl.xaml.cs">
-      <DependentUpon>MemoryUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\MemoryVVM\MemoryItemViewModel.cs" />
-    <Compile Include="VVM\MemoryVVM\MemoryViewModel.cs" />
-    <Compile Include="VVM\MotherboardInfo\MotherboardInfoUserControl.xaml.cs">
-      <DependentUpon>MotherboardInfoUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\MotherboardInfo\MotherboardInfoViewModel.cs" />
-    <Compile Include="VVM\MotherboardVVM\MotherboardItemUserControl.xaml.cs">
-      <DependentUpon>MotherboardItemUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\MotherboardVVM\MotherboardUserControl.xaml.cs">
-      <DependentUpon>MotherboardUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\MotherboardVVM\MotherboardViewModel.cs" />
-    <Compile Include="VVM\MotherboardVVM\MotherboardItemViewModel.cs" />
     <Compile Include="VVM\MyOrdersVVM\MyOrdersItemsVVM\OrderBookItemUserControl.xaml.cs">
       <DependentUpon>OrderBookItemUserControl.xaml</DependentUpon>
     </Compile>
@@ -205,7 +169,6 @@
     <Compile Include="VVM\PeriodicalItemVVM\PeriodicalItemUserControl.xaml.cs">
       <DependentUpon>PeriodicalItemUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VVM\ProcessorVVM\ProcessorItemViewModel.cs" />
     <Compile Include="VVM\SearchPageViewModel\SearchFilledFields.cs" />
     <Compile Include="VVM\SearchPageViewModel\SearchUserControl.xaml.cs">
       <DependentUpon>SearchUserControl.xaml</DependentUpon>
@@ -216,59 +179,12 @@
       <DependentUpon>SearchResultsUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="VVM\SearchResultsVVM\SearchResultsViewModel.cs" />
-    <Compile Include="VVM\StorePurchaseVVM\StorePurchaseUserControl.xaml.cs">
-      <DependentUpon>StorePurchaseUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\StoreSellableEditableItemUserControl.xaml.cs">
-      <DependentUpon>StoreSellableEditableItemUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\EditProcessorVVM\EditProcessorViewModel.cs" />
-    <Compile Include="VVM\EditProcessorVVM\EditProcessorWindow.xaml.cs">
-      <DependentUpon>EditProcessorWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\EditStoreVVM\StoreEditWindow.xaml.cs">
-      <DependentUpon>StoreEditWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\EditStoreVVM\StoreEditViewModel.cs" />
     <Compile Include="VVM\Home\HomeUserControl.xaml.cs">
       <DependentUpon>HomeUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="VVM\Home\HomeViewModel.cs" />
     <Compile Include="IPageViewModel.cs" />
     <Compile Include="VVM\LogInVVM\LogInViewModel.cs" />
-    <Compile Include="VVM\ProcessorInfo\ProcessorInfoUserControl.xaml.cs">
-      <DependentUpon>ProcessorInfoUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\ProcessorInfo\ProcessorInfoViewModel.cs" />
-    <Compile Include="VVM\ProcessorVVM\ProcessorItemUserControl.xaml.cs">
-      <DependentUpon>ProcessorItemUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\ProcessorVVM\ProcessorUserControl.xaml.cs">
-      <DependentUpon>ProcessorUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\ProcessorVVM\ProcessorViewModel.cs" />
-    <Compile Include="VVM\PuchaseVVM\PurchaseUserControl.xaml.cs">
-      <DependentUpon>PurchaseUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\PuchaseVVM\PurchaseViewModel.cs" />
-    <Compile Include="VVM\SellableItemUserControl.xaml.cs">
-      <DependentUpon>SellableItemUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\StoreVVM\StoreItemUserControl.xaml.cs">
-      <DependentUpon>StoreItemUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\StoreVVM\StoreSellableItemUserControl.xaml.cs">
-      <DependentUpon>StoreSellableItemUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\StoreVVM\StoreSellableItemViewModel.cs" />
-    <Compile Include="VVM\StoreVVM\UserStoresViewModel.cs" />
-    <Compile Include="VVM\StoreVVM\UserStoresWindow.xaml.cs">
-      <DependentUpon>UserStoresWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\StorePurchaseVVM\StorePurchaseViewModel.cs" />
-    <Compile Include="VVM\StorePurchaseVVM\StorePurchaseWindow.xaml.cs">
-      <DependentUpon>StorePurchaseWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="VVM\MainVVM\MainViewModel.cs" />
@@ -276,18 +192,6 @@
       <DependentUpon>ThesisItemUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="VVM\ThesisItemVVM\ThesisItemViewModel.cs" />
-    <Compile Include="VVM\VideocardInfo\VideocardInfoUserControl.xaml.cs">
-      <DependentUpon>VideocardInfoUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\VideocardInfo\VideocardInfoViewModel.cs" />
-    <Compile Include="VVM\VideocardVVM\VideoCardItemViewModel.cs" />
-    <Compile Include="VVM\VideocardVVM\VideocardItemUserControl.xaml.cs">
-      <DependentUpon>VideocardItemUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\VideocardVVM\VideocardUserControl.xaml.cs">
-      <DependentUpon>VideocardUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\VideocardVVM\VideocardViewModel.cs" />
     <Page Include="Themes\BureauBlue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -324,42 +228,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="VVM\EditMemoryVVM\EditMemoryWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\EditMotherboardVVM\EditMotherboardWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\EditVideocardVVM\EditVideocardWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\MemoryInfo\MemoryInfoUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\MemoryVVM\MemoryItemUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\MemoryVVM\MemoryUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\MotherboardInfo\MotherboardInfoUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\MotherboardVVM\MotherboardItemUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\MotherboardVVM\MotherboardUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="VVM\MyOrdersVVM\MyOrdersItemsVVM\OrderBookItemUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -384,59 +252,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="VVM\StorePurchaseVVM\StorePurchaseUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\StoreSellableEditableItemUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\EditProcessorVVM\EditProcessorWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\EditStoreVVM\StoreEditWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="VVM\Home\HomeUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\ProcessorInfo\ProcessorInfoUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\ProcessorVVM\ProcessorItemUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\ProcessorVVM\ProcessorUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\PuchaseVVM\PurchaseUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\SellableItemUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\StoreVVM\StoreItemUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\StoreVVM\StoreSellableItemUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\StoreVVM\UserStoresWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\StorePurchaseVVM\StorePurchaseWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -464,18 +280,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VVM\ThesisItemVVM\ThesisItemUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\VideocardInfo\VideocardInfoUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\VideocardVVM\VideocardItemUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\VideocardVVM\VideocardUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

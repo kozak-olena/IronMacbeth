@@ -60,25 +60,12 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\User.sql" />
-    <Build Include="Tables\Store.sql" />
-    <Build Include="Tables\Memory.sql" />
-    <Build Include="Tables\Processor.sql" />
-    <Build Include="Tables\VideoCard.sql" />
-    <Build Include="Tables\Motherboard.sql" />
-    <Build Include="Tables\StoreMemory.sql" />
-    <Build Include="Tables\StoreProcessor.sql" />
-    <Build Include="Tables\StoreVideoCard.sql" />
-    <Build Include="Tables\StoreMotherboard.sql" />
-    <Build Include="Tables\Purchase.sql" />
     <Build Include="Tables\Book.sql" />
     <Build Include="Tables\RentBook.sql" />
     <Build Include="Tables\Article.sql" />
     <Build Include="Tables\Periodical.sql" />
     <Build Include="Tables\RentPeriodical.sql" />
     <Build Include="Tables\Thesis.sql" />
-    <Build Include="Tables\StoreBook.sql" />
-    <Build Include="Tables\StorePeriodicals.sql" />
-    <Build Include="Tables\StoreArticle.sql" />
     <Build Include="Tables\Newspaper.sql" />
     <Build Include="Tables\UserRole.sql" />
     <Build Include="Tables\Order.sql" />

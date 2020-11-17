@@ -14,7 +14,7 @@
             <DoubleAnimation Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(ProgressBar.Width)" From="100" To="0" Duration="0:0:0.5"/>
             <DoubleAnimation Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(ProgressBar.Opacity)" From="1" To="0" Duration="0:0:0.25"/>
             <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(FrameworkElement.Margin)">
-                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0,5"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0,2.5"/>
             </ThicknessAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(UIElement.Visibility)">
                 <DiscreteObjectKeyFrame KeyTime="00:00:0.5" Value="{x:Static Visibility.Collapsed}"/>
@@ -33,13 +33,13 @@
                 <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
             </BooleanAnimationUsingKeyFrames>
             <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="RetryButton" Storyboard.TargetProperty="(FrameworkElement.Margin)">
-                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="5,5"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="2.5,2.5"/>
             </ThicknessAnimationUsingKeyFrames>
             
             <DoubleAnimation Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(ProgressBar.Width)" From="100" To="0" Duration="0:0:0.5"/>
             <DoubleAnimation Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(ProgressBar.Opacity)" From="1" To="0" Duration="0:0:0.25"/>
             <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(FrameworkElement.Margin)">
-                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0,5"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0,2.5"/>
             </ThicknessAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(UIElement.Visibility)">
                 <DiscreteObjectKeyFrame KeyTime="00:00:0.5" Value="{x:Static Visibility.Collapsed}"/>
@@ -57,13 +57,13 @@
                 <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
             </BooleanAnimationUsingKeyFrames>
             <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="RetryButton" Storyboard.TargetProperty="(FrameworkElement.Margin)">
-                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0,5"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0,2.5"/>
             </ThicknessAnimationUsingKeyFrames>
             
             <DoubleAnimation Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(ProgressBar.Width)" From="0" To="100" Duration="0:0:0.5"/>
             <DoubleAnimation Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(ProgressBar.Opacity)" From="0" To="1" BeginTime="0:0:0.25" Duration="0:0:0.25"/>
             <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(FrameworkElement.Margin)">
-                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="5,5"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="2.5,2.5"/>
             </ThicknessAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="BusyProgressBar" Storyboard.TargetProperty="(UIElement.Visibility)">
                 <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
@@ -92,18 +92,18 @@
     </i:Interaction.Triggers>
 
     <DockPanel>
-        <Menu 
-            x:Name="Menu" 
-            Height="25" 
-            Visibility="{Binding MenuVisibility}"
-            DockPanel.Dock="Top">
-            <MenuItem 
-                Header="My Stores"
-                Command="{Binding ShowStoresCommand}"/>
-            <MenuItem 
-                Header="New Purchases"
-                Command="{Binding ShowPurchasesCommand}"/>
-        </Menu>
+        <Border DockPanel.Dock="Top" Height="25" Background="#FFBFDBFF">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock x:Name="ConnectionStatusTextBlock" Text="{Binding ConnectionMenuText}" Margin="5,5,5,2.5" Foreground="Black"/>
+                <ProgressBar x:Name="BusyProgressBar" Margin="2.5" Width="100" IsIndeterminate="True" />
+                <Button x:Name="RetryButton" Margin="2.5" Width="75" Content="Retry" Command="{Binding ReconnectCommand}" Visibility="Collapsed"/>
+                <WrapPanel Visibility="{Binding MenuVisibility}">
+                    <Border Margin="5,2.5,5,0"  BorderThickness="1,0,0,0" BorderBrush="#FF395FB9"/>
+                    <TextBlock Margin="5,5,0,2.5" Text="Logged in as "/>
+                    <TextBlock Margin="0,5,5,2.5" Text="{Binding Login}" FontWeight="Bold"/>
+                </WrapPanel>
+            </StackPanel>
+        </Border>
         <Border 
             DockPanel.Dock="Left" 
             BorderBrush="#FF405DC0" 
@@ -161,18 +161,6 @@
                         CommandParameter="{Binding ElementName=Window}"/>
                 </Border>
             </Grid>
-        </Border>
-        <Border DockPanel.Dock="Bottom" Height="30" Background="#FFBFDBFF">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock x:Name="ConnectionStatusTextBlock" Text="{Binding ConnectionMenuText}" Margin="5" Foreground="Black"/>
-                <ProgressBar x:Name="BusyProgressBar" Margin="5" Width="100" IsIndeterminate="True" />
-                <Button x:Name="RetryButton" Margin="5" Width="75" Content="Retry" Command="{Binding ReconnectCommand}" Visibility="Collapsed"/>
-                <WrapPanel Visibility="{Binding MenuVisibility}">
-                    <Border Margin="5,2.5,5,0"  BorderThickness="1,0,0,0" BorderBrush="#FF395FB9"/>
-                    <TextBlock Margin="5,5,0,5" Text="Logged in as "/>
-                    <TextBlock Margin="0,5,5,5" Text="{Binding Login}" FontWeight="Bold"/>
-                </WrapPanel>                
-            </StackPanel>
         </Border>
         <Grid>
             <ContentControl Content="{Binding CurrentPageViewModel}"/>

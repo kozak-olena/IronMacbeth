@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7147F8FD-500B-4BD9-97B2-3AD28C2496E2}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IronMacbeth.BFF.Contract</RootNamespace>
-    <AssemblyName>IronMacbeth.BFF.Contract</AssemblyName>
+    <ProjectGuid>{6A35E59A-DB7D-442E-AA46-CE356F171F2D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>IronMacbeth.UserManagement</RootNamespace>
+    <AssemblyName>IronMacbeth.UserManagement</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,25 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Article.cs" />
-    <Compile Include="Book.cs" />
-    <Compile Include="DocumentsSearchResults.cs" />
-    <Compile Include="IAnonymousService.cs" />
-    <Compile Include="IService.cs" />
-    <Compile Include="Newspaper.cs" />
-    <Compile Include="CreateOrder.cs" />
-    <Compile Include="Order.cs" />
-    <Compile Include="Periodical.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReadingRoomOrder.cs" />
-    <Compile Include="RentBook.cs" />
-    <Compile Include="RentPeriodical.cs" />
-    <Compile Include="SearchFilledFields.cs" />
-    <Compile Include="Thesis.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserRegistrationStatus.cs" />
-    <Compile Include="UserRole.cs" />
-    <Compile Include="Videocard.cs" />
+    <Compile Include="UserManagementService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IronMacbeth.UserManagement.Contract\IronMacbeth.UserManagement.Contract.csproj">
+      <Project>{AAB2111A-8B50-43CE-BF1A-1C9734DE51B3}</Project>
+      <Name>IronMacbeth.UserManagement.Contract</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
