@@ -1,7 +1,6 @@
-﻿using IronMacbeth.FileManagement;
+﻿using IronMacbeth.FileStorage;
 using System;
 using System.ServiceModel;
-
 
 namespace FileService
 {
@@ -9,7 +8,7 @@ namespace FileService
     {
         static void Main(string[] args)
         {
-            using (ServiceHost host = new ServiceHost(typeof(FileManagementService)))
+            using (ServiceHost host = new ServiceHost(typeof(FileStorageService)))
             {
                 host.Open();
                 Console.WriteLine("The service is ready at {0}");
