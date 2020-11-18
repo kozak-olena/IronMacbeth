@@ -19,10 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronMacbeth.UserManagement"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronMacbeth.UserManagement.Contract", "UserManagement\IronMacbeth.UserManagement.Contract\IronMacbeth.UserManagement.Contract.csproj", "{AAB2111A-8B50-43CE-BF1A-1C9734DE51B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronMacbeth.FileManagement", "FileService\IronMacbeth.FileManagement.csproj", "{F8703621-4912-4E27-A748-11585CB974E3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronMacbeth.FileService.Contract", "FileService.Contract\IronMacbeth.FileService.Contract.csproj", "{D0B633D8-0BCF-490A-A858-0C45F0F92949}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,14 +51,6 @@ Global
 		{AAB2111A-8B50-43CE-BF1A-1C9734DE51B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAB2111A-8B50-43CE-BF1A-1C9734DE51B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAB2111A-8B50-43CE-BF1A-1C9734DE51B3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F8703621-4912-4E27-A748-11585CB974E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8703621-4912-4E27-A748-11585CB974E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F8703621-4912-4E27-A748-11585CB974E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8703621-4912-4E27-A748-11585CB974E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D0B633D8-0BCF-490A-A858-0C45F0F92949}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0B633D8-0BCF-490A-A858-0C45F0F92949}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0B633D8-0BCF-490A-A858-0C45F0F92949}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0B633D8-0BCF-490A-A858-0C45F0F92949}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

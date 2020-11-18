@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6A35E59A-DB7D-442E-AA46-CE356F171F2D}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>IronMacbeth.UserManagement</RootNamespace>
-    <AssemblyName>IronMacbeth.UserManagement</AssemblyName>
+    <ProjectGuid>{0A5CF019-2FD7-464C-B9E4-3DBE9432AD05}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IronMacbeth.Common</RootNamespace>
+    <AssemblyName>IronMacbeth.Common</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -34,8 +32,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,22 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="CertificateValidation\IronMacbethX509CertificateValidator.cs" />
+    <Compile Include="CertificateValidation\TrustedCertificatesConfigurationSection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserManagementService.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\IronMacbeth.Common\IronMacbeth.Common.csproj">
-      <Project>{0a5cf019-2fd7-464c-b9e4-3dbe9432ad05}</Project>
-      <Name>IronMacbeth.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IronMacbeth.UserManagement.Contract\IronMacbeth.UserManagement.Contract.csproj">
-      <Project>{AAB2111A-8B50-43CE-BF1A-1C9734DE51B3}</Project>
-      <Name>IronMacbeth.UserManagement.Contract</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
