@@ -1,16 +1,9 @@
-﻿
-using IronMacbeth.FileManagement.Contract;
-using IronMacbeth.UserManagement.Contract;
-using System;
-using System.Collections.Generic;
+﻿using IronMacbeth.FileStorage.Contract;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace IronMacbeth.FileManagement
+namespace IronMacbeth.FileStorage
 {
-    class FileManagementService : IFileManagement
+    class FileStorageService : IFileStorageService
     {
         public string AddFile(Stream fileStream)
         {
@@ -65,7 +58,5 @@ namespace IronMacbeth.FileManagement
 
             return fileStream;
         }
-
-
     }
 }

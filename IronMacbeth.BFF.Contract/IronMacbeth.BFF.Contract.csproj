@@ -61,7 +61,6 @@
     <Compile Include="User.cs" />
     <Compile Include="UserRegistrationStatus.cs" />
     <Compile Include="UserRole.cs" />
-    <Compile Include="Videocard.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileManagementService.cs" />
+    <Compile Include="FileStorageService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -52,17 +52,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FileService.Contract\IronMacbeth.FileService.Contract.csproj">
+    <ProjectReference Include="..\IronMacbeth.FileStorage.Contract\IronMacbeth.FileStorage.Contract.csproj">
       <Project>{D0B633D8-0BCF-490A-A858-0C45F0F92949}</Project>
-      <Name>IronMacbeth.FileService.Contract</Name>
+      <Name>IronMacbeth.FileStorage.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IronMacbeth.Common\IronMacbeth.Common.csproj">
+    <ProjectReference Include="..\..\IronMacbeth.Common\IronMacbeth.Common.csproj">
       <Project>{0a5cf019-2fd7-464c-b9e4-3dbe9432ad05}</Project>
       <Name>IronMacbeth.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UserManagement\IronMacbeth.UserManagement.Contract\IronMacbeth.UserManagement.Contract.csproj">
-      <Project>{AAB2111A-8B50-43CE-BF1A-1C9734DE51B3}</Project>
-      <Name>IronMacbeth.UserManagement.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

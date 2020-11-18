@@ -21,8 +21,6 @@ namespace IronMacbeth.BFF
 
         internal DbSet<User> Users { get; set; }
 
-        public DbSet<Videocard> VideoCards { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlServer("Data Source=localhost;Initial Catalog=IronMacbeth.BFF.Database;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=False");
 
@@ -55,10 +53,6 @@ namespace IronMacbeth.BFF
 
             modelBuilder.Entity<User>()
                 .Property(x => x.UserRole).HasColumnName("RoleId");
-
-
-            modelBuilder.Entity<Videocard>()
-                .ToTable(nameof(Videocard));
         }
     }
 }

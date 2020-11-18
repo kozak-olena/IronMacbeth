@@ -1,13 +1,13 @@
-﻿using System;
+﻿using IronMacbeth.BFF.Contract;
+using IronMacbeth.UserManagement.Contract;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.ServiceModel;
 using System.Threading;
-using IronMacbeth.BFF.Contract;
-using IronMacbeth.UserManagement.Contract;
-using Microsoft.EntityFrameworkCore;
 
 namespace IronMacbeth.BFF
 {
