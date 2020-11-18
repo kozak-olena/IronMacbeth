@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.ServiceModel;
 
@@ -21,7 +22,7 @@ namespace IronMacbeth.BFF.Contract
         List<Order> GetAllOrders();
 
         [OperationContract]
-        bool CheckOrder(int id);
+        bool CheckOrder(int id, DocumentType documentType);
 
 
         [OperationContract]

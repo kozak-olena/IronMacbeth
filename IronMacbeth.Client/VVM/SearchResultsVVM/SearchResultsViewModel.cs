@@ -1,4 +1,5 @@
 ﻿
+using IronMacbeth.BFF.Contract;
 using IronMacbeth.Client.Annotations;
 using IronMacbeth.Client.ViewModel;
 using IronMacbeth.Client.VVM.ArticleItemVVM;
@@ -36,17 +37,100 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
         public SearchResultsDispatch SearchResultsDispatch;
         public void AddToMyOrdersMethod(object parameter)
         {
-            Order selectedItem = (Order)SelectedItem.GetItem();
-            bool isAlreadyTheSameOrderExist = ServerAdapter.Instance.CheckOrder(selectedItem.Id);
-            SearchResultsDispatch = new SearchResultsDispatch(SelectedItem.GetItem(), IsTypeReadingRoom);
+            IsTypeIssueing = true;
+            bool isAlreadyTheSameOrderExist = GetIdDispatch();
+            if (!isAlreadyTheSameOrderExist)
+            {
+                SearchResultsDispatch = new SearchResultsDispatch(SelectedItem.GetItem(), IsTypeIssueing);
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show($"Such document already exist in your orders. Do you want to add one more?", "Document already exist",
+     MessageBoxButton.YesNoCancel);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        SearchResultsDispatch = new SearchResultsDispatch(SelectedItem.GetItem(), IsTypeIssueing);
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                    case MessageBoxResult.Cancel:
+                        break;
+                }
+
+
+            }
         }
 
-        public bool IsTypeReadingRoom = false;
+        public bool IsTypeIssueing = false;
+
+        public bool GetIdDispatch()
+        {
+            object selectedItem = SelectedItem.GetItem();
+            if (selectedItem is Book)
+            {
+                Book book = (Book)selectedItem;
+                return ServerAdapter.Instance.CheckOrder(book.Id, DocumentType.Book);
+
+            }
+            if (selectedItem is Article)
+            {
+                Article article = (Article)selectedItem;
+                return ServerAdapter.Instance.CheckOrder(article.Id, DocumentType.Article);
+
+            }
+            if (selectedItem is Periodical)
+            {
+                Periodical periodical = (Periodical)selectedItem;
+                return ServerAdapter.Instance.CheckOrder(periodical.Id, DocumentType.Periodical);
+
+            }
+            if (selectedItem is Newspaper)
+            {
+                Newspaper newspaper = (Newspaper)selectedItem;
+                return ServerAdapter.Instance.CheckOrder(newspaper.Id, DocumentType.Newspaper);
+
+            }
+            if (selectedItem is Thesis)
+            {
+                Thesis thesis = (Thesis)selectedItem;
+                return ServerAdapter.Instance.CheckOrder(thesis.Id, DocumentType.Thesis);
+
+            }
+            else
+            {
+                throw new InvalidCastException("Can not dispatch");
+            }
+
+        }
 
         public void OrderToReadingRoomMethod(object parameter)
         {
-            IsTypeReadingRoom = true;
-            SearchResultsDispatch = new SearchResultsDispatch(SelectedItem.GetItem(), IsTypeReadingRoom);
+            IsTypeIssueing = false;
+            bool isAlreadyTheSameOrderExist = GetIdDispatch();
+            if (!isAlreadyTheSameOrderExist)
+            {
+                SearchResultsDispatch = new SearchResultsDispatch(SelectedItem.GetItem(), IsTypeIssueing);
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show($"Such document already exist in your orders. Do you want to add one more?", "Document already exist",
+     MessageBoxButton.YesNoCancel);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+
+                        SearchResultsDispatch = new SearchResultsDispatch(SelectedItem.GetItem(), IsTypeIssueing);
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                    case MessageBoxResult.Cancel:
+                        break;
+                }
+
+
+            }
+
         }
 
 

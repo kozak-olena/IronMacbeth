@@ -72,13 +72,40 @@ namespace IronMacbeth.BFF
             }
         }
 
-        public bool CheckOrder(int id)
+        public bool CheckOrder(int id, DocumentType documentType)
         {
             using (var dbContext = new DbContext())
             {
-                List<Order> intermediate = dbContext.Orders.ToList();
-                var result = intermediate.Any(x => x.Id == id);
-                return result;
+
+                if (documentType == DocumentType.Book)
+                {
+                    List<Book> intermediate = dbContext.Books.ToList();
+                    return intermediate.Any(x => x.Id == id);
+                }
+                if (documentType == DocumentType.Article)
+                {
+                    List<Article> intermediate = dbContext.Articles.ToList();
+                    return intermediate.Any(x => x.Id == id);
+                }
+                if (documentType == DocumentType.Periodical)
+                {
+                    List<Periodical> intermediate = dbContext.Periodicals.ToList();
+                    return intermediate.Any(x => x.Id == id);
+                }
+                if (documentType == DocumentType.Thesis)
+                {
+                    List<Thesis> intermediate = dbContext.Thesises.ToList();
+                    return intermediate.Any(x => x.Id == id);
+
+                }
+                if (documentType == DocumentType.Newspaper)
+                {
+                    List<Newspaper> intermediate = dbContext.Newspapers.ToList();
+                    return intermediate.Any(x => x.Id == id);
+                }
+                else { throw new InvalidOperationException("Can not get bool"); }
+
+
             }
         }
 

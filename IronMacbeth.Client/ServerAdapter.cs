@@ -43,6 +43,7 @@ namespace IronMacbeth.Client
 
         public void CreateOrder(Internal.Order orderInfo)
         {
+
             var contractOrder = MapInternalToContractCreateOrder(orderInfo);
             _proxy.CreateOrder(contractOrder);
         }
@@ -75,10 +76,9 @@ namespace IronMacbeth.Client
             return internalOrders;
         }
 
-        public bool CheckOrder(int id) 
+        public bool CheckOrder(int id, DocumentType documentType)
         {
-
-            var isAlreadyTheSameOrderInDb = _proxy.CheckOrder(id);
+            var isAlreadyTheSameOrderInDb = _proxy.CheckOrder(id, documentType);
             return isAlreadyTheSameOrderInDb;
         }
         private Internal.Order MapContractToInternalOrder(Contract.Order order)
