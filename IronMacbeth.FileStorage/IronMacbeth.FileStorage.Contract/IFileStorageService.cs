@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.ServiceModel;
 
 namespace IronMacbeth.FileStorage.Contract
@@ -11,5 +12,8 @@ namespace IronMacbeth.FileStorage.Contract
 
         [OperationContract]
         Stream GetFile(string fileName);
+
+        [OperationContract]
+        DateTime GetCurrentTime();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using IronMacbeth.BFF.Contract;
+using IronMacbeth.FileStorage.Contract;
 using IronMacbeth.UserManagement.Contract;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -515,13 +516,21 @@ namespace IronMacbeth.BFF
             //TODO: remove following. This is just to test service to service communication
             #region The following
 
-            var channelFactory = new ChannelFactory<IUserManagementService>("IronMacbeth.BFF.UserManagementEndpoint");
+            var channelFactory = new ChannelFactory<IUserManagementService>("IronMacbeth.UserManagementEndpoint");
 
             var serviceClient = channelFactory.CreateChannel();
 
             var time = serviceClient.GetCurrentTime();
 
             Console.WriteLine($"Asked UserManagement the time. It was {time}");
+
+            var fileStorageChannelFactory = new ChannelFactory<IFileStorageService>("IronMacbeth.FileStorageEndpoint");
+
+            var fileStorageServiceClient = fileStorageChannelFactory.CreateChannel();
+
+            var timeFromFileStorage = fileStorageServiceClient.GetCurrentTime();
+
+            Console.WriteLine($"Asked FileStorage the time. It was {timeFromFileStorage}");
 
             #endregion
 

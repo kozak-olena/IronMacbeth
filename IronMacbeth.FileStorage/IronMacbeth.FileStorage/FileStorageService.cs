@@ -1,4 +1,5 @@
 ﻿using IronMacbeth.FileStorage.Contract;
+using System;
 using System.IO;
 
 namespace IronMacbeth.FileStorage
@@ -57,6 +58,13 @@ namespace IronMacbeth.FileStorage
             var fileStream = File.OpenRead($"Files\\{fileName}");
 
             return fileStream;
+        }
+
+        public DateTime GetCurrentTime()
+        {
+            Console.WriteLine("Someone asked for the time.");
+
+            return DateTime.UtcNow;
         }
     }
 }
