@@ -52,7 +52,6 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
         }
 
 
-
         public Order CurrentOrder;
         public EditOrderViewModel(Order order)
         {

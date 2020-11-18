@@ -36,7 +36,8 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
         public SearchResultsDispatch SearchResultsDispatch;
         public void AddToMyOrdersMethod(object parameter)
         {
-
+            Order selectedItem = (Order)SelectedItem.GetItem();
+            bool isAlreadyTheSameOrderExist = ServerAdapter.Instance.CheckOrder(selectedItem.Id);
             SearchResultsDispatch = new SearchResultsDispatch(SelectedItem.GetItem(), IsTypeReadingRoom);
         }
 

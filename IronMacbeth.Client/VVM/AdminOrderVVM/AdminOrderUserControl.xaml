@@ -32,6 +32,11 @@
                 Width="150"
                 Margin="5,10,10,10"
                 Content="Edit" Background="White"/>
+            <Button 
+                Command="{Binding DeleteCommand}"
+                Width="150"
+                Margin="5,10,10,10"
+                Content="Delete" Background="White"/>
         </WrapPanel>
         <ListView
             DockPanel.Dock="Top"

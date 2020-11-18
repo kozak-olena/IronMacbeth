@@ -21,6 +21,7 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
         public List<OrderBookItemViewModel> Items { get; private set; }
 
         public ICommand EditCommand { get; }
+        public ICommand DeleteCommand { get; }
 
         public OrderBookItemViewModel SelectedItem { get; set; }
 
@@ -59,9 +60,14 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
         public AdminOrderViewModel()
         {
             EditCommand = new RelayCommand(EditOrderMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
+            DeleteCommand = new RelayCommand(CancelMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
         }
-
-
+        public void CancelMethod(object parameter)
+        {
+            Order orderToDelete = (Order)SelectedItem.GetItem();
+            ServerAdapter.Instance.DeleteOrder(orderToDelete.Id);
+            Update();
+        }
 
         public void EditOrderMethod(object parameter)
         {

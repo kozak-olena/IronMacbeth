@@ -72,6 +72,16 @@ namespace IronMacbeth.BFF
             }
         }
 
+        public bool CheckOrder(int id)
+        {
+            using (var dbContext = new DbContext())
+            {
+                List<Order> intermediate = dbContext.Orders.ToList();
+                var result = intermediate.Any(x => x.Id == id);
+                return result;
+            }
+        }
+
         public List<Contract.Order> GetAllOrders()
         {
             using (var dbContext = new DbContext())
