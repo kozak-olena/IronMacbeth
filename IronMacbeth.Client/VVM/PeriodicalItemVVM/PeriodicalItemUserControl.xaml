@@ -41,7 +41,7 @@
                     Foreground="CornflowerBlue" 
                     FontWeight="Bold" 
                     FontSize="13"/>
-                <Label Margin="5,10,5,0" Content="*" FontSize="13" Foreground="DimGray"/>
+                <Label Margin="5,10,5,0" Content="№" FontSize="13" Foreground="DimGray"/>
                 <TextBlock 
                     Margin="0,10,5,0"
                     Text="{Binding IssueNumber}"
@@ -55,38 +55,25 @@
                 <Label Content="•" FontSize="13" Foreground="DimGray"/>
                 <Label Margin="5,0,5,0" Content="IssueNumber:" FontSize="13" Foreground="DimGray"/>
                 <Label Content="{Binding IssueNumber}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
+            </WrapPanel>
 
+            <WrapPanel Margin="0,5,0,0">
+                <Label Content="Type:" FontSize="13" Foreground="DimGray"/>
+                <Label Content="{Binding TypeOfDocument}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
             </WrapPanel>
+            <WrapPanel>
+                <Label Margin="0,5,0,0" Content="Number of offerings:" FontSize="13" Foreground="DimGray"/>
+                <Label Margin="0,5,0,0" Content="{Binding Availiability}" FontSize="13" Foreground="DimGray"/>
+                <Label  Margin="5,5,5,0" Content="•" FontSize="13" Foreground="DimGray"/>
+                <Label Margin="5,5,5,0" Content="Location:" FontSize="13" Foreground="DimGray"/>
+                <Label Margin="5,5,5,0" Content="{Binding Location}" FontSize="13" Foreground="DimGray"/>
+            </WrapPanel>
+
             <WrapPanel>
                 <WrapPanel Margin="0,5,0,0">
-                    <Label Content="Type:" FontSize="13" Foreground="DimGray"/>
-                    <Label Content="{Binding TypeOfDocument}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
-                    <Label Content="•" FontSize="13" Foreground="DimGray"/>
-                    <Label Margin="5,0,5,0" Content="Availiability:" FontSize="13" Foreground="DimGray"/>
-                    <Label Content="{Binding Availiability}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
-                    <Label Content="•" FontSize="13" Foreground="DimGray"/>
-                    <Label Margin="5,0,5,0" Content="Location:" FontSize="13" Foreground="DimGray"/>
-                    <Label Content="{Binding Location}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
-                </WrapPanel>
-            </WrapPanel>
-            <WrapPanel>
-                <WrapPanel Margin="0,5,0,0">
-                    <Label Margin="0,0,5,0" Content="Electronic version price:" FontSize="13" Foreground="DimGray"/>
-                    <Label Content="{Binding ElectronicVersionPrice}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
-                    <Label
-                    Content="₴"
-                    Foreground="DimGray" 
-                    FontWeight="DemiBold"
-                    FontSize="13"/>
-                </WrapPanel>
-            </WrapPanel>
-            <WrapPanel>
-                <WrapPanel>
-                    <WrapPanel Margin="0,5,0,0">
-                        <Label Margin="0,0,5,0" Content="Rent perice:" FontSize="13" Foreground="DimGray"/>
-                        <Label Content="{Binding RentPrice}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
-                        <Label Content="₴" Foreground="DimGray" FontWeight="DemiBold"  FontSize="13"/>
-                    </WrapPanel>
+                    <Label Margin="0,0,5,0" Content="Rent perice:" FontSize="13" Foreground="DimGray"/>
+                    <Label Content="{Binding RentPrice}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
+                    <Label Content="₴" Foreground="DimGray" FontWeight="DemiBold"  FontSize="13"/>
                 </WrapPanel>
             </WrapPanel>
         </WrapPanel>

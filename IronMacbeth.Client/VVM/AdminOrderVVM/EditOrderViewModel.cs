@@ -57,11 +57,11 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
         public EditOrderViewModel(Order order)
         {
             CurrentOrder = order;
-            DateTime dateTimeOfReceiving = order.ReceiveDate;
+            DateTime dateTimeOfReceiving = DateTime.Now;
             Min = new DateTime(dateTimeOfReceiving.Ticks - (dateTimeOfReceiving.Ticks % TimeSpan.TicksPerSecond), dateTimeOfReceiving.Kind);
-            _receiveDate = DateTime.Now;
+            _receiveDate = order.ReceiveDate;
 
-            DateTime dateTimeOfReturning = order.ReceiveDate;
+            DateTime dateTimeOfReturning = order.DateOfReturn;
             MinDateReturn = new DateTime(dateTimeOfReturning.Ticks - (dateTimeOfReturning.Ticks % TimeSpan.TicksPerSecond), dateTimeOfReturning.Kind);
             _dateTimeOfReturning = DateTime.Now;
             CloseCommand = new RelayCommand(CloseMethod);

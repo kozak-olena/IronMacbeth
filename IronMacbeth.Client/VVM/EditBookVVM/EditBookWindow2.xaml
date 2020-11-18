@@ -149,7 +149,7 @@
                     Height="24" 
                     Width="145"/>
                 </WrapPanel>
-                <WrapPanel Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
+                <WrapPanel Visibility="{Binding  FilledFieldsInfo.AvailibilityVisibility}" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
                     <TextBlock
                     VerticalAlignment="Center" 
                     TextWrapping="Wrap"
@@ -230,19 +230,6 @@
                     Height="24" 
                     Width="145"/>
                 </WrapPanel>
-                <WrapPanel 
-                     Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
-                    <TextBlock
-                    VerticalAlignment="Center" 
-                    TextWrapping="Wrap"
-                    Margin="17,0,0,0"
-                    Text="ElectronicVersionPrice: "/>
-                    <TextBox 
-                    Text="{Binding FilledFieldsInfo.ElectronicVersionPrice,UpdateSourceTrigger=PropertyChanged}"
-                    Height="24" 
-                    Width="145"/>
-                </WrapPanel>
-
             </WrapPanel>
         </ScrollViewer>
         <WrapPanel Grid.Row="1"

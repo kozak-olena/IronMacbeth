@@ -14,17 +14,17 @@
 
         public int Year { get; set; }
 
-        public string Pages { get; set; }
-        public string Availiability { get; set; }
+        public int Pages { get; set; }
+
+        public int Availiability { get; set; }
 
         public string Location { get; set; }
 
-        public string IssueNumber { get; set; }
+        public int IssueNumber { get; set; }
 
         public string ElectronicVersionFileName { get; set; }
-        public string RentPrice { get; set; }
 
-        public string ElectronicVersionPrice { get; set; }
+        public string RentPrice { get; set; }
 
         public string TypeOfDocument { get; set; }
 
@@ -35,6 +35,6 @@
 
         public string ImageName { get; set; }
 
-        public string DescriptionName { get; set; }
+     
     }
 }

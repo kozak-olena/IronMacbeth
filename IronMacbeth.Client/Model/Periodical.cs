@@ -3,13 +3,13 @@ using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client
 {
-    public class Periodical : Base, ISellable
+    public class Periodical : Base, IDisplayable
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public string Responsible { get; set; }  //Київ. нац. ун-т ім. Тараса Шевченка ; голов. ред. Л.І. Шевченко ; редкол.: Ф.С. Бацевич, А. Брацкі, П.Ю. Гриценко [та ін.]
+        public string Responsible { get; set; }
 
         public string PublishingHouse { get; set; }
 
@@ -17,33 +17,31 @@ namespace IronMacbeth.Client
 
         public int Year { get; set; }
 
-        public string Pages { get; set; }
-        public string Availiability { get; set; }
+        public int Pages { get; set; }
+
+        public int Availiability { get; set; }
 
         public string Location { get; set; }
 
-        public string IssueNumber { get; set; }
-
+        public int IssueNumber { get; set; }
 
         public string RentPrice { get; set; }
 
         public byte[] ElectronicVersion { get; set; }
 
         public string ElectronicVersionFileName { get; set; }
-        public string ElectronicVersionPrice { get; set; }
 
         public string TypeOfDocument { get; set; }
 
         public string Rating { get; set; }
 
         public string Comments { get; set; }
+
         public string ImageName { get; set; }
 
         public string DescriptionName { get; set; }
 
         public string NameOfBook => Name;
-
-        public string SellableType => "Periodical";
 
 
         public BitmapImage BitmapImage
@@ -62,11 +60,5 @@ namespace IronMacbeth.Client
         [NonSerialized]
         private string _description;
 
-
-
-        public int NumberOfOfferings   //the same as availability?
-        {
-            get { return 0; }
-        }
     }
 }

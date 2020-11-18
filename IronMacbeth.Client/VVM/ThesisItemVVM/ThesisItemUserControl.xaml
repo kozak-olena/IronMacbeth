@@ -51,11 +51,11 @@
             </WrapPanel>
             <WrapPanel Margin="0,5,0,0">
                 <Label Margin="0,0,5,0" Content="Name:" FontSize="13" Foreground="DimGray"/>
-                <Label Margin="5,0,5,0" Content="{Binding Name}" FontSize="13" Foreground="DimGray"/>
+                <Label Margin="0,0,5,0" Content="{Binding Name}" FontSize="13" Foreground="DimGray"/>
             </WrapPanel>
             <WrapPanel>
                 <Label Margin="0,5,5,0" Content="Author:" FontSize="13" Foreground="DimGray"/>
-                <Label Margin="5,0,5,0" Content="{Binding Author}" FontSize="13" Foreground="DimGray"/>
+                <Label Margin="0,5,5,0" Content="{Binding Author}" FontSize="13" Foreground="DimGray"/>
             </WrapPanel>
             <WrapPanel>
                 <WrapPanel Margin="0,5,0,0">
@@ -63,18 +63,6 @@
                     <Label Content="{Binding TypeOfDocument}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
                 </WrapPanel>
             </WrapPanel>
-            <WrapPanel>
-                <WrapPanel Margin="0,5,0,0">
-                    <Label Margin="0,0,5,0" Content="Electronic version price:" FontSize="13" Foreground="DimGray"/>
-                    <Label Content="{Binding ElectronicVersionPrice}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
-                    <Label
-                    Content="₴"
-                    Foreground="DimGray" 
-                    FontWeight="DemiBold"
-                    FontSize="13"/>
-                </WrapPanel>
-            </WrapPanel>
-
         </WrapPanel>
     </Grid>
 </UserControl>

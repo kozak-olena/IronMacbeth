@@ -26,19 +26,17 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
 
         public int Year { get; set; }
 
-        public string Pages { get; set; }
+        public int Pages { get; set; }
 
         public string Responsible { get; set; }
 
-        public string Availiability { get; set; }
+        public int Availiability { get; set; }
 
         public string ElectronicVersionFileName { get; set; }
 
-        public string ElectronicVersionPrice { get; set; }
-
         public string Location { get; set; }
 
-        public string IssueNumber { get; set; }
+        public int IssueNumber { get; set; }
 
         public string RentPrice { get; set; }
 
@@ -93,6 +91,8 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
         public Visibility ToAllVisibility => IsPeriodicalSelected || IsBookSelected || IsThesisSelected || IsArticleSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
 
         public Visibility CityVisibility => IsPeriodicalSelected || IsBookSelected || IsThesisSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
+
+        public Visibility AvailibilityVisibility => IsBookSelected || IsPeriodicalSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
         private void OnSelectedItemTypeChanged(string value)
         {
             if (value == "Book")
@@ -156,6 +156,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             OnPropertyChanged(nameof(MainDocumentVisibility));
             OnPropertyChanged(nameof(ImageVisibility));
             OnPropertyChanged(nameof(CityVisibility));
+            OnPropertyChanged(nameof(AvailibilityVisibility));
         }
 
         #endregion

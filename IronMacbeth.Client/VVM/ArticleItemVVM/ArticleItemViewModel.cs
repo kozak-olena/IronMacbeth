@@ -15,11 +15,9 @@ namespace IronMacbeth.Client.VVM.ArticleItemVVM
 
         public string Name => _item.Name;
         public string Author => _item.Author;
-        public string Availiability => _item.Availiability;
         public string MainDocument => _item.MainDocumentId;
         public string TypeOfDocument => _item.TypeOfDocument;
         public string Rating => _item.Rating;
-        public string ElectronicVersionPrice => _item.ElectronicVersionPrice;
 
         public DocumentInfoViewModel MoreInfoVm => new DocumentInfoViewModel(_item);
 

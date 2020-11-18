@@ -118,7 +118,7 @@ namespace IronMacbeth.Client
                 NewspaperId = order.Newspaper?.Id,
                 ThesesId = order.Thesis?.Id,
                 TypeOfOrder = order.TypeOfOrder,
-                //StatusOfOrder = order.StatusOfOrder,
+                //StatusOfOrder = order.StatusOfOrder,          //TODO:
                 //ReceiveDate = order.ReceiveDate,
                 DateOfOrder = order.DateOfOrder,
                 DateOfReturn = order.DateOfReturn
@@ -176,8 +176,7 @@ namespace IronMacbeth.Client
             foreach (var book in documents.Books)
             {
                 if (book.ImageName != null) { book.BitmapImage = GetImage(book.ImageName); }
-                if (book.DescriptionName != null)
-                { book.Description = GetStringFileContent(book.DescriptionName); }
+
 
             }
 
@@ -201,7 +200,6 @@ namespace IronMacbeth.Client
         public void CreatePeriodical(Internal.Periodical periodical)
         {
             CreateIDisplayable(periodical);
-            CreateIDescribable(periodical);
 
             if (periodical.ElectronicVersion != null)
             {
@@ -234,7 +232,7 @@ namespace IronMacbeth.Client
         public void UpdatePeriodical(Internal.Periodical periodical)
         {
             UpdateIDisplayable(periodical);
-            UpdateIDescribable(periodical);
+
 
             var contractPeriodical = MapInternalToContractPeriodical(periodical);
 
@@ -262,12 +260,11 @@ namespace IronMacbeth.Client
                 IssueNumber = periodical.IssueNumber,
                 Responsible = periodical.Responsible,
                 RentPrice = periodical.RentPrice,
-                ElectronicVersionPrice = periodical.ElectronicVersionPrice,
                 ElectronicVersionFileName = periodical.ElectronicVersionFileName,
                 Rating = periodical.Rating,
                 Comments = periodical.Comments,
                 ImageName = periodical.ImageName,
-                DescriptionName = periodical.DescriptionName
+
             };
         }
 
@@ -284,7 +281,6 @@ namespace IronMacbeth.Client
                 PublishingHouse = periodical.PublishingHouse,
                 Location = periodical.Location,
                 TypeOfDocument = periodical.TypeOfDocument,
-                ElectronicVersionPrice = periodical.ElectronicVersionPrice,
                 ElectronicVersionFileName = periodical.ElectronicVersionFileName,
                 IssueNumber = periodical.IssueNumber,
                 Responsible = periodical.Responsible,
@@ -292,7 +288,7 @@ namespace IronMacbeth.Client
                 Rating = periodical.Rating,
                 Comments = periodical.Comments,
                 ImageName = periodical.ImageName,
-                DescriptionName = periodical.DescriptionName
+
             };
         }
 
@@ -302,12 +298,12 @@ namespace IronMacbeth.Client
 
         public void CreateNewspaper(Internal.Newspaper newspaper)
         {
-            CreateIDisplayable(newspaper);
-            CreateIDescribable(newspaper);
             string fileName;
-            AddFile(newspaper.ElectronicVersion, out fileName);
-            newspaper.ElectronicVersionFileName = fileName;
-
+            if (newspaper.ElectronicVersion != null)
+            {
+                AddFile(newspaper.ElectronicVersion, out fileName);
+                newspaper.ElectronicVersionFileName = fileName;
+            }
             var contractNewspaper = MapInternalToContractNewspaper(newspaper);
 
             _proxy.CreateNewspaper(contractNewspaper);
@@ -319,19 +315,10 @@ namespace IronMacbeth.Client
 
             var internalNewspapers = newspapers.Select(MapContractToInternalNewspaper).ToList();
 
-            foreach (var newspaper in internalNewspapers)
-            {
-                if (newspaper.ImageName != null) { newspaper.BitmapImage = GetImage(newspaper.ImageName); }
-                if (newspaper.DescriptionName != null)
-                { newspaper.Description = GetStringFileContent(newspaper.DescriptionName); }
-            }
             return internalNewspapers;
         }
         public void UpdateNewspaper(Internal.Newspaper newspaper)
         {
-            UpdateIDisplayable(newspaper);
-            UpdateIDescribable(newspaper);
-
             var contractNewspaper = MapInternalToContractNewspaper(newspaper);
 
             _proxy.UpdateNewspaper(contractNewspaper);
@@ -357,10 +344,8 @@ namespace IronMacbeth.Client
                 Location = newspaper.Location,
                 ElectronicVersionFileName = newspaper.ElectronicVersionFileName,
                 Rating = newspaper.Rating,
-                ElectronicVersionPrice = newspaper.ElectronicVersionPrice,
                 Comments = newspaper.Comments,
-                //ImageName = periodical.ImageName,
-                // DescriptionName = periodical.DescriptionName
+
             };
         }
 
@@ -374,15 +359,12 @@ namespace IronMacbeth.Client
                 City = newspaper.City,
                 Availiability = newspaper.Availiability,
                 TypeOfDocument = newspaper.TypeOfDocument,
-                ElectronicVersionPrice = newspaper.ElectronicVersionPrice,
                 ElectronicVersionFileName = newspaper.ElectronicVersionFileName,
                 IssueNumber = newspaper.IssueNumber,
                 Location = newspaper.Location,
                 RentPrice = newspaper.RentPrice,
                 Rating = newspaper.Rating,
                 Comments = newspaper.Comments,
-                // ImageName = periodical.ImageName,
-                // DescriptionName = periodical.DescriptionName
             };
         }
         #endregion
@@ -391,12 +373,12 @@ namespace IronMacbeth.Client
 
         public void CreateThesis(Internal.Thesis thesis)
         {
-            CreateIDisplayable(thesis);
-            CreateIDescribable(thesis);
             string fileName;
-            AddFile(thesis.ElectronicVersion, out fileName);
-            thesis.ElectronicVersionFileName = fileName;
-
+            if (thesis.ElectronicVersion != null)
+            {
+                AddFile(thesis.ElectronicVersion, out fileName);
+                thesis.ElectronicVersionFileName = fileName;
+            }
             var contractThesis = MapInternalToContractThesis(thesis);
 
             _proxy.CreateThesis(contractThesis);
@@ -408,21 +390,10 @@ namespace IronMacbeth.Client
 
             var internalThesises = thesises.Select(MapContractToInternalTheses).ToList();
 
-            foreach (var thesis in internalThesises)
-            {
-                if (thesis.ImageName != null) { thesis.BitmapImage = GetImage(thesis.ImageName); }
-                if (thesis.DescriptionName != null)
-                { thesis.Description = GetStringFileContent(thesis.DescriptionName); }
-
-            }
-
             return internalThesises;
         }
         public void UpdateThesis(Internal.Thesis thesis)
         {
-            UpdateIDisplayable(thesis);
-            UpdateIDescribable(thesis);
-
             var contractThesis = MapInternalToContractThesis(thesis);
 
             _proxy.UpdateThesis(contractThesis);
@@ -443,16 +414,12 @@ namespace IronMacbeth.Client
                 Author = thesis.Author,
                 Pages = thesis.Pages,
                 City = thesis.City,
-
-                Availiability = thesis.Availiability,
                 TypeOfDocument = thesis.TypeOfDocument,
                 Responsible = thesis.Responsible,
-                ElectronicVersionPrice = thesis.ElectronicVersionPrice,
                 ElectronicVersionFileName = thesis.ElectronicVersionFileName,
                 Rating = thesis.Rating,
                 Comments = thesis.Comments,
-                // ImageName = periodical.ImageName,
-                // DescriptionName = periodical.DescriptionName
+
             };
         }
 
@@ -466,15 +433,12 @@ namespace IronMacbeth.Client
                 Author = thesis.Author,
                 City = thesis.City,
                 Pages = thesis.Pages,
-                Availiability = thesis.Availiability,
                 TypeOfDocument = thesis.TypeOfDocument,
                 Responsible = thesis.Responsible,
-                ElectronicVersionPrice = thesis.ElectronicVersionPrice,
                 ElectronicVersionFileName = thesis.ElectronicVersionFileName,
                 Rating = thesis.Rating,
                 Comments = thesis.Comments,
-                //ImageName = periodical.ImageName,
-                //DescriptionName = periodical.DescriptionName
+
             };
         }
 
@@ -484,8 +448,7 @@ namespace IronMacbeth.Client
 
         public void CreateArticle(Internal.Article article)
         {
-            //CreateIDisplayable(article);
-            //CreateIDescribable(article);
+
             string fileName;
             if (article.ElectronicVersion != null)
             {
@@ -504,29 +467,12 @@ namespace IronMacbeth.Client
 
             var internalArticles = articles.Select(MapContractToInternalArticle).ToList();
 
-            foreach (var article in internalArticles)
-            {
-                if (article.ImageName != null) { article.BitmapImage = GetImage(article.ImageName); }
-                //if (article.DescriptionName != null)
-                //{ article.Description = GetStringFileContent(article.DescriptionName); }
-
-            }
-
             return internalArticles;
         }
 
-        private Contract.Article MapInternalToContractSearchCriteria(Internal.Article article)
-        {
-            return new Contract.Article
-            {
-            };
-        }
 
         public void UpdateArticle(Internal.Article article)
         {
-            UpdateIDisplayable(article);
-            UpdateIDescribable(article);
-
             var contractArticle = MapInternalToContractArticle(article);
 
             _proxy.UpdateArticle(contractArticle);
@@ -547,14 +493,10 @@ namespace IronMacbeth.Client
                 Year = article.Year,
                 Pages = article.Pages,
                 MainDocumentId = article.MainDocumentId,
-                Availiability = article.Availiability,
                 TypeOfDocument = article.TypeOfDocument,
-                ElectronicVersionPrice = article.ElectronicVersionPrice,
                 ElectronicVersionFileName = article.ElectronicVersionFileName,
                 Rating = article.Rating,
                 Comments = article.Comments,
-                /// ImageName = article.ImageName,
-                // DescriptionName = article.DescriptionName
             };
         }
 
@@ -571,14 +513,10 @@ namespace IronMacbeth.Client
                 Year = article.Year,
                 Pages = article.Pages,
                 MainDocumentId = article.MainDocumentId,
-                Availiability = article.Availiability,
                 TypeOfDocument = article.TypeOfDocument,
-                ElectronicVersionPrice = article.ElectronicVersionPrice,
                 ElectronicVersionFileName = article.ElectronicVersionFileName,
                 Rating = article.Rating,
                 Comments = article.Comments,
-                // ImageName = article.ImageName,
-                // DescriptionName = article.DescriptionName
             };
         }
 
@@ -589,7 +527,7 @@ namespace IronMacbeth.Client
         public void CreateBook(Internal.Book book)
         {
             CreateIDisplayable(book);
-            CreateIDescribable(book);
+
             string fileName;
             if (book.ElectronicVersion != null)
             {
@@ -611,8 +549,7 @@ namespace IronMacbeth.Client
             foreach (var book in internalBooks)
             {
                 if (book.ImageName != null) { book.BitmapImage = GetImage(book.ImageName); }
-                if (book.DescriptionName != null)
-                { book.Description = GetStringFileContent(book.DescriptionName); }
+
 
             }
 
@@ -621,7 +558,6 @@ namespace IronMacbeth.Client
         public void UpdateBook(Internal.Book book)
         {
             UpdateIDisplayable(book);
-            UpdateIDescribable(book);
 
             var contractBook = MapInternalToContractBook(book);
 
@@ -649,12 +585,10 @@ namespace IronMacbeth.Client
                 TypeOfDocument = book.TypeOfDocument,
                 RentPrice = book.RentPrice,
                 ElectronicVersionFileName = book.ElectronicVersionFileName,
-                ElectronicVersionPrice = book.ElectronicVersionPrice,
-
                 Rating = book.Rating,
                 Comments = book.Comments,
                 ImageName = book.ImageName,
-                DescriptionName = book.DescriptionName
+
             };
         }
 
@@ -672,13 +606,12 @@ namespace IronMacbeth.Client
                 Availiability = book.Availiability,
                 Location = book.Location,
                 TypeOfDocument = book.TypeOfDocument,
-                ElectronicVersionPrice = book.ElectronicVersionPrice,
                 RentPrice = book.RentPrice,
                 ElectronicVersionFileName = book.ElectronicVersionFileName,
                 Rating = book.Rating,
                 Comments = book.Comments,
                 ImageName = book.ImageName,
-                DescriptionName = book.DescriptionName
+
             };
         }
 

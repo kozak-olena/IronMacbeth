@@ -3,7 +3,7 @@ using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client
 {
-    public class Article : Base, ISellable
+    public class Article : Base
     {
         public int Id { get; set; }
 
@@ -13,9 +13,7 @@ namespace IronMacbeth.Client
 
         public int Year { get; set; }
 
-        public string Pages { get; set; }
-
-        public string Availiability { get; set; }
+        public int Pages { get; set; }
 
         public string MainDocumentId { get; set; }
 
@@ -25,38 +23,11 @@ namespace IronMacbeth.Client
 
         public string ElectronicVersionFileName { get; set; }
 
-        public string ElectronicVersionPrice { get; set; }
-
         public string Rating { get; set; }
 
         public string Comments { get; set; }
 
         public string NameOfArticle => Name;
 
-        public string SellableType => "Article";
-
-        public string ImageName { get; set; }
-        public BitmapImage BitmapImage
-        {
-            get { return _bitmapImage; }
-            set { _bitmapImage = value; }
-        }
-
-        public int NumberOfOfferings   //the same as availability?
-        {
-            get { return 0; }
-        }
-        [NonSerialized]
-        private BitmapImage _bitmapImage;
-        public string Description
-        {
-            get { return _description; }
-            set { _description = value; }
-        }
-
-        [NonSerialized]
-        private string _description;
-
-        public string DescriptionName { get; set; }
     }
 }

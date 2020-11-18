@@ -4,7 +4,7 @@ using System.Windows.Media.Imaging;
 namespace IronMacbeth.Client
 {
     [Serializable]
-    public class Videocard : Base, ISellable
+    public class Videocard : Base 
     {
         
         public int Id { get; set; }

@@ -61,10 +61,8 @@
   <ItemGroup>
     <Build Include="Tables\User.sql" />
     <Build Include="Tables\Book.sql" />
-    <Build Include="Tables\RentBook.sql" />
     <Build Include="Tables\Article.sql" />
     <Build Include="Tables\Periodical.sql" />
-    <Build Include="Tables\RentPeriodical.sql" />
     <Build Include="Tables\Thesis.sql" />
     <Build Include="Tables\Newspaper.sql" />
     <Build Include="Tables\UserRole.sql" />

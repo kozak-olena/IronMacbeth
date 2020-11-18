@@ -3,7 +3,7 @@ using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client
 {
-    public class Book : Base, ISellable
+    public class Book : Base, IDisplayable
     {
 
         public int Id { get; set; }
@@ -18,9 +18,9 @@ namespace IronMacbeth.Client
 
         public int Year { get; set; }
 
-        public string Pages { get; set; }
+        public int Pages { get; set; }
 
-        public string Availiability { get; set; }   
+        public int Availiability { get; set; }
 
         public string Location { get; set; }
 
@@ -28,7 +28,6 @@ namespace IronMacbeth.Client
 
         public string RentPrice { get; set; }
 
-        public string ElectronicVersionPrice { get; set; }
 
         public byte[] ElectronicVersion { get; set; }
 
@@ -40,9 +39,10 @@ namespace IronMacbeth.Client
 
         public string NameOfBook => Name;
 
-        public string SellableType => "Book";
+
 
         public string ImageName { get; set; }
+
         public BitmapImage BitmapImage
         {
             get { return _bitmapImage; }
@@ -50,20 +50,8 @@ namespace IronMacbeth.Client
         }
         [NonSerialized]
         private BitmapImage _bitmapImage;
-        public string Description
-        {
-            get { return _description; }
-            set { _description = value; }
-        }
+        
+        
 
-        [NonSerialized]
-        private string _description;
-
-        public string DescriptionName { get; set; }
-
-        public int NumberOfOfferings   //the same as availability?
-        {
-            get { return 0; }
-        }
     }
 }
