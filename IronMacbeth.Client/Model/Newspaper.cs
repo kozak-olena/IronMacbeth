@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
-
-namespace IronMacbeth.Client
+﻿namespace IronMacbeth.Client
 {
-    public class Newspaper : Base
+    public class Newspaper : Document
     {
         public int Id { get; set; }
 
@@ -25,9 +18,6 @@ namespace IronMacbeth.Client
 
         public string TypeOfDocument { get; set; }
 
-        public byte[] ElectronicVersion { get; set; }
-
-        public string ElectronicVersionFileName { get; set; }
         public string RentPrice { get; set; }
 
         public string Rating { get; set; }
@@ -35,6 +25,5 @@ namespace IronMacbeth.Client
         public string Comments { get; set; }
 
         public string NameOfBook => Name;
-
     }
 }

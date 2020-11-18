@@ -10,10 +10,9 @@
     [TypeOfDocument] VARCHAR (255) NOT NULL,
     [Availiability] INT NULL,
     [Location] VARCHAR (255) NULL,
-    [ElectronicVersionFileName]VARCHAR (255) NULL,
+    [ElectronicVersionFileId] UNIQUEIDENTIFIER NULL,
     [Rating]VARCHAR (255) NULL,
     [Comments]VARCHAR (255) NULL,
-    [ImageName] NVARCHAR (1024) NULL,
-    [RentPrice] VARCHAR (255)   NULL,
-   
+    [ImageFileId] UNIQUEIDENTIFIER NULL,
+    [RentPrice] VARCHAR (255) NULL   
 )

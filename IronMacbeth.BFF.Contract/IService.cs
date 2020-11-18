@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.ServiceModel;
 
@@ -115,9 +116,9 @@ namespace IronMacbeth.BFF.Contract
         #endregion
 
         [OperationContract]
-        string AddFile(Stream fileStream);
+        Guid AddFile(Stream fileStream);
 
         [OperationContract]
-        Stream GetFile(string fileName);
+        Stream GetFile(Guid fileId);
     }
 }

@@ -543,23 +543,23 @@ namespace IronMacbeth.BFF
 
         #endregion
 
-        public string AddFile(Stream fileStream)
+        public Guid AddFile(Stream fileStream)
         {
-            var fileName = GetFileId();
+            var fileId = GetFileId();
 
-            FileInfo fileInfo = new FileInfo($"Files\\{fileName}");
+            FileInfo fileInfo = new FileInfo($"Files\\{fileId}");
             using (var stream = fileInfo.Open(FileMode.CreateNew, FileAccess.Write))
             {
                 fileStream.CopyTo(stream);
                 stream.Close();
             }
 
-            return fileName;
+            return fileId;
         }
 
-        private static string GetFileId()
+        private static Guid GetFileId()
         {
-            string result;
+            int result;
 
             Directory.CreateDirectory("Files");
 
@@ -572,7 +572,7 @@ namespace IronMacbeth.BFF
                     id = int.Parse(reader.ReadLine());
                 }
                 id++;
-                result = id.ToString();
+                result = id;
                 using (TextWriter writer = fileInfo.CreateText())
                 {
                     writer.Write(result);
@@ -580,19 +580,20 @@ namespace IronMacbeth.BFF
             }
             else
             {
-                result = "1";
+                result = 1;
                 using (TextWriter writer = fileInfo.CreateText())
                 {
                     writer.Write(result);
                 }
             }
-            return result;
+
+            return Guid.Parse($"00000000-0000-0000-0000-{result:000000000000}");
         }
 
-        public Stream GetFile(string fileName)
+        public Stream GetFile(Guid fileId)
         {
             // do not dispose stream here. It's disposed by WCF whenever it's done sending it to the client
-            var fileStream = File.OpenRead($"Files\\{fileName}");
+            var fileStream = File.OpenRead($"Files\\{fileId}");
 
             return fileStream;
         }

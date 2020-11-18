@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IronMacbeth.BFF.Contract
 {
@@ -24,7 +20,7 @@ namespace IronMacbeth.BFF.Contract
 
         public string TypeOfDocument { get; set; }
 
-        public string ElectronicVersionFileName { get; set; }
+        public Guid? ElectronicVersionFileId { get; set; }
 
         public string Rating { get; set; }
 

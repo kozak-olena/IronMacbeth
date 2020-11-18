@@ -87,10 +87,11 @@
     <Compile Include="AnonymousServerAdapter.cs" />
     <Compile Include="IDocumentViewModel.cs" />
     <Compile Include="Model\Article.cs" />
-    <Compile Include="Model\Base.cs" />
     <Compile Include="Model\Book.cs" />
+    <Compile Include="Model\Document.cs" />
     <Compile Include="Model\DocumentsSearchResults.cs" />
     <Compile Include="Model\IDisplayable.cs" />
+    <Compile Include="Model\Image.cs" />
     <Compile Include="Model\Newspaper.cs" />
     <Compile Include="Model\Periodical.cs" />
     <Compile Include="Model\SpecifiedOrderFields.cs" />
@@ -128,9 +129,6 @@
     <Compile Include="VVM\BookVVM\BookViewModel.cs" />
     <Compile Include="VVM\EditBookVVM\Dispatch.cs" />
     <Compile Include="VVM\EditBookVVM\EditBookViewModel.cs" />
-    <Compile Include="VVM\EditBookVVM\EditBookWindow.xaml.cs">
-      <DependentUpon>EditBookWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="VVM\EditBookVVM\EditBookWindow2.xaml.cs">
       <DependentUpon>EditBookWindow2.xaml</DependentUpon>
     </Compile>
@@ -208,10 +206,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VVM\BookVVM\BookUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\EditBookVVM\EditBookWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

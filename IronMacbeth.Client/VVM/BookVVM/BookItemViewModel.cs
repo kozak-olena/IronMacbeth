@@ -1,6 +1,4 @@
-﻿using IronMacbeth.Client.VVM.EditBookVVM;
-using System;
-using System.Windows.Media.Imaging;
+﻿using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client.VVM.BookVVM
 {
@@ -13,7 +11,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
             _item = item;
         }
 
-        public BitmapImage BitmapImage => _item.BitmapImage;
+        public BitmapImage BitmapImage => _item.Image.BitmapImage;
         public string Name => _item.NameOfBook;
         public string Author => _item.Author;
         public string PublishingHouse => _item.PublishingHouse;
@@ -21,7 +19,6 @@ namespace IronMacbeth.Client.VVM.BookVVM
         public string City => _item.City;
         public int Year => _item.Year;
         public int Pages => _item.Pages;
-        public string ElectronicVersionFileName => _item.ElectronicVersionFileName;
         public string Comments => _item.Comments;
         public string Location => _item.Location;
 

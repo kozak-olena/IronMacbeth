@@ -1,6 +1,4 @@
 ﻿using IronMacbeth.Client.VVM.BookVVM;
-
-using System;
 using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client.VVM.PeriodicalItemVVM
@@ -15,7 +13,7 @@ namespace IronMacbeth.Client.VVM.PeriodicalItemVVM
         }
 
         public string Name => _item.Name;
-        public BitmapImage BitmapImage => _item.BitmapImage;
+        public BitmapImage BitmapImage => _item.Image.BitmapImage;
         public string Responsible => _item.Responsible;
         public int Availiability => _item.Availiability;
         public int IssueNumber => _item.IssueNumber;
@@ -31,6 +29,5 @@ namespace IronMacbeth.Client.VVM.PeriodicalItemVVM
         {
             return _item;
         }
-
     }
 }

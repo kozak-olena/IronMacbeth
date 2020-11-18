@@ -1,4 +1,6 @@
-﻿namespace IronMacbeth.BFF.Contract
+﻿using System;
+
+namespace IronMacbeth.BFF.Contract
 {
     public class Book
     {
@@ -24,13 +26,12 @@
 
         public string RentPrice { get; set; }
 
-        public string ElectronicVersionFileName { get; set; }
+        public Guid? ElectronicVersionFileId { get; set; }
 
         public string Rating { get; set; }
 
         public string Comments { get; set; }
 
-        public string ImageName { get; set; }
-
+        public Guid? ImageFileId { get; set; }
     }
 }

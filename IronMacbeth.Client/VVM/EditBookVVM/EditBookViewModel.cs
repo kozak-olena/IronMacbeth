@@ -2,13 +2,13 @@
 using IronMacbeth.Client.ViewModel;
 using IronMacbeth.Client.VVM.EditBookVVM;
 using Microsoft.Win32;
-using System;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using Image = IronMacbeth.Client.Model.Image;
 
 namespace IronMacbeth.Client.VVM.BookVVM
 {
@@ -18,11 +18,18 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
         public bool CollectionChanged { get; private set; }
 
-        public string ImagePath { get; set; }
+        public string ImagePath 
+        {
+            get => _imagePath ?? (FilledFieldsInfo.Image != null ? "<image>" : "");
+            set => _imagePath = value;
+        }
 
-        public string PdfPath { get; set; }
+        public string PdfPath
+        {
+            get => _imagePath ?? (FilledFieldsInfo.ElectronicVersion != null ? "<file>" : "");
+            set => _imagePath = value;
+        }
 
-      
         public FilledFieldsInfo FilledFieldsInfo { get; set; }
 
         public ICommand CloseCommand { get; set; }
@@ -36,8 +43,11 @@ namespace IronMacbeth.Client.VVM.BookVVM
         private Dispatch _dispatch;
 
         private object _objectForEdit;
+        private string _imagePath;
 
         public string[] AvailibleItemTypes => new[] { "Book", "Article", "Periodical", "Thesis", "Newspaper" };
+
+        public BitmapImage Image => FilledFieldsInfo.Image?.BitmapImage;
 
         public EditBookViewModel(object objectForEdit)
         {
@@ -74,8 +84,20 @@ namespace IronMacbeth.Client.VVM.BookVVM
             if (userClickedOk == true)
             {
                 PdfPath = openFileDialog.FileName;
+
+                // mark that file was updated
+                FilledFieldsInfo.ElectronicVersionFileId = null;
+
+                var documentElectronicVersion = new MemoryStream();
+
+                using (var fileStream = File.OpenRead(PdfPath))
+                {
+                    fileStream.CopyTo(documentElectronicVersion);
+                }
+
+                FilledFieldsInfo.ElectronicVersion = documentElectronicVersion;
+
                 OnPropertyChanged(nameof(PdfPath));
-                FilledFieldsInfo.ElectronicVersion = File.ReadAllBytes(PdfPath);       //TODO???
             }
         }
 
@@ -115,10 +137,21 @@ namespace IronMacbeth.Client.VVM.BookVVM
             if (userClickedOk == true)
             {
                 ImagePath = openFileDialog.FileName;
-                OnPropertyChanged(nameof(ImagePath));
 
-               FilledFieldsInfo.BitmapImage = new BitmapImage(new Uri(ImagePath));
-                OnPropertyChanged(nameof(BitmapImage));
+                // mark that image was updated
+                FilledFieldsInfo.ImageFileId = null;
+
+                var imageData = new MemoryStream();
+
+                using (var fileStream = File.OpenRead(ImagePath))
+                {
+                    fileStream.CopyTo(imageData);
+                }
+
+                FilledFieldsInfo.Image = new Image(imageData);
+
+                OnPropertyChanged(nameof(ImagePath));
+                OnPropertyChanged(nameof(Image));
             }
         }
 
