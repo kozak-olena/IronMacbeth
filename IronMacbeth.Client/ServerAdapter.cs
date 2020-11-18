@@ -75,6 +75,12 @@ namespace IronMacbeth.Client
             return internalOrders;
         }
 
+        public bool CheckOrder(int id) 
+        {
+
+            var isAlreadyTheSameOrderInDb = _proxy.CheckOrder(id);
+            return isAlreadyTheSameOrderInDb;
+        }
         private Internal.Order MapContractToInternalOrder(Contract.Order order)
         {
             return new Internal.Order

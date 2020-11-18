@@ -21,6 +21,7 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
         public List<OrderBookItemViewModel> Items { get; private set; }
 
         public ICommand EditCommand { get; }
+        public ICommand DeleteCommand { get; }
 
         public OrderBookItemViewModel SelectedItem { get; set; }
 
@@ -34,21 +35,39 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
                 _search = value;
                 if (!string.IsNullOrWhiteSpace(value))
                 {
-                    //UpdateCollection(false);
+                    UpdateCollection(false);
                 }
                 else
                 {
-                    // ShowCollection();
+                    ShowCollection();
                 }
             }
+        }
+
+        public void UpdateCollection(bool innerCall)
+        {
+            Items = new List<OrderBookItemViewModel>();
+            List<Order> orders = ServerAdapter.Instance.GetAllOrders();
+
+            Items.AddRange(orders.OrderByDescending(item => item.DateOfOrder).Where(item => item.Book != null && item.Book.Name.ToLower().Contains(Search.ToLower())).Select(x => new OrderBookItemViewModel(x)));
+            Items.AddRange(orders.OrderByDescending(item => item.DateOfOrder).Where(item => item.Article != null && item.Article.Name.ToLower().Contains(Search.ToLower())).Select(x => new OrderBookItemViewModel(x)));
+            Items.AddRange(orders.OrderByDescending(item => item.DateOfOrder).Where(item => item.Periodical != null && item.Periodical.Name.ToLower().Contains(Search.ToLower())).Select(x => new OrderBookItemViewModel(x)));
+            Items.AddRange(orders.OrderByDescending(item => item.DateOfOrder).Where(item => item.Newspaper != null && item.Newspaper.Name.ToLower().Contains(Search.ToLower())).Select(x => new OrderBookItemViewModel(x)));
+            Items.AddRange(orders.OrderByDescending(item => item.DateOfOrder).Where(item => item.Thesis != null && item.Thesis.Name.ToLower().Contains(Search.ToLower())).Select(x => new OrderBookItemViewModel(x)));
+            OnPropertyChanged(nameof(Items));
         }
 
         public AdminOrderViewModel()
         {
             EditCommand = new RelayCommand(EditOrderMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
+            DeleteCommand = new RelayCommand(CancelMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
         }
-
-
+        public void CancelMethod(object parameter)
+        {
+            Order orderToDelete = (Order)SelectedItem.GetItem();
+            ServerAdapter.Instance.DeleteOrder(orderToDelete.Id);
+            Update();
+        }
 
         public void EditOrderMethod(object parameter)
         {

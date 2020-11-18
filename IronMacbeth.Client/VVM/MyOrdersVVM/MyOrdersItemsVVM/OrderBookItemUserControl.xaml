@@ -43,8 +43,8 @@
                     <Label Margin="5,0,5,0" Content="{Binding TypeOfDocument}" FontSize="13" Foreground="DimGray"/>
                 </WrapPanel>
                 <WrapPanel Orientation="Horizontal">
-                    <Label Margin="5,0,5,0" Content="Status of order:" FontSize="13" Foreground="DimGray"/>
-                    <Label Margin="5,0,5,0" Content="{Binding StatusOfOrder}" FontSize="13" Foreground="DimGray"/>
+                    <Label Margin="5,0,5,0" Content="Date of issueing:" FontSize="13" Foreground="DimGray"/>
+                    <Label Margin="5,0,5,0" Content="{Binding ReceiveDate}" FontSize="13" Foreground="DimGray"/>
                 </WrapPanel>
                 <WrapPanel Orientation="Horizontal">
                     <Label Margin="5,0,5,0" Content="Date of order:" FontSize="13" Foreground="DimGray"/>
@@ -54,16 +54,17 @@
                     <Label Margin="5,0,5,0" Content="Date of return:" FontSize="13" Foreground="DimGray"/>
                     <Label Margin="5,0,5,0" Content="{Binding DateOfReturn}" FontSize="13" Foreground="DimGray"/>
                 </WrapPanel>
-                 
+
             </WrapPanel>
         </WrapPanel>
         <WrapPanel Orientation="Vertical" Grid.Column="1">
             <WrapPanel Orientation="Horizontal" VerticalAlignment="Top">
-                <Label Margin="5,0,5,0" Content="Date of issueing:" FontSize="13" Foreground="DimGray"/>
-                <Label Margin="5,0,5,0" Content="{Binding ReceiveDate}" FontSize="13" Foreground="DimGray"/>
+                <Label Margin="5,0,5,0" Content="Status of order:" FontSize="13" Foreground="DimGray"/>
+                <Label Margin="5,0,5,0" Content="{Binding StatusOfOrder}" FontSize="13" Foreground="DimGray"/>
+
             </WrapPanel>
             <WrapPanel Orientation="Horizontal" VerticalAlignment="Top"  Grid.Column="1">
-                <Label Margin="5,0,5,0" Content="Price:" FontSize="13" Foreground="DimGray"/>
+                <Label Visibility="{Binding PriceVisibility}" Margin="5,0,5,0" Content="Price:" FontSize="13" Foreground="DimGray"/>
                 <Label Margin="5,0,5,0" Content="{Binding TypeOfDocument}" FontSize="13" Foreground="DimGray"/>
             </WrapPanel>
             <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">

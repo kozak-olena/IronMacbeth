@@ -20,6 +20,9 @@ namespace IronMacbeth.BFF.Contract
         [OperationContract]
         List<Order> GetAllOrders();
 
+        [OperationContract]
+        bool CheckOrder(int id);
+
 
         [OperationContract]
         void DeleteOrder(int id);

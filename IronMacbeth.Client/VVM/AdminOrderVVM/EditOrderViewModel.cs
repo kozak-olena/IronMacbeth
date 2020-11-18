@@ -17,7 +17,7 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
         public ICommand CloseCommand { get; set; }
         public ICommand ApplyChangesCommand { get; set; }
 
-        public string[] AvailibleItemTypes => new[] { "Order is accepted", "Order is in proccessing", "Order completed" };
+        public string[] AvailibleItemTypes => new[] { "Order is accepted", "Order is in proccessing", "Order completed", "Document is currently taking by the user", "Document returned" };
 
         public string Status { get; set; }
         public DateTime Min { get; }
@@ -52,7 +52,6 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
         }
 
 
-
         public Order CurrentOrder;
         public EditOrderViewModel(Order order)
         {
@@ -74,7 +73,7 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
             SpecifyOrderFields.DateOfReturning = DateOfReturning;
             SpecifyOrderFields.ReceiveDate = ReceiveDate;
             SpecifyOrderFields.Status = Status;
-           // ServerAdapter.Instance.UpdateOrder(SpecifyOrderFields);
+            // ServerAdapter.Instance.UpdateOrder(SpecifyOrderFields);
             CloseMethod(parameter);
         }
 
