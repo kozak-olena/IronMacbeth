@@ -23,9 +23,6 @@ namespace IronMacbeth.BFF.Contract
 
         public string RentPrice { get; set; }
 
-        public string Rating { get; set; }
-
-        public string Comments { get; set; }
         public string NameOfBook => Name;
 
        

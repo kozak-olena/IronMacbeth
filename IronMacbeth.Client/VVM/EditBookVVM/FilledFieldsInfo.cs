@@ -42,9 +42,6 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
 
         public static byte[] ElectronicVersion { get; set; }                    //TODO: static
 
-        public string Rating { get; set; }
-
-        public string Comments { get; set; }
 
         public string ImagePath { get; set; }
         public string ImageName { get; set; }

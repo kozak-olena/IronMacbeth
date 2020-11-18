@@ -28,13 +28,8 @@
 
         public string TypeOfDocument { get; set; }
 
-
-        public string Rating { get; set; }
-
-        public string Comments { get; set; }
-
         public string ImageName { get; set; }
 
-     
+
     }
 }

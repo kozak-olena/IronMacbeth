@@ -206,11 +206,11 @@ namespace IronMacbeth.BFF
             }
         }
 
-        public void UpdatePeriodical(Periodical article)
+        public void UpdatePeriodical(Periodical periodical)
         {
             using (var dbContext = new DbContext())
             {
-                dbContext.Update(article);
+                dbContext.Update(periodical);
 
                 dbContext.SaveChanges();
             }

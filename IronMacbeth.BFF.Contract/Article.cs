@@ -19,9 +19,5 @@
 
         public string ElectronicVersionFileName { get; set; }
 
-        public string Rating { get; set; }
-
-        public string Comments { get; set; }
-
     }
 }

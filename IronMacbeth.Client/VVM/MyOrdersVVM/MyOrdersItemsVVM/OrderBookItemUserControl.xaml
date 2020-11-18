@@ -65,7 +65,7 @@
             </WrapPanel>
             <WrapPanel Orientation="Horizontal" VerticalAlignment="Top"  Grid.Column="1">
                 <Label Visibility="{Binding PriceVisibility}" Margin="5,0,5,0" Content="Price:" FontSize="13" Foreground="DimGray"/>
-                <Label Margin="5,0,5,0" Content="{Binding TypeOfDocument}" FontSize="13" Foreground="DimGray"/>
+                <Label Margin="5,0,5,0" Content="{Binding Price}" FontSize="13" Foreground="DimGray"/>
             </WrapPanel>
             <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button VerticalAlignment="Center"

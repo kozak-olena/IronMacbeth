@@ -68,7 +68,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             order.ReceiveDate = receiveDateTime.ToUniversalTime();
             order.UserLogin = UserService.LoggedInUser.Login;
             order.TypeOfOrder = "Reading room order";
-            order.StatusOfOrder = "Order in processing";
+            order.StatusOfOrder = "Order is accepted";
             DateTime dateOfOrdering = DateTime.Now.ToUniversalTime();
             order.DateOfOrder = dateOfOrdering;
 
@@ -84,7 +84,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             order.ReceiveDate = receiveDateTime.ToUniversalTime();
             order.UserLogin = UserService.LoggedInUser.Login;
             order.TypeOfOrder = "Issueing order";
-            order.StatusOfOrder = "Order in processing";
+            order.StatusOfOrder = "Order is accepted";
             DateTime dateOfOrdering = DateTime.Now.ToUniversalTime();
             order.DateOfOrder = dateOfOrdering;
             DateTime dateOfReturning = dateOfOrdering.AddMonths(1);

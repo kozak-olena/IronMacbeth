@@ -106,10 +106,6 @@
     <Compile Include="VVM\AdminOrderVVM\EditOrderWindow.xaml.cs">
       <DependentUpon>EditOrderWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VVM\ArticleInfoVVM\ArticleInfoUserControl.xaml.cs">
-      <DependentUpon>ArticleInfoUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VVM\ArticleInfoVVM\ArticleInfoViewModel.cs" />
     <Compile Include="VVM\ArticleItemVVM\ArticleItemUserControl.xaml.cs">
       <DependentUpon>ArticleItemUserControl.xaml</DependentUpon>
     </Compile>
@@ -188,10 +184,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VVM\AdminOrderVVM\EditOrderWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VVM\ArticleInfoVVM\ArticleInfoUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

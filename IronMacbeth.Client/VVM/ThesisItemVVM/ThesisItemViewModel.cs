@@ -26,8 +26,6 @@ namespace IronMacbeth.Client.VVM.ThesisItemVVM
 
         public string Responsible => _item.Responsible;
 
-        public string Rating => _item.Rating;
-
 
         public DocumentInfoViewModel MoreInfoVm => new DocumentInfoViewModel(_item);
 

@@ -22,12 +22,10 @@ namespace IronMacbeth.Client.VVM.BookVVM
         public int Year => _item.Year;
         public int Pages => _item.Pages;
         public string ElectronicVersionFileName => _item.ElectronicVersionFileName;
-        public string Comments => _item.Comments;
         public string Location => _item.Location;
 
         public string TypeOfDocument => _item.TypeOfDocument;
 
-        public string Rating => _item.Rating;
         public string RentPrice => _item.RentPrice;
 
         public int NumberOfOfferings => _item.Availiability;

@@ -20,7 +20,6 @@ namespace IronMacbeth.Client.VVM.PeriodicalItemVVM
         public int Availiability => _item.Availiability;
         public int IssueNumber => _item.IssueNumber;
         public string TypeOfDocument => _item.TypeOfDocument;
-        public string Rating => _item.Rating;
         public string City => _item.City;
         public string RentPrice => _item.RentPrice;
         public string Location => _item.Location;

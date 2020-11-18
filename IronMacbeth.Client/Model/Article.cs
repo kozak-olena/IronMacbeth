@@ -22,11 +22,6 @@ namespace IronMacbeth.Client
         public byte[] ElectronicVersion { get; set; }
 
         public string ElectronicVersionFileName { get; set; }
-
-        public string Rating { get; set; }
-
-        public string Comments { get; set; }
-
         public string NameOfArticle => Name;
 
     }

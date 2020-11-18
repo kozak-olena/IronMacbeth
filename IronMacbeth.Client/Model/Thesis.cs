@@ -29,10 +29,6 @@ namespace IronMacbeth.Client
 
         public string ElectronicVersionFileName { get; set; }
 
-        public string Rating { get; set; }
-
-        public string Comments { get; set; }
-
         public string NameOfBook => Name;
 
     }
