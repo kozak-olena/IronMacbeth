@@ -40,6 +40,7 @@ namespace IronMacbeth.Client
 
         public void CreateOrder(Internal.Order orderInfo)
         {
+
             var contractOrder = MapInternalToContractCreateOrder(orderInfo);
             _proxy.CreateOrder(contractOrder);
         }
@@ -72,10 +73,9 @@ namespace IronMacbeth.Client
             return internalOrders;
         }
 
-        public bool CheckOrder(int id)
+        public bool CheckOrder(int id, DocumentType documentType)
         {
-            var isAlreadyTheSameOrderInDb = _proxy.CheckOrder(id);
-
+            var isAlreadyTheSameOrderInDb = _proxy.CheckOrder(id, documentType);
             return isAlreadyTheSameOrderInDb;
         }
 
@@ -272,8 +272,6 @@ namespace IronMacbeth.Client
                 Responsible = periodical.Responsible,
                 RentPrice = periodical.RentPrice,
                 ElectronicVersionFileId = periodical.ElectronicVersionFileId,
-                Rating = periodical.Rating,
-                Comments = periodical.Comments,
                 ImageFileId = periodical.ImageFileId,
             };
         }
@@ -295,8 +293,7 @@ namespace IronMacbeth.Client
                 IssueNumber = periodical.IssueNumber,
                 Responsible = periodical.Responsible,
                 RentPrice = periodical.RentPrice,
-                Rating = periodical.Rating,
-                Comments = periodical.Comments,
+
                 ImageFileId = periodical.ImageFileId
             };
         }
@@ -356,8 +353,7 @@ namespace IronMacbeth.Client
                 RentPrice = newspaper.RentPrice,
                 Location = newspaper.Location,
                 ElectronicVersionFileId = newspaper.ElectronicVersionFileId,
-                Rating = newspaper.Rating,
-                Comments = newspaper.Comments,
+                 
 
             };
         }
@@ -376,8 +372,7 @@ namespace IronMacbeth.Client
                 IssueNumber = newspaper.IssueNumber,
                 Location = newspaper.Location,
                 RentPrice = newspaper.RentPrice,
-                Rating = newspaper.Rating,
-                Comments = newspaper.Comments,
+               
             };
         }
 
@@ -435,8 +430,7 @@ namespace IronMacbeth.Client
                 TypeOfDocument = thesis.TypeOfDocument,
                 Responsible = thesis.Responsible,
                 ElectronicVersionFileId = thesis.ElectronicVersionFileId,
-                Rating = thesis.Rating,
-                Comments = thesis.Comments,
+               
 
             };
         }
@@ -454,8 +448,7 @@ namespace IronMacbeth.Client
                 TypeOfDocument = thesis.TypeOfDocument,
                 Responsible = thesis.Responsible,
                 ElectronicVersionFileId = thesis.ElectronicVersionFileId,
-                Rating = thesis.Rating,
-                Comments = thesis.Comments,
+               
 
             };
         }
@@ -513,8 +506,7 @@ namespace IronMacbeth.Client
                 MainDocumentId = article.MainDocumentId,
                 TypeOfDocument = article.TypeOfDocument,
                 ElectronicVersionFileId = article.ElectronicVersionFileId,
-                Rating = article.Rating,
-                Comments = article.Comments,
+                 
             };
         }
 
@@ -530,8 +522,7 @@ namespace IronMacbeth.Client
                 MainDocumentId = article.MainDocumentId,
                 TypeOfDocument = article.TypeOfDocument,
                 ElectronicVersionFileId = article.ElectronicVersionFileId,
-                Rating = article.Rating,
-                Comments = article.Comments,
+               
             };
         }
 
@@ -589,14 +580,13 @@ namespace IronMacbeth.Client
                 PublishingHouse = book.PublishingHouse,
                 City = book.City,
                 Year = book.Year,
-                Pages = book.Pages,                               //TODO:add more attributes
+                Pages = book.Pages,                                
                 Availiability = book.Availiability,
                 Location = book.Location,
                 TypeOfDocument = book.TypeOfDocument,
                 RentPrice = book.RentPrice,
                 ElectronicVersionFileId = book.ElectronicVersionFileId,
-                Rating = book.Rating,
-                Comments = book.Comments,
+                 
                 ImageFileId = book.ImageFileId
             };
         }
@@ -608,7 +598,7 @@ namespace IronMacbeth.Client
                 Id = book.Id,
                 Name = book.Name,
                 Author = book.Author,
-                PublishingHouse = book.PublishingHouse,              //TODO: add more attributes
+                PublishingHouse = book.PublishingHouse,               
                 City = book.City,
                 Year = book.Year,
                 Pages = book.Pages,
@@ -617,8 +607,7 @@ namespace IronMacbeth.Client
                 TypeOfDocument = book.TypeOfDocument,
                 RentPrice = book.RentPrice,
                 ElectronicVersionFileId = book.ElectronicVersionFileId,
-                Rating = book.Rating,
-                Comments = book.Comments,
+                 
                 ImageFileId = book.ImageFileId
             };
         }

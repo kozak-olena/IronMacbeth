@@ -30,11 +30,6 @@ namespace IronMacbeth.BFF.Contract
 
         public string TypeOfDocument { get; set; }
 
-
-        public string Rating { get; set; }
-
-        public string Comments { get; set; }
-
-        public Guid? ImageFileId { get; set; }     
+        public Guid? ImageFileId { get; set; }
     }
 }

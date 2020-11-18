@@ -29,9 +29,6 @@ namespace IronMacbeth.Client
 
         public string TypeOfDocument { get; set; }
 
-        public string Rating { get; set; }
-
-        public string Comments { get; set; }
 
         public string NameOfBook => Name;
 

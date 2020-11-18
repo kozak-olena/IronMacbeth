@@ -39,9 +39,6 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
 
         public MemoryStream ElectronicVersion { get; set; }
 
-        public string Rating { get; set; }
-
-        public string Comments { get; set; }
 
         public string ImagePath { get; set; }
         public Guid? ImageFileId { get; set; }

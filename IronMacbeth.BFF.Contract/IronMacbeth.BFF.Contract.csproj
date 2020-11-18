@@ -45,6 +45,7 @@
     <Compile Include="Article.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="DocumentsSearchResults.cs" />
+    <Compile Include="DocumentType.cs" />
     <Compile Include="IAnonymousService.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="Newspaper.cs" />

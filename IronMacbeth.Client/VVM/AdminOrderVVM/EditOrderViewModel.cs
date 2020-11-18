@@ -29,7 +29,6 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
             get { return _receiveDate; }
             set
             {
-
                 _receiveDate = value;
                 OnPropertyChanged(nameof(ReceiveDate));
             }

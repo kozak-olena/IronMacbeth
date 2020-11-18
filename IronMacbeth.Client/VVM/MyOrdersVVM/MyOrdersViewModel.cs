@@ -1,14 +1,11 @@
 ﻿using IronMacbeth.Client.Annotations;
 using IronMacbeth.Client.ViewModel;
-using IronMacbeth.Client.VVM.EditBookVVM;
 using IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows.Input;
 
 namespace IronMacbeth.Client.VVM.MyOrdersVVM
@@ -73,7 +70,6 @@ namespace IronMacbeth.Client.VVM.MyOrdersVVM
             ServerAdapter.Instance.DeleteOrder(orderToDelete.Id);
             Update();
         }
-
 
         public void ShowCollection()
         {

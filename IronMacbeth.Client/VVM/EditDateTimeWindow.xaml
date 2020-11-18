@@ -6,18 +6,18 @@
         xmlns:local="clr-namespace:IronMacbeth.Client.VVM" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         x:Name="Window"
         mc:Ignorable="d"
-        Title="Time of issueing" Height="200" Width="300">
+        Title="Time of issueing" Height="170" Width="350">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.7*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="0.7*"/>
         </Grid.RowDefinitions>
         <WrapPanel  Grid.Row="0" Orientation="Vertical" VerticalAlignment="Bottom">
             <TextBlock Text="Choose date and time of issueing:" Margin="5,5,0,10" />
         </WrapPanel>
-        <WrapPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <xctk:DateTimePicker Margin="5,5,0,0"  Height="30" Value="{Binding ReceiveDate}"  Minimum="{Binding  Min}"/>
+        <WrapPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <xctk:DateTimePicker Margin="5,5,0,0"  Height="35" Value="{Binding ReceiveDate}"  Minimum="{Binding  Min}"/>
         </WrapPanel>
         <WrapPanel  
                 HorizontalAlignment="Center"

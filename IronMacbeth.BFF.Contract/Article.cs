@@ -21,8 +21,5 @@ namespace IronMacbeth.BFF.Contract
 
         public Guid? ElectronicVersionFileId { get; set; }
 
-        public string Rating { get; set; }
-
-        public string Comments { get; set; }
     }
 }

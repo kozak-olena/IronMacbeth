@@ -19,7 +19,6 @@ namespace IronMacbeth.Client.VVM.NewspaperItemVVM
         public string City => _item.City;
         public string Location => _item.Location;
         public string TypeOfDocument => _item.TypeOfDocument;
-        public string Rating => _item.Rating;
         public string RentPrice => _item.RentPrice;
 
         public DocumentInfoViewModel MoreInfoVm => new DocumentInfoViewModel(_item);
