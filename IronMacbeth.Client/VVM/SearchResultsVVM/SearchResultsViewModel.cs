@@ -23,6 +23,8 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
 
         public List<IDocumentViewModel> Items { get; private set; }
 
+        public Visibility ButtonsVisibility => UserService.LoggedInUser.IsAdmin ? Visibility.Collapsed : Visibility.Visible;
+
         public ICommand AddtoMyOrdersCommand { get; }
         public ICommand OrderToReadingRoomCommand { get; }
 
@@ -34,7 +36,6 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
         public SearchResultsDispatch SearchResultsDispatch;
         public void AddToMyOrdersMethod(object parameter)
         {
-            //order = new Order();
 
             SearchResultsDispatch = new SearchResultsDispatch(SelectedItem.GetItem(), IsTypeReadingRoom);
         }

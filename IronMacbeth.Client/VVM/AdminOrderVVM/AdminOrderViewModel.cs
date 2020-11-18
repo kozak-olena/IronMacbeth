@@ -34,13 +34,26 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
                 _search = value;
                 if (!string.IsNullOrWhiteSpace(value))
                 {
-                    //UpdateCollection(false);
+                    UpdateCollection(false);
                 }
                 else
                 {
-                    // ShowCollection();
+                    ShowCollection();
                 }
             }
+        }
+
+        public void UpdateCollection(bool innerCall)
+        {
+            Items = new List<OrderBookItemViewModel>();
+            List<Order> orders = ServerAdapter.Instance.GetAllOrders();
+
+            Items.AddRange(orders.OrderByDescending(item => item.DateOfOrder).Where(item => item.Book != null && item.Book.Name.ToLower().Contains(Search.ToLower())).Select(x => new OrderBookItemViewModel(x)));
+            Items.AddRange(orders.OrderByDescending(item => item.DateOfOrder).Where(item => item.Article != null && item.Article.Name.ToLower().Contains(Search.ToLower())).Select(x => new OrderBookItemViewModel(x)));
+            Items.AddRange(orders.OrderByDescending(item => item.DateOfOrder).Where(item => item.Periodical != null && item.Periodical.Name.ToLower().Contains(Search.ToLower())).Select(x => new OrderBookItemViewModel(x)));
+            Items.AddRange(orders.OrderByDescending(item => item.DateOfOrder).Where(item => item.Newspaper != null && item.Newspaper.Name.ToLower().Contains(Search.ToLower())).Select(x => new OrderBookItemViewModel(x)));
+            Items.AddRange(orders.OrderByDescending(item => item.DateOfOrder).Where(item => item.Thesis != null && item.Thesis.Name.ToLower().Contains(Search.ToLower())).Select(x => new OrderBookItemViewModel(x)));
+            OnPropertyChanged(nameof(Items));
         }
 
         public AdminOrderViewModel()
