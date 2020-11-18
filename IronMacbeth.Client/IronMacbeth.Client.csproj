@@ -90,7 +90,6 @@
     <Compile Include="Model\Base.cs" />
     <Compile Include="Model\Book.cs" />
     <Compile Include="Model\DocumentsSearchResults.cs" />
-    <Compile Include="Model\IDescribable.cs" />
     <Compile Include="Model\IDisplayable.cs" />
     <Compile Include="Model\Newspaper.cs" />
     <Compile Include="Model\Periodical.cs" />
@@ -98,7 +97,6 @@
     <Compile Include="ServerAdapter.cs" />
     <Compile Include="Model\Thesis.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="Model\Videocard.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="VVM\AdminOrderVVM\AdminOrderUserControl.xaml.cs">
       <DependentUpon>AdminOrderUserControl.xaml</DependentUpon>

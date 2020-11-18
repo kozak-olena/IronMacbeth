@@ -40,11 +40,13 @@ namespace IronMacbeth.Client
         }
 
         #region Order
+
         public void CreateOrder(Internal.Order orderInfo)
         {
             var contractOrder = MapInternalToContractCreateOrder(orderInfo);
             _proxy.CreateOrder(contractOrder);
         }
+
         private Contract.CreateOrder MapInternalToContractCreateOrder(Internal.Order orderInfo)
         {
             return new Contract.CreateOrder
@@ -72,7 +74,6 @@ namespace IronMacbeth.Client
 
             return internalOrders;
         }
-
 
         private Internal.Order MapContractToInternalOrder(Contract.Order order)
         {
@@ -105,7 +106,6 @@ namespace IronMacbeth.Client
             _proxy.UpdateOrder(contractOrder, contractSpecifiedOrderFields);
         }
 
-
         private Contract.Order MapInternalToContractUpdateOrder(Internal.Order order)
         {
             return new Contract.Order
@@ -134,15 +134,10 @@ namespace IronMacbeth.Client
             };
         }
 
-
-
-
-
         #endregion
 
-
-
         #region SearchDocument
+
         public DocumentsSearchResults SearchDocuments(Internal.SearchFilledFields searchFilledFields)
         {
             var contractSearch = MapInternalToContractSearchCriteria(searchFilledFields);
@@ -193,6 +188,7 @@ namespace IronMacbeth.Client
 
             return documents;
         }
+
         #endregion
 
         #region Periodical
@@ -229,6 +225,7 @@ namespace IronMacbeth.Client
 
             return internalPeriodicals;
         }
+
         public void UpdatePeriodical(Internal.Periodical periodical)
         {
             UpdateIDisplayable(periodical);
@@ -317,6 +314,7 @@ namespace IronMacbeth.Client
 
             return internalNewspapers;
         }
+
         public void UpdateNewspaper(Internal.Newspaper newspaper)
         {
             var contractNewspaper = MapInternalToContractNewspaper(newspaper);
@@ -367,6 +365,7 @@ namespace IronMacbeth.Client
                 Comments = newspaper.Comments,
             };
         }
+
         #endregion
 
         #region Thesis
@@ -392,6 +391,7 @@ namespace IronMacbeth.Client
 
             return internalThesises;
         }
+
         public void UpdateThesis(Internal.Thesis thesis)
         {
             var contractThesis = MapInternalToContractThesis(thesis);
@@ -470,7 +470,6 @@ namespace IronMacbeth.Client
             return internalArticles;
         }
 
-
         public void UpdateArticle(Internal.Article article)
         {
             var contractArticle = MapInternalToContractArticle(article);
@@ -499,9 +498,6 @@ namespace IronMacbeth.Client
                 Comments = article.Comments,
             };
         }
-
-
-
 
         private Internal.Article MapContractToInternalArticle(Contract.Article article)
         {
@@ -555,6 +551,7 @@ namespace IronMacbeth.Client
 
             return internalBooks;
         }
+
         public void UpdateBook(Internal.Book book)
         {
             UpdateIDisplayable(book);
@@ -587,8 +584,7 @@ namespace IronMacbeth.Client
                 ElectronicVersionFileName = book.ElectronicVersionFileName,
                 Rating = book.Rating,
                 Comments = book.Comments,
-                ImageName = book.ImageName,
-
+                ImageName = book.ImageName
             };
         }
 
@@ -610,8 +606,7 @@ namespace IronMacbeth.Client
                 ElectronicVersionFileName = book.ElectronicVersionFileName,
                 Rating = book.Rating,
                 Comments = book.Comments,
-                ImageName = book.ImageName,
-
+                ImageName = book.ImageName
             };
         }
 
@@ -642,13 +637,6 @@ namespace IronMacbeth.Client
 
         #endregion
 
-        public void AddTextFile(string text, out string fileName)
-        {
-            byte[] bytes = Serialize(text);
-
-            AddFile(bytes, out fileName);
-        }
-
         public void AddFile(byte[] file, out string fileName)
         {
             using (var memoryStream = new MemoryStream(file))
@@ -673,18 +661,6 @@ namespace IronMacbeth.Client
             }
         }
 
-        private void CreateIDescribable(IDescribable describable)
-        {
-            if (describable.Description != null)
-            {
-                string fileName;
-
-                AddTextFile(describable.Description, out fileName);
-
-                describable.DescriptionName = fileName;
-            }
-        }
-
         private void UpdateIDisplayable(IDisplayable displayable)
         {
             if (string.IsNullOrWhiteSpace(displayable.ImageName) && displayable.BitmapImage != null)
@@ -696,16 +672,6 @@ namespace IronMacbeth.Client
                 AddFile(image, out var fileName);
 
                 displayable.ImageName = fileName;
-            }
-        }
-
-        private void UpdateIDescribable(IDescribable describable)
-        {
-            if (string.IsNullOrWhiteSpace(describable.DescriptionName) && describable.Description != null)
-            {
-                AddTextFile(describable.Description, out var fileName);
-
-                describable.DescriptionName = fileName;
             }
         }
 
