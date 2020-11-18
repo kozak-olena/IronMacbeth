@@ -18,6 +18,9 @@ namespace IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM
             _item = item;
         }
 
+        public string Price => GetPrice(_item.GetOrderedItem());
+
+        public Visibility PriceVisibility => Price != null ? Visibility.Visible : Visibility.Collapsed;
         public string Name => GetName(_item.GetOrderedItem());
 
         public string Author => GetAuthor(_item.GetOrderedItem());
@@ -112,6 +115,40 @@ namespace IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM
             {
                 throw new InvalidCastException();
             }
+
+
+        }
+        public string GetPrice(object order)
+        {
+            if (order is Book)
+            {
+                Book book = (Book)order;
+                return book.RentPrice;
+            }
+            if (order is Article)
+            {
+                return null;
+            }
+            if (order is Periodical)
+            {
+                Periodical periodical = (Periodical)order;
+                return periodical.RentPrice;
+            }
+            if (order is Thesis)
+            {
+                return null;
+            }
+            if (order is Newspaper)
+            {
+                Newspaper newspaper = (Newspaper)order;
+                return newspaper.RentPrice;
+            }
+            else
+            {
+                throw new InvalidCastException();
+            }
+
+
         }
     }
 
