@@ -1,9 +1,10 @@
-﻿using System;
+﻿using IronMacbeth.Client.VVM;
+using System;
 using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client
 {
-    public class Periodical : Base, IDisplayable
+    public class Periodical : Base, IDisplayable, IAvailiable
     {
         public int Id { get; set; }
 
@@ -57,5 +58,9 @@ namespace IronMacbeth.Client
         [NonSerialized]
         private string _description;
 
+        public int GetAvailibility()
+        {
+            return Availiability;
+        }
     }
 }

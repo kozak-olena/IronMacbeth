@@ -1,9 +1,10 @@
-﻿using System;
+﻿using IronMacbeth.Client.VVM;
+using System;
 using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client
 {
-    public class Book : Base, IDisplayable
+    public class Book : Base, IDisplayable, IAvailiable
     {
 
         public int Id { get; set; }
@@ -47,8 +48,10 @@ namespace IronMacbeth.Client
         }
         [NonSerialized]
         private BitmapImage _bitmapImage;
-        
-        
 
+        public int GetAvailibility()
+        {
+            return Availiability;
+        }
     }
 }

@@ -31,6 +31,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
 
         public IDocumentViewModel SelectedItem { get; set; }
 
+        public IAvailiable Availibility { get; set; }
 
         public Order order;
 
@@ -145,9 +146,11 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
         public bool CanExecuteMaintenanceMethods(object parameter)
         {
             object selectedItem = SelectedItem?.GetItem();
-            bool isSelectedItemIsThesisOrArticle = selectedItem is Article || selectedItem is Thesis;
+            var availibility = Availibility?.GetAvailibility();
 
-            return SelectedItem != null && !isSelectedItemIsThesisOrArticle;
+            bool isSelectedItemIsThesisOrArticle = selectedItem is Article || selectedItem is Thesis || availibility == null;
+            bool IsAvailible = !isSelectedItemIsThesisOrArticle && availibility > 0;
+            return SelectedItem != null && !isSelectedItemIsThesisOrArticle && IsAvailible;
         }
 
         public void ShowCollection()

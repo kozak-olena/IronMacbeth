@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace IronMacbeth.Client.Model
 {
-    public class UpdateAvailibility : INotifyPropertyChanged
+    public class UpdateAvailibility
     {
 
         public static void UpdateBook(object selectedItem)
@@ -18,7 +18,7 @@ namespace IronMacbeth.Client.Model
             {
                 Book book = (Book)selectedItem;
                 book.Availiability--;
-                 
+
                 ServerAdapter.Instance.UpdateBook(book);
             }
 
@@ -43,15 +43,5 @@ namespace IronMacbeth.Client.Model
                 ServerAdapter.Instance.UpdateNewspaper(newspaper);
             }
         }
-
-        #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
     }
 }

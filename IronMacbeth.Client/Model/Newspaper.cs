@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IronMacbeth.Client.VVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client
 {
-    public class Newspaper : Base
+    public class Newspaper : Base, IAvailiable
     {
         public int Id { get; set; }
 
@@ -32,5 +33,9 @@ namespace IronMacbeth.Client
 
         public string NameOfBook => Name;
 
+        public int GetAvailibility()
+        {
+            return Availiability;
+        }
     }
 }

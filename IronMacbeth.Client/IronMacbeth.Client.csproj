@@ -136,6 +136,7 @@
     <Compile Include="VVM\EditDateTimeWindow.xaml.cs">
       <DependentUpon>EditDateTimeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VVM\IAvailiable.cs" />
     <Compile Include="VVM\MyOrdersVVM\MyOrdersItemsVVM\OrderBookItemUserControl.xaml.cs">
       <DependentUpon>OrderBookItemUserControl.xaml</DependentUpon>
     </Compile>
