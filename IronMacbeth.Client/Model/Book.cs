@@ -4,7 +4,7 @@ using System;
 
 namespace IronMacbeth.Client
 {
-    public class Book : Document, IDisplayable, IAvailiable
+    public class Book : Document, IDisplayable 
     {
         public int Id { get; set; }
 
@@ -34,9 +34,7 @@ namespace IronMacbeth.Client
         public Guid? ImageFileId { get; set; }
 
         public Image Image { get; set; }
-        public int GetAvailibility()
-        {
-            return Availiability;
-        }
+
+    
     }
 }

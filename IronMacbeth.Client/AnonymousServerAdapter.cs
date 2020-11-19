@@ -30,9 +30,9 @@ namespace IronMacbeth.Client
             _proxy = proxy;
         }
 
-        public UserRegistrationStatus Register(string login, string password)
+        public UserRegistrationStatus Register(string login, string password, string name, string surname, int phoneNumber)
         {
-            return _proxy.Register(login, password);
+            return _proxy.Register(login, password, surname,name,phoneNumber );
         }
 
         public bool Ping()

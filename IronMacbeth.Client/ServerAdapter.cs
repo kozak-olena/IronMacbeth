@@ -60,7 +60,11 @@ namespace IronMacbeth.Client
                 StatusOfOrder = orderInfo.StatusOfOrder,
                 ReceiveDate = orderInfo.ReceiveDate,
                 DateOfOrer = orderInfo.DateOfOrder,
-                DateOfReturn = orderInfo.DateOfReturn
+                DateOfReturn = orderInfo.DateOfReturn,
+                UserName = orderInfo.UserName,
+                UserSurname = orderInfo.UserSurname,
+                PhoneNumber = orderInfo.PhoneNumber
+
             };
         }
 
@@ -90,6 +94,9 @@ namespace IronMacbeth.Client
                 DateOfOrder = order.DateOfOrder.ToLocalTime(),
                 DateOfReturn = order.DateOfReturn.ToLocalTime(),
                 ReceiveDate = order.ReceiveDate.ToLocalTime(),
+                UserSurname = order.UserSurname,
+                UserName = order.UserName,
+                PhoneNumber = order.PhoneNumber,
                 Book = order.Book != null ? MapContractToInternalBook(order.Book) : null,
                 Article = order.Article != null ? MapContractToInternalArticle(order.Article) : null,
                 Periodical = order.Periodical != null ? MapContractToInternalPeriodical(order.Periodical) : null,
@@ -122,10 +129,10 @@ namespace IronMacbeth.Client
                 NewspaperId = order.Newspaper?.Id,
                 ThesesId = order.Thesis?.Id,
                 TypeOfOrder = order.TypeOfOrder,
-                //StatusOfOrder = order.StatusOfOrder,          //TODO:
-                //ReceiveDate = order.ReceiveDate,
                 DateOfOrder = order.DateOfOrder,
-                DateOfReturn = order.DateOfReturn
+                UserName = order.UserName,
+                UserSurname = order.UserSurname
+
             };
         }
         private Contract.SpecifiedOrderFields MapInternalToContractOrderFields(Internal.SpecifiedOrderFields specifyOrderFields)
@@ -353,7 +360,7 @@ namespace IronMacbeth.Client
                 RentPrice = newspaper.RentPrice,
                 Location = newspaper.Location,
                 ElectronicVersionFileId = newspaper.ElectronicVersionFileId,
-                 
+
 
             };
         }
@@ -372,7 +379,7 @@ namespace IronMacbeth.Client
                 IssueNumber = newspaper.IssueNumber,
                 Location = newspaper.Location,
                 RentPrice = newspaper.RentPrice,
-               
+
             };
         }
 
@@ -430,7 +437,7 @@ namespace IronMacbeth.Client
                 TypeOfDocument = thesis.TypeOfDocument,
                 Responsible = thesis.Responsible,
                 ElectronicVersionFileId = thesis.ElectronicVersionFileId,
-               
+
 
             };
         }
@@ -448,7 +455,7 @@ namespace IronMacbeth.Client
                 TypeOfDocument = thesis.TypeOfDocument,
                 Responsible = thesis.Responsible,
                 ElectronicVersionFileId = thesis.ElectronicVersionFileId,
-               
+
 
             };
         }
@@ -506,7 +513,7 @@ namespace IronMacbeth.Client
                 MainDocumentId = article.MainDocumentId,
                 TypeOfDocument = article.TypeOfDocument,
                 ElectronicVersionFileId = article.ElectronicVersionFileId,
-                 
+
             };
         }
 
@@ -522,7 +529,7 @@ namespace IronMacbeth.Client
                 MainDocumentId = article.MainDocumentId,
                 TypeOfDocument = article.TypeOfDocument,
                 ElectronicVersionFileId = article.ElectronicVersionFileId,
-               
+
             };
         }
 
@@ -580,13 +587,13 @@ namespace IronMacbeth.Client
                 PublishingHouse = book.PublishingHouse,
                 City = book.City,
                 Year = book.Year,
-                Pages = book.Pages,                                
+                Pages = book.Pages,
                 Availiability = book.Availiability,
                 Location = book.Location,
                 TypeOfDocument = book.TypeOfDocument,
                 RentPrice = book.RentPrice,
                 ElectronicVersionFileId = book.ElectronicVersionFileId,
-                 
+
                 ImageFileId = book.ImageFileId
             };
         }
@@ -598,7 +605,7 @@ namespace IronMacbeth.Client
                 Id = book.Id,
                 Name = book.Name,
                 Author = book.Author,
-                PublishingHouse = book.PublishingHouse,               
+                PublishingHouse = book.PublishingHouse,
                 City = book.City,
                 Year = book.Year,
                 Pages = book.Pages,
@@ -607,7 +614,7 @@ namespace IronMacbeth.Client
                 TypeOfDocument = book.TypeOfDocument,
                 RentPrice = book.RentPrice,
                 ElectronicVersionFileId = book.ElectronicVersionFileId,
-                 
+
                 ImageFileId = book.ImageFileId
             };
         }
@@ -633,7 +640,10 @@ namespace IronMacbeth.Client
             return new User
             {
                 Login = user.Login,
-                UserRole = user.UserRole
+                UserRole = user.UserRole,
+                Name = user.Name,
+                Surname = user.Surname,
+                PhoneNumber = user.PhoneNumber
             };
         }
 

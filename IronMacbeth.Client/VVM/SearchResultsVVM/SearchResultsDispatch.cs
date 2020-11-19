@@ -76,6 +76,9 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             order.UserLogin = UserService.LoggedInUser.Login;
             order.TypeOfOrder = "Reading room order";
             order.StatusOfOrder = "Order is accepted";
+            order.UserName = UserService.LoggedInUser.Name;
+            order.UserSurname = UserService.LoggedInUser.Surname;
+            order.UserLogin = UserService.LoggedInUser.Login;
             DateTime dateOfOrdering = DateTime.Now.ToUniversalTime();
             order.DateOfOrder = dateOfOrdering;
 
@@ -89,6 +92,9 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             new EditDateTimeWindow { DataContext = editDateTimeViewModel }.ShowDialog();
             DateTime receiveDateTime = editDateTimeViewModel.ReceiveDate;
             order.ReceiveDate = receiveDateTime.ToUniversalTime();
+            order.PhoneNumber = UserService.LoggedInUser.PhoneNumber;
+            order.UserName = UserService.LoggedInUser.Name;
+            order.UserSurname = UserService.LoggedInUser.Surname;
             order.UserLogin = UserService.LoggedInUser.Login;
             order.TypeOfOrder = "Issueing order";
             order.StatusOfOrder = "Order is accepted";

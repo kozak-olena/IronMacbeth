@@ -4,6 +4,7 @@ using IronMacbeth.Client.VVM.AdminOrderVVM;
 using IronMacbeth.Client.VVM.BookVVM;
 using IronMacbeth.Client.VVM.Home;
 using IronMacbeth.Client.VVM.LogInVVM;
+using IronMacbeth.Client.VVM.LogInVVM.RegisterVVM;
 using IronMacbeth.Client.VVM.MyOrdersVVM;
 using IronMacbeth.Client.VVM.SearchPageViewModel;
 using System;
@@ -221,8 +222,8 @@ namespace IronMacbeth.Client.ViewModel
 
         public void RegisterMethod(object parameter)
         {
-            LogInViewModel logInViewModel = new LogInViewModel(false);
-            new LogInWindow { DataContext = logInViewModel }.ShowDialog();
+            RegisterViewModel registerViewModel = new RegisterViewModel();
+            new RegisterWindow { DataContext = registerViewModel }.ShowDialog();
             OnUserChanged();
         }
 

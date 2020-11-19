@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -18,6 +19,7 @@ namespace IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM
             _item = item;
         }
 
+
         public string Price => GetPrice(_item.GetOrderedItem());
 
         public Visibility PriceVisibility => Price != null ? Visibility.Visible : Visibility.Collapsed;
@@ -28,6 +30,11 @@ namespace IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM
         public Visibility AuthorVisibility => Author != null ? Visibility.Visible : Visibility.Collapsed;
 
         public int Id => _item.Id;
+
+
+        public string UserName => _item.UserName;
+        public string UserSurname => _item.UserSurname;
+        public int PhoneNumber => _item.PhoneNumber;
 
         public string StatusOfOrder => _item.StatusOfOrder;
 
@@ -51,6 +58,9 @@ namespace IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM
             return _item;
         }
 
+
+        public string FormattedPhoneNumber => $"0{PhoneNumber.ToString()}";
+        
         public string GetAuthor(object order)
         {
             if (order is Book)
