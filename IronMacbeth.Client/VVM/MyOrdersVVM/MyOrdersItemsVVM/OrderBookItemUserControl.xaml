@@ -37,12 +37,15 @@
                 <WrapPanel Orientation="Horizontal">
                     <Label Margin="5,0,5,0" Content="User login:" FontSize="13" Foreground="DimGray"/>
                     <Label Margin="5,0,5,0" Content="{Binding UserLogin}" FontSize="13" Foreground="DimGray"/>
+                    <Label Margin="5,0,5,0" Content="•" FontSize="13" Foreground="DimGray"/>
                     <Label Margin="5,0,5,0" Content="User name:" FontSize="13" Foreground="DimGray"/>
                     <Label Margin="5,0,5,0" Content="{Binding UserName}" FontSize="13" Foreground="DimGray"/>
+                    <Label Margin="5,0,5,0" Content="•" FontSize="13" Foreground="DimGray"/>
                     <Label Margin="5,0,5,0" Content="User surname:" FontSize="13" Foreground="DimGray"/>
                     <Label Margin="5,0,5,0" Content="{Binding UserSurname}" FontSize="13" Foreground="DimGray"/>
+                    <Label Margin="5,0,5,0" Content="•" FontSize="13" Foreground="DimGray"/>
                     <Label Margin="5,0,5,0" Content="User phone number:" FontSize="13" Foreground="DimGray"/>
-                    <Label  Margin="5,0,5,0"  Content="{Binding FormattedPhoneNumber, StringFormat={}{0:(000)###-####}}"/>
+                    <Label  Margin="5,0,5,0"  Content="{Binding FormattedPhoneNumber}"/>
                 </WrapPanel>
                 <WrapPanel Orientation="Horizontal">
                     <Label Margin="5,0,5,0" Content="Type of order:" FontSize="13" Foreground="DimGray"/>
