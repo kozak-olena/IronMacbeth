@@ -8,12 +8,9 @@ namespace IronMacbeth.FileStorage.Contract
     public interface IFileStorageService
     {
         [OperationContract]
-        string AddFile(Stream fileStream);
+        Guid AddFile(Stream fileStream);
 
         [OperationContract]
-        Stream GetFile(string fileName);
-
-        [OperationContract]
-        DateTime GetCurrentTime();
+        Stream GetFile(Guid fileId);
     }
 }

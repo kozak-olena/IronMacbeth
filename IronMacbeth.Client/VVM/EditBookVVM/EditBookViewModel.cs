@@ -95,6 +95,8 @@ namespace IronMacbeth.Client.VVM.BookVVM
                     fileStream.CopyTo(documentElectronicVersion);
                 }
 
+                documentElectronicVersion.Seek(0, SeekOrigin.Begin);
+
                 FilledFieldsInfo.ElectronicVersion = documentElectronicVersion;
 
                 OnPropertyChanged(nameof(PdfPath));
@@ -147,6 +149,8 @@ namespace IronMacbeth.Client.VVM.BookVVM
                 {
                     fileStream.CopyTo(imageData);
                 }
+
+                imageData.Seek(0, SeekOrigin.Begin);
 
                 FilledFieldsInfo.Image = new Image(imageData);
 

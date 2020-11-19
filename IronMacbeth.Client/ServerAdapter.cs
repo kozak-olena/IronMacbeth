@@ -686,6 +686,7 @@ namespace IronMacbeth.Client
             if (document.ElectronicVersion != null)
             {
                 document.ElectronicVersionFileId = _proxy.AddFile(document.ElectronicVersion);
+                document.ElectronicVersion.Seek(0, SeekOrigin.Begin);
             }
         }
 

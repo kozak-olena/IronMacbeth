@@ -14,6 +14,13 @@ namespace IronMacbeth.BFF
 {
     public class Service : IService
     {
+        private readonly IFileStorageService _fileStorageServiceClient;
+
+        public Service()
+        {
+            _fileStorageServiceClient = new ChannelFactory<IFileStorageService>("IronMacbeth.FileStorageEndpoint").CreateChannel();
+        }
+
         #region Order
         public void CreateOrder(Contract.CreateOrder orderInfo)
         {
@@ -152,7 +159,6 @@ namespace IronMacbeth.BFF
             }
         }
         #endregion
-
 
         #region Search
         public DocumentsSearchResults SearchDocuments(SearchFilledFields searchFilledFields)
@@ -551,14 +557,6 @@ namespace IronMacbeth.BFF
 
             Console.WriteLine($"Asked UserManagement the time. It was {time}");
 
-            var fileStorageChannelFactory = new ChannelFactory<IFileStorageService>("IronMacbeth.FileStorageEndpoint");
-
-            var fileStorageServiceClient = fileStorageChannelFactory.CreateChannel();
-
-            var timeFromFileStorage = fileStorageServiceClient.GetCurrentTime();
-
-            Console.WriteLine($"Asked FileStorage the time. It was {timeFromFileStorage}");
-
             #endregion
 
             var internalUser = GetLoggedInUserInternal();
@@ -570,60 +568,24 @@ namespace IronMacbeth.BFF
 
         #endregion
 
+        #region File Storage
+
         public Guid AddFile(Stream fileStream)
         {
-            var fileId = GetFileId();
-
-            FileInfo fileInfo = new FileInfo($"Files\\{fileId}");
-            using (var stream = fileInfo.Open(FileMode.CreateNew, FileAccess.Write))
-            {
-                fileStream.CopyTo(stream);
-                stream.Close();
-            }
+            var fileId = _fileStorageServiceClient.AddFile(fileStream);
 
             return fileId;
-        }
-
-        private static Guid GetFileId()
-        {
-            int result;
-
-            Directory.CreateDirectory("Files");
-
-            FileInfo fileInfo = new FileInfo("Files\\idStorage");
-            if (fileInfo.Exists)
-            {
-                int id;
-                using (TextReader reader = fileInfo.OpenText())
-                {
-                    id = int.Parse(reader.ReadLine());
-                }
-                id++;
-                result = id;
-                using (TextWriter writer = fileInfo.CreateText())
-                {
-                    writer.Write(result);
-                }
-            }
-            else
-            {
-                result = 1;
-                using (TextWriter writer = fileInfo.CreateText())
-                {
-                    writer.Write(result);
-                }
-            }
-
-            return Guid.Parse($"00000000-0000-0000-0000-{result:000000000000}");
         }
 
         public Stream GetFile(Guid fileId)
         {
             // do not dispose stream here. It's disposed by WCF whenever it's done sending it to the client
-            var fileStream = File.OpenRead($"Files\\{fileId}");
+            var fileStream = _fileStorageServiceClient.GetFile(fileId);
 
             return fileStream;
         }
+
+        #endregion
 
         private User GetLoggedInUserInternal()
         {

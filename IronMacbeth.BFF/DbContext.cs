@@ -1,5 +1,6 @@
 ﻿using IronMacbeth.BFF.Contract;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
 namespace IronMacbeth.BFF
 {
@@ -22,7 +23,7 @@ namespace IronMacbeth.BFF
         internal DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlServer("Data Source=localhost;Initial Catalog=IronMacbeth.BFF.Database;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=False");
+            => options.UseSqlServer(ConfigurationManager.ConnectionStrings["Database"].ConnectionString);
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
