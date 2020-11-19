@@ -48,7 +48,6 @@ namespace IronMacbeth.Client.VVM.SearchPageViewModel
             DeleteAllComand = new RelayCommand(DeleteAllMethod);
 
         }
-
         public string SearchName { get => SearchFilledFields.SearchName; set => SearchFilledFields.SearchName = value; }
 
         public string SearchAuthor { get => SearchFilledFields.SearchAuthor; set => SearchFilledFields.SearchAuthor = value; }

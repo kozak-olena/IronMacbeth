@@ -14,8 +14,6 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
 
         public SearchResultsDispatch(object selectedItem, bool IsTypeIssueing)
         {
-
-
             order = new Order();
             if (selectedItem is Book)
             {
@@ -74,6 +72,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             DateTime receiveDateTime = editDateTimeViewModel.ReceiveDate;
             order.ReceiveDate = receiveDateTime.ToUniversalTime();
             order.UserLogin = UserService.LoggedInUser.Login;
+            order.PhoneNumber = UserService.LoggedInUser.PhoneNumber;
             order.TypeOfOrder = "Reading room order";
             order.StatusOfOrder = "Order is accepted";
             order.UserName = UserService.LoggedInUser.Name;

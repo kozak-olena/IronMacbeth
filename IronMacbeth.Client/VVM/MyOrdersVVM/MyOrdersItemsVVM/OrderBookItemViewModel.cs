@@ -1,10 +1,5 @@
 ﻿using IronMacbeth.Client.VVM.BookVVM;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
@@ -18,7 +13,6 @@ namespace IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM
         {
             _item = item;
         }
-
 
         public string Price => GetPrice(_item.GetOrderedItem());
 
@@ -60,7 +54,7 @@ namespace IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM
 
 
         public string FormattedPhoneNumber => $"0{PhoneNumber.ToString()}";
-        
+
         public string GetAuthor(object order)
         {
             if (order is Book)

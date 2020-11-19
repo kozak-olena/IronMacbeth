@@ -78,39 +78,37 @@ namespace IronMacbeth.BFF
 
         public bool CheckOrder(int id, DocumentType documentType)
         {
+            bool exists = false;
             using (var dbContext = new DbContext())
             {
+                User currentUser = GetLoggedInUserInternal();
+                List<Order> orders = dbContext.Orders.Where(x => x.UserLogin == currentUser.Login).ToList();
 
                 if (documentType == DocumentType.Book)
                 {
-                    List<Book> intermediate = dbContext.Books.ToList();
-                    return intermediate.Any(x => x.Id == id);
+                    exists = orders.Any(x => x.BookId == id);
+                    return exists;
                 }
                 if (documentType == DocumentType.Article)
                 {
-                    List<Article> intermediate = dbContext.Articles.ToList();
-                    return intermediate.Any(x => x.Id == id);
+                    exists = orders.Any(x => x.ArticleId == id);
                 }
                 if (documentType == DocumentType.Periodical)
                 {
-                    List<Periodical> intermediate = dbContext.Periodicals.ToList();
-                    return intermediate.Any(x => x.Id == id);
+                    exists = orders.Any(x => x.PeriodicalId == id);
                 }
                 if (documentType == DocumentType.Thesis)
                 {
-                    List<Thesis> intermediate = dbContext.Thesises.ToList();
-                    return intermediate.Any(x => x.Id == id);
+                    exists = orders.Any(x => x.ThesesId == id);
 
                 }
                 if (documentType == DocumentType.Newspaper)
                 {
-                    List<Newspaper> intermediate = dbContext.Newspapers.ToList();
-                    return intermediate.Any(x => x.Id == id);
+                    exists = orders.Any(x => x.NewspaperId == id);
                 }
-                else { throw new InvalidOperationException("Can not get bool"); }
-
 
             }
+            return exists;
         }
 
         public List<Contract.Order> GetAllOrders()

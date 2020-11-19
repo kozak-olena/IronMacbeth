@@ -60,8 +60,6 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
                     case MessageBoxResult.Cancel:
                         break;
                 }
-
-
             }
         }
 

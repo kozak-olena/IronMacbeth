@@ -192,6 +192,13 @@ namespace IronMacbeth.Client.ViewModel
         {
             UserService.LogOut();
             OnUserChanged();
+            PageViewModels = new List<IPageViewModel>
+            {
+                new HomeViewModel(),
+                new SearchViewModel()
+             };
+
+            OnPropertyChanged(nameof(PageViewModels));
         }
 
         public void CloseMethod(object parameter)
