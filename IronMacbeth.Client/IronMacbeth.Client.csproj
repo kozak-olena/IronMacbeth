@@ -135,6 +135,10 @@
       <DependentUpon>EditDateTimeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="VVM\IAvailiable.cs" />
+    <Compile Include="VVM\LogInVVM\RegisterVVM\RegisterViewModel.cs" />
+    <Compile Include="VVM\LogInVVM\RegisterVVM\RegisterWindow.xaml.cs">
+      <DependentUpon>RegisterWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VVM\MyOrdersVVM\MyOrdersItemsVVM\OrderBookItemUserControl.xaml.cs">
       <DependentUpon>OrderBookItemUserControl.xaml</DependentUpon>
     </Compile>
@@ -208,6 +212,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VVM\EditDateTimeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VVM\LogInVVM\RegisterVVM\RegisterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

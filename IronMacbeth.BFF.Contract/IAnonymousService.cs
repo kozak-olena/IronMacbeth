@@ -6,7 +6,7 @@ namespace IronMacbeth.BFF.Contract
     public interface IAnonymousService
     {
         [OperationContract]
-        UserRegistrationStatus Register(string login, string password);
+        UserRegistrationStatus Register(string login, string password, string surname, string name, int phoneNumber);
 
         [OperationContract]
         bool Ping();

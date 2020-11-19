@@ -30,7 +30,10 @@ namespace IronMacbeth.BFF
                 StatusOfOrder = orderInfo.StatusOfOrder,
                 DateOfReturn = orderInfo.DateOfReturn,
                 DateOfOrder = orderInfo.DateOfOrer,
-                ReceiveDate = orderInfo.ReceiveDate
+                ReceiveDate = orderInfo.ReceiveDate,
+                UserName = orderInfo.UserName,
+                UserSurname = orderInfo.UserSurname,
+                PhoneNumber = orderInfo.PhoneNumber
             };
 
             using (var dbContext = new DbContext())
@@ -127,6 +130,9 @@ namespace IronMacbeth.BFF
                 {
                     Id = x.Id,
                     UserLogin = x.UserLogin,
+                    UserName = x.UserName,
+                    UserSurname = x.UserSurname,
+                    PhoneNumber = x.PhoneNumber,
                     Book = x.Book,
                     Article = x.Article,
                     Periodical = x.Periodical,
@@ -563,7 +569,7 @@ namespace IronMacbeth.BFF
 
             var internalUser = GetLoggedInUserInternal();
 
-            var contractUser = new Contract.User { Login = internalUser.Login, UserRole = internalUser.UserRole };
+            var contractUser = new Contract.User { Login = internalUser.Login, Name = internalUser.Name, Surname = internalUser.Surname, PhoneNumber = internalUser.PhoneNumber, UserRole = internalUser.UserRole };
 
             return contractUser;
         }

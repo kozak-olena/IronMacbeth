@@ -7,7 +7,6 @@ namespace IronMacbeth.BFF
     {
         internal DbSet<Order> Orders { get; set; }
 
-        public DbSet<ReadingRoomOrder> ReadingRoomOrders { get; set; }
 
         public DbSet<Periodical> Periodicals { get; set; }
 
@@ -26,8 +25,6 @@ namespace IronMacbeth.BFF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ReadingRoomOrder>()
-             .ToTable(nameof(ReadingRoomOrder));
 
             modelBuilder.Entity<Order>()
              .ToTable(nameof(Order));

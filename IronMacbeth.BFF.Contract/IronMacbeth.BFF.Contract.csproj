@@ -53,9 +53,6 @@
     <Compile Include="Order.cs" />
     <Compile Include="Periodical.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReadingRoomOrder.cs" />
-    <Compile Include="RentBook.cs" />
-    <Compile Include="RentPeriodical.cs" />
     <Compile Include="SearchFilledFields.cs" />
     <Compile Include="SpecifiedOrderFields.cs" />
     <Compile Include="Thesis.cs" />

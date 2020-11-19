@@ -14,6 +14,12 @@ namespace IronMacbeth.Client
     {
         public int Id { get; set; }
 
+        public string UserName { get; set; }
+
+        public string UserSurname { get; set; }
+
+        public int PhoneNumber { get; set; }
+
         public string UserLogin { get; set; }
 
         public Book Book { get; set; }

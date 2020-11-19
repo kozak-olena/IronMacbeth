@@ -146,7 +146,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
         public bool CanExecuteMaintenanceMethods(object parameter)
         {
             object selectedItem = SelectedItem?.GetItem();
-            var availibility = Availibility?.GetAvailibility();
+            var availibility = GetAvailibility(selectedItem);
 
             bool isSelectedItemIsThesisOrArticle = selectedItem is Article || selectedItem is Thesis || availibility == null;
             bool IsAvailible = !isSelectedItemIsThesisOrArticle && availibility > 0;
@@ -164,6 +164,30 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             Items.AddRange(documentsSearchResults.Newspapers.Select(x => new NewspaperItemViewModel(x)));
             Items.AddRange(documentsSearchResults.Theses.Select(x => new ThesisItemViewModel(x)));
             OnPropertyChanged(nameof(Items));
+        }
+
+        public int? GetAvailibility(object selectedItem)
+        {
+            if (selectedItem is Book)
+            {
+                Book book = (Book)selectedItem;
+                return book.Availiability;
+            }
+            else if (selectedItem is Periodical)
+            {
+                Periodical periodical = (Periodical)selectedItem;
+                return periodical.Availiability;
+            }
+            else if (selectedItem is Newspaper)
+            {
+                Newspaper newspaper = (Newspaper)selectedItem;
+                return newspaper.Availiability;
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
 

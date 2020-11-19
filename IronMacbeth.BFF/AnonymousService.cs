@@ -6,13 +6,13 @@ namespace IronMacbeth.BFF
 {
     class AnonymousService : IAnonymousService
     {
-        public UserRegistrationStatus Register(string login, string password)
+        public UserRegistrationStatus Register(string login, string password, string surname, string name, int phoneNumber)
         {
             var passwordHash = SecurePasswordHasher.Hash(password);
 
             using (var dbContext = new DbContext())
             {
-                dbContext.Users.Add(new User { Login = login, PasswordHash = passwordHash, UserRole = UserRole.User });
+                dbContext.Users.Add(new User { Login = login, PasswordHash = passwordHash, Name = name, Surname = surname, PhoneNumber = phoneNumber, UserRole = UserRole.User });
 
                 try
                 {
@@ -21,7 +21,7 @@ namespace IronMacbeth.BFF
                 catch (DbUpdateException ex) when (ex.InnerException is SqlException sqlException && sqlException.Number == 2627) // 2627 = unique (primary key) constraint violation
                 {
                     return UserRegistrationStatus.UserNameAlreadyTaken;
-                }            
+                }
             }
 
             return UserRegistrationStatus.Success;

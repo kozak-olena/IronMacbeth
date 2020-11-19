@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IdentityModel.Tokens;
 using System.Security.Claims;
+using System.Windows.Forms;
 using System.Xml;
 
 namespace IronMacbeth.BFF
@@ -27,10 +28,10 @@ namespace IronMacbeth.BFF
             UserNameSecurityToken nameSecurityToken = token as UserNameSecurityToken;
             if (nameSecurityToken == null)
                 throw new ArgumentException("SecurityToken is not a UserNameSecurityToken");
-
-            if (!ValidateUserNameCredentialCore(nameSecurityToken.UserName, nameSecurityToken.Password))
-                throw new SecurityTokenValidationException(nameSecurityToken.UserName);
-
+             
+                if (!ValidateUserNameCredentialCore(nameSecurityToken.UserName, nameSecurityToken.Password))
+                    throw new SecurityTokenValidationException(nameSecurityToken.UserName);
+            
             List<Claim> claimList = 
                 new List<Claim>()
                 {

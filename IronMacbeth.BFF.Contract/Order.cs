@@ -10,6 +10,12 @@ namespace IronMacbeth.BFF.Contract
     {
         public int Id { get; set; }
 
+        public string UserName { get; set; }
+
+        public string UserSurname { get; set; }
+
+        public int PhoneNumber { get; set; }
+
         public string UserLogin { get; set; }
 
         public int? BookId { get; set; }

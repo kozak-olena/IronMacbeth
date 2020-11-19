@@ -11,5 +11,8 @@
     [DateOfReturn] DATETIME2 NULL,
     [ReceiveDate] DATETIME2 NOT NULL,
     [StatusOfOrder] VARCHAR (255) NOT NULL,
+    [UserName] VARCHAR (255) NOT NULL,
+    [UserSurname] VARCHAR (255) NOT NULL,
+    [PhoneNumber] INT NOT NULL,
     [TypeOfOrder] VARCHAR (255) NOT NULL
 )
