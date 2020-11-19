@@ -94,6 +94,7 @@
     <Compile Include="Model\Newspaper.cs" />
     <Compile Include="Model\Periodical.cs" />
     <Compile Include="Model\SpecifiedOrderFields.cs" />
+    <Compile Include="Model\UpdateAvailibility.cs" />
     <Compile Include="ServerAdapter.cs" />
     <Compile Include="Model\Thesis.cs" />
     <Compile Include="Model\User.cs" />

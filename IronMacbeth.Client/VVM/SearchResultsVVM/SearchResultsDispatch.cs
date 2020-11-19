@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IronMacbeth.Client.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,10 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
     public class SearchResultsDispatch
     {
         public Order order;
+
         public SearchResultsDispatch(object selectedItem, bool IsTypeIssueing)
         {
+
 
             order = new Order();
             if (selectedItem is Book)
@@ -21,6 +24,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
 
                 if (IsTypeIssueing && order.Book.Location.ToLower().Contains("issueing")) { CreateOrder(order); }
                 else { CreateReadingRoomOrder(order); }
+                UpdateAvailibility.UpdateBook(book);
                 MessageBox.Show($"Book \"{book.Name}\" added to your orders", "Book added", MessageBoxButton.OK,
                 MessageBoxImage.Information);
             }
@@ -38,6 +42,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
                 order.Periodical = periodical;
                 if (IsTypeIssueing && order.Periodical.Location.ToLower().Contains("issueing")) { CreateOrder(order); }
                 else { CreateReadingRoomOrder(order); }
+                UpdateAvailibility.UpdatePeriodical(periodical);
                 MessageBox.Show($"Periodical \"{periodical.Name}\" added to your orders", "Periodical added", MessageBoxButton.OK,
                  MessageBoxImage.Information);
             }
@@ -47,6 +52,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
                 order.Newspaper = newspaper;
                 if (IsTypeIssueing && order.Newspaper.Location.ToLower().Contains("issueing")) { CreateOrder(order); }
                 else { CreateReadingRoomOrder(order); }
+                UpdateAvailibility.UpdateNewspaper(newspaper);
                 MessageBox.Show($"Newspaper \"{newspaper.Name}\" added to your orders", "Newspaper added", MessageBoxButton.OK,
                MessageBoxImage.Information);
             }
@@ -60,6 +66,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             }
 
         }
+
         public void CreateReadingRoomOrder(Order readingRoomOrder)
         {
             var editDateTimeViewModel = new EditDateTimeViewModel();

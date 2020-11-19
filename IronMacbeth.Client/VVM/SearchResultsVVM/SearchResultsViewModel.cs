@@ -42,6 +42,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             if (!isAlreadyTheSameOrderExist)
             {
                 SearchResultsDispatch = new SearchResultsDispatch(SelectedItem.GetItem(), IsTypeIssueing);
+                ShowCollection();
             }
             else
             {
@@ -51,6 +52,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
                 {
                     case MessageBoxResult.Yes:
                         SearchResultsDispatch = new SearchResultsDispatch(SelectedItem.GetItem(), IsTypeIssueing);
+                        ShowCollection();
                         break;
                     case MessageBoxResult.No:
                         break;
@@ -89,13 +91,11 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
             {
                 Newspaper newspaper = (Newspaper)selectedItem;
                 return ServerAdapter.Instance.CheckOrder(newspaper.Id, DocumentType.Newspaper);
-
             }
             if (selectedItem is Thesis)
             {
                 Thesis thesis = (Thesis)selectedItem;
                 return ServerAdapter.Instance.CheckOrder(thesis.Id, DocumentType.Thesis);
-
             }
             else
             {
@@ -127,10 +127,7 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
                     case MessageBoxResult.Cancel:
                         break;
                 }
-
-
             }
-
         }
 
 
