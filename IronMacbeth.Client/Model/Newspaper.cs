@@ -1,14 +1,8 @@
 ﻿using IronMacbeth.Client.VVM;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client
 {
-    public class Newspaper : Base, IAvailiable
+    public class Newspaper : Document, IAvailiable
     {
         public int Id { get; set; }
 
@@ -26,13 +20,9 @@ namespace IronMacbeth.Client
 
         public string TypeOfDocument { get; set; }
 
-        public byte[] ElectronicVersion { get; set; }
-
-        public string ElectronicVersionFileName { get; set; }
         public string RentPrice { get; set; }
 
         public string NameOfBook => Name;
-
         public int GetAvailibility()
         {
             return Availiability;

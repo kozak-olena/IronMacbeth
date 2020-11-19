@@ -1,4 +1,6 @@
-﻿namespace IronMacbeth.BFF.Contract
+﻿using System;
+
+namespace IronMacbeth.BFF.Contract
 {
     public class Article
     {
@@ -17,7 +19,7 @@
 
         public string TypeOfDocument { get; set; }
 
-        public string ElectronicVersionFileName { get; set; }
+        public Guid? ElectronicVersionFileId { get; set; }
 
     }
 }

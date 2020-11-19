@@ -4,10 +4,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        
         mc:Ignorable="d"
-          Height="617" Width="446"
-        >
+        Height="617" Width="446">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -16,13 +14,12 @@
         <Border Visibility="{Binding FilledFieldsInfo.ImageVisibility}"
             Grid.Row="0"
             Margin="10,10,0,0"
-            Height="136"
+            Width="125"
+            Height="125"
             BorderBrush="#FF2C72AF"
-            BorderThickness="1" HorizontalAlignment="Left" Width="124" VerticalAlignment="Top">
+            BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Image  
-                Source="{Binding FilledFieldsInfo.BitmapImage}"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
+                Source="{Binding Image}"
                 Height="100"
                 Width="100"/>
         </Border>
@@ -185,7 +182,7 @@
                     Text="Electronic version: "/>
                     <TextBox 
                     IsEnabled="False"
-                    Text="{Binding FilledFieldsInfo.PdfPath,UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding PdfPath}"
                     Height="24" 
                     Width="120"/>
                     <Button 

@@ -7,7 +7,7 @@
     [Pages] INT NOT NULL,
     [TypeOfDocument] VARCHAR (255) NOT NULL,
     [MainDocumentId] VARCHAR (255) NULL,
-    [ElectronicVersionFileName]VARCHAR (255) NULL,
-    [Rating]VARCHAR (255) NULL,
-    [Comments]VARCHAR (255) NULL,
+    [ElectronicVersionFileId] UNIQUEIDENTIFIER NULL,
+    [Rating] VARCHAR (255) NULL,
+    [Comments] VARCHAR (255) NULL
   )

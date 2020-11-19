@@ -1,29 +1,34 @@
 ﻿using IronMacbeth.Client.VVM.EditBookVVM;
+using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client.VVM.BookVVM
 {
     public  class DocumentInfoViewModel : IPageViewModel
     {
+        private readonly object _objectForEdit;
+
+        private readonly Dispatch _dispatch;
+
         public string PageViewName => "BookInfo";
-        public void Update() { }
 
         public FilledFieldsInfo FilledFieldsInfo { get; set; }
 
-        private object _objectForEdit;
+        public BitmapImage Image => FilledFieldsInfo.Image?.BitmapImage;
 
-        private Dispatch _dispatch;
         public DocumentInfoViewModel(object item)
         {
             _dispatch = new Dispatch(new IHandler[] { new BookHandler(), new ArticleHandler(), new PeriodicalHandler(), new ThesisHandler(), new NewspaperHandler() });
             _objectForEdit = item;
             if (_objectForEdit != null)
             {
-                FilledFieldsInfo = _dispatch.UnwrapObjectForEdit(item);
+                FilledFieldsInfo = _dispatch.UnwrapObjectForEdit(_objectForEdit);
             }
             else
             {
                 FilledFieldsInfo = new FilledFieldsInfo();
             }
         }
+
+        public void Update() { }
     }
 }

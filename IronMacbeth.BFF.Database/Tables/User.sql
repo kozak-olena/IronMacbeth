@@ -5,7 +5,5 @@
     [Surname] VARCHAR(255)  NULL,
     [PasswordHash] VARCHAR(48) NOT NULL,
     [RoleId] INT NOT NULL FOREIGN KEY REFERENCES [dbo].[UserRole]([Id]),
-    [PhoneNumber] INT NULL,
-    
-
+    [PhoneNumber] INT NULL
 )

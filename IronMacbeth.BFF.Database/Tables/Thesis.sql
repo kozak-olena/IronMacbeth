@@ -8,7 +8,7 @@
     [Year] INT NULL,
     [Pages] INT NOT NULL,
     [TypeOfDocument] VARCHAR (255) NOT NULL,
-       [ElectronicVersionFileName]VARCHAR (255) NULL,
-    [Rating]VARCHAR (255) NULL,
-    [Comments]VARCHAR (255) NULL,
+    [ElectronicVersionFileId] UNIQUEIDENTIFIER NULL,
+    [Rating] VARCHAR (255) NULL,
+    [Comments] VARCHAR (255) NULL
 )

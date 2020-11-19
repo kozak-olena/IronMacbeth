@@ -1,14 +1,11 @@
-﻿using System;
+﻿using IronMacbeth.BFF.Contract;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Windows.Media.Imaging;
-using IronMacbeth.BFF.Contract;
-using Internal = IronMacbeth.Client;
 using Contract = IronMacbeth.BFF.Contract;
+using Image = IronMacbeth.Client.Model.Image;
+using Internal = IronMacbeth.Client;
 
 namespace IronMacbeth.Client
 {
@@ -81,6 +78,7 @@ namespace IronMacbeth.Client
             var isAlreadyTheSameOrderInDb = _proxy.CheckOrder(id, documentType);
             return isAlreadyTheSameOrderInDb;
         }
+
         private Internal.Order MapContractToInternalOrder(Contract.Order order)
         {
             return new Internal.Order
@@ -169,28 +167,46 @@ namespace IronMacbeth.Client
             };
         }
 
-        private Internal.DocumentsSearchResults MapContractToInternalSearchCriteria(Contract.DocumentsSearchResults documentsSearchResults)
+        private DocumentsSearchResults MapContractToInternalSearchCriteria(Contract.DocumentsSearchResults documentsSearchResults)
         {
-            var documents = new Internal.DocumentsSearchResults();
+            var documents = new DocumentsSearchResults();
 
             documents.Books = documentsSearchResults.Books?.Select(MapContractToInternalBook).ToList() ?? new List<Book>();
+
             foreach (var book in documents.Books)
             {
-                if (book.ImageName != null) { book.BitmapImage = GetImage(book.ImageName); }
-
-
+                PopulateIDisplayable(book);
+                PopulateElectronicVersion(book);
             }
 
             documents.Articles = documentsSearchResults.Articles?.Select(MapContractToInternalArticle).ToList() ?? new List<Article>();
+
+            foreach (var articles in documents.Articles)
+            {
+                PopulateElectronicVersion(articles);
+            }
+
             documents.Periodicals = documentsSearchResults.Periodicals?.Select(MapContractToInternalPeriodical).ToList() ?? new List<Periodical>();
+
             foreach (var periodical in documents.Periodicals)
             {
-                if (periodical.ImageName != null) { periodical.BitmapImage = GetImage(periodical.ImageName); }
-                if (periodical.DescriptionName != null)
-                { periodical.Description = GetStringFileContent(periodical.DescriptionName); }
+                PopulateIDisplayable(periodical);
+                PopulateElectronicVersion(periodical);
             }
+
             documents.Newspapers = documentsSearchResults.Newspapers?.Select(MapContractToInternalNewspaper).ToList() ?? new List<Newspaper>();
+
+            foreach (var newspaper in documents.Newspapers)
+            {
+                PopulateElectronicVersion(newspaper);
+            }
+
             documents.Theses = documentsSearchResults.Theses?.Select(MapContractToInternalTheses).ToList() ?? new List<Thesis>();
+
+            foreach (var theses in documents.Theses)
+            {
+                PopulateElectronicVersion(theses);
+            }
 
             return documents;
         }
@@ -199,16 +215,10 @@ namespace IronMacbeth.Client
 
         #region Periodical
 
-        public void CreatePeriodical(Internal.Periodical periodical)
+        public void CreatePeriodical(Periodical periodical)
         {
             CreateIDisplayable(periodical);
-
-            if (periodical.ElectronicVersion != null)
-            {
-                string fileName;
-                AddFile(periodical.ElectronicVersion, out fileName);
-                periodical.ElectronicVersionFileName = fileName;
-            }
+            SaveElectronicVersion(periodical);
 
             var contractPeriodical = MapInternalToContractPeriodical(periodical);
 
@@ -223,19 +233,17 @@ namespace IronMacbeth.Client
 
             foreach (var periodical in internalPeriodicals)
             {
-                if (periodical.ImageName != null) { periodical.BitmapImage = GetImage(periodical.ImageName); }
-                if (periodical.DescriptionName != null)
-                { periodical.Description = GetStringFileContent(periodical.DescriptionName); }
-
+                PopulateIDisplayable(periodical);
+                PopulateElectronicVersion(periodical);
             }
 
             return internalPeriodicals;
         }
 
-        public void UpdatePeriodical(Internal.Periodical periodical)
+        public void UpdatePeriodical(Periodical periodical)
         {
             UpdateIDisplayable(periodical);
-
+            UpdateElectronicVersion(periodical);
 
             var contractPeriodical = MapInternalToContractPeriodical(periodical);
 
@@ -247,7 +255,7 @@ namespace IronMacbeth.Client
             _proxy.DeletePeriodical(id);
         }
 
-        private Contract.Periodical MapInternalToContractPeriodical(Internal.Periodical periodical)
+        private Contract.Periodical MapInternalToContractPeriodical(Periodical periodical)
         {
             return new Contract.Periodical
             {
@@ -263,9 +271,8 @@ namespace IronMacbeth.Client
                 IssueNumber = periodical.IssueNumber,
                 Responsible = periodical.Responsible,
                 RentPrice = periodical.RentPrice,
-                ElectronicVersionFileName = periodical.ElectronicVersionFileName,
-                ImageName = periodical.ImageName,
-
+                ElectronicVersionFileId = periodical.ElectronicVersionFileId,
+                ImageFileId = periodical.ImageFileId,
             };
         }
 
@@ -282,13 +289,12 @@ namespace IronMacbeth.Client
                 PublishingHouse = periodical.PublishingHouse,
                 Location = periodical.Location,
                 TypeOfDocument = periodical.TypeOfDocument,
-                ElectronicVersionFileName = periodical.ElectronicVersionFileName,
+                ElectronicVersionFileId = periodical.ElectronicVersionFileId,
                 IssueNumber = periodical.IssueNumber,
                 Responsible = periodical.Responsible,
                 RentPrice = periodical.RentPrice,
 
-                ImageName = periodical.ImageName,
-
+                ImageFileId = periodical.ImageFileId
             };
         }
 
@@ -296,14 +302,10 @@ namespace IronMacbeth.Client
 
         #region Newspaper
 
-        public void CreateNewspaper(Internal.Newspaper newspaper)
+        public void CreateNewspaper(Newspaper newspaper)
         {
-            string fileName;
-            if (newspaper.ElectronicVersion != null)
-            {
-                AddFile(newspaper.ElectronicVersion, out fileName);
-                newspaper.ElectronicVersionFileName = fileName;
-            }
+            SaveElectronicVersion(newspaper);
+
             var contractNewspaper = MapInternalToContractNewspaper(newspaper);
 
             _proxy.CreateNewspaper(contractNewspaper);
@@ -315,11 +317,18 @@ namespace IronMacbeth.Client
 
             var internalNewspapers = newspapers.Select(MapContractToInternalNewspaper).ToList();
 
+            foreach (var newspaper in internalNewspapers)
+            {
+                PopulateElectronicVersion(newspaper);
+            }
+
             return internalNewspapers;
         }
 
         public void UpdateNewspaper(Internal.Newspaper newspaper)
         {
+            UpdateElectronicVersion(newspaper);
+
             var contractNewspaper = MapInternalToContractNewspaper(newspaper);
 
             _proxy.UpdateNewspaper(contractNewspaper);
@@ -343,7 +352,7 @@ namespace IronMacbeth.Client
                 IssueNumber = newspaper.IssueNumber,
                 RentPrice = newspaper.RentPrice,
                 Location = newspaper.Location,
-                ElectronicVersionFileName = newspaper.ElectronicVersionFileName,
+                ElectronicVersionFileId = newspaper.ElectronicVersionFileId,
                  
 
             };
@@ -359,7 +368,7 @@ namespace IronMacbeth.Client
                 City = newspaper.City,
                 Availiability = newspaper.Availiability,
                 TypeOfDocument = newspaper.TypeOfDocument,
-                ElectronicVersionFileName = newspaper.ElectronicVersionFileName,
+                ElectronicVersionFileId = newspaper.ElectronicVersionFileId,
                 IssueNumber = newspaper.IssueNumber,
                 Location = newspaper.Location,
                 RentPrice = newspaper.RentPrice,
@@ -373,12 +382,8 @@ namespace IronMacbeth.Client
 
         public void CreateThesis(Internal.Thesis thesis)
         {
-            string fileName;
-            if (thesis.ElectronicVersion != null)
-            {
-                AddFile(thesis.ElectronicVersion, out fileName);
-                thesis.ElectronicVersionFileName = fileName;
-            }
+            SaveElectronicVersion(thesis);
+
             var contractThesis = MapInternalToContractThesis(thesis);
 
             _proxy.CreateThesis(contractThesis);
@@ -390,11 +395,18 @@ namespace IronMacbeth.Client
 
             var internalThesises = thesises.Select(MapContractToInternalTheses).ToList();
 
+            foreach (var thesis in internalThesises)
+            {
+                PopulateElectronicVersion(thesis);
+            }
+
             return internalThesises;
         }
 
         public void UpdateThesis(Internal.Thesis thesis)
         {
+            UpdateElectronicVersion(thesis);
+
             var contractThesis = MapInternalToContractThesis(thesis);
 
             _proxy.UpdateThesis(contractThesis);
@@ -417,7 +429,7 @@ namespace IronMacbeth.Client
                 City = thesis.City,
                 TypeOfDocument = thesis.TypeOfDocument,
                 Responsible = thesis.Responsible,
-                ElectronicVersionFileName = thesis.ElectronicVersionFileName,
+                ElectronicVersionFileId = thesis.ElectronicVersionFileId,
                
 
             };
@@ -435,7 +447,7 @@ namespace IronMacbeth.Client
                 Pages = thesis.Pages,
                 TypeOfDocument = thesis.TypeOfDocument,
                 Responsible = thesis.Responsible,
-                ElectronicVersionFileName = thesis.ElectronicVersionFileName,
+                ElectronicVersionFileId = thesis.ElectronicVersionFileId,
                
 
             };
@@ -447,13 +459,7 @@ namespace IronMacbeth.Client
 
         public void CreateArticle(Internal.Article article)
         {
-
-            string fileName;
-            if (article.ElectronicVersion != null)
-            {
-                AddFile(article.ElectronicVersion, out fileName);
-                article.ElectronicVersionFileName = fileName;
-            }
+            SaveElectronicVersion(article);
 
             var contractArticle = MapInternalToContractArticle(article);
 
@@ -466,11 +472,18 @@ namespace IronMacbeth.Client
 
             var internalArticles = articles.Select(MapContractToInternalArticle).ToList();
 
+            foreach (var article in internalArticles)
+            {
+                PopulateElectronicVersion(article);
+            }
+
             return internalArticles;
         }
 
-        public void UpdateArticle(Internal.Article article)
+        public void UpdateArticle(Article article)
         {
+            UpdateElectronicVersion(article);
+
             var contractArticle = MapInternalToContractArticle(article);
 
             _proxy.UpdateArticle(contractArticle);
@@ -492,7 +505,7 @@ namespace IronMacbeth.Client
                 Pages = article.Pages,
                 MainDocumentId = article.MainDocumentId,
                 TypeOfDocument = article.TypeOfDocument,
-                ElectronicVersionFileName = article.ElectronicVersionFileName,
+                ElectronicVersionFileId = article.ElectronicVersionFileId,
                  
             };
         }
@@ -508,7 +521,7 @@ namespace IronMacbeth.Client
                 Pages = article.Pages,
                 MainDocumentId = article.MainDocumentId,
                 TypeOfDocument = article.TypeOfDocument,
-                ElectronicVersionFileName = article.ElectronicVersionFileName,
+                ElectronicVersionFileId = article.ElectronicVersionFileId,
                
             };
         }
@@ -520,20 +533,14 @@ namespace IronMacbeth.Client
         public void CreateBook(Internal.Book book)
         {
             CreateIDisplayable(book);
-
-            string fileName;
-            if (book.ElectronicVersion != null)
-            {
-                AddFile(book.ElectronicVersion, out fileName);
-                book.ElectronicVersionFileName = fileName;
-            }
+            SaveElectronicVersion(book);
 
             var contractBook = MapInternalToContractBook(book);
 
             _proxy.CreateBook(contractBook);
         }
 
-        public List<Internal.Book> GetAllBooks()
+        public List<Book> GetAllBooks()
         {
             var books = _proxy.GetAllBooks();
 
@@ -541,9 +548,8 @@ namespace IronMacbeth.Client
 
             foreach (var book in internalBooks)
             {
-                if (book.ImageName != null) { book.BitmapImage = GetImage(book.ImageName); }
-
-
+                PopulateIDisplayable(book);
+                PopulateElectronicVersion(book);
             }
 
             return internalBooks;
@@ -552,6 +558,7 @@ namespace IronMacbeth.Client
         public void UpdateBook(Internal.Book book)
         {
             UpdateIDisplayable(book);
+            UpdateElectronicVersion(book);
 
             var contractBook = MapInternalToContractBook(book);
 
@@ -578,9 +585,9 @@ namespace IronMacbeth.Client
                 Location = book.Location,
                 TypeOfDocument = book.TypeOfDocument,
                 RentPrice = book.RentPrice,
-                ElectronicVersionFileName = book.ElectronicVersionFileName,
+                ElectronicVersionFileId = book.ElectronicVersionFileId,
                  
-                ImageName = book.ImageName
+                ImageFileId = book.ImageFileId
             };
         }
 
@@ -599,9 +606,9 @@ namespace IronMacbeth.Client
                 Location = book.Location,
                 TypeOfDocument = book.TypeOfDocument,
                 RentPrice = book.RentPrice,
-                ElectronicVersionFileName = book.ElectronicVersionFileName,
+                ElectronicVersionFileId = book.ElectronicVersionFileId,
                  
-                ImageName = book.ImageName
+                ImageFileId = book.ImageFileId
             };
         }
 
@@ -621,9 +628,9 @@ namespace IronMacbeth.Client
             return null;
         }
 
-        private Internal.User MapContractToInternalUser(Contract.User user)
+        private User MapContractToInternalUser(Contract.User user)
         {
-            return new Internal.User
+            return new User
             {
                 Login = user.Login,
                 UserRole = user.UserRole
@@ -632,130 +639,70 @@ namespace IronMacbeth.Client
 
         #endregion
 
-        public void AddFile(byte[] file, out string fileName)
+        private void PopulateIDisplayable(IDisplayable displayable)
         {
-            using (var memoryStream = new MemoryStream(file))
+            if (displayable.ImageFileId != null)
             {
-                fileName = _proxy.AddFile(memoryStream);
+                var imageStream = new MemoryStream();
+
+                using (Stream serverStream = _proxy.GetFile(displayable.ImageFileId.Value))
+                {
+                    serverStream.CopyTo(imageStream);
+                }
+
+                imageStream.Seek(0, SeekOrigin.Begin);
+
+                displayable.Image = new Image(imageStream);
+            }
+        }
+
+        private void PopulateElectronicVersion(Document document)
+        {
+            if (document.ElectronicVersionFileId != null)
+            {
+                var documentElectronicVersion = new MemoryStream();
+
+                using (Stream serverStream = _proxy.GetFile(document.ElectronicVersionFileId.Value))
+                {
+                    serverStream.CopyTo(documentElectronicVersion);
+                }
+
+                documentElectronicVersion.Seek(0, SeekOrigin.Begin);
+
+                document.ElectronicVersion = documentElectronicVersion;
             }
         }
 
         private void CreateIDisplayable(IDisplayable displayable)
         {
-            if (displayable.BitmapImage != null)
+            if (displayable.Image != null)
             {
-                string fileName;
+                displayable.ImageFileId = _proxy.AddFile(displayable.Image.ImageData);
+            }
+        }
 
-                Bitmap bitmap = BitmapImageToBitmap(displayable.BitmapImage);
-
-                byte[] image = Serialize(bitmap);
-
-                AddFile(image, out fileName);
-
-                displayable.ImageName = fileName;
+        private void SaveElectronicVersion(Document document)
+        {
+            if (document.ElectronicVersion != null)
+            {
+                document.ElectronicVersionFileId = _proxy.AddFile(document.ElectronicVersion);
             }
         }
 
         private void UpdateIDisplayable(IDisplayable displayable)
         {
-            if (string.IsNullOrWhiteSpace(displayable.ImageName) && displayable.BitmapImage != null)
+            if (displayable.ImageFileId == null && displayable.Image != null)
             {
-                Bitmap bitmap = BitmapImageToBitmap(displayable.BitmapImage);
-
-                byte[] image = Serialize(bitmap);
-
-                AddFile(image, out var fileName);
-
-                displayable.ImageName = fileName;
+                displayable.ImageFileId = _proxy.AddFile(displayable.Image.ImageData);
             }
         }
 
-        private static byte[] Serialize(object item)
+        private void UpdateElectronicVersion(Document document)
         {
-            byte[] bytes;
-
-            using (MemoryStream stream = new MemoryStream())
+            if (document.ElectronicVersionFileId == null && document.ElectronicVersion != null)
             {
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                binaryFormatter.Serialize(stream, item);
-                bytes = stream.ToArray();
+                document.ElectronicVersionFileId = _proxy.AddFile(document.ElectronicVersion);
             }
-
-            return bytes;
-        }
-
-        private string GetStringFileContent(string fileName)
-        {
-            byte[] bytes;
-
-            using (MemoryStream stream = new MemoryStream())
-            using (Stream serverStream = _proxy.GetFile(fileName))
-            {
-                serverStream.CopyTo(stream);
-                bytes = stream.ToArray();
-            }
-            return Deserialize(bytes) as string;
-        }
-
-        public BitmapImage GetImage(string fileName)
-        {
-            byte[] bytes;
-
-            using (MemoryStream stream = new MemoryStream())
-            using (Stream serverStream = _proxy.GetFile(fileName))
-            {
-                serverStream.CopyTo(stream);
-                bytes = stream.ToArray();
-            }
-
-            Bitmap bitmap = Deserialize(bytes) as Bitmap;
-
-            return BitmapToBitmapImage(bitmap);
-        }
-
-        public static object Deserialize(byte[] bytes)
-        {
-            object item;
-
-            using (MemoryStream stream = new MemoryStream(bytes))
-            {
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-
-                item = binaryFormatter.Deserialize(stream);
-            }
-            return item;
-        }
-
-        private static Bitmap BitmapImageToBitmap(BitmapImage bitmapImage)
-        {
-            Bitmap bitmap;
-            using (MemoryStream stream = new MemoryStream())
-            {
-                BitmapEncoder encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
-                encoder.Save(stream);
-                bitmap = new Bitmap(stream);
-            }
-            return bitmap;
-        }
-
-        public static BitmapImage BitmapToBitmapImage(Bitmap bitmap)
-        {
-            BitmapImage bitmapImage;
-
-            using (MemoryStream memory = new MemoryStream())
-            {
-                bitmap.Save(memory, ImageFormat.Png);
-                memory.Position = 0;
-
-                bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = memory;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
-            }
-
-            return bitmapImage;
         }
     }
 }

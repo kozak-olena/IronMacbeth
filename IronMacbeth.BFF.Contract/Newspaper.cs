@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace IronMacbeth.BFF.Contract
 {
     public class Newspaper
@@ -17,14 +18,12 @@ namespace IronMacbeth.BFF.Contract
 
         public string TypeOfDocument { get; set; }
 
-        public string ElectronicVersionFileName { get; set; }
+        public Guid? ElectronicVersionFileId { get; set; }
 
         public int IssueNumber { get; set; }
 
         public string RentPrice { get; set; }
 
-        public string NameOfBook => Name;
-
-       
+        public string NameOfBook => Name;       
     }
 }

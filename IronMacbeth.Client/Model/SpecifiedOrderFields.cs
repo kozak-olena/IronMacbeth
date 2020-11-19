@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace IronMacbeth.Client 
+namespace IronMacbeth.Client
 {
-  public  class SpecifiedOrderFields
+    public class SpecifiedOrderFields
     {
         public string Status { get; set; }
 

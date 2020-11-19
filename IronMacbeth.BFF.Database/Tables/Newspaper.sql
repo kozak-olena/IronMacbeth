@@ -8,8 +8,8 @@
     [Availiability] INT NULL,
     [IssueNumber] INT NULL,
     [Location] VARCHAR (255) NULL,
-    [ElectronicVersionFileName]VARCHAR (255) NULL,
-    [RentPrice]VARCHAR (255) NOT NULL,
-    [Rating]VARCHAR (255) NULL,
-    [Comments]VARCHAR (255) NULL,
+    [ElectronicVersionFileId] UNIQUEIDENTIFIER NULL,
+    [RentPrice] VARCHAR (255) NOT NULL,
+    [Rating] VARCHAR (255) NULL,
+    [Comments] VARCHAR (255) NULL
 )

@@ -116,9 +116,9 @@ namespace IronMacbeth.BFF.Contract
         #endregion
 
         [OperationContract]
-        string AddFile(Stream fileStream);
+        Guid AddFile(Stream fileStream);
 
         [OperationContract]
-        Stream GetFile(string fileName);
+        Stream GetFile(Guid fileId);
     }
 }

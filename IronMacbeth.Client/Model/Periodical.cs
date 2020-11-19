@@ -1,10 +1,10 @@
-﻿using IronMacbeth.Client.VVM;
+﻿using IronMacbeth.Client.Model;
+using IronMacbeth.Client.VVM;
 using System;
-using System.Windows.Media.Imaging;
 
 namespace IronMacbeth.Client
 {
-    public class Periodical : Base, IDisplayable, IAvailiable
+    public class Periodical : Document, IDisplayable, IAvailiable
     {
         public int Id { get; set; }
 
@@ -28,36 +28,14 @@ namespace IronMacbeth.Client
 
         public string RentPrice { get; set; }
 
-        public byte[] ElectronicVersion { get; set; }
-
-        public string ElectronicVersionFileName { get; set; }
-
         public string TypeOfDocument { get; set; }
 
 
-        public string ImageName { get; set; }
-
-        public string DescriptionName { get; set; }
-
         public string NameOfBook => Name;
 
+        public Guid? ImageFileId { get; set; }
 
-        public BitmapImage BitmapImage
-        {
-            get { return _bitmapImage; }
-            set { _bitmapImage = value; }
-        }
-        [NonSerialized]
-        private BitmapImage _bitmapImage;
-        public string Description
-        {
-            get { return _description; }
-            set { _description = value; }
-        }
-
-        [NonSerialized]
-        private string _description;
-
+        public Image Image { get; set; }
         public int GetAvailibility()
         {
             return Availiability;

@@ -1,10 +1,11 @@
-﻿using System.Windows.Media.Imaging;
+﻿using IronMacbeth.Client.Model;
+using System;
 
 namespace IronMacbeth.Client
 {
     public interface IDisplayable
     {
-        string ImageName { get; set; }
-        BitmapImage BitmapImage { get; set; }
+        Guid? ImageFileId { get; set; }
+        Image Image { get; set; }
     }
 }

@@ -1,13 +1,10 @@
 ﻿using IronMacbeth.Client.Annotations;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
+using System.IO;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media.Imaging;
+using Image = IronMacbeth.Client.Model.Image;
 
 namespace IronMacbeth.Client.VVM.EditBookVVM
 {
@@ -32,7 +29,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
 
         public int Availiability { get; set; }
 
-        public string ElectronicVersionFileName { get; set; }
+        public Guid? ElectronicVersionFileId { get; set; }
 
         public string Location { get; set; }
 
@@ -40,13 +37,12 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
 
         public string RentPrice { get; set; }
 
-        public static byte[] ElectronicVersion { get; set; }                    //TODO: static
+        public MemoryStream ElectronicVersion { get; set; }
 
 
         public string ImagePath { get; set; }
-        public string ImageName { get; set; }
-        public string DescriptionName { get; set; }
-        public BitmapImage BitmapImage { get; set; }
+        public Guid? ImageFileId { get; set; }
+        public Image Image { get; set; }
 
         private string _typeOfDocument;
         public string TypeOfDocument

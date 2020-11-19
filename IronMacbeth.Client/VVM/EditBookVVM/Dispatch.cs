@@ -58,7 +58,6 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
 
         public void DispatchUpdate(FilledFieldsInfo filledFieldsInfo, object objectForEdit)
         {
-
             var handler = Handlers.SingleOrDefault(x => x.CandHandle(filledFieldsInfo));
             if (handler != null)
             {
@@ -68,10 +67,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             {
                 throw new InvalidOperationException("Can not handle operation");
             }
-
         }
-
-
     }
 
     interface IHandler
@@ -136,7 +132,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
         {
             Book book = new Book
             {
-                BitmapImage = filledFieldsInfo.BitmapImage,
+                Image = filledFieldsInfo.Image,
                 Name = filledFieldsInfo.Name,
                 Author = filledFieldsInfo.Author,
                 PublishingHouse = filledFieldsInfo.PublishingHouse,
@@ -147,7 +143,8 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
                 Location = filledFieldsInfo.Location,
                 TypeOfDocument = filledFieldsInfo.TypeOfDocument,
                 RentPrice = filledFieldsInfo.RentPrice,
-                ElectronicVersionFileName = filledFieldsInfo.ElectronicVersionFileName,
+                ElectronicVersionFileId = filledFieldsInfo.ElectronicVersionFileId,
+                ElectronicVersion = filledFieldsInfo.ElectronicVersion,
                 
             };
             ServerAdapter.Instance.CreateBook(book);
@@ -166,15 +163,11 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             book.Availiability = filledFieldsInfo.Availiability;
             book.Location = filledFieldsInfo.Location;
             book.TypeOfDocument = filledFieldsInfo.TypeOfDocument;
-            book.ElectronicVersionFileName = filledFieldsInfo.ElectronicVersionFileName;
+            book.ElectronicVersionFileId = filledFieldsInfo.ElectronicVersionFileId;
+            book.ElectronicVersion = filledFieldsInfo.ElectronicVersion;
              
-
-            if (!book.BitmapImage.Equals(filledFieldsInfo.BitmapImage))
-            {
-                book.BitmapImage = filledFieldsInfo.BitmapImage;
-                book.ImageName = null;
-            }
-            
+            book.Image = filledFieldsInfo.Image;
+            book.ImageFileId = filledFieldsInfo.ImageFileId;
 
             ServerAdapter.Instance.UpdateBook(book);
         }
@@ -182,9 +175,13 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
         public FilledFieldsInfo Unwrap(object objectForUnwrapping)
         {
             if (!CanHandleUnwrapping(objectForUnwrapping)) { throw new InvalidOperationException(); }
+
             FilledFieldsInfo filledFieldsInfo = new FilledFieldsInfo();
+
             Book book = (Book)objectForUnwrapping;
-            filledFieldsInfo.BitmapImage = book.BitmapImage;
+
+            filledFieldsInfo.Image = book.Image;
+            filledFieldsInfo.ImageFileId = book.ImageFileId;
             filledFieldsInfo.Name = book.Name;
             filledFieldsInfo.Author = book.Author;
             filledFieldsInfo.PublishingHouse = book.PublishingHouse;                      //TODO:Handle exception
@@ -195,11 +192,14 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             filledFieldsInfo.Availiability = book.Availiability;
             filledFieldsInfo.Location = book.Location;
             filledFieldsInfo.TypeOfDocument = book.TypeOfDocument;
-            filledFieldsInfo.ElectronicVersionFileName = book.ElectronicVersionFileName;
+            filledFieldsInfo.ElectronicVersionFileId = book.ElectronicVersionFileId;
+            filledFieldsInfo.ElectronicVersion = book.ElectronicVersion;
             
+
             return filledFieldsInfo;
         }
     }
+
     #endregion
 
     #region ArticleHandler
@@ -259,7 +259,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
                 Pages = filledFieldsInfo.Pages,
                 MainDocumentId = filledFieldsInfo.MainDocumentId,
                 TypeOfDocument = filledFieldsInfo.TypeOfDocument,
-                ElectronicVersionFileName = filledFieldsInfo.ElectronicVersionFileName,
+                ElectronicVersionFileId = filledFieldsInfo.ElectronicVersionFileId,
                  
             };
             ServerAdapter.Instance.CreateArticle(article);
@@ -276,7 +276,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             article.Pages = filledFieldsInfo.Pages;
             article.MainDocumentId = filledFieldsInfo.MainDocumentId;
             article.TypeOfDocument = filledFieldsInfo.TypeOfDocument;
-            article.ElectronicVersionFileName = filledFieldsInfo.ElectronicVersionFileName;
+            article.ElectronicVersionFileId = filledFieldsInfo.ElectronicVersionFileId;
             
 
             ServerAdapter.Instance.UpdateArticle(article);
@@ -295,7 +295,8 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             filledFieldsInfo.Pages = article.Pages;
             filledFieldsInfo.MainDocumentId = article.MainDocumentId;
             filledFieldsInfo.TypeOfDocument = article.TypeOfDocument;
-            filledFieldsInfo.ElectronicVersionFileName = article.ElectronicVersionFileName;
+            filledFieldsInfo.ElectronicVersionFileId = article.ElectronicVersionFileId;
+            filledFieldsInfo.ElectronicVersion = article.ElectronicVersion;
              
             return filledFieldsInfo;
         }
@@ -353,7 +354,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
         {
             Periodical periodical = new Periodical
             {
-                BitmapImage = filledFieldsInfo.BitmapImage,
+                Image = filledFieldsInfo.Image,
                 Name = filledFieldsInfo.Name,
                 Year = filledFieldsInfo.Year,
                 Pages = filledFieldsInfo.Pages,
@@ -365,11 +366,13 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
                 IssueNumber = filledFieldsInfo.IssueNumber,
                 Responsible = filledFieldsInfo.Responsible,
                 RentPrice = filledFieldsInfo.RentPrice,
-                ElectronicVersionFileName = filledFieldsInfo.ElectronicVersionFileName,
+                ElectronicVersionFileId = filledFieldsInfo.ElectronicVersionFileId,
+                ElectronicVersion = filledFieldsInfo.ElectronicVersion,
                 
-                ImageName = filledFieldsInfo.ImageName,
+                ImageFileId = filledFieldsInfo.ImageFileId,
 
             };
+
             ServerAdapter.Instance.CreatePeriodical(periodical);
         }
 
@@ -380,7 +383,6 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             periodical.Year = filledFieldsInfo.Year;
             periodical.Pages = filledFieldsInfo.Pages;
             periodical.City = filledFieldsInfo.City;
-            periodical.BitmapImage = filledFieldsInfo.BitmapImage;
             periodical.PublishingHouse = filledFieldsInfo.PublishingHouse;
             periodical.Location = filledFieldsInfo.Location;
             periodical.Availiability = filledFieldsInfo.Availiability;
@@ -388,16 +390,11 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             periodical.IssueNumber = filledFieldsInfo.IssueNumber;
             periodical.Responsible = filledFieldsInfo.Responsible;
             periodical.RentPrice = filledFieldsInfo.RentPrice;
-            periodical.ElectronicVersionFileName = filledFieldsInfo.ElectronicVersionFileName;
+            periodical.ElectronicVersionFileId = filledFieldsInfo.ElectronicVersionFileId;
+            periodical.ElectronicVersion = filledFieldsInfo.ElectronicVersion;
             
-            periodical.ImageName = filledFieldsInfo.ImageName;
-
-            if (!periodical.BitmapImage.Equals(filledFieldsInfo.BitmapImage))
-            {
-                periodical.BitmapImage = filledFieldsInfo.BitmapImage;
-                periodical.ImageName = null;
-            }
-            
+            periodical.Image = filledFieldsInfo.Image;
+            periodical.ImageFileId = filledFieldsInfo.ImageFileId;
 
             ServerAdapter.Instance.UpdatePeriodical(periodical);
         }
@@ -407,7 +404,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             if (!CanHandleUnwrapping(objectForUnwrapping)) { throw new InvalidOperationException(); }
             FilledFieldsInfo filledFieldsInfo = new FilledFieldsInfo();
             Periodical periodical = (Periodical)objectForUnwrapping;
-            filledFieldsInfo.BitmapImage = periodical.BitmapImage;
+            filledFieldsInfo.Image = periodical.Image;
             filledFieldsInfo.Name = periodical.Name;
             filledFieldsInfo.Year = periodical.Year;
             filledFieldsInfo.City = periodical.City;
@@ -419,9 +416,10 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             filledFieldsInfo.IssueNumber = periodical.IssueNumber;
             filledFieldsInfo.Responsible = periodical.Responsible;
             filledFieldsInfo.RentPrice = periodical.RentPrice;
-            filledFieldsInfo.ElectronicVersionFileName = periodical.ElectronicVersionFileName;
+            filledFieldsInfo.ElectronicVersionFileId = periodical.ElectronicVersionFileId;
+            filledFieldsInfo.ElectronicVersion = periodical.ElectronicVersion;
              
-            filledFieldsInfo.ImageName = periodical.ImageName;
+            filledFieldsInfo.ImageFileId = periodical.ImageFileId;
             return filledFieldsInfo;
         }
     }
@@ -485,7 +483,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
                 City = filledFieldsInfo.City,
                 TypeOfDocument = filledFieldsInfo.TypeOfDocument,
                 Responsible = filledFieldsInfo.Responsible,
-                ElectronicVersionFileName = filledFieldsInfo.ElectronicVersionFileName,
+                ElectronicVersionFileId = filledFieldsInfo.ElectronicVersionFileId,
                 
             };
             ServerAdapter.Instance.CreateThesis(thesis);
@@ -501,9 +499,8 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             thesis.City = filledFieldsInfo.City;
             thesis.TypeOfDocument = filledFieldsInfo.TypeOfDocument;
             thesis.Responsible = filledFieldsInfo.Responsible;
-            thesis.ElectronicVersionFileName = filledFieldsInfo.ElectronicVersionFileName;
+            thesis.ElectronicVersionFileId = filledFieldsInfo.ElectronicVersionFileId;
             
-
 
             ServerAdapter.Instance.UpdateThesis(thesis);
         }
@@ -521,10 +518,11 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             filledFieldsInfo.Pages = thesis.Pages;
             filledFieldsInfo.TypeOfDocument = thesis.TypeOfDocument;
             filledFieldsInfo.Responsible = thesis.Responsible;
-            filledFieldsInfo.ElectronicVersionFileName = thesis.ElectronicVersionFileName;
+            filledFieldsInfo.ElectronicVersionFileId = thesis.ElectronicVersionFileId;
+            filledFieldsInfo.ElectronicVersion = thesis.ElectronicVersion;
              
-            return filledFieldsInfo;
 
+            return filledFieldsInfo;
         }
     }
     #endregion
@@ -587,7 +585,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
                 Availiability = filledFieldsInfo.Availiability,
                 TypeOfDocument = filledFieldsInfo.TypeOfDocument,
                 Location = filledFieldsInfo.Location,
-                ElectronicVersionFileName = filledFieldsInfo.ElectronicVersionFileName,
+                ElectronicVersionFileId = filledFieldsInfo.ElectronicVersionFileId,
                  
             };
             ServerAdapter.Instance.CreateNewspaper(newspaper);
@@ -607,7 +605,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             newspaper.Availiability = filledFieldsInfo.Availiability;
             newspaper.TypeOfDocument = filledFieldsInfo.TypeOfDocument;
             newspaper.Location = filledFieldsInfo.Location;
-            newspaper.ElectronicVersionFileName = filledFieldsInfo.ElectronicVersionFileName;
+            newspaper.ElectronicVersionFileId = filledFieldsInfo.ElectronicVersionFileId;
              
             ServerAdapter.Instance.UpdateNewspaper(newspaper);
         }
@@ -626,11 +624,13 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             filledFieldsInfo.RentPrice = newspaper.RentPrice;
             filledFieldsInfo.TypeOfDocument = newspaper.TypeOfDocument;
             filledFieldsInfo.Location = newspaper.Location;
-            filledFieldsInfo.ElectronicVersionFileName = newspaper.ElectronicVersionFileName;
+            filledFieldsInfo.ElectronicVersionFileId = newspaper.ElectronicVersionFileId;
+            filledFieldsInfo.ElectronicVersion = newspaper.ElectronicVersion;
             
             return filledFieldsInfo;
         }
     }
+
     #endregion
 }
 

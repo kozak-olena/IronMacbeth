@@ -1,9 +1,6 @@
-﻿using System;
-using System.Windows.Media.Imaging;
-
-namespace IronMacbeth.Client
+﻿namespace IronMacbeth.Client
 {
-    public class Article : Base
+    public class Article : Document
     {
         public int Id { get; set; }
 
@@ -19,10 +16,6 @@ namespace IronMacbeth.Client
 
         public string TypeOfDocument { get; set; }
 
-        public byte[] ElectronicVersion { get; set; }
-
-        public string ElectronicVersionFileName { get; set; }
         public string NameOfArticle => Name;
-
     }
 }
