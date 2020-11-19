@@ -54,14 +54,12 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
         public Order CurrentOrder;
         public EditOrderViewModel(Order order)
         {
-            CurrentOrder = order;
             DateTime dateTimeOfReceiving = DateTime.Now;
             Min = new DateTime(dateTimeOfReceiving.Ticks - (dateTimeOfReceiving.Ticks % TimeSpan.TicksPerSecond), dateTimeOfReceiving.Kind);
-            _receiveDate = order.ReceiveDate;
-
+            _receiveDate = GetReceivedTime(order);
             DateTime dateTimeOfReturning = order.DateOfReturn;
             MinDateReturn = new DateTime(dateTimeOfReturning.Ticks - (dateTimeOfReturning.Ticks % TimeSpan.TicksPerSecond), dateTimeOfReturning.Kind);
-            _dateTimeOfReturning = DateTime.Now;
+            _dateTimeOfReturning = MinDateReturn.AddMinutes(3);
             CloseCommand = new RelayCommand(CloseMethod);
             ApplyChangesCommand = new RelayCommand(ApplyChangesMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
         }
@@ -72,8 +70,22 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
             SpecifyOrderFields.DateOfReturning = DateOfReturning;
             SpecifyOrderFields.ReceiveDate = ReceiveDate;
             SpecifyOrderFields.Status = Status;
-            // ServerAdapter.Instance.UpdateOrder(SpecifyOrderFields);
             CloseMethod(parameter);
+        }
+
+
+        public DateTime GetReceivedTime(Order order)
+        {
+            DateTime dateTimeNow = DateTime.Now;
+            dateTimeNow = new DateTime(dateTimeNow.Ticks - (dateTimeNow.Ticks % TimeSpan.TicksPerSecond), dateTimeNow.Kind);
+            if (dateTimeNow > order.ReceiveDate)
+            {
+                return dateTimeNow.AddMinutes(3);
+            }
+            else
+            {
+                return order.ReceiveDate;
+            }
         }
 
         public bool CanExecuteMaintenanceMethods(object parameter)

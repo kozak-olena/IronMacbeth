@@ -79,9 +79,9 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
             DateTime receiveDateTime = editOrderViewModel.ReceiveDate;
             string Status = editOrderViewModel.Status;
             DateTime dateOfReturning = editOrderViewModel.DateOfReturning;
-            specifyOrderFields.ReceiveDate = receiveDateTime;
+            specifyOrderFields.ReceiveDate = receiveDateTime.ToUniversalTime();
             specifyOrderFields.Status = Status;
-            specifyOrderFields.DateOfReturning = dateOfReturning;
+            specifyOrderFields.DateOfReturning = dateOfReturning.ToUniversalTime();
             ServerAdapter.Instance.UpdateOrder(order, specifyOrderFields);
             Update();
         }
@@ -91,7 +91,7 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
         {
             Items = new List<OrderBookItemViewModel>();
             List<Order> orders = ServerAdapter.Instance.GetAllOrders();
-            Items.AddRange(orders.OrderByDescending(item => item.DateOfOrder).Select(x => new OrderBookItemViewModel(x)));
+            Items.AddRange(orders.OrderBy(item => item.ReceiveDate).Select(x => new OrderBookItemViewModel(x)));
             OnPropertyChanged(nameof(Items));
         }
 
