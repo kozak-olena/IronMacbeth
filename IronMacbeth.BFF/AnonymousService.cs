@@ -1,27 +1,37 @@
 ﻿using IronMacbeth.BFF.Contract;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
+using IronMacbeth.UserManagement.Contract;
+using System.ServiceModel;
 
 namespace IronMacbeth.BFF
 {
     class AnonymousService : IAnonymousService
     {
+        private readonly IUserManagementService _userManagementServiceClient;
+
+        public AnonymousService()
+        {
+            _userManagementServiceClient = UserManagementClient.Instance;
+        }
+
         public UserRegistrationStatus Register(string login, string password, string surname, string name, int phoneNumber)
         {
-            var passwordHash = SecurePasswordHasher.Hash(password);
+            var userRegistrationData =
+                new RegisterUserRequestData
+                {
+                    Login = login,
+                    Password = password,
+                    Name = name,
+                    Surname = surname,
+                    PhoneNumber = phoneNumber
+                };
 
-            using (var dbContext = new DbContext())
+            try
             {
-                dbContext.Users.Add(new User { Login = login, PasswordHash = passwordHash, Name = name, Surname = surname, PhoneNumber = phoneNumber, UserRole = UserRole.User });
-
-                try
-                {
-                    dbContext.SaveChanges();
-                }
-                catch (DbUpdateException ex) when (ex.InnerException is SqlException sqlException && sqlException.Number == 2627) // 2627 = unique (primary key) constraint violation
-                {
-                    return UserRegistrationStatus.UserNameAlreadyTaken;
-                }
+                _userManagementServiceClient.RegisterUser(userRegistrationData);
+            }
+            catch (FaultException<UsernameTakenFault>)
+            {
+                return UserRegistrationStatus.UserNameAlreadyTaken;
             }
 
             return UserRegistrationStatus.Success;

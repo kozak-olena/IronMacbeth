@@ -173,14 +173,12 @@
   <ItemGroup>
     <Compile Include="AnonymousService.cs" />
     <Compile Include="Order.cs" />
-    <Compile Include="SecurePasswordHasher.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserLoginService.cs" />
-    <Compile Include="UserNameSecurityTokenHandler.cs" />
     <Compile Include="DbContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service.cs" />
+    <Compile Include="UserManagementClient.cs" />
+    <Compile Include="UserNameSecurityTokenHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

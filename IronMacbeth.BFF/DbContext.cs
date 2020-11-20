@@ -8,7 +8,6 @@ namespace IronMacbeth.BFF
     {
         internal DbSet<Order> Orders { get; set; }
 
-
         public DbSet<Periodical> Periodicals { get; set; }
 
         public DbSet<Thesis> Thesises { get; set; }
@@ -18,8 +17,6 @@ namespace IronMacbeth.BFF
         public DbSet<Article> Articles { get; set; }
 
         public DbSet<Book> Books { get; set; }
-
-        internal DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlServer(ConfigurationManager.ConnectionStrings["Database"].ConnectionString);
@@ -44,13 +41,6 @@ namespace IronMacbeth.BFF
 
             modelBuilder.Entity<Periodical>()
             .ToTable(nameof(Periodical));
-
-            modelBuilder.Entity<User>()
-                .ToTable(nameof(User))
-                .HasKey(nameof(User.Login));
-
-            modelBuilder.Entity<User>()
-                .Property(x => x.UserRole).HasColumnName("RoleId");
         }
     }
 }
