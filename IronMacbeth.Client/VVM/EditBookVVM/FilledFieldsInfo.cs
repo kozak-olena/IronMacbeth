@@ -21,19 +21,19 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
 
         public string City { get; set; }
 
-        public int Year { get; set; }
+        public int? Year { get; set; }
 
-        public int Pages { get; set; }
+        public int? Pages { get; set; }
 
         public string Responsible { get; set; }
 
-        public int Availiability { get; set; }
+        public int? Availiability { get; set; }
 
         public Guid? ElectronicVersionFileId { get; set; }
 
         public string Location { get; set; }
 
-        public int IssueNumber { get; set; }
+        public int? IssueNumber { get; set; }
 
         public string RentPrice { get; set; }
 

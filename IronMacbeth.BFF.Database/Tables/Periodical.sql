@@ -8,12 +8,10 @@
     [City] VARCHAR (255) NULL,
     [Year] INT NULL,
     [Pages] INT NOT NULL,
-    [Availiability] INT NULL,
+    [Availiability] INT NOT NULL,
     [Location] VARCHAR (255) NOT NULL,
     [TypeOfDocument] VARCHAR (255) NOT NULL,
     [ElectronicVersionFileId] UNIQUEIDENTIFIER NULL,
     [RentPrice] VARCHAR (255) NOT NULL,
-    [Rating] VARCHAR (255) NULL,
-    [Comments] VARCHAR (255) NULL,
     [ImageFileId] UNIQUEIDENTIFIER NULL
 )

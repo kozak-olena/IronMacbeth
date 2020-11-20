@@ -8,6 +8,5 @@
     [TypeOfDocument] VARCHAR (255) NOT NULL,
     [MainDocumentId] VARCHAR (255) NULL,
     [ElectronicVersionFileId] UNIQUEIDENTIFIER NULL,
-    [Rating] VARCHAR (255) NULL,
-    [Comments] VARCHAR (255) NULL
+  
   )

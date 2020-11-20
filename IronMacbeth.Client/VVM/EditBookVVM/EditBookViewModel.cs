@@ -18,7 +18,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
         public bool CollectionChanged { get; private set; }
 
-        public string ImagePath 
+        public string ImagePath
         {
             get => _imagePath ?? (FilledFieldsInfo.Image != null ? "<image>" : "");
             set => _imagePath = value;
@@ -64,10 +64,10 @@ namespace IronMacbeth.Client.VVM.BookVVM
             CloseCommand = new RelayCommand(CloseMethod);
             SelectImageCommand = new RelayCommand(SelectImageMethod);
             SelectPdfCommand = new RelayCommand(SelectPdfMethod);
-            ApplyChangesCommand = new RelayCommand(ApplyChangesMethod);
-            //{
-            //    CanExecuteFunc = ApplyChangesCanExecute
-            //};
+            ApplyChangesCommand = new RelayCommand(ApplyChangesMethod)
+            {
+                CanExecuteFunc = ApplyChangesCanExecute
+            };
         }
 
         public void SelectPdfMethod(object parameter)
@@ -159,15 +159,10 @@ namespace IronMacbeth.Client.VVM.BookVVM
             }
         }
 
-        //public bool ApplyChangesCanExecute(object parameter)
-        //{
-        //    return !string.IsNullOrWhiteSpace(Name) &&
-        //           !string.IsNullOrWhiteSpace(City) &&
-        //           !string.IsNullOrWhiteSpace(Year) &&
-        //           !string.IsNullOrWhiteSpace(Pages) &&
-        //           !string.IsNullOrWhiteSpace(Availiability) &&
-        //           !string.IsNullOrWhiteSpace(ImagePath);
-        //}
+        public bool ApplyChangesCanExecute(object parameter)
+        {
+            return _dispatch.CanExecuteApplyChanges(FilledFieldsInfo);
+        }
 
         public void Update() { }
 

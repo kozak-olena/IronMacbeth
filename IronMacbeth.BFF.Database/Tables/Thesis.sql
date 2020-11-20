@@ -9,6 +9,4 @@
     [Pages] INT NOT NULL,
     [TypeOfDocument] VARCHAR (255) NOT NULL,
     [ElectronicVersionFileId] UNIQUEIDENTIFIER NULL,
-    [Rating] VARCHAR (255) NULL,
-    [Comments] VARCHAR (255) NULL
-)
+   )

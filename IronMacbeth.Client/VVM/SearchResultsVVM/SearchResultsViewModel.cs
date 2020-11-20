@@ -4,6 +4,7 @@ using IronMacbeth.Client.Annotations;
 using IronMacbeth.Client.ViewModel;
 using IronMacbeth.Client.VVM.ArticleItemVVM;
 using IronMacbeth.Client.VVM.BookVVM;
+using IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM;
 using IronMacbeth.Client.VVM.NewspaperItemVVM;
 using IronMacbeth.Client.VVM.PeriodicalItemVVM;
 using IronMacbeth.Client.VVM.ThesisItemVVM;
@@ -22,6 +23,25 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
         public string PageViewName => "SearchResults";
         public void Update() { ShowCollection(); }
 
+        private string _search = "";
+        public string Search
+        {
+            get { return _search; }
+
+            set
+            {
+                _search = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    UpdateCollection();
+                }
+                else
+                {
+                    ShowCollection();
+                }
+            }
+        }
+
         public List<IDocumentViewModel> Items { get; private set; }
 
         public Visibility ButtonsVisibility => UserService.LoggedInUser.IsAdmin ? Visibility.Collapsed : Visibility.Visible;
@@ -36,6 +56,20 @@ namespace IronMacbeth.Client.VVM.SearchResultsVVM
         public Order order;
 
         public SearchResultsDispatch SearchResultsDispatch;
+
+        public void UpdateCollection()
+        {
+            Items = new List<IDocumentViewModel>();
+            DocumentsSearchResults documentsSearchResults = ServerAdapter.Instance.SearchDocuments(_searchFilledFields);
+
+            Items.AddRange(documentsSearchResults.Books.Where(item => item.Name.ToLower().Contains(Search.ToLower())).Select(x => new BookItemViewModel(x)));
+            Items.AddRange(documentsSearchResults.Articles.Where(item => item.Name.ToLower().Contains(Search.ToLower())).Select(x => new ArticleItemViewModel(x)));
+            Items.AddRange(documentsSearchResults.Periodicals.Where(item => item.Name.ToLower().Contains(Search.ToLower())).Select(x => new PeriodicalItemViewModel(x)));
+            Items.AddRange(documentsSearchResults.Newspapers.Where(item => item.Name.ToLower().Contains(Search.ToLower())).Select(x => new NewspaperItemViewModel(x)));
+            Items.AddRange(documentsSearchResults.Theses.Where(item => item.Name.ToLower().Contains(Search.ToLower())).Select(x => new ThesisItemViewModel(x)));
+            OnPropertyChanged(nameof(Items));
+
+        }
         public void AddToMyOrdersMethod(object parameter)
         {
             IsTypeIssueing = true;

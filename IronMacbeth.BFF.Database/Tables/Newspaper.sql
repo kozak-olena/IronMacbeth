@@ -5,11 +5,9 @@
     [City] VARCHAR (255) NULL,
     [Year] INT NULL, 
     [TypeOfDocument] VARCHAR (255) NOT NULL,
-    [Availiability] INT NULL,
-    [IssueNumber] INT NULL,
-    [Location] VARCHAR (255) NULL,
+    [Availiability] INT NOT NULL,
+    [IssueNumber] INT NOT NULL,
+    [Location] VARCHAR (255) NOT NULL,
     [ElectronicVersionFileId] UNIQUEIDENTIFIER NULL,
     [RentPrice] VARCHAR (255) NOT NULL,
-    [Rating] VARCHAR (255) NULL,
-    [Comments] VARCHAR (255) NULL
-)
+   )
