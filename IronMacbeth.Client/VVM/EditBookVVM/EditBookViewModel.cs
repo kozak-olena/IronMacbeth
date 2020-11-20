@@ -74,7 +74,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                Filter = "pdf Files (.pdf)|*.pdf",
+                Filter = "Pdf Files (.pdf)|*.pdf",
                 FilterIndex = 1,
                 Multiselect = false
             };
