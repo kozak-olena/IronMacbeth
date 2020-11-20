@@ -86,6 +86,8 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
         public Visibility CityVisibility => IsPeriodicalSelected || IsBookSelected || IsThesisSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
 
         public Visibility AvailibilityVisibility => IsBookSelected || IsPeriodicalSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
+
+        public Visibility ElectronicVersionVisibility => ElectronicVersion != null ? Visibility.Visible : Visibility.Collapsed;
         private void OnSelectedItemTypeChanged(string value)
         {
             if (value == "Book")

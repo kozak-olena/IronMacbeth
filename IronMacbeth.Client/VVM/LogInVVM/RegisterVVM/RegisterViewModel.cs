@@ -29,7 +29,8 @@ namespace IronMacbeth.Client.VVM.LogInVVM.RegisterVVM
 
         public RegisterViewModel()
         {
-            RegisterCommand = new RelayCommand(RegisterMethod) { CanExecuteFunc = RegisterCanExecute }; ;
+            RegisterCommand = new RelayCommand(RegisterMethod) { CanExecuteFunc = RegisterCanExecute };
+            CloseCommand = new RelayCommand(CloseMethod);
         }
         public void RegisterMethod(object parameter)
         {
