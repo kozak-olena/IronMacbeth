@@ -168,7 +168,7 @@
                         	Text="IssueNumber:" 
                         	VerticalAlignment="Top"/>
                             </WrapPanel>
-                            <WrapPanel Visibility="{Binding FilledFieldsInfo.RentPriceVisibility}"
+                            <WrapPanel 
                                 Orientation="Vertical" Margin="5,5,0,0" 
                                 VerticalAlignment="Top" 
                                 HorizontalAlignment="Left">
@@ -176,7 +176,7 @@
                         	Grid.Column="0"
                         	HorizontalAlignment="Left" 
                         	Margin="5,5,0,0" 
-                        	Text="RentPrice:" 
+                        	Text="Theme:" 
                         	VerticalAlignment="Top"/>
                             </WrapPanel>
                             <WrapPanel 
@@ -310,14 +310,14 @@
                             Text="{Binding  FilledFieldsInfo.IssueNumber}"
                             VerticalAlignment="Top"/>
                             </WrapPanel>
-                            <WrapPanel Visibility="{Binding FilledFieldsInfo. RentPriceVisibility}"
+                            <WrapPanel  
                             Orientation="Vertical" Margin="5,5,0,0" 
                             VerticalAlignment="Top" 
                             HorizontalAlignment="Left">
                                 <TextBlock
                             HorizontalAlignment="Left" 
                             Margin="5,5,0,0" 
-                            Text="{Binding  FilledFieldsInfo.RentPrice}"
+                            Text="{Binding  FilledFieldsInfo.Topic}"
                             VerticalAlignment="Top"/>
                             </WrapPanel>
                             <WrapPanel 
