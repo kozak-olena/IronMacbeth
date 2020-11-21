@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:IronMacbeth.Client.VVM.ThesisItemVVM"
              
              mc:Ignorable="d" d:DesignWidth="800" Height="130" BorderBrush="#FF90AAD8">
-    <Grid  Background="#FF9ED1CA">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="5*"/>
@@ -56,9 +56,9 @@
                 <Label Margin="0,5,5,0" Content="{Binding Author}" FontSize="13" Foreground="DimGray"/>
             </WrapPanel>
             <WrapPanel>
-                <WrapPanel Margin="0,5,0,0">
-                    <Label Content="Type:" FontSize="13" Foreground="DimGray"/>
-                    <Label Content="{Binding TypeOfDocument}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
+                <WrapPanel>
+                    <Label Margin="0,5,5,0" Content="Type:" FontSize="13" Foreground="DimGray"/>
+                    <Label Margin="5,5,0,0" Content="{Binding TypeOfDocument}"  FontSize="13" Foreground="DimGray" FontWeight="Bold"/>
                 </WrapPanel>
             </WrapPanel>
         </WrapPanel>

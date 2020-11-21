@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              
              d:DesignWidth="800" Height="130" BorderBrush="#FF90AAD8">
-    <Grid  Background="#FFBAE3EE">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="2*"/>
@@ -69,12 +69,13 @@
         <WrapPanel Orientation="Vertical" Grid.Column="1">
             <WrapPanel Orientation="Horizontal" VerticalAlignment="Top">
                 <Label Margin="5,0,5,0" Content="Status of order:" FontSize="13" Foreground="DimGray"/>
-                <Label Margin="5,0,5,0" Content="{Binding StatusOfOrder}" FontSize="13" Foreground="DimGray"/>
+                <Label Margin="5,0,5,0" Content="{Binding StatusOfOrder}" FontSize="13" Foreground="DimGray" FontWeight="Bold"/>
 
             </WrapPanel>
             <WrapPanel Orientation="Horizontal" VerticalAlignment="Top"  Grid.Column="1">
                 <Label Visibility="{Binding PriceVisibility}" Margin="5,0,5,0" Content="Price:" FontSize="13" Foreground="DimGray"/>
                 <Label Margin="5,0,5,0" Content="{Binding Price}" FontSize="13" Foreground="DimGray"/>
+                <Label Content="₴" Foreground="DimGray" FontWeight="DemiBold"  FontSize="13"/>
             </WrapPanel>
             <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button VerticalAlignment="Center"
