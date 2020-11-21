@@ -19,8 +19,7 @@ USING
     (
         VALUES
         (1, 'User'),
-        (2, 'Librarian'),
-        (3, 'Admin')
+        (2, 'Admin')
     ) as userRoles(Id, [Name])
 ) AS source
 ON target.Id = source.Id
@@ -31,3 +30,20 @@ WHEN NOT MATCHED BY target THEN
 WHEN NOT MATCHED BY source THEN
     DELETE;
     
+--- Populate initial users ---
+MERGE [dbo].[User] AS target
+USING
+(
+    SELECT [Login], [Name], [Surname], [PasswordHash], [RoleId], [PhoneNumber]
+    FROM
+    (
+        VALUES
+        ('admin', 'Richard', 'Branson', 'BeaybnUyB2reEVYBZPgAkRH7pLde2F//qgCdWr5ZsJCOUhUj', 2, 0800352352),
+        ('me', 'olena', 'kozak', 'e5qYGb9ai6g1G8SVYXk21+IZcOLIciWOZGNaYXuueiOvRfoo', 1, 0507050620)
+    ) as [user]([Login], [Name], [Surname], [PasswordHash], [RoleId], [PhoneNumber])
+) AS source
+ON target.[Login] = source.[Login]
+WHEN NOT MATCHED BY target THEN
+    INSERT ([Login], [Name], [Surname], [PasswordHash], [RoleId], [PhoneNumber]) 
+    VALUES ([Login], [Name], [Surname], [PasswordHash], [RoleId], [PhoneNumber]);
+
