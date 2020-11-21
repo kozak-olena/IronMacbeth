@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace IronMacbeth.Client.VVM.BookVVM
 {
-    class BookViewModel : IPageViewModel, INotifyPropertyChanged
+    class DocumentViewModel : IPageViewModel, INotifyPropertyChanged
     {
         public string PageViewName => "Books";
 
@@ -54,7 +54,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
         public ICommand EditCommand { get; }
         public ICommand DeleteCommand { get; }
 
-        public BookViewModel()
+        public DocumentViewModel()
         {
             _dispatch = new Dispatch(new IHandler[] { new BookHandler(), new ArticleHandler(), new PeriodicalHandler(), new ThesisHandler(), new NewspaperHandler() });
             AddCommand = new RelayCommand(AddMethod);
@@ -153,10 +153,12 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
         public void UpdateCollectionNoFilter()    //TODO:///////////////////////////////
         {
-            _items =
+            _items.AddRange
+                (
                 ServerAdapter.Instance.GetAllBooks()
                     .Select(x => new BookItemViewModel(x))
-                    .ToList<IDocumentViewModel>();
+                    .ToList<IDocumentViewModel>()
+                 );
 
 
             OnPropertyChanged(nameof(Items));

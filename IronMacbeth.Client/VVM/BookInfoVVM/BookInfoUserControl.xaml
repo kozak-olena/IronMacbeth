@@ -181,11 +181,12 @@
                             </WrapPanel>
                             <WrapPanel 
                                 VerticalAlignment="Top" 
-                                HorizontalAlignment="Left">
+                                HorizontalAlignment="Left"
+                                Margin="5,5,0,0" >
                                 <TextBlock 
                         	Grid.Column="0"
                         	HorizontalAlignment="Left" 
-                        	Margin="5,5,0,0" 
+                        		Margin="5,5,0,0" 
                         	Text="ElectronicVersion:" 
                         	VerticalAlignment="Top"/>
                             </WrapPanel>

@@ -1,10 +1,11 @@
 ﻿<Window x:Class="IronMacbeth.Client.VVM.AdminOrderVVM.EditOrderWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        x:Name="Window"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IronMacbeth.Client.VVM.AdminOrderVVM" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        x:Name="Window"
+        
         mc:Ignorable="d"
         Title="EditOrderWindow" Height="300" Width="300">
     <Grid>
@@ -42,7 +43,7 @@
             <WrapPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <xctk:DateTimePicker Height="30" Value="{Binding ReceiveDate}"  Minimum="{Binding  Min}"/>
             </WrapPanel>
-            <WrapPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1">
+            <WrapPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1" >
                 <TextBlock Text="Date to return:" Margin="0,10,0,10"/>
             </WrapPanel>
             <WrapPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
@@ -63,7 +64,7 @@
                     Content="Done" 
                     Width="75"/>
             <Button 
-                    Command="{Binding CloseCommand}"
+                    Command="{Binding CancelCommand}"
                     CommandParameter="{Binding ElementName=Window}"
                     Margin="5,0"
                     Content="Cancel" 

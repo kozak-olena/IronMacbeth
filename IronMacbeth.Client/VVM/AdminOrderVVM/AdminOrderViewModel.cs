@@ -76,9 +76,9 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
             var editOrderViewModel = new EditOrderViewModel(order);
             new EditOrderWindow { DataContext = editOrderViewModel }.ShowDialog();
 
-            DateTime receiveDateTime = editOrderViewModel.ReceiveDate;
-            string Status = editOrderViewModel.Status;
-            DateTime dateOfReturning = editOrderViewModel.DateOfReturning;
+            DateTime receiveDateTime = editOrderViewModel.SpecifyOrderFields.ReceiveDate;
+            string Status = editOrderViewModel.SpecifyOrderFields.Status;
+            DateTime dateOfReturning = editOrderViewModel.SpecifyOrderFields.DateOfReturning;
             specifyOrderFields.ReceiveDate = receiveDateTime.ToUniversalTime();
             specifyOrderFields.Status = Status;
             specifyOrderFields.DateOfReturning = dateOfReturning.ToUniversalTime();

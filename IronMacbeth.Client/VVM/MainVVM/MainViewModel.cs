@@ -319,7 +319,7 @@ namespace IronMacbeth.Client.ViewModel
 
                 if (User.IsAdmin)
                 {
-                    PageViewModels.Add(new BookViewModel());
+                    PageViewModels.Add(new DocumentViewModel());
                     PageViewModels.Add(new AdminOrderViewModel());
                 }
                 else

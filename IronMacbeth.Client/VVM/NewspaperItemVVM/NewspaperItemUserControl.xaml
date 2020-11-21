@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:IronMacbeth.Client.VVM.NewspaperItemVVM"
               
              mc:Ignorable="d" d:DesignWidth="800" Height="130" BorderBrush="#FF90AAD8">
-    <Grid Background="#FFAFE6D2">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="5*"/>
@@ -36,7 +36,7 @@
                     FontSize="13"/>
                 <Label Margin="5,10,5,0" Content="№" FontSize="13" Foreground="DimGray"/>
                 <TextBlock 
-                    Margin="0,10,0,0"
+                    Margin="0,5,0,0"
                     Text="{Binding IssueNumber}"
                     Foreground="CornflowerBlue" 
                     FontWeight="Bold" 
@@ -48,9 +48,10 @@
                 <Label Margin="0,0,5,0" Content="•" FontSize="13" Foreground="DimGray"/>
                 <Label Margin="5,0,0,0" Content="IssueNumber:" FontSize="13" Foreground="DimGray"/>
                 <Label Content="{Binding IssueNumber}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
-                <Label Margin="0,0,5,0" Content="•" FontSize="13" Foreground="DimGray"/>
-                <Label Content="Type:" FontSize="13" Foreground="DimGray"/>
-                <Label Content="{Binding TypeOfDocument}" Margin="5,0" FontSize="13" Foreground="DimGray"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Margin="0,5,5,0" Content="Type:" FontSize="13" Foreground="DimGray"/>
+                <Label Margin="5,5,0,0" Content="{Binding TypeOfDocument}"  FontSize="13" Foreground="DimGray" FontWeight="Bold"/>
             </WrapPanel>
             <WrapPanel>
                 <WrapPanel Margin="0,5,0,0">
