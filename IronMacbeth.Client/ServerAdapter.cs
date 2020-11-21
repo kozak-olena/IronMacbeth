@@ -91,9 +91,9 @@ namespace IronMacbeth.Client
                 UserLogin = order.UserLogin,
                 TypeOfOrder = order.TypeOfOrder,
                 StatusOfOrder = order.StatusOfOrder,
-                DateOfOrder = order.DateOfOrder.ToLocalTime(),
-                DateOfReturn = order.DateOfReturn.ToLocalTime(),
-                ReceiveDate = order.ReceiveDate.ToLocalTime(),
+                DateOfOrder = order.DateOfOrder,
+                DateOfReturn = order.DateOfReturn,
+                ReceiveDate = order.ReceiveDate,
                 UserSurname = order.UserSurname,
                 UserName = order.UserName,
                 PhoneNumber = order.PhoneNumber,
@@ -131,7 +131,8 @@ namespace IronMacbeth.Client
                 TypeOfOrder = order.TypeOfOrder,
                 DateOfOrder = order.DateOfOrder,
                 UserName = order.UserName,
-                UserSurname = order.UserSurname
+                UserSurname = order.UserSurname,
+                PhoneNumber = order.PhoneNumber
 
             };
         }

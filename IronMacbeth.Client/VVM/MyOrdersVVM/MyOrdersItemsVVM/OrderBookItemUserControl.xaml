@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM"
              mc:Ignorable="d" 
              
-             d:DesignWidth="800" Height="130" BorderBrush="#FF90AAD8">
+             d:DesignWidth="800" Height="180" BorderBrush="#FF90AAD8">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="6*"/>
@@ -42,14 +42,14 @@
                     <Label Margin="5,0,5,0" Content="{Binding UserName}" FontSize="13" Foreground="DimGray"/>
                     <Label Margin="5,0,5,0" Content="•" FontSize="13" Foreground="DimGray"/>
                     <Label Margin="5,0,5,0" Content="User surname:" FontSize="13" Foreground="DimGray"/>
-                    <Label Margin="5,0,5,0" Content="{Binding UserSurname}" FontSize="13" Foreground="DimGray"/>
-                    <Label Margin="5,0,5,0" Content="•" FontSize="13" Foreground="DimGray"/>
+                    </WrapPanel>
+                <WrapPanel>
                     <Label Margin="5,0,5,0" Content="User phone number:" FontSize="13" Foreground="DimGray"/>
                     <Label  Margin="5,0,5,0"  Content="{Binding FormattedPhoneNumber}"/>
                 </WrapPanel>
                 <WrapPanel Orientation="Horizontal">
                     <Label Margin="5,0,5,0" Content="Type of order:" FontSize="13" Foreground="DimGray"/>
-                    <Label Margin="5,0,5,0" Content="{Binding TypeOfDocument}" FontSize="13" Foreground="DimGray"/>
+                    <Label Margin="5,0,0,0" Content="{Binding TypeOfDocument}" FontSize="13" Foreground="DimGray"/>
                 </WrapPanel>
                 <WrapPanel Orientation="Horizontal">
                     <Label Margin="5,0,5,0" Content="Date of issueing:" FontSize="13" Foreground="DimGray"/>

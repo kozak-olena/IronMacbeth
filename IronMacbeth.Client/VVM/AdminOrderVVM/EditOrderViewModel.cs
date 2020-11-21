@@ -14,7 +14,7 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
 {
     public class EditOrderViewModel : INotifyPropertyChanged
     {
-        public ICommand CloseCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
         public ICommand ApplyChangesCommand { get; set; }
 
         public string[] AvailibleItemTypes => new[] { "Order is accepted", "Order is in proccessing", "Order completed", "Document is currently taking by the user", "Document returned" };
@@ -50,29 +50,34 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
             }
         }
 
+        public Order _order;
+
 
         public Order CurrentOrder;
         public EditOrderViewModel(Order order)
         {
+            SpecifyOrderFields = new SpecifiedOrderFields();
+            _order = order;
+            Status = order.StatusOfOrder;
             DateTime dateTimeOfReceiving = DateTime.Now;
             Min = new DateTime(dateTimeOfReceiving.Ticks - (dateTimeOfReceiving.Ticks % TimeSpan.TicksPerSecond), dateTimeOfReceiving.Kind);
-            _receiveDate = GetReceivedTime(order);
+            _receiveDate = GetReceivedTime(order).ToLocalTime();
             DateTime dateTimeOfReturning = order.DateOfReturn;
             MinDateReturn = new DateTime(dateTimeOfReturning.Ticks - (dateTimeOfReturning.Ticks % TimeSpan.TicksPerSecond), dateTimeOfReturning.Kind);
-            _dateTimeOfReturning = MinDateReturn.AddMinutes(3);
-            CloseCommand = new RelayCommand(CloseMethod);
+            _dateTimeOfReturning = MinDateReturn.ToLocalTime();
+
+            CancelCommand = new RelayCommand(CancelMethod);
             ApplyChangesCommand = new RelayCommand(ApplyChangesMethod) { CanExecuteFunc = CanExecuteMaintenanceMethods };
         }
+        public SpecifiedOrderFields SpecifyOrderFields;
 
         public void ApplyChangesMethod(object parameter)
         {
-            SpecifiedOrderFields SpecifyOrderFields = new SpecifiedOrderFields();
             SpecifyOrderFields.DateOfReturning = DateOfReturning;
             SpecifyOrderFields.ReceiveDate = ReceiveDate;
             SpecifyOrderFields.Status = Status;
             CloseMethod(parameter);
         }
-
 
         public DateTime GetReceivedTime(Order order)
         {
@@ -95,6 +100,15 @@ namespace IronMacbeth.Client.VVM.AdminOrderVVM
 
         public void CloseMethod(object parameter)
         {
+
+            (parameter as Window)?.Close();
+        }
+
+        public void CancelMethod(object parameter)
+        {
+            SpecifyOrderFields.DateOfReturning = _order.DateOfReturn;
+            SpecifyOrderFields.ReceiveDate = _order.ReceiveDate;
+            SpecifyOrderFields.Status = _order.StatusOfOrder;
             (parameter as Window)?.Close();
         }
 

@@ -25,18 +25,17 @@ namespace IronMacbeth.Client.VVM.MyOrdersVVM.MyOrdersItemsVVM
 
         public int Id => _item.Id;
 
-
         public string UserName => _item.UserName;
         public string UserSurname => _item.UserSurname;
         public int PhoneNumber => _item.PhoneNumber;
 
         public string StatusOfOrder => _item.StatusOfOrder;
 
-        public string DateOfOrder => _item.DateOfOrder.ToString();
+        public string DateOfOrder => _item.DateOfOrder.ToLocalTime().ToString();
 
-        public string DateOfReturn => _item.DateOfReturn.ToString();
+        public string DateOfReturn => _item.DateOfReturn.ToLocalTime().ToString();
 
-        public string ReceiveDate => _item.ReceiveDate.ToString();
+        public string ReceiveDate => _item.ReceiveDate.ToLocalTime().ToString();
 
         public string UserLogin => _item.UserLogin;
 
