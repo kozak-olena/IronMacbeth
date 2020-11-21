@@ -14,7 +14,7 @@
     <DataTemplate DataType="{x:Type orderVvm:MyOrdersViewModel}">
         <orderVvm:MyOrdersUserControl/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type book:BookViewModel}">
+    <DataTemplate DataType="{x:Type book:DocumentViewModel}">
         <book:BookUserControl/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type book:DocumentInfoViewModel}">
