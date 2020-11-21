@@ -7,6 +7,7 @@
     [Pages] INT NOT NULL,
     [TypeOfDocument] VARCHAR (255) NOT NULL,
     [MainDocumentId] VARCHAR (255) NULL,
+      [Topic] VARCHAR (255) NOT NULL,
     [ElectronicVersionFileId] UNIQUEIDENTIFIER NULL,
   
   )

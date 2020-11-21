@@ -19,6 +19,7 @@ namespace IronMacbeth.Client
         public int Year { get; set; }
 
         public int Pages { get; set; }
+        public string Topic { get; set; }
 
         public int Availiability { get; set; }
 

@@ -7,6 +7,7 @@
     [City] VARCHAR (255) NULL,
     [Year] INT NULL,
     [Pages] INT NOT NULL,
+      [Topic] VARCHAR (255) NOT NULL,
     [TypeOfDocument] VARCHAR (255) NOT NULL,
     [ElectronicVersionFileId] UNIQUEIDENTIFIER NULL,
    )
