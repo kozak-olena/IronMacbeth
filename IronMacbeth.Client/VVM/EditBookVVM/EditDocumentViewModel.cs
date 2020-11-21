@@ -32,6 +32,8 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
         public FilledFieldsInfo FilledFieldsInfo { get; set; }
 
+        public Visibility DocumentTypePickerVisibility { get; } = Visibility.Visible;
+
         public ICommand CloseCommand { get; set; }
 
         public ICommand SelectImageCommand { get; set; }
@@ -53,22 +55,23 @@ namespace IronMacbeth.Client.VVM.BookVVM
         public EditDocumentViewModel(object objectForEdit)
         {
             _dispatch = new Dispatch(new IHandler[] { new BookHandler(), new ArticleHandler(), new PeriodicalHandler(), new ThesisHandler(), new NewspaperHandler() });
+
             _objectForEdit = objectForEdit;
+
             if (_objectForEdit != null)
             {
+                DocumentTypePickerVisibility = Visibility.Collapsed;
                 FilledFieldsInfo = _dispatch.UnwrapObjectForEdit(objectForEdit);
             }
             else
             {
                 FilledFieldsInfo = new FilledFieldsInfo();
             }
+
             CloseCommand = new RelayCommand(CloseMethod);
             SelectImageCommand = new RelayCommand(SelectImageMethod);
             SelectPdfCommand = new RelayCommand(SelectPdfMethod);
-            ApplyChangesCommand = new RelayCommand(ApplyChangesMethod)
-            {
-                CanExecuteFunc = ApplyChangesCanExecute
-            };
+            ApplyChangesCommand = new RelayCommand(ApplyChangesMethod) { CanExecuteFunc = ApplyChangesCanExecute };
         }
 
         public void SelectPdfMethod(object parameter)

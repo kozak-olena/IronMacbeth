@@ -53,7 +53,7 @@
                 Orientation="Vertical"
                 Margin="0,0,10,0"
                 HorizontalAlignment="Right">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel Visibility="{Binding DocumentTypePickerVisibility}" Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock
                         VerticalAlignment="Center" 
                         TextWrapping="Wrap"
