@@ -5,7 +5,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Height="630" Width="446" SizeToContent="WidthAndHeight">
+        Height="630" Width="446" 
+        MinHeight="130"
+        SizeToContent="WidthAndHeight">
     <DockPanel>
         <Border 
             Visibility="{Binding FilledFieldsInfo.ImageVisibility}"
@@ -67,7 +69,7 @@
                         </ComboBox.Background>
                     </ComboBox>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel Visibility="{Binding FilledFieldsInfo.GeneralVisibility}" Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock
                         VerticalAlignment="Center" 
                         TextWrapping="Wrap"
@@ -107,7 +109,7 @@
                         Margin="5,0,0,0"
                         Command="{Binding SelectImageCommand}"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
+                <StackPanel Visibility="{Binding FilledFieldsInfo.GeneralVisibility}" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
                     <TextBlock
                         VerticalAlignment="Center" 
                         TextWrapping="Wrap"
@@ -172,7 +174,7 @@
                         Height="24" 
                         Width="145"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
+                <StackPanel Visibility="{Binding FilledFieldsInfo.GeneralVisibility}" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
                     <TextBlock
                         VerticalAlignment="Center" 
                         TextWrapping="Wrap"
@@ -204,19 +206,20 @@
                 </StackPanel>
                 <StackPanel Visibility="{Binding  FilledFieldsInfo.LocationVisibility}" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
                     <TextBlock
-                    VerticalAlignment="Center" 
-                    TextWrapping="Wrap"
-                    Margin="17,0,0,0"
-                    Text="Location: "/>
+                        VerticalAlignment="Center" 
+                        TextWrapping="Wrap"
+                        Margin="17,0,0,0"
+                        Text="Location: "/>
                     <TextBox 
-                    Text="{Binding FilledFieldsInfo.Location}"
-                    Height="24" 
-                    Width="145"/>
+                        Text="{Binding FilledFieldsInfo.Location}"
+                        Height="24" 
+                        Width="145"/>
                 </StackPanel>
                 <StackPanel
-                HorizontalAlignment="Right"
-                Orientation="Horizontal" 
-                Margin="0,5">
+                    Visibility="{Binding FilledFieldsInfo.GeneralVisibility}"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal" 
+                    Margin="0,5">
                     <TextBlock
                         VerticalAlignment="Center" 
                         TextWrapping="Wrap"
@@ -246,8 +249,7 @@
                         Height="24" 
                         Width="145"/>
                 </StackPanel>
-                <StackPanel 
-                    Visibility="{Binding FilledFieldsInfo.IssueNumberVisibility}" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
+                <StackPanel Visibility="{Binding FilledFieldsInfo.IssueNumberVisibility}" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,5">
                     <TextBlock
                         VerticalAlignment="Center" 
                         TextWrapping="Wrap"

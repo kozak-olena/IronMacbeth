@@ -20,7 +20,6 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
 
         public string MainDocumentId { get; set; }
 
-
         public string City { get; set; }
 
         public int? Year { get; set; }
@@ -41,7 +40,6 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
 
         public MemoryStream ElectronicVersion { get; set; }
 
-
         public string ImagePath { get; set; }
         public Guid? ImageFileId { get; set; }
         public Image Image { get; set; }
@@ -54,95 +52,94 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
             {
                 _typeOfDocument = value;
                 OnSelectedItemTypeChanged(value);
-
             }
         }
 
-        public bool IsBookSelected = false;
-        public bool IsArticleSelected = false;
-        public bool IsPeriodicalSelected = false;
-        public bool IsThesisSelected = false;
-        public bool IsNewspaperSelected = false;
+        private bool _isBookSelected = false;
+        private bool _isArticleSelected = false;
+        private bool _isPeriodicalSelected = false;
+        private bool _isThesisSelected = false;
+        private bool _isNewspaperSelected = false;
 
         #region Visivility
-        public Visibility AuthorItemVisbility => IsBookSelected || IsArticleSelected || IsThesisSelected ? Visibility.Visible : Visibility.Collapsed;
 
-        public Visibility PublishingHouseVisibility => IsBookSelected || IsPeriodicalSelected ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility GeneralVisibility => (_isPeriodicalSelected || _isBookSelected || _isThesisSelected || _isArticleSelected || _isNewspaperSelected).ToVisibility();
 
-        public Visibility LocationVisibility => IsBookSelected || IsPeriodicalSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility AuthorItemVisbility => (_isBookSelected || _isArticleSelected || _isThesisSelected).ToVisibility();
 
-        public Visibility RentPriceVisibility => IsBookSelected || IsPeriodicalSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility PublishingHouseVisibility => (_isBookSelected || _isPeriodicalSelected).ToVisibility();
 
-        public Visibility MainDocumentVisibility => IsArticleSelected ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility LocationVisibility => (_isBookSelected || _isPeriodicalSelected).ToVisibility();
 
-        public Visibility IssueNumberVisibility => IsPeriodicalSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility RentPriceVisibility => (_isBookSelected || _isPeriodicalSelected).ToVisibility();
 
-        public Visibility ResponsibleVisibility => IsPeriodicalSelected || IsThesisSelected ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility MainDocumentVisibility => (_isArticleSelected).ToVisibility();
 
-        public Visibility PagesVisibility => IsPeriodicalSelected || IsBookSelected || IsThesisSelected || IsArticleSelected ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility IssueNumberVisibility => (_isPeriodicalSelected || _isNewspaperSelected).ToVisibility();
 
-        public Visibility ImageVisibility => IsPeriodicalSelected || IsBookSelected ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility ResponsibleVisibility => (_isPeriodicalSelected || _isThesisSelected).ToVisibility();
 
-        public Visibility ToAllVisibility => IsPeriodicalSelected || IsBookSelected || IsThesisSelected || IsArticleSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility PagesVisibility => (_isPeriodicalSelected || _isBookSelected || _isThesisSelected || _isArticleSelected).ToVisibility();
 
-        public Visibility CityVisibility => IsPeriodicalSelected || IsBookSelected || IsThesisSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility ImageVisibility => (_isPeriodicalSelected || _isBookSelected).ToVisibility();
 
-        public Visibility AvailibilityVisibility => IsBookSelected || IsPeriodicalSelected || IsNewspaperSelected ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility ToAllVisibility => (_isPeriodicalSelected || _isBookSelected || _isThesisSelected || _isArticleSelected || _isNewspaperSelected).ToVisibility();
 
-        public Visibility ElectronicVersionVisibility => ElectronicVersion != null ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility CityVisibility => (_isPeriodicalSelected || _isBookSelected || _isThesisSelected || _isNewspaperSelected).ToVisibility();
+
+        public Visibility AvailibilityVisibility => (_isBookSelected || _isPeriodicalSelected || _isNewspaperSelected).ToVisibility();
+
+        public Visibility ElectronicVersionVisibility => (ElectronicVersion != null).ToVisibility();
+
         private void OnSelectedItemTypeChanged(string value)
         {
             if (value == "Book")
             {
-                IsBookSelected = true;
-                IsArticleSelected = false;
-                IsPeriodicalSelected = false;
-                IsNewspaperSelected = false;
-                IsThesisSelected = false;
+                _isBookSelected = true;
+                _isArticleSelected = false;
+                _isPeriodicalSelected = false;
+                _isNewspaperSelected = false;
+                _isThesisSelected = false;
 
             }
-
             else if (value == "Article")
             {
-                IsArticleSelected = true;
-                IsBookSelected = false;
-                IsPeriodicalSelected = false;
-                IsNewspaperSelected = false;
-                IsThesisSelected = false;
-
-
+                _isArticleSelected = true;
+                _isBookSelected = false;
+                _isPeriodicalSelected = false;
+                _isNewspaperSelected = false;
+                _isThesisSelected = false;
             }
             else if (value == "Periodical")
             {
-                IsPeriodicalSelected = true;
-                IsArticleSelected = false;
-                IsBookSelected = false;
-                IsNewspaperSelected = false;
-                IsThesisSelected = false;
-
+                _isPeriodicalSelected = true;
+                _isArticleSelected = false;
+                _isBookSelected = false;
+                _isNewspaperSelected = false;
+                _isThesisSelected = false;
             }
             else if (value == "Thesis")
             {
-                IsThesisSelected = true;
-                IsPeriodicalSelected = false;
-                IsArticleSelected = false;
-                IsBookSelected = false;
-                IsNewspaperSelected = false;
-
+                _isThesisSelected = true;
+                _isPeriodicalSelected = false;
+                _isArticleSelected = false;
+                _isBookSelected = false;
+                _isNewspaperSelected = false;
             }
             else if (value == "Newspaper")
             {
-                IsNewspaperSelected = true;
-                IsThesisSelected = false;
-                IsPeriodicalSelected = false;
-                IsArticleSelected = false;
-                IsBookSelected = false;
-
+                _isNewspaperSelected = true;
+                _isThesisSelected = false;
+                _isPeriodicalSelected = false;
+                _isArticleSelected = false;
+                _isBookSelected = false;
             }
             else
             {
                 throw new NotImplementedException("Selected item is not supported");
             }
+
+            OnPropertyChanged(nameof(GeneralVisibility));
             OnPropertyChanged(nameof(AuthorItemVisbility));
             OnPropertyChanged(nameof(PublishingHouseVisibility));
             OnPropertyChanged(nameof(RentPriceVisibility));
@@ -158,9 +155,8 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
 
         #endregion
 
-
-
         #region INotifyPropertyChanged
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -168,6 +164,7 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         #endregion
     }
 }
