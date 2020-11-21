@@ -16,6 +16,8 @@ namespace IronMacbeth.BFF.Contract
 
         public int Year { get; set; }
 
+        public string Topic { get; set; }
+
         public int Pages { get; set; }
 
         public int Availiability { get; set; }

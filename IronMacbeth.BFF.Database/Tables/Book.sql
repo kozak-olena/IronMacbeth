@@ -8,6 +8,7 @@
     [Year] INT NULL,
     [Pages] INT NOT NULL,
     [TypeOfDocument] VARCHAR (255) NOT NULL,
+    [Topic] VARCHAR (255) NOT NULL,
     [Availiability] INT NOT NULL,
     [Location] VARCHAR (255) NOT NULL,
     [ElectronicVersionFileId] UNIQUEIDENTIFIER NULL,

@@ -14,7 +14,7 @@ namespace IronMacbeth.BFF.Contract
 
         public int Pages { get; set; }
 
-
+        public string Topic { get; set; }
         public string MainDocumentId { get; set; }
 
         public string TypeOfDocument { get; set; }

@@ -14,6 +14,8 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
 
         public string Author { get; set; }
 
+        public string Topic { get; set; }
+
         public string PublishingHouse { get; set; }
 
         public string MainDocumentId { get; set; }

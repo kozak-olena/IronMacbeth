@@ -10,6 +10,7 @@ namespace IronMacbeth.Client
 
         public string SearchAuthor { get; set; }
 
+        public string Topic { get; set; }
         public int? SearchYearFrom { get; set; }
 
         public int? SearchYearTo { get; set; }
@@ -76,11 +77,6 @@ namespace IronMacbeth.Client
                 OnPropertyChanged(nameof(IsThesisSelected));
             }
         }
-
-        //public string SearchTypeOfDocument { get; set; }
-
-        //  public string Topics { get; set; }
-
 
 
         #region INotifyPropertyChanged

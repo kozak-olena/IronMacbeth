@@ -15,6 +15,7 @@ namespace IronMacbeth.Client
         public int Availiability { get; set; }
 
         public string Location { get; set; }
+        public string Topic { get; set; }
 
         public int IssueNumber { get; set; }
 

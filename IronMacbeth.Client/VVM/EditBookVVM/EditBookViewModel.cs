@@ -46,6 +46,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
         private string _imagePath;
 
         public string[] AvailibleItemTypes => new[] { "Book", "Article", "Periodical", "Thesis", "Newspaper" };
+        public string[] AvailibleTopics => new[] { "Computer Science", "Engineering", "Physics", "Astronomy", "Mathematics", "Chemistry", "Neuroscience", "Medicine", "Economics","Literature", "Philologie"};
 
         public BitmapImage Image => FilledFieldsInfo.Image?.BitmapImage;
 

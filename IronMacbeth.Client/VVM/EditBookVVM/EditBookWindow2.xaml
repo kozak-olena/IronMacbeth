@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Height="617" Width="446" SizeToContent="WidthAndHeight">
+        Height="630" Width="446" SizeToContent="WidthAndHeight">
     <DockPanel>
         <Border 
             Visibility="{Binding FilledFieldsInfo.ImageVisibility}"
@@ -59,6 +59,26 @@
                     <ComboBox Name="TypeList" Height="24" Width="145" VerticalAlignment="Top" BorderBrush="White"
                               ItemsSource="{Binding AvailibleItemTypes}"
                               SelectedItem="{Binding FilledFieldsInfo.TypeOfDocument}"                              >
+                        <ComboBox.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </ComboBox.Background>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock
+                        VerticalAlignment="Center" 
+                        TextWrapping="Wrap"
+                        Text="Theme: "/>
+                    <ComboBox 
+                        Name="Theme"
+                        Height="24" Width="145"
+                        VerticalAlignment="Top" BorderBrush="White"
+                        ItemsSource="{Binding AvailibleTopics}"
+                        SelectedItem="{Binding FilledFieldsInfo.Topic}"
+                        Margin="0,5,0,0">
                         <ComboBox.Background>
                             <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                                 <GradientStop Color="#FFF0F0F0" Offset="0"/>

@@ -12,6 +12,8 @@ namespace IronMacbeth.BFF.Contract
 
         public string SearchAuthor { get; set; }
 
+        public string Topic { get; set; }
+
         public int? SearchYearFrom { get; set; }
 
         public int? SearchYearTo { get; set; }
@@ -26,9 +28,6 @@ namespace IronMacbeth.BFF.Contract
 
         public bool IsThesisSelected { get; set; }
 
-
-        // public string SearchTypeOfDocument { get; set; }
-
-        //  public string Topics { get; set; }
+ 
     }
 }
