@@ -53,6 +53,8 @@ namespace IronMacbeth.Client.VVM.SearchPageViewModel
 
         public string SearchAuthor { get => SearchFilledFields.SearchAuthor; set => SearchFilledFields.SearchAuthor = value; }
 
+        public string Topic { get => SearchFilledFields.Topic; set => SearchFilledFields.Topic = value; }
+
         public int? SearchYearFrom { get => SearchFilledFields.SearchYearFrom; set => SearchFilledFields.SearchYearFrom = value; }
 
         public int? SearchYearTo { get => SearchFilledFields.SearchYearTo; set => SearchFilledFields.SearchYearTo = value; }
@@ -61,6 +63,8 @@ namespace IronMacbeth.Client.VVM.SearchPageViewModel
         {
             SearchFilledFields.SearchName = "";
             OnPropertyChanged(nameof(SearchFilledFields.SearchName));
+            SearchFilledFields.Topic = "";
+            OnPropertyChanged(nameof(SearchFilledFields.Topic));
             SearchFilledFields.SearchAuthor = "";
             OnPropertyChanged(nameof(SearchFilledFields.SearchAuthor));
             SearchFilledFields.SearchYearFrom = null;

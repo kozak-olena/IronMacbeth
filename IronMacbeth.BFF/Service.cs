@@ -239,6 +239,10 @@ namespace IronMacbeth.BFF
                 {
                     intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
                 }
+                if (!string.IsNullOrWhiteSpace(searchFilledFields.Topic))
+                {
+                    intermediate = intermediate.Where(x => x.Topic == searchFilledFields.Topic);
+                }
                 if (!string.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
                 {
                     intermediate = intermediate.Where(x => x.Year > searchFilledFields.SearchYearFrom);
@@ -305,6 +309,10 @@ namespace IronMacbeth.BFF
                 if (!string.IsNullOrWhiteSpace(searchFilledFields.SearchName))
                 {
                     intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
+                }
+                if (!string.IsNullOrWhiteSpace(searchFilledFields.Topic))
+                {
+                    intermediate = intermediate.Where(x => x.Topic == searchFilledFields.Topic);
                 }
                 if (!string.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
                 {
@@ -377,6 +385,14 @@ namespace IronMacbeth.BFF
                 {
                     intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
                 }
+                if (!string.IsNullOrWhiteSpace(searchFilledFields.Topic))
+                {
+                    intermediate = intermediate.Where(x => x.Topic == searchFilledFields.Topic);
+                }
+                if (!string.IsNullOrWhiteSpace(searchFilledFields.Topic))
+                {
+                    intermediate = intermediate.Where(x => x.Name == searchFilledFields.Topic);
+                }
                 if (searchFilledFields.SearchYearFrom != null && searchFilledFields.SearchYearTo == null)
                 {
                     intermediate = intermediate.Where(x => x.Year > searchFilledFields.SearchYearFrom);
@@ -433,6 +449,10 @@ namespace IronMacbeth.BFF
                 if (!string.IsNullOrWhiteSpace(searchFilledFields.SearchName))
                 {
                     intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
+                }
+                if (!string.IsNullOrWhiteSpace(searchFilledFields.Topic))
+                {
+                    intermediate = intermediate.Where(x => x.Topic == searchFilledFields.Topic);
                 }
                 if (!string.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
                 {
@@ -498,6 +518,10 @@ namespace IronMacbeth.BFF
                 if (!string.IsNullOrWhiteSpace(searchFilledFields.SearchName))
                 {
                     intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
+                }
+                if (!string.IsNullOrWhiteSpace(searchFilledFields.Topic))
+                {
+                    intermediate = intermediate.Where(x => x.Topic == searchFilledFields.Topic);
                 }
                 if (!string.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
                 {

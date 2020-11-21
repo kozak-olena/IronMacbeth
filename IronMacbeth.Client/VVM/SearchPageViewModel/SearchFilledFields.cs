@@ -11,6 +11,7 @@ namespace IronMacbeth.Client
         public string SearchAuthor { get; set; }
 
         public string Topic { get; set; }
+
         public int? SearchYearFrom { get; set; }
 
         public int? SearchYearTo { get; set; }
