@@ -235,11 +235,11 @@ namespace IronMacbeth.BFF
             {
                 IQueryable<Periodical> intermediate = dbContext.Periodicals;
 
-                if (!String.IsNullOrWhiteSpace(searchFilledFields.SearchName))
+                if (!string.IsNullOrWhiteSpace(searchFilledFields.SearchName))
                 {
                     intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
                 }
-                if (!String.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
+                if (!string.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
                 {
                     intermediate = intermediate.Where(x => x.Year > searchFilledFields.SearchYearFrom);
                 }
@@ -302,11 +302,11 @@ namespace IronMacbeth.BFF
             using (var dbContext = new DbContext())
             {
                 IQueryable<Thesis> intermediate = dbContext.Thesises;
-                if (searchFilledFields.SearchName != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchName))
+                if (!string.IsNullOrWhiteSpace(searchFilledFields.SearchName))
                 {
                     intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
                 }
-                if (searchFilledFields.SearchAuthor != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
+                if (!string.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
                 {
                     intermediate = intermediate.Where(x => x.Author == searchFilledFields.SearchAuthor);
                 }
@@ -373,7 +373,7 @@ namespace IronMacbeth.BFF
             using (var dbContext = new DbContext())
             {
                 IQueryable<Newspaper> intermediate = dbContext.Newspapers;
-                if (searchFilledFields.SearchName != null)
+                if (!string.IsNullOrEmpty(searchFilledFields.SearchName))
                 {
                     intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
                 }
@@ -430,11 +430,11 @@ namespace IronMacbeth.BFF
             using (var dbContext = new DbContext())
             {
                 IQueryable<Article> intermediate = dbContext.Articles;
-                if (searchFilledFields.SearchName != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchName))
+                if (!string.IsNullOrWhiteSpace(searchFilledFields.SearchName))
                 {
                     intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
                 }
-                if (searchFilledFields.SearchAuthor != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
+                if (!string.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
                 {
                     intermediate = intermediate.Where(x => x.Author == searchFilledFields.SearchAuthor);
                 }
