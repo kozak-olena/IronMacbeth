@@ -28,12 +28,13 @@ namespace IronMacbeth.Client.VVM.SearchPageViewModel
             get
             {
                 return new SearchResultsViewModel(SearchFilledFields);
-
             }
         }
+
         public SearchFilledFields SearchFilledFields { get; set; }
         public void Update()
         {
+            DeleteAllMethod(null);
         }
 
         public ICommand SearchCommand { get; }

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace IronMacbeth.BFF
+namespace IronMacbeth.UserManagement
 {
     public static class SecurePasswordHasher
     {

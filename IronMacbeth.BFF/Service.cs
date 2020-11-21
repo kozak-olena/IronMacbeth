@@ -4,6 +4,7 @@ using IronMacbeth.UserManagement.Contract;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
@@ -124,7 +125,7 @@ namespace IronMacbeth.BFF
             {
                 User currentUser = GetLoggedInUserInternal();
                 IQueryable<Order> intermediate = dbContext.Orders.Include(x => x.Book).Include(x => x.Article).Include(x => x.Periodical).Include(x => x.Theses).Include(x => x.Newspaper);
-                if (currentUser.UserRole != UserRole.Admin)
+                if (currentUser.UserRole != Contract.UserRole.Admin)
                 {
                     intermediate = intermediate.Where(x => x.UserLogin == currentUser.Login);
                 }
@@ -150,7 +151,6 @@ namespace IronMacbeth.BFF
                     ReceiveDate = x.ReceiveDate
                 }).ToList();
             }
-
         }
 
         public void DeleteOrder(int id)
@@ -492,11 +492,11 @@ namespace IronMacbeth.BFF
             {
                 IQueryable<Book> intermediate = dbContext.Books;
 
-                if (searchFilledFields.SearchName != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
+                if (!string.IsNullOrWhiteSpace(searchFilledFields.SearchName))
                 {
                     intermediate = intermediate.Where(x => x.Name == searchFilledFields.SearchName);
                 }
-                if (searchFilledFields.SearchAuthor != null && !String.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
+                if (!string.IsNullOrWhiteSpace(searchFilledFields.SearchAuthor))
                 {
                     intermediate = intermediate.Where(x => x.Author == searchFilledFields.SearchAuthor);
                 }
@@ -550,19 +550,6 @@ namespace IronMacbeth.BFF
 
         public Contract.User GetLoggedInUser()
         {
-            //TODO: remove following. This is just to test service to service communication
-            #region The following
-
-            var channelFactory = new ChannelFactory<IUserManagementService>("IronMacbeth.UserManagementEndpoint");
-
-            var serviceClient = channelFactory.CreateChannel();
-
-            var time = serviceClient.GetCurrentTime();
-
-            Console.WriteLine($"Asked UserManagement the time. It was {time}");
-
-            #endregion
-
             var internalUser = GetLoggedInUserInternal();
 
             var contractUser = new Contract.User { Login = internalUser.Login, Name = internalUser.Name, Surname = internalUser.Surname, PhoneNumber = internalUser.PhoneNumber, UserRole = internalUser.UserRole };
@@ -595,14 +582,17 @@ namespace IronMacbeth.BFF
         {
             var identity = (ClaimsIdentity)Thread.CurrentPrincipal.Identity;
 
-            var userLogin = identity.Claims.Single(x => string.Equals(x.Type, identity.NameClaimType, StringComparison.OrdinalIgnoreCase)).Value;
+            var user =
+                new User
+                {
+                    Login = identity.Claims.Single(x => string.Equals(x.Type, ClaimTypes.Name, StringComparison.Ordinal)).Value,
+                    Name = identity.Claims.Single(x => string.Equals(x.Type, ClaimTypes.GivenName, StringComparison.Ordinal)).Value,
+                    Surname = identity.Claims.Single(x => string.Equals(x.Type, ClaimTypes.Surname, StringComparison.Ordinal)).Value,
+                    PhoneNumber = int.Parse(identity.Claims.Single(x => string.Equals(x.Type, ClaimTypes.MobilePhone, StringComparison.Ordinal)).Value, CultureInfo.InvariantCulture),
+                    UserRole = (Contract.UserRole)Enum.Parse(typeof(Contract.UserRole), identity.Claims.Single(x => string.Equals(x.Type, ClaimTypes.Role, StringComparison.Ordinal)).Value)
+                };
 
-            using (var dbContext = new DbContext())
-            {
-                var internalUser = dbContext.Users.SingleOrDefault(x => x.Login == userLogin);
-
-                return internalUser;
-            }
+            return user;
         }
     }
 }

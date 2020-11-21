@@ -3,16 +3,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>IronMacbeth.BFF.Database</Name>
+    <Name>IronMacbeth.UserManagement.Database</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{be2b329d-c09b-4850-8cb9-e2cbbee080a3}</ProjectGuid>
+    <ProjectGuid>{95a81734-e77d-4638-9ac5-c1cbceb8078e}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>IronMacbeth.BFF.Database</RootNamespace>
-    <AssemblyName>IronMacbeth.BFF.Database</AssemblyName>
+    <RootNamespace>IronMacbeth.UserManagement.Database</RootNamespace>
+    <AssemblyName>IronMacbeth.UserManagement.Database</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -59,11 +59,12 @@
     <Folder Include="Tables" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Tables\Book.sql" />
-    <Build Include="Tables\Article.sql" />
-    <Build Include="Tables\Periodical.sql" />
-    <Build Include="Tables\Thesis.sql" />
-    <Build Include="Tables\Newspaper.sql" />
-    <Build Include="Tables\Order.sql" />
+    <Build Include="Tables\User.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\UserRole.sql" />
   </ItemGroup>
 </Project>

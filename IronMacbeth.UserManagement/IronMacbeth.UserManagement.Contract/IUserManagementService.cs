@@ -1,5 +1,4 @@
-﻿using System;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 
 namespace IronMacbeth.UserManagement.Contract
 {
@@ -7,6 +6,11 @@ namespace IronMacbeth.UserManagement.Contract
     public interface IUserManagementService
     {
         [OperationContract]
-        DateTime GetCurrentTime();
+        [FaultContract(typeof(InvalidCredentialsFault))]
+        LoggedInUser LogIn(string login, string password);
+
+        [OperationContract]
+        [FaultContract(typeof(UsernameTakenFault))]
+        void RegisterUser(RegisterUserRequestData userData);
     }
 }
