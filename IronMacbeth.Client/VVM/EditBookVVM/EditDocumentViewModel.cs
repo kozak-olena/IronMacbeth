@@ -12,7 +12,7 @@ using Image = IronMacbeth.Client.Model.Image;
 
 namespace IronMacbeth.Client.VVM.BookVVM
 {
-    public class EditBookViewModel : IPageViewModel, INotifyPropertyChanged
+    public class EditDocumentViewModel : IPageViewModel, INotifyPropertyChanged
     {
         public string PageViewName => "Book";
 
@@ -50,7 +50,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
         public BitmapImage Image => FilledFieldsInfo.Image?.BitmapImage;
 
-        public EditBookViewModel(object objectForEdit)
+        public EditDocumentViewModel(object objectForEdit)
         {
             _dispatch = new Dispatch(new IHandler[] { new BookHandler(), new ArticleHandler(), new PeriodicalHandler(), new ThesisHandler(), new NewspaperHandler() });
             _objectForEdit = objectForEdit;

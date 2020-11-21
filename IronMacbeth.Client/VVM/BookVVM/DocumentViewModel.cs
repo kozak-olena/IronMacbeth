@@ -64,9 +64,9 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
         public void AddMethod(object parameter)
         {
-            var editBookViewModel = new EditBookViewModel(null);
-            new EditBookWindow2 { DataContext = editBookViewModel }.ShowDialog();
-            if (editBookViewModel.CollectionChanged)
+            var editDocumentViewModel = new EditDocumentViewModel(null);
+            new EditDocumentWindow { DataContext = editDocumentViewModel }.ShowDialog();
+            if (editDocumentViewModel.CollectionChanged)
             {
                 Update();
                 UpdateCollection(false);
@@ -82,9 +82,9 @@ namespace IronMacbeth.Client.VVM.BookVVM
 
         public void EditMethod(object parameter)
         {
-            var editBookViewModel = new EditBookViewModel(SelectedItem.GetItem());
-            new EditBookWindow2 { DataContext = editBookViewModel }.ShowDialog();
-            if (editBookViewModel.CollectionChanged)
+            var editDocumentModel = new EditDocumentViewModel(SelectedItem.GetItem());
+            new EditDocumentWindow { DataContext = editDocumentModel }.ShowDialog();
+            if (editDocumentModel.CollectionChanged)
             {
                 Update();
                 UpdateCollection(false);

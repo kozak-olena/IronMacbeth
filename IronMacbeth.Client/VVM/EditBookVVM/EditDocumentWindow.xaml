@@ -1,4 +1,4 @@
-﻿<Window x:Class="IronMacbeth.Client.VVM.EditBookVVM.EditBookWindow2"
+﻿<Window x:Class="IronMacbeth.Client.VVM.EditBookVVM.EditDocumentWindow"
          x:Name="Window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -55,9 +55,9 @@
                 HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock
-                    VerticalAlignment="Center" 
-                    TextWrapping="Wrap"
-                    Text="TypeOfDocument: "/>
+                        VerticalAlignment="Center" 
+                        TextWrapping="Wrap"
+                        Text="Type of document: "/>
                     <ComboBox Name="TypeList" Height="24" Width="145" VerticalAlignment="Top" BorderBrush="White"
                               ItemsSource="{Binding AvailibleItemTypes}"
                               SelectedItem="{Binding FilledFieldsInfo.TypeOfDocument}"                              >

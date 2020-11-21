@@ -126,9 +126,9 @@
     </Compile>
     <Compile Include="VVM\BookVVM\DocumentViewModel.cs" />
     <Compile Include="VVM\EditBookVVM\Dispatch.cs" />
-    <Compile Include="VVM\EditBookVVM\EditBookViewModel.cs" />
-    <Compile Include="VVM\EditBookVVM\EditBookWindow2.xaml.cs">
-      <DependentUpon>EditBookWindow2.xaml</DependentUpon>
+    <Compile Include="VVM\EditBookVVM\EditDocumentViewModel.cs" />
+    <Compile Include="VVM\EditBookVVM\EditDocumentWindow.xaml.cs">
+      <DependentUpon>EditDocumentWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="VVM\EditBookVVM\FilledFieldsInfo.cs" />
     <Compile Include="VVM\EditDateTimeViewModel.cs" />
@@ -208,7 +208,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="VVM\EditBookVVM\EditBookWindow2.xaml">
+    <Page Include="VVM\EditBookVVM\EditDocumentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

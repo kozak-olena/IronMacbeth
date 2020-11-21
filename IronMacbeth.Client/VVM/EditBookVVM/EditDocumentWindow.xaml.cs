@@ -5,11 +5,11 @@ using System.Windows;
 namespace IronMacbeth.Client.VVM.EditBookVVM
 {
     /// <summary>
-    /// Interaction logic for EditBookWindow2.xaml
+    /// Interaction logic for EditDocumentWindow.xaml
     /// </summary>
-    public partial class EditBookWindow2 : Window
+    public partial class EditDocumentWindow : Window
     {
-        public EditBookWindow2()
+        public EditDocumentWindow()
         {
             InitializeComponent();
         }
