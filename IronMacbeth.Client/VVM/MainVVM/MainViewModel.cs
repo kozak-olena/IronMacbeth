@@ -10,7 +10,6 @@ using IronMacbeth.Client.VVM.SearchPageViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.ServiceModel;
 using System.Threading.Tasks;
@@ -26,15 +25,30 @@ namespace IronMacbeth.Client.ViewModel
         public User User => UserService.LoggedInUser;
         private bool UserLoggedIn => User != null;
 
+        #region Commands
 
-        public ICommand BackCommand { get; }
-        public ICommand CloseCommand { get; }
-        public ICommand LogInCommand { get; }
-        public ICommand LogOutCommand { get; }
-        public ICommand ForwardCommand { get; }
-        public ICommand RegisterCommand { get; }
-        public ICommand ReconnectCommand { get; }
-        public ICommand ChangePageCommand { get; }
+        public ICommand BackCommand { get; private set; }
+        public ICommand CloseCommand { get; private set; }
+        public ICommand LogInCommand { get; private set; }
+        public ICommand LogOutCommand { get; private set; }
+        public ICommand ForwardCommand { get; private set; }
+        public ICommand RegisterCommand { get; private set; }
+        public ICommand ReconnectCommand { get; private set; }
+        public ICommand ChangePageCommand { get; private set; }
+
+        private void InitializeCommands()
+        {
+            BackCommand = new RelayCommand(BackMethod);
+            CloseCommand = new RelayCommand(CloseMethod);
+            LogInCommand = new RelayCommand(LogInMethod) { CanExecuteFunc = CanExecuteAutorizationMethods };
+            LogOutCommand = new RelayCommand(LogOutMethod) { CanExecuteFunc = CanExecuteLogOutMethod };
+            ForwardCommand = new RelayCommand(ForwardMethod);
+            RegisterCommand = new RelayCommand(RegisterMethod) { CanExecuteFunc = CanExecuteAutorizationMethods };
+            ReconnectCommand = new RelayCommand(ReconnectMethod);
+            ChangePageCommand = new RelayCommand(ChangePageMethod);
+        }
+
+        #endregion
 
         private IPageViewModel _currentPageViewModel;
 
@@ -54,23 +68,9 @@ namespace IronMacbeth.Client.ViewModel
         public string Login => User?.Login;
 
         public Visibility MenuVisibility => UserLoggedIn ? Visibility.Visible : Visibility.Collapsed;
-        public Visibility AdminToolsVisibility
-        {
-            get
-            {
-                if (User != null && User.IsAdmin)
-                {
-                    return Visibility.Visible;
-                }
-                else
-                {
-                    return Visibility.Collapsed;
-                }
-            }
-        }
+        public Visibility AdminToolsVisibility => User != null && User.IsAdmin ? Visibility.Visible : Visibility.Collapsed;
 
         public List<IPageViewModel> PageViewModels { get; set; }
-
 
         private readonly Stack<IPageViewModel> _previousPages;
         private readonly Stack<IPageViewModel> _nextPages;
@@ -158,7 +158,6 @@ namespace IronMacbeth.Client.ViewModel
             }
         });
 
-
         public MainViewModel()
         {
             connectionCheckTimer = new Timer();
@@ -168,19 +167,7 @@ namespace IronMacbeth.Client.ViewModel
 
             ConnectAsync();
 
-            BackCommand = new RelayCommand(BackMethod);
-            CloseCommand = new RelayCommand(CloseMethod);
-            LogInCommand = new RelayCommand(LogInMethod) { CanExecuteFunc = CanExecuteAutorizationMethods };
-            LogOutCommand = new RelayCommand(LogOutMethod) { CanExecuteFunc = CanExecuteLogOutMethod };
-            ForwardCommand = new RelayCommand(ForwardMethod);
-            RegisterCommand = new RelayCommand(RegisterMethod) { CanExecuteFunc = CanExecuteAutorizationMethods };
-            ReconnectCommand = new RelayCommand(ReconnectMethod);
-            ChangePageCommand = new RelayCommand(ChangePageMethod);
-            PageViewModels = new List<IPageViewModel>
-            {
-                new HomeViewModel(),
-                new SearchViewModel()
-             };
+            InitializeCommands();
 
             _previousPages = new Stack<IPageViewModel>();
             _nextPages = new Stack<IPageViewModel>();
@@ -191,12 +178,8 @@ namespace IronMacbeth.Client.ViewModel
         private void LogOutMethod(object parameter)
         {
             UserService.LogOut();
+
             OnUserChanged();
-            PageViewModels = new List<IPageViewModel>
-            {
-                new HomeViewModel(),
-                new SearchViewModel()
-             };
 
             OnPropertyChanged(nameof(PageViewModels));
         }
@@ -211,19 +194,6 @@ namespace IronMacbeth.Client.ViewModel
             LogInViewModel logInViewModel = new LogInViewModel();
             new LogInWindow { DataContext = logInViewModel }.ShowDialog();
 
-            if (UserLoggedIn && User.IsAdmin)
-            {
-                PageViewModels = PageViewModels.Append(new BookViewModel()).ToList();
-                OnPropertyChanged(nameof(PageViewModels));
-                PageViewModels = PageViewModels.Append(new AdminOrderViewModel()).ToList();
-                OnPropertyChanged(nameof(PageViewModels));
-            }
-            else if (UserLoggedIn)
-            {
-                PageViewModels = PageViewModels.Append(new MyOrdersViewModel()).ToList();
-                OnPropertyChanged(nameof(PageViewModels));
-            }
-
             OnUserChanged();
         }
 
@@ -231,6 +201,7 @@ namespace IronMacbeth.Client.ViewModel
         {
             RegisterViewModel registerViewModel = new RegisterViewModel();
             new RegisterWindow { DataContext = registerViewModel }.ShowDialog();
+
             OnUserChanged();
         }
 
@@ -248,12 +219,7 @@ namespace IronMacbeth.Client.ViewModel
         {
             if (parameter is IPageViewModel viewModel)
             {
-                if (!PageViewModels.Contains(viewModel))
-                {
-                    PageViewModels.Add(viewModel);
-                }
-
-                if (parameter.GetType() != CurrentPageViewModel.GetType())
+                if (parameter != CurrentPageViewModel)
                 {
                     _previousPages.Push(CurrentPageViewModel);
 
@@ -286,21 +252,6 @@ namespace IronMacbeth.Client.ViewModel
                 _previousPages.Push(CurrentPageViewModel);
                 CurrentPageViewModel = _nextPages.Pop();
             }
-        }
-
-        #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
-
-        public string GetName()
-        {
-            return User.Login;
         }
 
         private bool Connect()
@@ -362,6 +313,26 @@ namespace IronMacbeth.Client.ViewModel
 
         private void OnUserChanged()
         {
+            if (UserLoggedIn)
+            {
+                PageViewModels = new List<IPageViewModel> { new HomeViewModel(), new SearchViewModel() };
+
+                if (User.IsAdmin)
+                {
+                    PageViewModels.Add(new BookViewModel());
+                    PageViewModels.Add(new AdminOrderViewModel());
+                }
+                else
+                {
+                    PageViewModels.Add(new MyOrdersViewModel());
+                }
+            }
+            else
+            {
+                PageViewModels = null;
+            }
+
+            OnPropertyChanged(nameof(PageViewModels));
             OnPropertyChanged(nameof(AdminToolsVisibility));
             OnPropertyChanged(nameof(MenuVisibility));
             OnPropertyChanged(nameof(Login));
@@ -369,5 +340,17 @@ namespace IronMacbeth.Client.ViewModel
             // Forces view to re-check all CanExecute statuses
             CommandManager.InvalidateRequerySuggested();
         }
+
+        #region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
     }
 }
