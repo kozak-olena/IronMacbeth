@@ -38,8 +38,8 @@ USING
     FROM
     (
         VALUES
-        ('admin', 'Richard', 'Branson', 'BeaybnUyB2reEVYBZPgAkRH7pLde2F//qgCdWr5ZsJCOUhUj', 2, 0800352352),
-        ('me', 'olena', 'kozak', 'e5qYGb9ai6g1G8SVYXk21+IZcOLIciWOZGNaYXuueiOvRfoo', 1, 0507050620)
+        ('admin', 'Richard', 'Branson', 'Uu2t3h6oy/KpR8lWEyMZRdOYN1bFRd1UGRlyiAbQ78QFo1kU', 2, 0800352352),
+        ('me', 'Olena', 'Kozak', 'YUUDrYOVr6LUdmZc5lnEpDUrvttYWiOzb7hNhlkNirl6P4So', 1, 0507050620)
     ) as [user]([Login], [Name], [Surname], [PasswordHash], [RoleId], [PhoneNumber])
 ) AS source
 ON target.[Login] = source.[Login]

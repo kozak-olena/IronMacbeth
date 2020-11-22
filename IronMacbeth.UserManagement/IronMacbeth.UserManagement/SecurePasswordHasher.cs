@@ -19,7 +19,7 @@ namespace IronMacbeth.UserManagement
             new RNGCryptoServiceProvider().GetBytes(salt);
 
             // Create hash
-            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, Iterations);
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, Iterations, HashAlgorithmName.SHA256);
             var hash = pbkdf2.GetBytes(HashSize);
 
             // Combine salt and hash
@@ -44,7 +44,7 @@ namespace IronMacbeth.UserManagement
             Array.Copy(hashBytes, 0, salt, 0, SaltSize);
 
             // Create hash with given salt
-            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, Iterations);
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, Iterations, HashAlgorithmName.SHA256);
             byte[] hash = pbkdf2.GetBytes(HashSize);
 
             // Get result
