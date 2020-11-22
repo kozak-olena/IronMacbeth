@@ -11,7 +11,7 @@ namespace IronMacbeth.Client.VVM.BookVVM
             _item = item;
         }
 
-        public BitmapImage BitmapImage => _item.Image.BitmapImage;
+        public BitmapImage BitmapImage => _item.Image?.BitmapImage;
         public string Name => _item.NameOfBook;
         public string Author => _item.Author;
         public string PublishingHouse => _item.PublishingHouse;

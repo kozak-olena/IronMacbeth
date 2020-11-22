@@ -13,7 +13,7 @@ namespace IronMacbeth.Client.VVM.PeriodicalItemVVM
         }
 
         public string Name => _item.Name;
-        public BitmapImage BitmapImage => _item.Image.BitmapImage;
+        public BitmapImage BitmapImage => _item.Image?.BitmapImage;
         public string Responsible => _item.Responsible;
         public int Availiability => _item.Availiability;
         public int IssueNumber => _item.IssueNumber;
