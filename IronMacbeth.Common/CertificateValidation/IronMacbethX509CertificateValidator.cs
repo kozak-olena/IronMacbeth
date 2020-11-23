@@ -27,7 +27,7 @@ namespace IronMacbeth.Common.CertificateValidation
         {
             var trustedCertificates = _trustedCertificatesLazy.Value;
 
-            if (!trustedCertificates.Contains(certificate.SerialNumber))
+            if (!trustedCertificates.Contains(certificate.SerialNumber, StringComparer.OrdinalIgnoreCase))
             {
                 throw new Exception($"Certificate (SN='{certificate.SerialNumber}') is not trusted.");
             }
