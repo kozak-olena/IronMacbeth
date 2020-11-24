@@ -193,4 +193,14 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>if not exist $(TargetDir)x64 (
+    echo copping missing x64 dlls
+    xcopy /s/y "$(SolutionDir)packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\x64\*" "$(TargetDir)x64\"
+) 
+if not exist $(TargetDir)x86 (
+    echo copping missing x86 dlls
+    xcopy /s/y "$(SolutionDir)packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\x86\*" "$(TargetDir)x86\"
+)</PostBuildEvent>
+  </PropertyGroup>
 </Project>
