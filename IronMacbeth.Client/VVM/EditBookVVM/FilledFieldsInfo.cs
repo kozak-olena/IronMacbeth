@@ -69,9 +69,9 @@ namespace IronMacbeth.Client.VVM.EditBookVVM
 
         public Visibility PublishingHouseVisibility => (_isBookSelected || _isPeriodicalSelected).ToVisibility();
 
-        public Visibility LocationVisibility => (_isBookSelected || _isPeriodicalSelected).ToVisibility();
+        public Visibility LocationVisibility => (_isBookSelected || _isPeriodicalSelected || _isNewspaperSelected).ToVisibility();
 
-        public Visibility RentPriceVisibility => (_isBookSelected || _isPeriodicalSelected).ToVisibility();
+        public Visibility RentPriceVisibility => (_isBookSelected || _isPeriodicalSelected || _isNewspaperSelected).ToVisibility();
 
         public Visibility MainDocumentVisibility => (_isArticleSelected).ToVisibility();
 
