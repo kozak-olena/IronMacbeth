@@ -7,6 +7,8 @@ namespace IronMacbeth.UserManagement
     {
         static void Main(string[] args)
         {
+            Console.Title = "IronMacbeth.UserManagement";
+
             using (ServiceHost host = new ServiceHost(typeof(UserManagementService)))
             {
                 host.Open();

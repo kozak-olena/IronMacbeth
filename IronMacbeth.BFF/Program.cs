@@ -8,6 +8,8 @@ namespace IronMacbeth.BFF
     {
         private static void Main(string[] args)
         {
+            Console.Title = "IronMacbeth.BFF";
+
             using (var host = new ServiceHost(typeof (Service)))
             using (var anonymousServiceHost = new ServiceHost(typeof (AnonymousService)))
             {

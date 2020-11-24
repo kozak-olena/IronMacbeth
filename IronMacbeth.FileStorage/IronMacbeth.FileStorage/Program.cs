@@ -1,13 +1,14 @@
-﻿using IronMacbeth.FileStorage;
-using System;
+﻿using System;
 using System.ServiceModel;
 
-namespace FileService
+namespace IronMacbeth.FileStorage
 {
     class Program
     {
         static void Main(string[] args)
         {
+            Console.Title = "IronMacbeth.FileStorage";
+
             using (ServiceHost host = new ServiceHost(typeof(FileStorageService)))
             {
                 host.Open();
