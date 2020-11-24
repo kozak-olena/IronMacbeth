@@ -1,7 +1,7 @@
 ﻿using IronMacbeth.UserManagement.Contract;
 using IronMacbeth.UserManagement.Model;
 using Microsoft.EntityFrameworkCore;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Linq;
 
 namespace IronMacbeth.UserManagement
